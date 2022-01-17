@@ -7,12 +7,10 @@ export interface Signin {
 
 export interface SigninFormik extends Signin {}
 
-export interface Signup {
+export interface Signup extends Signin {
 	first_name: string;
 	last_name: string;
-	user_name: string;
 	email: string;
-	password: string;
 }
 
 export interface SignupFormik extends Signup {

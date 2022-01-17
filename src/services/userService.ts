@@ -4,9 +4,13 @@ import { CreateUser, UpdateUser, User } from 'models/user';
 import { ResponseData, ResponseDataPagination } from 'models/response';
 
 const userService = {
-	list: () => {
+	list: (page: number = 1, page_size: number = 5) => {
 		return http.get<ResponseDataPagination<User[]>>({
-			url: config.API.END_POINT.CRUD_USER
+			url: config.API.END_POINT.CRUD_USER,
+			params: {
+				page,
+				page_size
+			}
 		});
 	},
 	show: (id: number) => {

@@ -55,7 +55,7 @@ const SignupComponent: React.FC<Props> = () => {
 					})
 					.catch((error) => {
 						if (axios.isAxiosError(error)) {
-							if (error.response?.status === 422) {
+							if (error.response?.data.errors && error.response.status === 400) {
 								setErrors(error.response.data.errors);
 							}
 						}

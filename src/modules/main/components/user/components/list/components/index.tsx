@@ -9,25 +9,51 @@ import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import classNames from 'classnames';
+import Paginationomponent from 'common/components/Pagination/components';
 
 type Props = {};
 
 const ListUserComponent: React.FC<Props> = () => {
 	const [isLoading, setLoading] = useState(false);
 	const [data, setData] = useState<User[]>([]);
+	const [pagination, setPagination] = useState({
+		page: 1,
+		limit: 5,
+		limits: [5, 10, 20, 50],
+		total: 0
+	});
+
+	const onChangePage = (page: number) => {
+		setPagination((prevState) => ({
+			...prevState,
+			page: page
+		}));
+	};
+
+	const onChangeLimit = (limit: number) => {
+		setPagination((prevState) => ({
+			...prevState,
+			limit: limit,
+			page: 1
+		}));
+	};
 
 	useEffect(() => {
 		setLoading(true);
 		userService
-			.list()
+			.list(pagination.page, pagination.limit)
 			.then((response) => {
 				setData(response.data.data);
+				setPagination((prevState) => ({
+					...prevState,
+					total: response.data.pagination.total
+				}));
 			})
 			.catch((error) => {})
 			.finally(() => {
 				setLoading(false);
 			});
-	}, []);
+	}, [pagination.limit, pagination.page]);
 
 	return (
 		<>
@@ -118,9 +144,9 @@ const ListUserComponent: React.FC<Props> = () => {
 																			{
 																				'bg-green-100 text-green-800':
 																					user.status === 'active',
-																				'bg-red-100 text-red-800':
-																					user.status === 'inactive',
 																				'bg-yellow-100 text-yellow-800':
+																					user.status === 'inactive',
+																				'bg-red-100 text-red-800':
 																					user.status === 'banned'
 																			}
 																		)}
@@ -163,6 +189,14 @@ const ListUserComponent: React.FC<Props> = () => {
 								</div>
 							</div>
 						)}
+						<Paginationomponent
+							limits={pagination.limits}
+							total={1000}
+							limit={pagination.limit}
+							currentPage={pagination.page}
+							onChangePage={onChangePage}
+							onChangeLimit={onChangeLimit}
+						/>
 					</CardComponent>
 				</div>
 			</div>

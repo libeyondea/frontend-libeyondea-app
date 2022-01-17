@@ -15,12 +15,12 @@ export interface User {
 }
 
 export interface CreateUser extends Signup {
-	avatar?: string;
+	avatar?: string | null;
 	role: string;
 	status: string;
 }
 
-export interface CreateUserFormik extends CreateUser {
+export interface CreateUserFormik extends Omit<CreateUser, 'avatar'> {
 	password_confirmation: string;
 	image: File | null;
 }
@@ -29,7 +29,6 @@ export interface UpdateUser extends Omit<CreateUser, 'password'> {
 	password?: string;
 }
 
-export interface UpdateUserFormik extends UpdateUser {
-	password_confirmation: string;
-	image: File | null;
+export interface UpdateUserFormik extends Omit<CreateUserFormik, 'password'> {
+	password?: string;
 }
