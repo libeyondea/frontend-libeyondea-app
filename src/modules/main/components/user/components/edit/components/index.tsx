@@ -21,7 +21,7 @@ const EditUserComponent: React.FC<Props> = () => {
 	const params = useParams();
 	const [isUploading, setUploading] = useState(false);
 	const [isCreating, setCreating] = useState(false);
-	const [isLoading, setLoading] = useState(false);
+	const [isLoading, setLoading] = useState(true);
 	const [data, setData] = useState<User>({} as User);
 
 	const formik: FormikProps<UpdateUserFormik> = useFormik<UpdateUserFormik>({

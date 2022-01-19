@@ -5,7 +5,7 @@ interface Props {
 	pageNumbersToShow?: number;
 }
 
-const getPageNumbers = ({ currentPage, limit, total, pageNumbersToShow = 1 }: Props): Array<number | string> => {
+const getPageNumbers = ({ currentPage, limit, total, pageNumbersToShow = 3 }: Props): Array<number | string> => {
 	const lastPageNumber = Math.ceil(total / limit);
 	const currentPageNumber = currentPage <= lastPageNumber ? currentPage : lastPageNumber;
 	const maxPagesBeforeCurrentPage = Math.floor(pageNumbersToShow / 2);

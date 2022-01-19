@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Paginationomponent: React.FC<Props> = ({
-	limits = [5, 10, 20],
+	limits = [10, 20, 50, 100],
 	total,
 	limit,
 	currentPage,
@@ -45,7 +45,7 @@ const Paginationomponent: React.FC<Props> = ({
 					<span className="flex items-center text-sm text-gray-700">
 						Limit
 						<select
-							className="ml-2 rounded-md appearance-none border border-gray-300 py-2 pl-4 pr-6 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+							className="ml-2 rounded-md appearance-none border border-gray-300 py-2 pl-4 pr-8 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
 							value={limit}
 							onChange={(e) => onChangeLimitHandle(e)}
 						>
@@ -58,7 +58,7 @@ const Paginationomponent: React.FC<Props> = ({
 					</span>
 				</div>
 				<div className="flex items-center">
-					<nav className="relative inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+					<nav className="relative inline-flex flex-wrap rounded-md -space-x-px" aria-label="Pagination">
 						{currentPage !== 1 ? (
 							<>
 								<button
@@ -110,7 +110,7 @@ const Paginationomponent: React.FC<Props> = ({
 								<button
 									type="button"
 									aria-current="page"
-									className="z-10 bg-purple-600 text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+									className="z-10 bg-purple-600 text-white relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium"
 									key={pageNumber}
 								>
 									{pageNumber}
