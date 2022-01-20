@@ -4,6 +4,7 @@ import CardComponent from 'common/components/Card/components';
 import { FormikProps, useFormik } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as routeConstant from 'constants/route';
+import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
 import classNames from 'classnames';
@@ -55,10 +56,21 @@ const EditUserComponent: React.FC<Props> = () => {
 			password_confirmation: Yup.string().oneOf([Yup.ref('password')], 'The password confirmation does not match.'),
 			role: Yup.string()
 				.required('The role is required.')
-				.oneOf(['superadmin', 'admin', 'moderator', 'member'], 'The role invalid.'),
+				.oneOf(
+					[
+						userConstant.USER_ROLE_OWNER,
+						userConstant.USER_ROLE_ADMIN,
+						userConstant.USER_ROLE_MODERATOR,
+						userConstant.USER_ROLE_MEMBER
+					],
+					'The role invalid.'
+				),
 			status: Yup.string()
 				.required('The status is required.')
-				.oneOf(['active', 'inactive', 'banned'], 'The status invalid.')
+				.oneOf(
+					[userConstant.USER_STATUS_ACTIVE, userConstant.USER_STATUS_INACTIVE, userConstant.USER_STATUS_BANNED],
+					'The status invalid.'
+				)
 		}),
 		onSubmit: (values, { setErrors }) => {
 			new Promise<{ image?: string }>((resolve, reject) => {
@@ -314,7 +326,7 @@ const EditUserComponent: React.FC<Props> = () => {
 										<div className="relative">
 											<select
 												className={classNames(
-													'rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
+													'capitalize rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
 													{
 														'focus:ring-red-600 border-red-600':
 															formik.errors.role && formik.touched.role
@@ -327,14 +339,13 @@ const EditUserComponent: React.FC<Props> = () => {
 												id="role"
 											>
 												{[
-													{ value: '', label: 'Select' },
-													{ value: 'member', label: 'Member' },
-													{ value: 'moderator', label: 'Moderator' },
-													{ value: 'admin', label: 'Admin' },
-													{ value: 'superadmin', label: 'Super Admin' }
+													userConstant.USER_ROLE_MEMBER,
+													userConstant.USER_ROLE_MODERATOR,
+													userConstant.USER_ROLE_ADMIN,
+													userConstant.USER_ROLE_OWNER
 												].map((role, index) => (
-													<option value={role.value} key={index}>
-														{role.label}
+													<option value={role} key={index}>
+														{role}
 													</option>
 												))}
 											</select>
@@ -350,7 +361,7 @@ const EditUserComponent: React.FC<Props> = () => {
 										<div className="relative">
 											<select
 												className={classNames(
-													'rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
+													'capitalize rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
 													{
 														'focus:ring-red-600 border-red-600':
 															formik.errors.status && formik.touched.status
@@ -363,13 +374,12 @@ const EditUserComponent: React.FC<Props> = () => {
 												id="status"
 											>
 												{[
-													{ value: '', label: 'Select' },
-													{ value: 'inactive', label: 'Inactive' },
-													{ value: 'active', label: 'Active' },
-													{ value: 'banned', label: 'Banned' }
+													userConstant.USER_STATUS_INACTIVE,
+													userConstant.USER_STATUS_ACTIVE,
+													userConstant.USER_STATUS_BANNED
 												].map((status, index) => (
-													<option value={status.value} key={index}>
-														{status.label}
+													<option value={status} key={index}>
+														{status}
 													</option>
 												))}
 											</select>
@@ -388,6 +398,7 @@ const EditUserComponent: React.FC<Props> = () => {
 												id="image"
 												onChangeCustom={formik.setFieldValue}
 												onBlurCustom={formik.setFieldTouched}
+												imgUrl={data.avatar_url}
 											/>
 										</div>
 										{formik.errors.image && formik.touched.image && (

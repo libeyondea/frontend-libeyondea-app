@@ -6,6 +6,7 @@ import { User } from 'models/user';
 import { useEffect, useState } from 'react';
 import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
+import * as userConstant from 'constants/user';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import classNames from 'classnames';
 import Paginationomponent from 'common/components/Pagination/components';
@@ -186,11 +187,14 @@ const ListUserComponent: React.FC<Props> = () => {
 																				'px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize',
 																				{
 																					'bg-green-100 text-green-800':
-																						user.status === 'active',
+																						user.status ===
+																						userConstant.USER_STATUS_ACTIVE,
 																					'bg-yellow-100 text-yellow-800':
-																						user.status === 'inactive',
+																						user.status ===
+																						userConstant.USER_STATUS_INACTIVE,
 																					'bg-red-100 text-red-800':
-																						user.status === 'banned'
+																						user.status ===
+																						userConstant.USER_STATUS_BANNED
 																				}
 																			)}
 																		>

@@ -2,6 +2,7 @@ import http from 'helpers/http';
 import config from 'config';
 import { Me, Signin, Signup, Token } from 'models/auth';
 import { ResponseData } from 'models/response';
+import { User } from 'models/user';
 
 const authService = {
 	me: (token: string) => {
@@ -17,7 +18,7 @@ const authService = {
 		});
 	},
 	signup: (data: Signup) => {
-		return http.post<ResponseData<any>>({
+		return http.post<ResponseData<Me>>({
 			url: config.API.END_POINT.SIGNUP,
 			data: data
 		});

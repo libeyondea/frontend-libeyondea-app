@@ -1,6 +1,7 @@
-import { selectIsAuth } from 'store/auth/selectors';
+import { selectAuthCurrent, selectIsAuth } from 'store/auth/selectors';
 import { selectAppInitialized } from 'store/app/selectors';
 import * as routeConstant from 'constants/route';
+import * as userConstant from 'constants/user';
 import useAppSelector from 'hooks/useAppSelector';
 import { useLocation, Navigate } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ type Props = {
 const AccessControl: React.FC<Props> = ({ children }) => {
 	const location = useLocation();
 	const isAuth = useAppSelector(selectIsAuth);
+	const authCurrent = useAppSelector(selectAuthCurrent);
 	const appInitialized = useAppSelector(selectAppInitialized);
 	console.log('AccessControl');
 
@@ -25,6 +27,11 @@ const AccessControl: React.FC<Props> = ({ children }) => {
 				state={{ from: location }}
 			/>
 		);
+	} else if (
+		location.pathname.indexOf(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`) > -1 &&
+		authCurrent.user?.role !== userConstant.USER_ROLE_OWNER
+	) {
+		return <Navigate to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`} />;
 	}
 	return children;
 };

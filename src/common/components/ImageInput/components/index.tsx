@@ -5,10 +5,11 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 	onChangeCustom: (field: string, value: File | null, shouldValidate?: boolean) => void;
 	onBlurCustom: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
 	name: string;
+	imgUrl?: string;
 }
 
-const ImageInput: React.FC<Props> = ({ onChangeCustom, onBlurCustom, name, ...props }) => {
-	const [previewImg, setPreviewImg] = useState('');
+const ImageInput: React.FC<Props> = ({ onChangeCustom, onBlurCustom, name, imgUrl, ...props }) => {
+	const [previewImg, setPreviewImg] = useState(imgUrl || '');
 
 	const onChangeFile = (
 		e: React.ChangeEvent<HTMLInputElement>,
