@@ -1,7 +1,7 @@
 import { getCookie } from 'helpers/cookies';
 import { appInitializedRequestAction } from 'store/app/actions';
 import { authCurrentRequestAction } from 'store/auth/actions';
-import ImageComponent from 'common/components/Image/components';
+import ImageComponent from 'components/Image/components';
 import config from 'config';
 import { selectIsAuth } from 'store/auth/selectors';
 import * as cookiesConstant from 'constants/cookies';

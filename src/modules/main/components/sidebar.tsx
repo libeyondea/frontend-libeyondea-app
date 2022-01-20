@@ -1,13 +1,13 @@
 import classNames from 'classnames';
-import LinkComponent from 'common/components/Link/components';
+import LinkComponent from 'components/Link/components';
 import { appSidebarRequestAction } from 'store/app/actions';
-import ImageComponent from 'common/components/Image/components';
+import ImageComponent from 'components/Image/components';
 import config from 'config';
 import * as routeConstant from 'constants/route';
 import useAppDispatch from 'hooks/useAppDispatch';
 import { useLocation } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
-import NavLinkComponent from 'common/components/NavLink/components';
+import NavLinkComponent from 'components/NavLink/components';
 import { selectAppSidebar } from 'store/app/selectors';
 import useAppSelector from 'hooks/useAppSelector';
 import { AiOutlineMenu } from 'react-icons/ai';

@@ -1,6 +1,6 @@
-import BreadcrumbComponent from 'common/components/Breadcrumb/components';
-import CardComponent from 'common/components/Card/components';
-import LinkComponent from 'common/components/Link/components';
+import BreadcrumbComponent from 'components/Breadcrumb/components';
+import CardComponent from 'components/Card/components';
+import LinkComponent from 'components/Link/components';
 import time from 'helpers/time';
 import { User } from 'models/user';
 import { useEffect, useState } from 'react';
@@ -9,9 +9,9 @@ import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import classNames from 'classnames';
-import Paginationomponent from 'common/components/Pagination/components';
-import TableLoadingComponent from 'common/components/TableLoading/components';
-import BlockUIComponent from 'common/components/BlockUI/components';
+import Paginationomponent from 'components/Pagination/components';
+import TableLoadingComponent from 'components/TableLoading/components';
+import BlockUIComponent from 'components/BlockUI/components';
 
 type Props = {};
 
@@ -114,36 +114,36 @@ const ListUserComponent: React.FC<Props> = () => {
 														<tr>
 															<th
 																scope="col"
-																className="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
+																className="p-3 text-left text-sm font-medium text-gray-500 tracking-wider"
 															>
 																Name
 															</th>
 
 															<th
 																scope="col"
-																className="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
+																className="p-3 text-left text-sm font-medium text-gray-500 tracking-wider"
 															>
 																Status
 															</th>
 															<th
 																scope="col"
-																className="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
+																className="p-3 text-left text-sm font-medium text-gray-500 tracking-wider"
 															>
 																Role
 															</th>
 															<th
 																scope="col"
-																className="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
+																className="p-3 text-left text-sm font-medium text-gray-500 tracking-wider"
 															>
 																Updated at
 															</th>
 															<th
 																scope="col"
-																className="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider"
+																className="p-3 text-left text-sm font-medium text-gray-500 tracking-wider"
 															>
 																Created at
 															</th>
-															<th scope="col" className="relative px-6 py-3">
+															<th scope="col" className="relative p-3">
 																<span className="sr-only">Action</span>
 															</th>
 														</tr>
@@ -151,17 +151,14 @@ const ListUserComponent: React.FC<Props> = () => {
 													<tbody className="bg-white divide-y divide-gray-200">
 														{!data.length ? (
 															<tr>
-																<td
-																	colSpan={6}
-																	className="px-6 py-4 whitespace-nowrap text-center"
-																>
+																<td colSpan={6} className="p-3 whitespace-nowrap text-center">
 																	Empty user
 																</td>
 															</tr>
 														) : (
 															data.map((user) => (
 																<tr key={user.id}>
-																	<td className="px-6 py-4 whitespace-nowrap">
+																	<td className="p-3 whitespace-nowrap">
 																		<div className="flex items-center">
 																			<div className="flex-shrink-0 h-10 w-10">
 																				<img
@@ -181,7 +178,7 @@ const ListUserComponent: React.FC<Props> = () => {
 																			</div>
 																		</div>
 																	</td>
-																	<td className="px-6 py-4 whitespace-nowrap">
+																	<td className="p-3 whitespace-nowrap">
 																		<span
 																			className={classNames(
 																				'px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize',
@@ -201,16 +198,16 @@ const ListUserComponent: React.FC<Props> = () => {
 																			{user.status}
 																		</span>
 																	</td>
-																	<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">
+																	<td className="p-3 whitespace-nowrap text-sm text-gray-500 capitalize">
 																		{user.role}
 																	</td>
-																	<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+																	<td className="p-3 whitespace-nowrap text-sm text-gray-500">
 																		{time.ago(user.updated_at)}
 																	</td>
-																	<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+																	<td className="p-3 whitespace-nowrap text-sm text-gray-500">
 																		{time.format(user.created_at)}
 																	</td>
-																	<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+																	<td className="p-3 whitespace-nowrap text-right text-sm font-medium">
 																		<div className="flex items-center">
 																			<LinkComponent
 																				to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}

@@ -1,5 +1,5 @@
-import BreadcrumbComponent from 'common/components/Breadcrumb/components';
-import CardComponent from 'common/components/Card/components';
+import BreadcrumbComponent from 'components/Breadcrumb/components';
+import CardComponent from 'components/Card/components';
 
 type Props = {};
 

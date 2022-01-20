@@ -1,6 +1,6 @@
 import axios from 'axios';
-import BreadcrumbComponent from 'common/components/Breadcrumb/components';
-import CardComponent from 'common/components/Card/components';
+import BreadcrumbComponent from 'components/Breadcrumb/components';
+import CardComponent from 'components/Card/components';
 import { FormikProps, useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as routeConstant from 'constants/route';
@@ -8,7 +8,7 @@ import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
 import classNames from 'classnames';
-import ImageInput from 'common/components/ImageInput/components';
+import ImageInput from 'components/ImageInput/components';
 import imageService from 'services/imageService';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useState } from 'react';

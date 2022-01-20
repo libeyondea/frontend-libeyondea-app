@@ -1,4 +1,4 @@
-import ImageComponent from 'common/components/Image/components';
+import ImageComponent from 'components/Image/components';
 import { useState } from 'react';
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {

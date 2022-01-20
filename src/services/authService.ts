@@ -2,7 +2,6 @@ import http from 'helpers/http';
 import config from 'config';
 import { Me, Signin, Signup, Token } from 'models/auth';
 import { ResponseData } from 'models/response';
-import { User } from 'models/user';
 
 const authService = {
 	me: (token: string) => {

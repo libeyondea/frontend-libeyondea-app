@@ -1,10 +1,10 @@
 import { FormikProps, useFormik } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
-import CardComponent from 'common/components/Card/components';
+import CardComponent from 'components/Card/components';
 import * as routeConstant from 'constants/route';
 import { useNavigate } from 'react-router-dom';
-import LinkComponent from 'common/components/Link/components';
+import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
 import { FaRegUser } from 'react-icons/fa';
 import { MdLockOutline, MdMailOutline } from 'react-icons/md';
