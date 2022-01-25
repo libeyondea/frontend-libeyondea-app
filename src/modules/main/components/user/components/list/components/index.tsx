@@ -116,7 +116,7 @@ const ListUserComponent: React.FC<Props> = () => {
 																scope="col"
 																className="p-3 text-left text-sm font-medium text-gray-500 tracking-wider"
 															>
-																Name
+																User
 															</th>
 
 															<th

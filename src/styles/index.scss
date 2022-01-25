@@ -10,6 +10,9 @@
 
 @layer utilities {
 	.sidebar-collapse {
+		& > .main {
+			min-height: calc(100vh - calc(theme('spacing.14') + theme('spacing.16')));
+		}
 		& > .navbar,
 		& > .main,
 		& > .footer {
