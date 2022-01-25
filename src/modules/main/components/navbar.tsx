@@ -66,7 +66,7 @@ const NavbarComponent: React.FC<Props> = () => {
 										<Menu.Item>
 											{({ active }) => (
 												<LinkComponent
-													to={`/`}
+													to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_PROFILE}`}
 													className={classNames('block px-4 py-2 rounded-md text-md', {
 														'bg-gray-300 text-gray-700': active,
 														'text-gray-900': !active

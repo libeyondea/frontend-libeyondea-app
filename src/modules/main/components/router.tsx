@@ -7,6 +7,7 @@ import type { RouteObject } from 'react-router-dom';
 const HomeComponent = lazy(() => import('./home/components'));
 const SettingComponent = lazy(() => import('./setting/components'));
 const UserComponent = lazy(() => import('./user/components'));
+const ProfileComponent = lazy(() => import('./profile/components'));
 
 const MainRouter: RouteObject[] = [
 	{
@@ -30,6 +31,14 @@ const MainRouter: RouteObject[] = [
 		element: (
 			<Suspense fallback={null}>
 				<UserComponent />
+			</Suspense>
+		)
+	},
+	{
+		path: `${routeConstant.ROUTE_NAME_MAIN_PROFILE}`,
+		element: (
+			<Suspense fallback={null}>
+				<ProfileComponent />
 			</Suspense>
 		)
 	},

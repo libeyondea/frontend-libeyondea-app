@@ -2,30 +2,28 @@ import axios from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { FormikProps, useFormik } from 'formik';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as routeConstant from 'constants/route';
-import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
-import userService from 'services/userService';
 import classNames from 'classnames';
 import ImageInput from 'components/ImageInput/components';
 import imageService from 'services/imageService';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
-import { UpdateUserFormik, User } from 'models/user';
+import { UpdateProfileFormik, Profile } from 'models/profile';
 import Loadingomponent from 'components/Loading/components';
+import profileService from 'services/profileService';
 
 type Props = {};
 
-const EditUserComponent: React.FC<Props> = () => {
+const ProfileComponent: React.FC<Props> = () => {
 	const navigate = useNavigate();
-	const params = useParams();
 	const [isUploading, setUploading] = useState(false);
 	const [isCreating, setCreating] = useState(false);
 	const [isLoading, setLoading] = useState(true);
-	const [data, setData] = useState<User>({} as User);
+	const [data, setData] = useState<Profile>({} as Profile);
 
-	const formik: FormikProps<UpdateUserFormik> = useFormik<UpdateUserFormik>({
+	const formik: FormikProps<UpdateProfileFormik> = useFormik<UpdateProfileFormik>({
 		enableReinitialize: true,
 		initialValues: {
 			first_name: data.first_name,
@@ -34,8 +32,6 @@ const EditUserComponent: React.FC<Props> = () => {
 			user_name: data.user_name,
 			password: '',
 			password_confirmation: '',
-			role: data.role,
-			status: data.status,
 			image: null
 		},
 		validationSchema: Yup.object({
@@ -59,24 +55,7 @@ const EditUserComponent: React.FC<Props> = () => {
 				function (value) {
 					return this.parent.password === value;
 				}
-			),
-			role: Yup.string()
-				.required('The role is required.')
-				.oneOf(
-					[
-						userConstant.USER_ROLE_OWNER,
-						userConstant.USER_ROLE_ADMIN,
-						userConstant.USER_ROLE_MODERATOR,
-						userConstant.USER_ROLE_MEMBER
-					],
-					'The role invalid.'
-				),
-			status: Yup.string()
-				.required('The status is required.')
-				.oneOf(
-					[userConstant.USER_STATUS_ACTIVE, userConstant.USER_STATUS_INACTIVE, userConstant.USER_STATUS_BANNED],
-					'The status invalid.'
-				)
+			)
 		}),
 		onSubmit: (values, { setErrors }) => {
 			new Promise<{ image?: string }>((resolve, reject) => {
@@ -105,8 +84,6 @@ const EditUserComponent: React.FC<Props> = () => {
 						last_name: values.last_name,
 						email: values.email,
 						user_name: values.user_name,
-						role: values.role,
-						status: values.status,
 						...(values.password && {
 							password: values.password
 						}),
@@ -114,10 +91,16 @@ const EditUserComponent: React.FC<Props> = () => {
 							avatar: result.image
 						})
 					};
-					userService
-						.update(Number(params.userId), payload)
+					profileService
+						.update(payload)
 						.then((response) => {
-							navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
+							profileService
+								.show()
+								.then((response) => {
+									setData(response.data.data);
+								})
+								.catch((error) => {})
+								.finally(() => {});
 						})
 						.catch((error) => {
 							if (axios.isAxiosError(error)) {
@@ -143,8 +126,8 @@ const EditUserComponent: React.FC<Props> = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		userService
-			.show(Number(params.userId))
+		profileService
+			.show()
 			.then((response) => {
 				setData(response.data.data);
 			})
@@ -152,14 +135,14 @@ const EditUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				setLoading(false);
 			});
-	}, [params.userId]);
+	}, []);
 
 	return (
 		<>
-			<BreadcrumbComponent className="mb-4">Edit user</BreadcrumbComponent>
+			<BreadcrumbComponent className="mb-4">Profile</BreadcrumbComponent>
 			<div className="grid grid-cols-1 gap-4">
 				<div className="col-span-1 w-full">
-					<CardComponent header="Edit user">
+					<CardComponent header="Profile">
 						{isLoading ? (
 							<Loadingomponent />
 						) : (
@@ -326,75 +309,6 @@ const EditUserComponent: React.FC<Props> = () => {
 										)}
 									</div>
 									<div className="col-span-2 md:col-span-1">
-										<label htmlFor="role" className="inline-block font-medium text-gray-600 mb-1">
-											Role
-										</label>
-										<div className="relative">
-											<select
-												className={classNames(
-													'capitalize rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
-													{
-														'focus:ring-red-600 border-red-600':
-															formik.errors.role && formik.touched.role
-													}
-												)}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.role}
-												name="role"
-												id="role"
-											>
-												{[
-													userConstant.USER_ROLE_MEMBER,
-													userConstant.USER_ROLE_MODERATOR,
-													userConstant.USER_ROLE_ADMIN,
-													userConstant.USER_ROLE_OWNER
-												].map((role, index) => (
-													<option value={role} key={index}>
-														{role}
-													</option>
-												))}
-											</select>
-										</div>
-										{formik.errors.role && formik.touched.role && (
-											<div className="text-red-700 mt-1 text-sm">{formik.errors.role}</div>
-										)}
-									</div>
-									<div className="col-span-2 md:col-span-1">
-										<label htmlFor="status" className="inline-block font-medium text-gray-600 mb-1">
-											Status
-										</label>
-										<div className="relative">
-											<select
-												className={classNames(
-													'capitalize rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
-													{
-														'focus:ring-red-600 border-red-600':
-															formik.errors.status && formik.touched.status
-													}
-												)}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.status}
-												name="status"
-												id="status"
-											>
-												{[
-													userConstant.USER_STATUS_INACTIVE,
-													userConstant.USER_STATUS_ACTIVE,
-													userConstant.USER_STATUS_BANNED
-												].map((status, index) => (
-													<option value={status} key={index}>
-														{status}
-													</option>
-												))}
-											</select>
-										</div>
-										{formik.errors.status && formik.touched.status && (
-											<div className="text-red-700 mt-1 text-sm">{formik.errors.status}</div>
-										)}
-									</div>
-									<div className="col-span-2 md:col-span-1">
 										<label htmlFor="image" className="inline-block font-medium text-gray-600 mb-1">
 											Avatar
 										</label>
@@ -447,4 +361,4 @@ const EditUserComponent: React.FC<Props> = () => {
 	);
 };
 
-export default EditUserComponent;
+export default ProfileComponent;
