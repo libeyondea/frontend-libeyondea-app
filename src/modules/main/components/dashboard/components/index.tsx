@@ -3,17 +3,17 @@ import CardComponent from 'components/Card/components';
 
 type Props = {};
 
-const HomeComponent: React.FC<Props> = () => {
+const DashboardComponent: React.FC<Props> = () => {
 	return (
 		<>
-			<BreadcrumbComponent className="mb-4">Test</BreadcrumbComponent>
+			<BreadcrumbComponent className="mb-4">Dashboard</BreadcrumbComponent>
 			<div className="grid grid-cols-1 gap-4">
 				<div className="col-span-1 w-full">
-					<CardComponent>Test</CardComponent>
+					<CardComponent>Dashboard</CardComponent>
 				</div>
 			</div>
 		</>
 	);
 };
 
-export default HomeComponent;
+export default DashboardComponent;

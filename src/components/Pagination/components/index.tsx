@@ -110,7 +110,7 @@ const Paginationomponent: React.FC<Props> = ({
 								<button
 									type="button"
 									aria-current="page"
-									className="z-10 bg-purple-600 text-white relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium"
+									className="bg-purple-600 text-white relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium"
 									key={pageNumber}
 								>
 									{pageNumber}

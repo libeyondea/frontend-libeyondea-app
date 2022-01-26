@@ -4,7 +4,7 @@ import { lazy, Suspense } from 'react';
 
 import type { RouteObject } from 'react-router-dom';
 
-const HomeComponent = lazy(() => import('./home/components'));
+const DashboardComponent = lazy(() => import('./dashboard/components'));
 const SettingComponent = lazy(() => import('./setting/components'));
 const UserComponent = lazy(() => import('./user/components'));
 const ProfileComponent = lazy(() => import('./profile/components'));
@@ -14,7 +14,7 @@ const MainRouter: RouteObject[] = [
 		path: `${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`,
 		element: (
 			<Suspense fallback={null}>
-				<HomeComponent />
+				<DashboardComponent />
 			</Suspense>
 		)
 	},
