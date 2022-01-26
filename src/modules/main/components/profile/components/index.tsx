@@ -2,8 +2,6 @@ import axios from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { FormikProps, useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import * as routeConstant from 'constants/route';
 import * as Yup from 'yup';
 import classNames from 'classnames';
 import ImageInput from 'components/ImageInput/components';
@@ -13,13 +11,13 @@ import { useEffect, useState } from 'react';
 import { UpdateProfileFormik, Profile } from 'models/profile';
 import Loadingomponent from 'components/Loading/components';
 import profileService from 'services/profileService';
+import toastify from 'helpers/toastify';
 
 type Props = {};
 
 const ProfileComponent: React.FC<Props> = () => {
-	const navigate = useNavigate();
 	const [isUploading, setUploading] = useState(false);
-	const [isCreating, setCreating] = useState(false);
+	const [isUpdating, setUpdating] = useState(false);
 	const [isLoading, setLoading] = useState(true);
 	const [data, setData] = useState<Profile>({} as Profile);
 
@@ -78,7 +76,7 @@ const ProfileComponent: React.FC<Props> = () => {
 					});
 			})
 				.then((result) => {
-					setCreating(true);
+					setUpdating(true);
 					const payload = {
 						first_name: values.first_name,
 						last_name: values.last_name,
@@ -94,13 +92,8 @@ const ProfileComponent: React.FC<Props> = () => {
 					profileService
 						.update(payload)
 						.then((response) => {
-							profileService
-								.show()
-								.then((response) => {
-									setData(response.data.data);
-								})
-								.catch((error) => {})
-								.finally(() => {});
+							setData(response.data.data);
+							toastify.success('Update profile success');
 						})
 						.catch((error) => {
 							if (axios.isAxiosError(error)) {
@@ -110,7 +103,7 @@ const ProfileComponent: React.FC<Props> = () => {
 							}
 						})
 						.finally(() => {
-							setCreating(false);
+							setUpdating(false);
 						});
 				})
 				.catch((error) => {
@@ -331,20 +324,20 @@ const ProfileComponent: React.FC<Props> = () => {
 											className={classNames(
 												'flex items-center justify-center py-3 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md',
 												{
-													'cursor-not-allowed disabled:opacity-50': isUploading || isCreating
+													'cursor-not-allowed disabled:opacity-50': isUploading || isUpdating
 												}
 											)}
-											disabled={isUploading || isCreating}
+											disabled={isUploading || isUpdating}
 										>
 											{isUploading ? (
 												<>
 													<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
 													<span>Uploading</span>
 												</>
-											) : isCreating ? (
+											) : isUpdating ? (
 												<>
 													<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-													<span>Creating</span>
+													<span>Updating</span>
 												</>
 											) : (
 												<span>Submit</span>

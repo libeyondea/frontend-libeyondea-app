@@ -2,8 +2,7 @@ import axios from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { FormikProps, useFormik } from 'formik';
-import { useNavigate, useParams } from 'react-router-dom';
-import * as routeConstant from 'constants/route';
+import { useParams } from 'react-router-dom';
 import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
@@ -14,14 +13,14 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import { UpdateUserFormik, User } from 'models/user';
 import Loadingomponent from 'components/Loading/components';
+import toastify from 'helpers/toastify';
 
 type Props = {};
 
 const EditUserComponent: React.FC<Props> = () => {
-	const navigate = useNavigate();
 	const params = useParams();
 	const [isUploading, setUploading] = useState(false);
-	const [isCreating, setCreating] = useState(false);
+	const [isUpdating, setUpdating] = useState(false);
 	const [isLoading, setLoading] = useState(true);
 	const [data, setData] = useState<User>({} as User);
 
@@ -99,7 +98,7 @@ const EditUserComponent: React.FC<Props> = () => {
 					});
 			})
 				.then((result) => {
-					setCreating(true);
+					setUpdating(true);
 					const payload = {
 						first_name: values.first_name,
 						last_name: values.last_name,
@@ -117,7 +116,8 @@ const EditUserComponent: React.FC<Props> = () => {
 					userService
 						.update(Number(params.userId), payload)
 						.then((response) => {
-							navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
+							setData(response.data.data);
+							toastify.success('Update user success');
 						})
 						.catch((error) => {
 							if (axios.isAxiosError(error)) {
@@ -127,7 +127,7 @@ const EditUserComponent: React.FC<Props> = () => {
 							}
 						})
 						.finally(() => {
-							setCreating(false);
+							setUpdating(false);
 						});
 				})
 				.catch((error) => {
@@ -417,20 +417,20 @@ const EditUserComponent: React.FC<Props> = () => {
 											className={classNames(
 												'flex items-center justify-center py-3 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md',
 												{
-													'cursor-not-allowed disabled:opacity-50': isUploading || isCreating
+													'cursor-not-allowed disabled:opacity-50': isUploading || isUpdating
 												}
 											)}
-											disabled={isUploading || isCreating}
+											disabled={isUploading || isUpdating}
 										>
 											{isUploading ? (
 												<>
 													<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
 													<span>Uploading</span>
 												</>
-											) : isCreating ? (
+											) : isUpdating ? (
 												<>
 													<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-													<span>Creating</span>
+													<span>Updating</span>
 												</>
 											) : (
 												<span>Submit</span>

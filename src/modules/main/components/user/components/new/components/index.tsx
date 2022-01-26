@@ -13,6 +13,7 @@ import imageService from 'services/imageService';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useState } from 'react';
 import { CreateUserFormik } from 'models/user';
+import toastify from 'helpers/toastify';
 
 type Props = {};
 
@@ -107,6 +108,7 @@ const NewUserComponent: React.FC<Props> = () => {
 					userService
 						.create(payload)
 						.then((response) => {
+							toastify.success('Create user success');
 							navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
 						})
 						.catch((error) => {
