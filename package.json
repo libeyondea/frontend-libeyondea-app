@@ -4,15 +4,15 @@
 	"private": true,
 	"dependencies": {
 		"@headlessui/react": "^1.4.3",
-		"@reduxjs/toolkit": "^1.7.1",
+		"@reduxjs/toolkit": "^1.7.2",
 		"@tailwindcss/forms": "^0.4.0",
-		"@testing-library/jest-dom": "^5.16.1",
+		"@testing-library/jest-dom": "^5.16.2",
 		"@testing-library/react": "^12.1.2",
 		"@testing-library/user-event": "^13.5.0",
 		"@types/jest": "^27.0.3",
 		"@types/js-cookie": "^3.0.1",
-		"@types/node": "^16.11.21",
-		"@types/react": "^17.0.37",
+		"@types/node": "^16.11.22",
+		"@types/react": "^17.0.38",
 		"@types/react-dom": "^17.0.11",
 		"@types/react-router-dom": "^5.3.3",
 		"@types/redux-logger": "^3.0.9",
@@ -28,12 +28,12 @@
 		"react-redux": "^7.2.6",
 		"react-router-dom": "^6.2.1",
 		"react-scripts": "5.0.0",
-		"react-toastify": "^8.1.0",
+		"react-toastify": "^8.1.1",
 		"redux": "^4.1.2",
 		"redux-logger": "^3.0.6",
 		"redux-observable": "^2.0.0",
 		"reselect": "^4.1.5",
-		"rxjs": "^7.4.0",
+		"rxjs": "^7.5.2",
 		"typescript": "^4.5.5",
 		"web-vitals": "^2.1.4",
 		"yup": "^0.32.11"
@@ -63,10 +63,10 @@
 		]
 	},
 	"devDependencies": {
-		"autoprefixer": "^10.4.0",
-		"node-sass": "^7.0.0",
-		"postcss": "^8.4.5",
+		"autoprefixer": "^10.4.2",
+		"node-sass": "^7.0.1",
+		"postcss": "^8.4.6",
 		"prettier": "^2.5.1",
-		"tailwindcss": "^3.0.16"
+		"tailwindcss": "^3.0.18"
 	}
 }
