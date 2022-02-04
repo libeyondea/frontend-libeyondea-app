@@ -174,21 +174,6 @@ const SidebarComponent: React.FC<Props> = () => {
 								</li>
 							</ul>
 						</nav>
-						<div className="flex">
-							<div className="px-4 py-2">
-								<small className="text-gray-500">
-									Copyright &copy; {new Date().getFullYear()}
-									<a
-										target="_blank"
-										rel="noopener noreferrer"
-										href="https://libeyondea.com"
-										className="font-bold ml-1"
-									>
-										{config.APP_NAME}
-									</a>
-								</small>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
