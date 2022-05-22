@@ -10,8 +10,6 @@ const config = {
 			API_URL: process.env.REACT_APP_API_URL
 		},
 		END_POINT: {
-			CSRF: '/sanctum/csrf-cookie',
-
 			SIGNIN: '/auth/signin',
 			SIGNUP: '/auth/signup',
 			SIGNOUT: '/auth/signout',
