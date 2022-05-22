@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { FormikProps, useFormik } from 'formik';
@@ -14,6 +14,8 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useState } from 'react';
 import { CreateUserFormik } from 'models/user';
 import toastify from 'helpers/toastify';
+import { ResponseError } from 'models/response';
+import { Image } from 'models/image';
 
 type Props = {};
 
@@ -72,9 +74,12 @@ const NewUserComponent: React.FC<Props> = () => {
 				)
 		}),
 		onSubmit: (values, { setErrors }) => {
-			new Promise<{ image?: string }>((resolve, reject) => {
+			new Promise<Image>((resolve, reject) => {
 				if (!values.image) {
-					return resolve({});
+					return resolve({
+						image_name: null,
+						image_url: null
+					});
 				}
 				setUploading(true);
 				imageService
@@ -82,7 +87,10 @@ const NewUserComponent: React.FC<Props> = () => {
 						image: values.image
 					})
 					.then((response) => {
-						return resolve({ image: response.data.data.image });
+						return resolve({
+							image_name: response.data.data.image_name,
+							image_url: response.data.data.image_url
+						});
 					})
 					.catch((error) => {
 						return reject(error);
@@ -101,8 +109,8 @@ const NewUserComponent: React.FC<Props> = () => {
 						password: values.password,
 						role: values.role,
 						status: values.status,
-						...(result.image && {
-							avatar: result.image
+						...(result.image_name && {
+							avatar: result.image_name
 						})
 					};
 					userService
@@ -111,7 +119,7 @@ const NewUserComponent: React.FC<Props> = () => {
 							toastify.success('Create user success');
 							navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
 						})
-						.catch((error) => {
+						.catch((error: Error | AxiosError<ResponseError>) => {
 							if (axios.isAxiosError(error)) {
 								if (error.response?.data.errors && error.response.status === 400) {
 									setErrors(error.response.data.errors);
@@ -122,7 +130,7 @@ const NewUserComponent: React.FC<Props> = () => {
 							setCreating(false);
 						});
 				})
-				.catch((error) => {
+				.catch((error: Error | AxiosError<ResponseError>) => {
 					if (axios.isAxiosError(error)) {
 						if (error.response?.data.errors && error.response.status === 400) {
 							setErrors(error.response.data.errors);

@@ -79,6 +79,7 @@ const ListUserComponent: React.FC<Props> = () => {
 	};
 
 	useEffect(() => {
+		console.log('useEffect');
 		setLoading(true);
 		userService
 			.list(pagination.page, pagination.limit)

@@ -1,10 +1,11 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import config from 'config';
 import store from 'store';
 import { removeCookie } from 'helpers/cookies';
 import * as cookiesConstant from 'constants/cookies';
 import toastify from './toastify';
 import { authCurrentRequestAction } from 'store/auth/actions';
+import { ResponseError } from 'models/response';
 
 const instance = axios.create({
 	baseURL: config.API.URL.API_URL,
@@ -12,8 +13,7 @@ const instance = axios.create({
 		Accept: 'application/json',
 		'Content-Type': 'application/json'
 	},
-	timeout: config.REQUEST.TIMEOUT,
-	withCredentials: true
+	timeout: config.REQUEST.TIMEOUT
 });
 
 instance.interceptors.request.use(
@@ -34,7 +34,7 @@ instance.interceptors.response.use(
 	(response: AxiosResponse) => {
 		return response;
 	},
-	(error) => {
+	(error: Error | AxiosError<ResponseError>) => {
 		if (axios.isAxiosError(error)) {
 			toastify.error(error.response?.data.message);
 			if (error.response?.status === 401) {

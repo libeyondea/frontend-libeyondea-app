@@ -9,8 +9,9 @@ import authService from 'services/authService';
 import { FaRegUser } from 'react-icons/fa';
 import { MdLockOutline, MdMailOutline } from 'react-icons/md';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { SignupFormik } from 'models/auth';
+import { ResponseError } from 'models/response';
 
 type Props = {};
 
@@ -47,23 +48,21 @@ const SignupComponent: React.FC<Props> = () => {
 				.required('The password confirmation is required')
 		}),
 		onSubmit: (values, { setSubmitting, setErrors }) => {
-			authService.csrf().then((response) => {
-				authService
-					.signup(values)
-					.then((response) => {
-						navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`);
-					})
-					.catch((error) => {
-						if (axios.isAxiosError(error)) {
-							if (error.response?.data.errors && error.response.status === 400) {
-								setErrors(error.response.data.errors);
-							}
+			authService
+				.signup(values)
+				.then((response) => {
+					navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`);
+				})
+				.catch((error: Error | AxiosError<ResponseError>) => {
+					if (axios.isAxiosError(error)) {
+						if (error.response?.data.errors && error.response.status === 400) {
+							setErrors(error.response.data.errors);
 						}
-					})
-					.finally(() => {
-						setSubmitting(false);
-					});
-			});
+					}
+				})
+				.finally(() => {
+					setSubmitting(false);
+				});
 		}
 	});
 	return (

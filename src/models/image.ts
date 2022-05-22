@@ -1,5 +1,6 @@
 export interface Image {
-	image: string;
+	image_name: string | null;
+	image_url: string | null;
 }
 
 export interface UploadImage {

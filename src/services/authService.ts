@@ -27,12 +27,6 @@ const authService = {
 			url: config.API.END_POINT.SIGNOUT,
 			token: token
 		});
-	},
-	csrf: () => {
-		return http.get<any>({
-			baseURL: config.API.URL.ROOT_URL,
-			url: config.API.END_POINT.CSRF
-		});
 	}
 };
 

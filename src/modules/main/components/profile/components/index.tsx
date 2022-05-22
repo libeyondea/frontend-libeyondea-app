@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { FormikProps, useFormik } from 'formik';
@@ -12,6 +12,8 @@ import { UpdateProfileFormik, Profile } from 'models/profile';
 import Loadingomponent from 'components/Loading/components';
 import profileService from 'services/profileService';
 import toastify from 'helpers/toastify';
+import { ResponseError } from 'models/response';
+import { Image } from 'models/image';
 
 type Props = {};
 
@@ -56,9 +58,12 @@ const ProfileComponent: React.FC<Props> = () => {
 			)
 		}),
 		onSubmit: (values, { setErrors }) => {
-			new Promise<{ image?: string }>((resolve, reject) => {
+			new Promise<Image>((resolve, reject) => {
 				if (!values.image) {
-					return resolve({});
+					return resolve({
+						image_name: null,
+						image_url: null
+					});
 				}
 				setUploading(true);
 				imageService
@@ -66,7 +71,10 @@ const ProfileComponent: React.FC<Props> = () => {
 						image: values.image
 					})
 					.then((response) => {
-						return resolve({ image: response.data.data.image });
+						return resolve({
+							image_name: response.data.data.image_name,
+							image_url: response.data.data.image_url
+						});
 					})
 					.catch((error) => {
 						return reject(error);
@@ -85,8 +93,8 @@ const ProfileComponent: React.FC<Props> = () => {
 						...(values.password && {
 							password: values.password
 						}),
-						...(result.image && {
-							avatar: result.image
+						...(result.image_name && {
+							avatar: result.image_name
 						})
 					};
 					profileService
@@ -95,7 +103,7 @@ const ProfileComponent: React.FC<Props> = () => {
 							setData(response.data.data);
 							toastify.success('Update profile success');
 						})
-						.catch((error) => {
+						.catch((error: Error | AxiosError<ResponseError>) => {
 							if (axios.isAxiosError(error)) {
 								if (error.response?.data.errors && error.response.status === 400) {
 									setErrors(error.response.data.errors);
@@ -106,7 +114,7 @@ const ProfileComponent: React.FC<Props> = () => {
 							setUpdating(false);
 						});
 				})
-				.catch((error) => {
+				.catch((error: Error | AxiosError<ResponseError>) => {
 					if (axios.isAxiosError(error)) {
 						if (error.response?.data.errors && error.response.status === 400) {
 							setErrors(error.response.data.errors);

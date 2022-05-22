@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { FormikProps, useFormik } from 'formik';
@@ -14,6 +14,8 @@ import { useEffect, useState } from 'react';
 import { UpdateUserFormik, User } from 'models/user';
 import Loadingomponent from 'components/Loading/components';
 import toastify from 'helpers/toastify';
+import { ResponseError } from 'models/response';
+import { Image } from 'models/image';
 
 type Props = {};
 
@@ -78,9 +80,12 @@ const EditUserComponent: React.FC<Props> = () => {
 				)
 		}),
 		onSubmit: (values, { setErrors }) => {
-			new Promise<{ image?: string }>((resolve, reject) => {
+			new Promise<Image>((resolve, reject) => {
 				if (!values.image) {
-					return resolve({});
+					return resolve({
+						image_name: null,
+						image_url: null
+					});
 				}
 				setUploading(true);
 				imageService
@@ -88,7 +93,10 @@ const EditUserComponent: React.FC<Props> = () => {
 						image: values.image
 					})
 					.then((response) => {
-						return resolve({ image: response.data.data.image });
+						return resolve({
+							image_name: response.data.data.image_name,
+							image_url: response.data.data.image_url
+						});
 					})
 					.catch((error) => {
 						return reject(error);
@@ -109,8 +117,8 @@ const EditUserComponent: React.FC<Props> = () => {
 						...(values.password && {
 							password: values.password
 						}),
-						...(result.image && {
-							avatar: result.image
+						...(result.image_name && {
+							avatar: result.image_name
 						})
 					};
 					userService
@@ -119,7 +127,7 @@ const EditUserComponent: React.FC<Props> = () => {
 							setData(response.data.data);
 							toastify.success('Update user success');
 						})
-						.catch((error) => {
+						.catch((error: Error | AxiosError<ResponseError>) => {
 							if (axios.isAxiosError(error)) {
 								if (error.response?.data.errors && error.response.status === 400) {
 									setErrors(error.response.data.errors);
@@ -130,7 +138,7 @@ const EditUserComponent: React.FC<Props> = () => {
 							setUpdating(false);
 						});
 				})
-				.catch((error) => {
+				.catch((error: Error | AxiosError<ResponseError>) => {
 					if (axios.isAxiosError(error)) {
 						if (error.response?.data.errors && error.response.status === 400) {
 							setErrors(error.response.data.errors);

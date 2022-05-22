@@ -12,8 +12,9 @@ import authService from 'services/authService';
 import { MdLockOutline } from 'react-icons/md';
 import { FaRegUser } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { SigninFormik } from 'models/auth';
+import { ResponseError } from 'models/response';
 
 type Props = {};
 
@@ -32,26 +33,24 @@ const SigninCompoment: React.FC<Props> = () => {
 			password: Yup.string().required('The password is required.')
 		}),
 		onSubmit: (values, { setSubmitting, setErrors }) => {
-			authService.csrf().then((response) => {
-				authService
-					.signin(values)
-					.then((response) => {
-						setCookie(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
-							expires: config.AUTH_DATA.EXPIRED_TIME
-						});
-						navigate(routeConstant.ROUTE_NAME_SPLASH, { state: { from: from } });
-					})
-					.catch((error) => {
-						if (axios.isAxiosError(error)) {
-							if (error.response?.data.errors && error.response.status === 400) {
-								setErrors(error.response.data.errors);
-							}
-						}
-					})
-					.finally(() => {
-						setSubmitting(false);
+			authService
+				.signin(values)
+				.then((response) => {
+					setCookie(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
+						expires: config.AUTH_DATA.EXPIRED_TIME
 					});
-			});
+					navigate(routeConstant.ROUTE_NAME_SPLASH, { state: { from: from } });
+				})
+				.catch((error: Error | AxiosError<ResponseError>) => {
+					if (axios.isAxiosError(error)) {
+						if (error.response?.data.errors && error.response.status === 400) {
+							setErrors(error.response.data.errors);
+						}
+					}
+				})
+				.finally(() => {
+					setSubmitting(false);
+				});
 		}
 	});
 
