@@ -1,8 +1,12 @@
-type Props = {};
+import classNames from 'classnames';
 
-const TableLoadingComponent: React.FC<Props> = () => {
+type Props = {
+	className?: string;
+};
+
+const TableLoadingComponent: React.FC<Props> = ({ className }) => {
 	return (
-		<div className="flex flex-col animate-pulse">
+		<div className={classNames('flex flex-col animate-pulse', className)}>
 			<div className="align-middle inline-block min-w-full">
 				<div className="overflow-hidden border-2 border-gray-200 rounded-md">
 					<table className="min-w-full divide-y divide-gray-200">

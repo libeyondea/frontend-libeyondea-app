@@ -4,9 +4,10 @@ import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
 import useAppSelector from 'hooks/useAppSelector';
 import { useLocation, Navigate } from 'react-router-dom';
+import { Fragment } from 'react';
 
 type Props = {
-	children: JSX.Element;
+	children: React.ReactNode;
 };
 
 const AccessControl: React.FC<Props> = ({ children }) => {
@@ -33,7 +34,7 @@ const AccessControl: React.FC<Props> = ({ children }) => {
 	) {
 		return <Navigate to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`} />;
 	}
-	return children;
+	return <Fragment>{children}</Fragment>;
 };
 
 export default AccessControl;

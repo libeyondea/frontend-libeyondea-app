@@ -1,9 +1,11 @@
+import classNames from 'classnames';
 import getPageNumbers from 'helpers/getPageNumbers';
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { MdMoreHoriz } from 'react-icons/md';
 
 type Props = {
-	limits?: Array<number>;
+	className?: string;
+	limits?: number[];
 	total: number;
 	limit: number;
 	currentPage: number;
@@ -11,7 +13,8 @@ type Props = {
 	onChangeLimit: (limit: number) => void;
 };
 
-const Paginationomponent: React.FC<Props> = ({
+const PaginationComponent: React.FC<Props> = ({
+	className,
 	limits = [10, 20, 50, 100],
 	total,
 	limit,
@@ -22,18 +25,18 @@ const Paginationomponent: React.FC<Props> = ({
 	const totalPage = Math.ceil(total / limit);
 	const pageNumbers = getPageNumbers({ currentPage, limit, total });
 
-	const onChangePageHandle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => {
+	const _onChangePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => {
 		e.preventDefault();
 		onChangePage(page);
 	};
 
-	const onChangeLimitHandle = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	const _onChangeLimit = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		e.preventDefault();
 		onChangeLimit(parseInt(e.target.value));
 	};
 
 	return (
-		<div className="mt-4 flex items-center justify-between">
+		<div className={classNames('mt-4 flex items-center justify-between', className)}>
 			<div className="sm:flex-1 flex flex-col md:flex-row md:items-center md:justify-between">
 				<div className="flex items-center mb-4 md:mb-0 mr-0 md:mr-4">
 					<p className="text-sm text-gray-700">
@@ -47,7 +50,7 @@ const Paginationomponent: React.FC<Props> = ({
 						<select
 							className="ml-2 rounded-md appearance-none border border-gray-300 py-2 pl-4 pr-8 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
 							value={limit}
-							onChange={(e) => onChangeLimitHandle(e)}
+							onChange={(e) => _onChangeLimit(e)}
 						>
 							{limits.map((limit, index) => (
 								<option key={index} value={limit}>
@@ -64,7 +67,7 @@ const Paginationomponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(event) => onChangePageHandle(event, 1)}
+									onClick={(event) => _onChangePage(event, 1)}
 								>
 									<span className="sr-only">First</span>
 									<FaAngleDoubleLeft className="h-4 w-4" aria-hidden="true" />
@@ -72,7 +75,7 @@ const Paginationomponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(event) => onChangePageHandle(event, currentPage === 1 ? 1 : currentPage - 1)}
+									onClick={(event) => _onChangePage(event, currentPage === 1 ? 1 : currentPage - 1)}
 								>
 									<span className="sr-only">Previous</span>
 									<FaAngleLeft className="h-4 w-4" aria-hidden="true" />
@@ -119,7 +122,7 @@ const Paginationomponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-									onClick={(e) => onChangePageHandle(e, Number(pageNumber))}
+									onClick={(e) => _onChangePage(e, Number(pageNumber))}
 									key={pageNumber}
 								>
 									{pageNumber}
@@ -131,7 +134,7 @@ const Paginationomponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(e) => onChangePageHandle(e, currentPage + 1)}
+									onClick={(e) => _onChangePage(e, currentPage + 1)}
 								>
 									<span className="sr-only">Next</span>
 									<FaAngleRight className="h-4 w-4" aria-hidden="true" />
@@ -139,7 +142,7 @@ const Paginationomponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(e) => onChangePageHandle(e, totalPage)}
+									onClick={(e) => _onChangePage(e, totalPage)}
 								>
 									<span className="sr-only">Last</span>
 									<FaAngleDoubleRight className="h-4 w-4" aria-hidden="true" />
@@ -172,4 +175,4 @@ const Paginationomponent: React.FC<Props> = ({
 	);
 };
 
-export default Paginationomponent;
+export default PaginationComponent;

@@ -1,10 +1,13 @@
 import classNames from 'classnames';
-import { NavLink, NavLinkProps } from 'react-router-dom';
+import { NavLink, NavLinkProps, To } from 'react-router-dom';
 
-interface Props extends NavLinkProps {
+type Props = {
+	className?: string;
 	activeClassName: string;
 	notActiveClassName?: string;
-}
+	to: To;
+	children: React.ReactNode;
+} & NavLinkProps;
 
 const NavLinkComponent: React.FC<Props> = ({ className, activeClassName, notActiveClassName, to, children, ...props }) => (
 	<NavLink

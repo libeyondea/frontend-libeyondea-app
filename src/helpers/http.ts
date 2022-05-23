@@ -24,7 +24,7 @@ instance.interceptors.request.use(
 		}
 		return config;
 	},
-	(error) => {
+	(error: Error) => {
 		toastify.error();
 		return Promise.reject(error);
 	}
