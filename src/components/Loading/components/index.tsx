@@ -5,7 +5,7 @@ type Props = {
 	className?: string;
 };
 
-const Loadingomponent: React.FC<Props> = ({ className }) => {
+const LoadingComponent: React.FC<Props> = ({ className }) => {
 	return (
 		<div className={classNames('flex justify-center', className)}>
 			<RiLoader2Line className="animate-spin w-10 h-10 text-gray-600" />
@@ -13,4 +13,4 @@ const Loadingomponent: React.FC<Props> = ({ className }) => {
 	);
 };
 
-export default Loadingomponent;
+export default LoadingComponent;

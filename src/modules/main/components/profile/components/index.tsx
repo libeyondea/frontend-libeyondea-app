@@ -7,7 +7,7 @@ import imageService from 'services/imageService';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { Fragment, useEffect, useState, useCallback } from 'react';
 import { UpdateProfileFormik, Profile } from 'models/profile';
-import Loadingomponent from 'components/Loading/components';
+import LoadingComponent from 'components/Loading/components';
 import profileService from 'services/profileService';
 import toastify from 'helpers/toastify';
 import { ResponseError } from 'models/response';
@@ -219,7 +219,7 @@ const ProfileComponent: React.FC<Props> = () => {
 				<div className="col-span-1 w-full">
 					<CardComponent header="Profile">
 						{state.loading.profile ? (
-							<Loadingomponent />
+							<LoadingComponent />
 						) : (
 							<FormComponent<UpdateProfileFormik>
 								initialValues={initialValues}

@@ -10,7 +10,7 @@ import imageService from 'services/imageService';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { Fragment, useEffect, useState, useCallback } from 'react';
 import { UpdateUserFormik, User } from 'models/user';
-import Loadingomponent from 'components/Loading/components';
+import LoadingComponent from 'components/Loading/components';
 import toastify from 'helpers/toastify';
 import { ResponseError } from 'models/response';
 import { Image } from 'models/image';
@@ -244,7 +244,7 @@ const EditUserComponent: React.FC<Props> = () => {
 				<div className="col-span-1 w-full">
 					<CardComponent header="Edit user">
 						{state.loading.user ? (
-							<Loadingomponent />
+							<LoadingComponent />
 						) : (
 							<FormComponent<UpdateUserFormik>
 								initialValues={initialValues}
