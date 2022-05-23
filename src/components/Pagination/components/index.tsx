@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import getPageNumbers from 'helpers/getPageNumbers';
+import { Fragment } from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { MdMoreHoriz } from 'react-icons/md';
 
@@ -63,7 +64,7 @@ const PaginationComponent: React.FC<Props> = ({
 				<div className="flex items-center">
 					<nav className="relative inline-flex flex-wrap rounded-md -space-x-px" aria-label="Pagination">
 						{currentPage !== 1 ? (
-							<>
+							<Fragment>
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
@@ -80,9 +81,9 @@ const PaginationComponent: React.FC<Props> = ({
 									<span className="sr-only">Previous</span>
 									<FaAngleLeft className="h-4 w-4" aria-hidden="true" />
 								</button>
-							</>
+							</Fragment>
 						) : (
-							<>
+							<Fragment>
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
@@ -99,7 +100,7 @@ const PaginationComponent: React.FC<Props> = ({
 									<span className="sr-only">No previous</span>
 									<FaAngleLeft className="h-4 w-4" aria-hidden="true" />
 								</button>
-							</>
+							</Fragment>
 						)}
 						{pageNumbers.map((pageNumber, i) =>
 							pageNumber === '...' ? (
@@ -130,7 +131,7 @@ const PaginationComponent: React.FC<Props> = ({
 							)
 						)}
 						{currentPage !== totalPage ? (
-							<>
+							<Fragment>
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
@@ -147,9 +148,9 @@ const PaginationComponent: React.FC<Props> = ({
 									<span className="sr-only">Last</span>
 									<FaAngleDoubleRight className="h-4 w-4" aria-hidden="true" />
 								</button>
-							</>
+							</Fragment>
 						) : (
-							<>
+							<Fragment>
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
@@ -166,7 +167,7 @@ const PaginationComponent: React.FC<Props> = ({
 									<span className="sr-only">No last</span>
 									<FaAngleDoubleRight className="h-4 w-4" aria-hidden="true" />
 								</button>
-							</>
+							</Fragment>
 						)}
 					</nav>
 				</div>

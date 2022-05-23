@@ -1,10 +1,10 @@
 import cookie from 'js-cookie';
 
-export const setCookie = (key: string, value: string, options?: cookie.CookieAttributes | undefined): void => {
+export const setCookie = (key: string, value: string, options?: cookie.CookieAttributes): void => {
 	cookie.set(key, value, options);
 };
 
-export const removeCookie = (key: string, options?: cookie.CookieAttributes | undefined): void => {
+export const removeCookie = (key: string, options?: cookie.CookieAttributes): void => {
 	cookie.remove(key, options);
 };
 

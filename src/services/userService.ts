@@ -8,9 +8,9 @@ const userService = {
 		return http.get<ResponseDataPagination<User[]>>({
 			url: config.API.END_POINT.CRUD_USER,
 			params: {
-				page,
-				page_size,
-				q
+				page: page,
+				page_size: page_size,
+				q: q
 			}
 		});
 	},
