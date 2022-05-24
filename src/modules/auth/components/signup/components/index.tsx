@@ -7,12 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import axios, { AxiosError } from 'axios';
 import { SignupFormik } from 'models/auth';
-import { ResponseError } from 'models/response';
 import FormComponent from 'components/Form/components';
 import { Fragment } from 'react';
 import toastify from 'helpers/toastify';
+import { errorHandler } from 'helpers/error';
 
 type Props = {};
 
@@ -65,13 +64,13 @@ const SignupComponent: React.FC<Props> = () => {
 				toastify.success('Sign up success');
 				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`);
 			})
-			.catch((error: Error | AxiosError<ResponseError>) => {
-				if (axios.isAxiosError(error)) {
-					if (error.response?.data.errors && error.response.status === 400) {
-						formikHelpers.setErrors(error.response.data.errors);
+			.catch(
+				errorHandler((resAxios) => {
+					if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
+						formikHelpers.setErrors(resAxios.error.response.data.errors);
 					}
-				}
-			})
+				})
+			)
 			.finally(() => {
 				formikHelpers.setSubmitting(false);
 			});

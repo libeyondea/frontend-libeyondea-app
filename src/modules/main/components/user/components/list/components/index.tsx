@@ -14,6 +14,7 @@ import TableLoadingComponent from 'components/TableLoading/components';
 import BlockUIComponent from 'components/BlockUI/components';
 import FilterComponent from 'components/Filter/components';
 import TableComponent from 'components/Table/components';
+import { errorHandler } from 'helpers/error';
 
 type Props = {};
 
@@ -168,7 +169,7 @@ const ListUserComponent: React.FC<Props> = () => {
 					}
 				}));
 			})
-			.catch((error) => {})
+			.catch(errorHandler())
 			.finally(() => {
 				setState((prevState) => ({
 					...prevState,
@@ -211,7 +212,7 @@ const ListUserComponent: React.FC<Props> = () => {
 				.then((result) => {
 					loadUsers();
 				})
-				.catch((error) => {})
+				.catch(errorHandler())
 				.finally(() => {});
 		}
 	};

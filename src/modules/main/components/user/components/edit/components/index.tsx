@@ -1,4 +1,3 @@
-import axios, { AxiosError } from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { useParams } from 'react-router-dom';
@@ -12,10 +11,10 @@ import { Fragment, useEffect, useState, useCallback } from 'react';
 import { UpdateUserFormik, User } from 'models/user';
 import LoadingComponent from 'components/Loading/components';
 import toastify from 'helpers/toastify';
-import { ResponseError } from 'models/response';
 import { Image } from 'models/image';
 import FormComponent from 'components/Form/components';
 import { FormikHelpers } from 'formik';
+import { errorHandler } from 'helpers/error';
 
 type Props = {};
 
@@ -69,7 +68,7 @@ const EditUserComponent: React.FC<Props> = () => {
 					}
 				}));
 			})
-			.catch((error) => {})
+			.catch(errorHandler())
 			.finally(() => {
 				setState((prevState) => ({
 					...prevState,
@@ -206,13 +205,13 @@ const EditUserComponent: React.FC<Props> = () => {
 						}));
 						toastify.success('Update user success');
 					})
-					.catch((error: Error | AxiosError<ResponseError>) => {
-						if (axios.isAxiosError(error)) {
-							if (error.response?.data.errors && error.response.status === 400) {
-								formikHelpers.setErrors(error.response.data.errors);
+					.catch(
+						errorHandler((resAxios) => {
+							if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
+								formikHelpers.setErrors(resAxios.error.response.data.errors);
 							}
-						}
-					})
+						})
+					)
 					.finally(() => {
 						setState((prevState) => ({
 							...prevState,
@@ -223,13 +222,13 @@ const EditUserComponent: React.FC<Props> = () => {
 						}));
 					});
 			})
-			.catch((error: Error | AxiosError<ResponseError>) => {
-				if (axios.isAxiosError(error)) {
-					if (error.response?.data.errors && error.response.status === 400) {
-						formikHelpers.setErrors(error.response.data.errors);
+			.catch(
+				errorHandler((resAxios) => {
+					if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
+						formikHelpers.setErrors(resAxios.error.response.data.errors);
 					}
-				}
-			})
+				})
+			)
 			.finally(() => {});
 	};
 

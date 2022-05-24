@@ -1,4 +1,3 @@
-import axios, { AxiosError } from 'axios';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +11,10 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { Fragment, useState } from 'react';
 import { CreateUserFormik } from 'models/user';
 import toastify from 'helpers/toastify';
-import { ResponseError } from 'models/response';
 import { Image } from 'models/image';
 import FormComponent from 'components/Form/components';
 import { FormikHelpers } from 'formik';
+import { errorHandler } from 'helpers/error';
 
 type Props = {};
 
@@ -152,13 +151,13 @@ const NewUserComponent: React.FC<Props> = () => {
 						toastify.success('Create user success');
 						navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
 					})
-					.catch((error: Error | AxiosError<ResponseError>) => {
-						if (axios.isAxiosError(error)) {
-							if (error.response?.data.errors && error.response.status === 400) {
-								formikHelpers.setErrors(error.response.data.errors);
+					.catch(
+						errorHandler((resAxios) => {
+							if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
+								formikHelpers.setErrors(resAxios.error.response.data.errors);
 							}
-						}
-					})
+						})
+					)
 					.finally(() => {
 						setState((prevState) => ({
 							...prevState,
@@ -169,13 +168,13 @@ const NewUserComponent: React.FC<Props> = () => {
 						}));
 					});
 			})
-			.catch((error: Error | AxiosError<ResponseError>) => {
-				if (axios.isAxiosError(error)) {
-					if (error.response?.data.errors && error.response.status === 400) {
-						formikHelpers.setErrors(error.response.data.errors);
+			.catch(
+				errorHandler((resAxios) => {
+					if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
+						formikHelpers.setErrors(resAxios.error.response.data.errors);
 					}
-				}
-			})
+				})
+			)
 			.finally(() => {});
 	};
 

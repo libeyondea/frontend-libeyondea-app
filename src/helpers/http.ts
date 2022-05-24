@@ -34,15 +34,11 @@ instance.interceptors.response.use(
 	(response: AxiosResponse) => {
 		return response;
 	},
-	(error: Error | AxiosError<ResponseError>) => {
-		if (axios.isAxiosError(error)) {
-			toastify.error(error.response?.data.message);
-			if (error.response?.status === 401) {
-				removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
-				store.dispatch(authCurrentRequestAction(null, null));
-			}
-		} else {
-			toastify.error();
+	(error: AxiosError<ResponseError>) => {
+		if (error.response?.status === 401) {
+			toastify.error(error.response.data.message);
+			removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
+			store.dispatch(authCurrentRequestAction(null, null));
 		}
 		return Promise.reject(error);
 	}

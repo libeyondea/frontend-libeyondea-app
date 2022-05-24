@@ -10,12 +10,11 @@ import { useNavigate, useLocation, Location } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import axios, { AxiosError } from 'axios';
 import { SigninFormik } from 'models/auth';
-import { ResponseError } from 'models/response';
 import FormComponent from 'components/Form/components';
 import { Fragment } from 'react';
 import toastify from 'helpers/toastify';
+import { errorHandler } from 'helpers/error';
 
 type Props = {};
 
@@ -50,13 +49,13 @@ const SigninCompoment: React.FC<Props> = () => {
 				toastify.success('Sign in success');
 				navigate(routeConstant.ROUTE_NAME_SPLASH, { state: { from: from } });
 			})
-			.catch((error: Error | AxiosError<ResponseError>) => {
-				if (axios.isAxiosError(error)) {
-					if (error.response?.data.errors && error.response.status === 400) {
-						formikHelpers.setErrors(error.response.data.errors);
+			.catch(
+				errorHandler((resAxios) => {
+					if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
+						formikHelpers.setErrors(resAxios.error.response.data.errors);
 					}
-				}
-			})
+				})
+			)
 			.finally(() => {
 				formikHelpers.setSubmitting(false);
 			});
