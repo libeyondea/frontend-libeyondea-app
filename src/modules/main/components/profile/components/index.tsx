@@ -324,7 +324,6 @@ const ProfileComponent: React.FC<Props> = () => {
 													onChangeFile={formik.setFieldValue}
 													onBlurFile={formik.setFieldTouched}
 													imgUrl={state.data.profile.avatar_url}
-													canDelete
 												/>
 											</div>
 											<div className="col-span-2">

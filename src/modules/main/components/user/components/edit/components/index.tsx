@@ -305,7 +305,7 @@ const EditUserComponent: React.FC<Props> = () => {
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}
 													value={formik.values.email}
-													isError={!!(formik.errors.first_name && formik.touched.email)}
+													isError={!!(formik.errors.email && formik.touched.email)}
 													errorMessage={formik.errors.email}
 													name="email"
 													id="email"
@@ -333,7 +333,12 @@ const EditUserComponent: React.FC<Props> = () => {
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}
 													value={formik.values.password_confirmation}
-													isError={!!(formik.errors.first_name && formik.touched.password_confirmation)}
+													isError={
+														!!(
+															formik.errors.password_confirmation &&
+															formik.touched.password_confirmation
+														)
+													}
 													errorMessage={formik.errors.password_confirmation}
 													name="password_confirmation"
 													id="password_confirmation"

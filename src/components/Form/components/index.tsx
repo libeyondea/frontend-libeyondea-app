@@ -1,8 +1,9 @@
 import { FormikConfig, FormikHelpers, FormikProps, useFormik } from 'formik';
+import classNames from 'classnames';
 import Input from './Input';
 import Select from './Select';
 import Image from './Image';
-import classNames from 'classnames';
+import Checkbox from './Checkbox';
 
 type FormProps<TFormValues> = {
 	className?: string;
@@ -37,5 +38,6 @@ const FormComponent = <TFormValues extends Record<string, any> = Record<string, 
 export default Object.assign(FormComponent, {
 	Input: Input,
 	Select: Select,
+	Checkbox: Checkbox,
 	Image: Image
 });

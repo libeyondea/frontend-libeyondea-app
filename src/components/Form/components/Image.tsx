@@ -1,11 +1,13 @@
+import classNames from 'classnames';
 import ImageComponent from 'components/Image/components';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
 type onChangeFile = (field: string, value: File | null, shouldValidate?: boolean) => void;
 
 type onBlurFile = (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
 
 type Props = {
+	className?: string;
 	onChangeFile: onChangeFile;
 	onBlurFile: onBlurFile;
 	name: string;
@@ -17,6 +19,7 @@ type Props = {
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 const Image: React.FC<Props> = ({
+	className,
 	onChangeFile,
 	onBlurFile,
 	name,
@@ -48,7 +51,7 @@ const Image: React.FC<Props> = ({
 	};
 
 	return (
-		<Fragment>
+		<div className={classNames('', className)}>
 			<label htmlFor={name} className="inline-block font-medium text-gray-600 mb-1">
 				{label}
 			</label>
@@ -86,7 +89,7 @@ const Image: React.FC<Props> = ({
 				</div>
 			</div>
 			{isError && <div className="text-red-700 mt-1 text-sm">{errorMessage}</div>}
-		</Fragment>
+		</div>
 	);
 };
 
