@@ -1,10 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import config from 'config';
 import store from 'store';
-import { removeCookie } from 'helpers/cookies';
-import * as cookiesConstant from 'constants/cookies';
-import toastify from './toastify';
-import { authCurrentRequestAction } from 'store/auth/actions';
 import { ResponseError } from 'models/response';
 
 const instance = axios.create({
@@ -25,7 +21,6 @@ instance.interceptors.request.use(
 		return config;
 	},
 	(error: Error) => {
-		toastify.error();
 		return Promise.reject(error);
 	}
 );
@@ -35,11 +30,6 @@ instance.interceptors.response.use(
 		return response;
 	},
 	(error: AxiosError<ResponseError>) => {
-		if (error.response?.status === 401) {
-			toastify.error(error.response.data.message);
-			removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
-			store.dispatch(authCurrentRequestAction(null, null));
-		}
 		return Promise.reject(error);
 	}
 );

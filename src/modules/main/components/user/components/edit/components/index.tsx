@@ -206,11 +206,11 @@ const EditUserComponent: React.FC<Props> = () => {
 						toastify.success('Update user success');
 					})
 					.catch(
-						errorHandler((resAxios) => {
-							if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
-								formikHelpers.setErrors(resAxios.error.response.data.errors);
-							}
-						})
+						errorHandler(
+							(axiosError) => {},
+							(stockError) => {},
+							(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+						)
 					)
 					.finally(() => {
 						setState((prevState) => ({
@@ -223,11 +223,11 @@ const EditUserComponent: React.FC<Props> = () => {
 					});
 			})
 			.catch(
-				errorHandler((resAxios) => {
-					if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
-						formikHelpers.setErrors(resAxios.error.response.data.errors);
-					}
-				})
+				errorHandler(
+					(axiosError) => {},
+					(stockError) => {},
+					(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+				)
 			)
 			.finally(() => {});
 	};

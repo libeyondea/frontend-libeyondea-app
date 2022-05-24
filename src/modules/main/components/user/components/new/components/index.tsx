@@ -152,11 +152,11 @@ const NewUserComponent: React.FC<Props> = () => {
 						navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
 					})
 					.catch(
-						errorHandler((resAxios) => {
-							if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
-								formikHelpers.setErrors(resAxios.error.response.data.errors);
-							}
-						})
+						errorHandler(
+							(axiosError) => {},
+							(stockError) => {},
+							(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+						)
 					)
 					.finally(() => {
 						setState((prevState) => ({
@@ -169,11 +169,11 @@ const NewUserComponent: React.FC<Props> = () => {
 					});
 			})
 			.catch(
-				errorHandler((resAxios) => {
-					if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
-						formikHelpers.setErrors(resAxios.error.response.data.errors);
-					}
-				})
+				errorHandler(
+					(axiosError) => {},
+					(stockError) => {},
+					(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+				)
 			)
 			.finally(() => {});
 	};

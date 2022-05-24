@@ -50,11 +50,11 @@ const SigninCompoment: React.FC<Props> = () => {
 				navigate(routeConstant.ROUTE_NAME_SPLASH, { state: { from: from } });
 			})
 			.catch(
-				errorHandler((resAxios) => {
-					if (resAxios.error.response?.data.errors && resAxios.error.response.status === 400) {
-						formikHelpers.setErrors(resAxios.error.response.data.errors);
-					}
-				})
+				errorHandler(
+					(axiosError) => {},
+					(stockError) => {},
+					(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+				)
 			)
 			.finally(() => {
 				formikHelpers.setSubmitting(false);
