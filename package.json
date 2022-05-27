@@ -1,6 +1,6 @@
 {
 	"name": "frontend-libeyondea-app",
-	"version": "0.6.9",
+	"version": "1.0.0",
 	"private": true,
 	"dependencies": {
 		"@headlessui/react": "^1.6.2",

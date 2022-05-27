@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import getPageNumbers from 'helpers/getPageNumbers';
+import { getPageNumbers } from 'helpers/utils';
 import { Fragment } from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { MdMoreHoriz } from 'react-icons/md';

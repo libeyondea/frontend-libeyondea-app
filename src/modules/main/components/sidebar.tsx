@@ -8,9 +8,6 @@ import useAppDispatch from 'hooks/useAppDispatch';
 import { useLocation } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
 import NavLinkComponent from 'components/NavLink/components';
-import { selectAppSidebar } from 'store/app/selectors';
-import useAppSelector from 'hooks/useAppSelector';
-import { AiOutlineMenu } from 'react-icons/ai';
 import { FaChevronLeft, FaCog, FaEllipsisH, FaPlusCircle, FaRegListAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
 
 type Props = {};
@@ -18,7 +15,6 @@ type Props = {};
 const SidebarComponent: React.FC<Props> = () => {
 	const location = useLocation();
 	const dispatch = useAppDispatch();
-	const appSidebar = useAppSelector(selectAppSidebar);
 
 	return (
 		<div className="sidebar flex">
@@ -32,17 +28,11 @@ const SidebarComponent: React.FC<Props> = () => {
 				)}
 			>
 				<div className="flex flex-col w-64 bg-gray-800">
-					<div className="bg-gray-800 flex flex-col flex-shrink-0 fixed w-64 z-50 py-3 px-8">
+					<div className="bg-gray-800 flex flex-col flex-shrink-0 fixed w-64 z-50 py-3 px-7">
 						<div className="flex">
-							<button
-								className="text-gray-300 inline-flex items-center justify-center rounded-md focus:outline-none"
-								onClick={() => dispatch(appSidebarRequestAction(!appSidebar))}
-							>
-								<AiOutlineMenu className="h-6 w-6" />
-							</button>
-							<LinkComponent to="/" className="flex items-center text-left focus:outline-none ml-4">
+							<LinkComponent to="/" className="flex items-center text-left focus:outline-none">
 								<ImageComponent className="rounded-full h-8 w-8" src={config.LOGO_URL} alt={config.APP_NAME} />
-								<h2 className="text-lg text-white font-bold tracking-tighter cursor-pointer ml-1">
+								<h2 className="text-lg text-white font-bold tracking-tighter cursor-pointer ml-3">
 									{config.APP_NAME}
 								</h2>
 							</LinkComponent>

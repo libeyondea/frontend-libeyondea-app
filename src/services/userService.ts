@@ -32,7 +32,7 @@ const userService = {
 		});
 	},
 	delete: (id: number) => {
-		return http.delete<ResponseData<any>>({
+		return http.delete<ResponseData<User>>({
 			url: `${config.API.END_POINT.CRUD_USER}/${id}`
 		});
 	}

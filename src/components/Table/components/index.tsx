@@ -14,7 +14,7 @@ const TableComponent: React.FC<Props> = ({ className, children, ...props }) => {
 	return (
 		<div className="flex flex-col">
 			<div className="overflow-x-auto">
-				<div className="align-middle inline-block min-w-full">
+				<div className="align-middle inline-block min-w-full relative">
 					<div className="overflow-hidden border-2 border-gray-200 rounded-md">
 						<table {...props} className={classNames('min-w-full divide-y divide-gray-200', className)}>
 							{children}

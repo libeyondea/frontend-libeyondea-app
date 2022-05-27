@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useViewport = () => {
+const useViewportEffect = (): { vw: number; vh: number } => {
 	const [vw, setVW] = useState(0);
 	const [vh, setVH] = useState(0);
 
@@ -17,5 +17,8 @@ export const useViewport = () => {
 		window.addEventListener('resize', setSizes);
 		return () => window.removeEventListener('resize', setSizes);
 	}, [vh, vw]);
+
 	return { vw, vh };
 };
+
+export default useViewportEffect;

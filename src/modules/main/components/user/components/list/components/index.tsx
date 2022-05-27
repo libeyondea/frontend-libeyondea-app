@@ -2,8 +2,7 @@ import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import LinkComponent from 'components/Link/components';
 import time from 'helpers/time';
-import { User } from 'models/user';
-import { useEffect, useState, Fragment, useCallback } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
@@ -15,108 +14,45 @@ import BlockUIComponent from 'components/BlockUI/components';
 import FilterComponent from 'components/Filter/components';
 import TableComponent from 'components/Table/components';
 import { errorHandler } from 'helpers/error';
+import { useRoutes } from 'react-router-dom';
+import ListUserRouter from './router';
+import useAppDispatch from 'hooks/useAppDispatch';
+import useAppSelector from 'hooks/useAppSelector';
+import { selectUserDelete, selectUserList } from 'store/user/selectors';
+import {
+	userDeleteDataRequestAction,
+	userDeleteLoadingRequestAction,
+	userListDataRequestAction,
+	userListFilterQRequestAction,
+	userListLoadingRequestAction,
+	userListPaginationLimitRequestAction,
+	userListPaginationPageRequestAction,
+	userListPaginationTotalRequestAction
+} from 'store/user/actions';
 
 type Props = {};
 
 const ListUserComponent: React.FC<Props> = () => {
+	const dispatch = useAppDispatch();
+	const userList = useAppSelector(selectUserList);
+	const userDelete = useAppSelector(selectUserDelete);
 	const [formSearch, setFormSearch] = useState({
 		q: ''
 	});
 
-	const [state, setState] = useState<{
-		data: {
-			users: User[];
-		};
-		pagination: {
-			users: {
-				page: number;
-				limit: number;
-				limits: number[];
-				total: number;
-			};
-		};
-		filter: {
-			users: {
-				q: string;
-			};
-		};
-		loading: {
-			users: boolean;
-		};
-		deleting: {
-			users: boolean;
-		};
-	}>({
-		data: {
-			users: []
-		},
-		pagination: {
-			users: {
-				page: 1,
-				limit: 10,
-				limits: [10, 20, 50, 100],
-				total: 0
-			}
-		},
-		filter: {
-			users: {
-				q: ''
-			}
-		},
-		loading: {
-			users: true
-		},
-		deleting: {
-			users: false
-		}
-	});
-
 	const onChangePage = (page: number) => {
-		setState((prevState) => ({
-			...prevState,
-			pagination: {
-				...prevState.pagination,
-				users: {
-					...prevState.pagination.users,
-					page: page
-				}
-			}
-		}));
+		dispatch(userListPaginationPageRequestAction(page));
 	};
 
 	const onChangeLimit = (limit: number) => {
-		setState((prevState) => ({
-			...prevState,
-			pagination: {
-				...prevState.pagination,
-				users: {
-					...prevState.pagination.users,
-					limit: limit,
-					page: 1
-				}
-			}
-		}));
+		dispatch(userListPaginationPageRequestAction(1));
+		dispatch(userListPaginationLimitRequestAction(limit));
 	};
 
 	const onChangeSearch = (q: string) => {
 		if (!q) {
-			setState((prevState) => ({
-				...prevState,
-				filter: {
-					...prevState.filter,
-					users: {
-						...prevState.filter.users,
-						q: ''
-					}
-				},
-				pagination: {
-					...prevState.pagination,
-					users: {
-						...prevState.pagination.users,
-						page: 1
-					}
-				}
-			}));
+			dispatch(userListPaginationPageRequestAction(1));
+			dispatch(userListFilterQRequestAction(q));
 		}
 		setFormSearch({
 			q: q
@@ -124,102 +60,38 @@ const ListUserComponent: React.FC<Props> = () => {
 	};
 
 	const onSubmitSearch = () => {
-		setState((prevState) => ({
-			...prevState,
-			filter: {
-				...prevState.filter,
-				users: {
-					...prevState.filter.users,
-					q: formSearch.q
-				}
-			},
-			pagination: {
-				...prevState.pagination,
-				users: {
-					...prevState.pagination.users,
-					page: 1
-				}
-			}
-		}));
+		dispatch(userListPaginationPageRequestAction(1));
+		dispatch(userListFilterQRequestAction(formSearch.q));
 	};
-
-	const loadUsers = useCallback(() => {
-		setState((prevState) => ({
-			...prevState,
-			loading: {
-				...prevState.loading,
-				users: true
-			}
-		}));
-		userService
-			.list(state.pagination.users.page, state.pagination.users.limit, state.filter.users.q)
-			.then((response) => {
-				setState((prevState) => ({
-					...prevState,
-					data: {
-						...prevState.data,
-						users: response.data.data
-					},
-					pagination: {
-						...prevState.pagination,
-						users: {
-							...prevState.pagination.users,
-							total: response.data.pagination.total
-						}
-					}
-				}));
-			})
-			.catch(errorHandler())
-			.finally(() => {
-				setState((prevState) => ({
-					...prevState,
-					loading: {
-						...prevState.loading,
-						users: false
-					}
-				}));
-			});
-	}, [state.pagination.users.page, state.pagination.users.limit, state.filter.users.q]);
 
 	const onDeleteClicked = (userId: number) => {
 		if (window.confirm('Do you want to delete?')) {
-			new Promise((resolve, reject) => {
-				setState((prevState) => ({
-					...prevState,
-					deleting: {
-						...prevState.deleting,
-						users: true
-					}
-				}));
-				userService
-					.delete(userId)
-					.then((response) => {
-						return resolve(response);
-					})
-					.catch((error) => {
-						return reject(error);
-					})
-					.finally(() => {
-						setState((prevState) => ({
-							...prevState,
-							deleting: {
-								...prevState.deleting,
-								users: false
-							}
-						}));
-					});
-			})
-				.then((result) => {
-					loadUsers();
+			dispatch(userDeleteLoadingRequestAction(true));
+			userService
+				.delete(userId)
+				.then((response) => {
+					dispatch(userDeleteDataRequestAction(response.data.data));
 				})
 				.catch(errorHandler())
-				.finally(() => {});
+				.finally(() => {
+					dispatch(userDeleteLoadingRequestAction(false));
+				});
 		}
 	};
 
 	useEffect(() => {
-		loadUsers();
-	}, [loadUsers]);
+		dispatch(userListLoadingRequestAction(true));
+		userService
+			.list(userList.pagination.page, userList.pagination.limit, userList.filter.q)
+			.then((response) => {
+				dispatch(userListDataRequestAction(response.data.data));
+				dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
+			})
+			.catch(errorHandler())
+			.finally(() => {
+				dispatch(userListLoadingRequestAction(false));
+			});
+	}, [dispatch, userList.pagination.page, userList.pagination.limit, userList.filter.q]);
 
 	return (
 		<Fragment>
@@ -229,7 +101,7 @@ const ListUserComponent: React.FC<Props> = () => {
 					<CardComponent header="List users">
 						<div className="relative">
 							<FilterComponent q={formSearch.q} onChangeSearch={onChangeSearch} onSubmitSearch={onSubmitSearch} />
-							{state.loading.users ? (
+							{userList.loading ? (
 								<TableLoadingComponent />
 							) : (
 								<TableComponent>
@@ -248,12 +120,12 @@ const ListUserComponent: React.FC<Props> = () => {
 
 									<TableComponent.Tbody>
 										<Fragment>
-											{!state.data.users.length ? (
+											{!userList.data.length ? (
 												<TableComponent.Tr>
 													<TableComponent.Td colSpan={6}>Empty users</TableComponent.Td>
 												</TableComponent.Tr>
 											) : (
-												state.data.users.map((user) => (
+												userList.data.map((user) => (
 													<TableComponent.Tr key={user.id}>
 														<TableComponent.Td>
 															<div className="flex items-center">
@@ -317,18 +189,19 @@ const ListUserComponent: React.FC<Props> = () => {
 								</TableComponent>
 							)}
 							<PaginationComponent
-								limits={state.pagination.users.limits}
-								total={state.pagination.users.total}
-								limit={state.pagination.users.limit}
-								currentPage={state.pagination.users.page}
+								limits={userList.pagination.limits}
+								total={userList.pagination.total}
+								limit={userList.pagination.limit}
+								currentPage={userList.pagination.page}
 								onChangePage={onChangePage}
 								onChangeLimit={onChangeLimit}
 							/>
-							<BlockUIComponent isBlocking={state.deleting.users} />
+							<BlockUIComponent isBlocking={userDelete.loading} />
 						</div>
 					</CardComponent>
 				</div>
 			</div>
+			{useRoutes(ListUserRouter)}
 		</Fragment>
 	);
 };

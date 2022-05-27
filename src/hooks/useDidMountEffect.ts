@@ -5,11 +5,8 @@ const useDidMountEffect = (effect: EffectCallback): void => {
 
 	useEffect(() => {
 		if (!mounted.current) {
-			// didMount
 			effect();
 			mounted.current = true;
-		} else {
-			// didUpdate
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

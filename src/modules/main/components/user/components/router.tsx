@@ -5,31 +5,13 @@ import { lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
 const ListUserComponent = lazy(() => import('./list/components'));
-const NewUserComponent = lazy(() => import('./new/components'));
-const EditUserComponent = lazy(() => import('./edit/components'));
 
 const UserRouter: RouteObject[] = [
 	{
-		path: '',
+		path: '/*',
 		element: (
 			<Suspense fallback={null}>
 				<ListUserComponent />
-			</Suspense>
-		)
-	},
-	{
-		path: `${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`,
-		element: (
-			<Suspense fallback={null}>
-				<NewUserComponent />
-			</Suspense>
-		)
-	},
-	{
-		path: `:userId/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`,
-		element: (
-			<Suspense fallback={null}>
-				<EditUserComponent />
 			</Suspense>
 		)
 	},

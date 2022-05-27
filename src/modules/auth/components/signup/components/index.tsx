@@ -68,7 +68,7 @@ const SignupComponent: React.FC<Props> = () => {
 				errorHandler(
 					(axiosError) => {},
 					(stockError) => {},
-					(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+					(formError) => formikHelpers.setErrors(formError.data.errors)
 				)
 			)
 			.finally(() => {

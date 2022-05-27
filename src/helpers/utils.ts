@@ -1,11 +1,16 @@
-type Props = {
+import { MutableRefObject } from 'react';
+
+export const getPageNumbers = ({
+	currentPage,
+	limit,
+	total,
+	pageNumbersToShow = 3
+}: {
 	currentPage: number;
 	limit: number;
 	total: number;
 	pageNumbersToShow?: number;
-};
-
-const getPageNumbers = ({ currentPage, limit, total, pageNumbersToShow = 3 }: Props): Array<number | '...'> => {
+}): Array<number | '...'> => {
 	const lastPageNumber = Math.ceil(total / limit);
 	const currentPageNumber = currentPage <= lastPageNumber ? currentPage : lastPageNumber;
 	const maxPagesBeforeCurrentPage = Math.floor(pageNumbersToShow / 2);
@@ -55,4 +60,40 @@ const getPageNumbers = ({ currentPage, limit, total, pageNumbersToShow = 3 }: Pr
 	return pageNumbers;
 };
 
-export default getPageNumbers;
+export const insertItemIntoArray = <T = any>(arr: T[], item: T, index = 0): T[] => {
+	const arrClone = [...arr];
+	arrClone.splice(index, 0, item);
+	return arrClone;
+};
+
+export const updateArrayItemById = <T = any>(arr: T[], itemId: number, fields: T): T[] => {
+	const arrClone = [...arr];
+	const item = arrClone.find((i: any) => i.id === itemId);
+	if (item) {
+		const itemIndex = arrClone.indexOf(item);
+		arrClone.splice(itemIndex, 1, { ...item, ...fields });
+	}
+	return arrClone;
+};
+
+export const deleteArrayItemById = <T = any>(arr: T[], itemId: number): T[] => {
+	const arrClone = [...arr];
+	const item = arrClone.find((i: any) => i.id === itemId);
+	if (item) {
+		const itemIndex = arrClone.indexOf(item);
+		arrClone.splice(itemIndex, 1);
+	}
+	return arrClone;
+};
+
+export const getOwnerDocument = <T extends Element | MutableRefObject<Element | null>>(element?: T | null): Document | null => {
+	if (typeof window === 'undefined') {
+		return null;
+	} else if (element instanceof Node) {
+		return element.ownerDocument;
+	} else if (element?.hasOwnProperty('current') && element.current instanceof Node) {
+		return element.current.ownerDocument;
+	} else {
+		return document;
+	}
+};

@@ -184,7 +184,7 @@ const ProfileComponent: React.FC<Props> = () => {
 						errorHandler(
 							(axiosError) => {},
 							(stockError) => {},
-							(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+							(formError) => formikHelpers.setErrors(formError.data.errors)
 						)
 					)
 					.finally(() => {
@@ -201,7 +201,7 @@ const ProfileComponent: React.FC<Props> = () => {
 				errorHandler(
 					(axiosError) => {},
 					(stockError) => {},
-					(formError) => formikHelpers.setErrors(formError.response?.data.errors)
+					(formError) => formikHelpers.setErrors(formError.data.errors)
 				)
 			)
 			.finally(() => {});
@@ -307,7 +307,12 @@ const ProfileComponent: React.FC<Props> = () => {
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}
 													value={formik.values.password_confirmation}
-													isError={!!(formik.errors.first_name && formik.touched.password_confirmation)}
+													isError={
+														!!(
+															formik.errors.password_confirmation &&
+															formik.touched.password_confirmation
+														)
+													}
 													errorMessage={formik.errors.password_confirmation}
 													name="password_confirmation"
 													id="password_confirmation"
