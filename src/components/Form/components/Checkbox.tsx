@@ -3,12 +3,12 @@ import classNames from 'classnames';
 type Props = {
 	className?: string;
 	name: string;
-	isError: boolean;
+	isError?: boolean;
 	errorMessage?: string;
 	children: React.ReactNode;
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const Checkbox: React.FC<Props> = ({ className, name, isError, errorMessage, children, ...props }) => {
+const Checkbox: React.FC<Props> = ({ className, name, isError = false, errorMessage, children, ...props }) => {
 	return (
 		<div className={classNames('flex-row', className)}>
 			<div className="flex items-center">

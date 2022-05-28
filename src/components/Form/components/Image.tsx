@@ -12,7 +12,7 @@ type Props = {
 	onBlurFile: onBlurFile;
 	name: string;
 	label: string;
-	isError: boolean;
+	isError?: boolean;
 	errorMessage?: string;
 	imgUrl?: string;
 	canDelete?: boolean;
@@ -24,7 +24,7 @@ const Image: React.FC<Props> = ({
 	onBlurFile,
 	name,
 	label,
-	isError,
+	isError = false,
 	errorMessage,
 	imgUrl = '',
 	canDelete = false,

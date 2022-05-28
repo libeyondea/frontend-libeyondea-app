@@ -3,17 +3,19 @@ import classNames from 'classnames';
 type Props = {
 	className?: string;
 	name: string;
-	label: string;
-	isError: boolean;
+	label?: string;
+	isError?: boolean;
 	errorMessage?: string;
 } & React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
 
-const Select: React.FC<Props> = ({ className, name, label, isError, errorMessage, ...props }) => {
+const Select: React.FC<Props> = ({ className, name, label, isError = false, errorMessage, ...props }) => {
 	return (
 		<div className={classNames('', className)}>
-			<label htmlFor={name} className="inline-block font-medium text-gray-600 mb-1">
-				{label}
-			</label>
+			{label && (
+				<label htmlFor={name} className="inline-block font-medium text-gray-600 mb-1">
+					{label}
+				</label>
+			)}
 			<div className="relative">
 				<select
 					{...props}
