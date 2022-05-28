@@ -60,8 +60,10 @@ const NewListUserComponent: React.FC<Props> = () => {
 			.min(6, 'The password must be at least 6 characters.')
 			.max(66, 'The password must not be greater than 66 characters.'),
 		password_confirmation: Yup.string()
-			.required('The password confirmation is required.')
-			.oneOf([Yup.ref('password')], 'The password confirmation does not match.'),
+			.required('The password confirmation is required')
+			.test('passwords-match', 'The password confirmation does not match.', function (value) {
+				return this.parent.password === value;
+			}),
 		role: Yup.string()
 			.required('The role is required.')
 			.oneOf(

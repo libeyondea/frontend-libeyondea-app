@@ -44,8 +44,10 @@ const SignupComponent: React.FC<Props> = () => {
 			.min(6, 'The password must be at least 6 characters')
 			.max(66, 'The password must not be greater than 66 characters'),
 		password_confirmation: Yup.string()
-			.oneOf([Yup.ref('password')], 'The password confirmation does not match')
-			.required('The password confirmation is required'),
+			.required('The password confirmation is required')
+			.test('passwords-match', 'The password confirmation does not match.', function (value) {
+				return this.parent.password === value;
+			}),
 		terms: Yup.boolean().oneOf([true], 'You must accept the terms')
 	});
 
