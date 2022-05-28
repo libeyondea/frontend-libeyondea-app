@@ -103,7 +103,7 @@ const PaginationComponent: React.FC<Props> = ({
 							</Fragment>
 						)}
 						{pageNumbers.map((pageNumber, i) =>
-							pageNumber === '...' ? (
+							!pageNumber ? (
 								<span
 									className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
 									key={`${pageNumber}${i}`}

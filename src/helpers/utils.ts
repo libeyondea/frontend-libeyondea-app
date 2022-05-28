@@ -10,7 +10,7 @@ export const getPageNumbers = ({
 	limit: number;
 	total: number;
 	pageNumbersToShow?: number;
-}): Array<number | '...'> => {
+}): Array<number | null> => {
 	const lastPageNumber = Math.ceil(total / limit);
 	const currentPageNumber = currentPage <= lastPageNumber ? currentPage : lastPageNumber;
 	const maxPagesBeforeCurrentPage = Math.floor(pageNumbersToShow / 2);
@@ -35,15 +35,15 @@ export const getPageNumbers = ({
 		endPage = currentPageNumber + maxPagesAfterCurrentPage;
 	}
 
-	let pageNumbers = Array.from(Array(endPage + 1 - startPage).keys())
+	let pageNumbers: Array<number | null> = Array.from(Array(endPage + 1 - startPage).keys())
 		.map((pageNumber) => startPage + pageNumber)
 		.filter((pageNumber) => pageNumber <= lastPageNumber && pageNumber > 0);
 
-	if (pageNumbers[0] > 1) {
-		if (pageNumbers[0] <= 2) {
+	if (Number(pageNumbers[0]) > 1) {
+		if (Number(pageNumbers[0]) <= 2) {
 			pageNumbers = [1, ...pageNumbers];
 		} else {
-			const ellipsis: any = pageNumbers[0] > 3 ? '...' : 2;
+			const ellipsis: number | null = Number(pageNumbers[0]) > 3 ? null : 2;
 			pageNumbers = [1, ellipsis, ...pageNumbers];
 		}
 	}
@@ -52,7 +52,8 @@ export const getPageNumbers = ({
 		if (pageNumbers[pageNumbers.length - 1] === lastPageNumber - 1) {
 			pageNumbers = [...pageNumbers, lastPageNumber];
 		} else {
-			const ellipsis: any = pageNumbers[pageNumbers.length - 1] < lastPageNumber - 2 ? '...' : lastPageNumber - 1;
+			const ellipsis: number | null =
+				Number(pageNumbers[pageNumbers.length - 1]) < lastPageNumber - 2 ? null : lastPageNumber - 1;
 			pageNumbers = [...pageNumbers, ellipsis, lastPageNumber];
 		}
 	}
@@ -60,15 +61,15 @@ export const getPageNumbers = ({
 	return pageNumbers;
 };
 
-export const insertItemIntoArray = <T = any>(arr: T[], item: T, index = 0): T[] => {
+export const insertItemIntoArray = <T extends object | string | number>(arr: T[], item: T, index = 0): T[] => {
 	const arrClone = [...arr];
 	arrClone.splice(index, 0, item);
 	return arrClone;
 };
 
-export const updateArrayItemById = <T = any>(arr: T[], itemId: number, fields: T): T[] => {
+export const updateArrayItemById = <T extends { id: number }>(arr: T[], itemId: number, fields: T): T[] => {
 	const arrClone = [...arr];
-	const item = arrClone.find((i: any) => i.id === itemId);
+	const item = arrClone.find((i) => i.id === itemId);
 	if (item) {
 		const itemIndex = arrClone.indexOf(item);
 		arrClone.splice(itemIndex, 1, { ...item, ...fields });
@@ -76,9 +77,9 @@ export const updateArrayItemById = <T = any>(arr: T[], itemId: number, fields: T
 	return arrClone;
 };
 
-export const deleteArrayItemById = <T = any>(arr: T[], itemId: number): T[] => {
+export const deleteArrayItemById = <T extends { id: number }>(arr: T[], itemId: number): T[] => {
 	const arrClone = [...arr];
-	const item = arrClone.find((i: any) => i.id === itemId);
+	const item = arrClone.find((i) => i.id === itemId);
 	if (item) {
 		const itemIndex = arrClone.indexOf(item);
 		arrClone.splice(itemIndex, 1);

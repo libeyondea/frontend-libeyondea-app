@@ -1,7 +1,6 @@
 import { setCookie } from 'helpers/cookies';
 import { FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import classNames from 'classnames';
 import CardComponent from 'components/Card/components';
 import * as cookiesConstant from 'constants/cookies';
 import * as routeConstant from 'constants/route';
@@ -9,12 +8,12 @@ import config from 'config';
 import { useNavigate, useLocation, Location } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { SigninFormik } from 'models/auth';
 import FormComponent from 'components/Form/components';
 import { Fragment } from 'react';
 import toastify from 'helpers/toastify';
 import { errorHandler } from 'helpers/error';
+import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
@@ -114,25 +113,9 @@ const SigninCompoment: React.FC<Props> = () => {
 							</div>
 						</div>
 						<div className="flex w-full">
-							<button
-								type="submit"
-								className={classNames(
-									'flex items-center justify-center py-2 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg',
-									{
-										'cursor-not-allowed disabled:opacity-50': formik.isSubmitting
-									}
-								)}
-								disabled={formik.isSubmitting}
-							>
-								{formik.isSubmitting ? (
-									<Fragment>
-										<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-										<span>Signing in</span>
-									</Fragment>
-								) : (
-									<span>Sign in</span>
-								)}
-							</button>
+							<ButtonComponent className="w-full" isLoading={formik.isSubmitting} disabled={formik.isSubmitting}>
+								{formik.isSubmitting ? 'Signing in' : 'Sign in'}
+							</ButtonComponent>
 						</div>
 					</Fragment>
 				)}

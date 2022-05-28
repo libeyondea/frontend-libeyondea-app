@@ -4,10 +4,8 @@ import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
-import classNames from 'classnames';
 import imageService from 'services/imageService';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { Fragment, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { CreateUserFormik } from 'models/user';
 import toastify from 'helpers/toastify';
 import { Image } from 'models/image';
@@ -20,6 +18,7 @@ import { selectUserCreate } from 'store/user/selectors';
 import { userCreateDataRequestAction, userCreateLoadingRequestAction } from 'store/user/actions';
 import useOutsideClick from 'hooks/useOutsideClick';
 import useScrollLock from 'hooks/useScrollLock';
+import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
@@ -327,31 +326,12 @@ const NewListUserComponent: React.FC<Props> = () => {
 									/>
 								</div>
 								<div className="col-span-2 flex flex-row-reverse">
-									<button
-										type="submit"
-										className={classNames(
-											'flex items-center justify-center py-3 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md',
-											{
-												'cursor-not-allowed disabled:opacity-50':
-													imageUpload.loading || userCreate.loading
-											}
-										)}
+									<ButtonComponent
+										isLoading={imageUpload.loading || userCreate.loading}
 										disabled={imageUpload.loading || userCreate.loading}
 									>
-										{imageUpload.loading ? (
-											<Fragment>
-												<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-												<span>Uploading</span>
-											</Fragment>
-										) : userCreate.loading ? (
-											<Fragment>
-												<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-												<span>Creating</span>
-											</Fragment>
-										) : (
-											<span>Submit</span>
-										)}
-									</button>
+										{imageUpload.loading ? 'Uploading' : userCreate.loading ? 'Creating' : 'Submit'}
+									</ButtonComponent>
 								</div>
 							</div>
 						)}

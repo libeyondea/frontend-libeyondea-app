@@ -1,11 +1,9 @@
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import * as Yup from 'yup';
-import classNames from 'classnames';
 import imageService from 'services/imageService';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { Fragment, useEffect, useState, useCallback } from 'react';
-import { UpdateProfileFormik, Profile } from 'models/profile';
+import { Fragment, useState } from 'react';
+import { UpdateProfileFormik } from 'models/profile';
 import LoadingComponent from 'components/Loading/components';
 import profileService from 'services/profileService';
 import toastify from 'helpers/toastify';
@@ -13,74 +11,31 @@ import { Image } from 'models/image';
 import FormComponent from 'components/Form/components';
 import { FormikHelpers } from 'formik';
 import { errorHandler } from 'helpers/error';
+import useAppSelector from 'hooks/useAppSelector';
+import useAppDispatch from 'hooks/useAppDispatch';
+import { selectProfileShow, selectProfileUpdate } from 'store/profile/selectors';
+import {
+	profileShowDataRequestAction,
+	profileShowLoadingRequestAction,
+	profileUpdateDataRequestAction,
+	profileUpdateLoadingRequestAction
+} from 'store/profile/actions';
+import useDidUpdateEffect from 'hooks/useDidUpdateEffect';
+import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
 const ProfileComponent: React.FC<Props> = () => {
-	const [state, setState] = useState<{
-		data: {
-			profile: Profile;
-		};
-		uploading: {
-			profile: boolean;
-		};
-		updating: {
-			profile: boolean;
-		};
-		loading: {
-			profile: boolean;
-		};
-	}>({
-		data: {
-			profile: {} as Profile
-		},
-		uploading: {
-			profile: false
-		},
-		updating: {
-			profile: false
-		},
-		loading: {
-			profile: true
-		}
-	});
-
-	const loadProfile = useCallback(() => {
-		setState((prevState) => ({
-			...prevState,
-			loading: {
-				...prevState.loading,
-				profile: true
-			}
-		}));
-		profileService
-			.show()
-			.then((response) => {
-				setState((prevState) => ({
-					...prevState,
-					data: {
-						...prevState.data,
-						profile: response.data.data
-					}
-				}));
-			})
-			.catch(errorHandler())
-			.finally(() => {
-				setState((prevState) => ({
-					...prevState,
-					loading: {
-						...prevState.loading,
-						profile: false
-					}
-				}));
-			});
-	}, []);
+	const dispatch = useAppDispatch();
+	const profileShow = useAppSelector(selectProfileShow);
+	const profileUpdate = useAppSelector(selectProfileUpdate);
+	const [imageUpload, setImageUpload] = useState({ loading: false });
 
 	const initialValues: UpdateProfileFormik = {
-		first_name: state.data.profile.first_name || '',
-		last_name: state.data.profile.last_name || '',
-		email: state.data.profile.email || '',
-		user_name: state.data.profile.user_name || '',
+		first_name: profileShow.data.first_name || '',
+		last_name: profileShow.data.last_name || '',
+		email: profileShow.data.email || '',
+		user_name: profileShow.data.user_name || '',
 		password: '',
 		password_confirmation: '',
 		image: null
@@ -118,13 +73,7 @@ const ProfileComponent: React.FC<Props> = () => {
 					image_url: null
 				});
 			}
-			setState((prevState) => ({
-				...prevState,
-				uploading: {
-					...prevState.uploading,
-					profile: true
-				}
-			}));
+			setImageUpload({ loading: true });
 			imageService
 				.upload({
 					image: values.image
@@ -139,23 +88,11 @@ const ProfileComponent: React.FC<Props> = () => {
 					return reject(error);
 				})
 				.finally(() => {
-					setState((prevState) => ({
-						...prevState,
-						uploading: {
-							...prevState.uploading,
-							profile: false
-						}
-					}));
+					setImageUpload({ loading: false });
 				});
 		})
 			.then((result) => {
-				setState((prevState) => ({
-					...prevState,
-					updating: {
-						...prevState.updating,
-						profile: true
-					}
-				}));
+				dispatch(profileUpdateLoadingRequestAction(true));
 				const payload = {
 					first_name: values.first_name,
 					last_name: values.last_name,
@@ -171,13 +108,7 @@ const ProfileComponent: React.FC<Props> = () => {
 				profileService
 					.update(payload)
 					.then((response) => {
-						setState((prevState) => ({
-							...prevState,
-							data: {
-								...prevState.data,
-								profile: response.data.data
-							}
-						}));
+						dispatch(profileUpdateDataRequestAction(response.data.data));
 						toastify.success('Update profile success');
 					})
 					.catch(
@@ -188,13 +119,7 @@ const ProfileComponent: React.FC<Props> = () => {
 						)
 					)
 					.finally(() => {
-						setState((prevState) => ({
-							...prevState,
-							updating: {
-								...prevState.updating,
-								profile: false
-							}
-						}));
+						dispatch(profileUpdateLoadingRequestAction(false));
 					});
 			})
 			.catch(
@@ -207,9 +132,18 @@ const ProfileComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useEffect(() => {
-		loadProfile();
-	}, [loadProfile]);
+	useDidUpdateEffect(() => {
+		dispatch(profileShowLoadingRequestAction(true));
+		profileService
+			.show()
+			.then((response) => {
+				dispatch(profileShowDataRequestAction(response.data.data));
+			})
+			.catch(errorHandler())
+			.finally(() => {
+				dispatch(profileShowLoadingRequestAction(false));
+			});
+	}, []);
 
 	return (
 		<Fragment>
@@ -217,7 +151,7 @@ const ProfileComponent: React.FC<Props> = () => {
 			<div className="grid grid-cols-1 gap-4">
 				<div className="col-span-1 w-full">
 					<CardComponent header="Profile">
-						{state.loading.profile ? (
+						{profileShow.loading ? (
 							<LoadingComponent />
 						) : (
 							<FormComponent<UpdateProfileFormik>
@@ -327,35 +261,20 @@ const ProfileComponent: React.FC<Props> = () => {
 													errorMessage={formik.errors.image}
 													onChangeFile={formik.setFieldValue}
 													onBlurFile={formik.setFieldTouched}
-													imgUrl={state.data.profile.avatar_url}
+													imgUrl={profileShow.data.avatar_url}
 												/>
 											</div>
 											<div className="col-span-2">
-												<button
-													type="submit"
-													className={classNames(
-														'flex items-center justify-center py-3 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md',
-														{
-															'cursor-not-allowed disabled:opacity-50':
-																state.uploading.profile || state.updating.profile
-														}
-													)}
-													disabled={state.uploading.profile || state.updating.profile}
+												<ButtonComponent
+													isLoading={imageUpload.loading || profileUpdate.loading}
+													disabled={imageUpload.loading || profileUpdate.loading}
 												>
-													{state.uploading.profile ? (
-														<Fragment>
-															<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-															<span>Uploading</span>
-														</Fragment>
-													) : state.updating.profile ? (
-														<Fragment>
-															<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-															<span>Updating</span>
-														</Fragment>
-													) : (
-														<span>Submit</span>
-													)}
-												</button>
+													{imageUpload.loading
+														? 'Uploading'
+														: profileUpdate.loading
+														? 'Updating'
+														: 'Submit'}
+												</ButtonComponent>
 											</div>
 										</div>
 									</Fragment>

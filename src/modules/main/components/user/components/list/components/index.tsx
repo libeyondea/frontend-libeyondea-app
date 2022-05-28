@@ -2,7 +2,7 @@ import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import LinkComponent from 'components/Link/components';
 import time from 'helpers/time';
-import { useEffect, useState, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
@@ -29,6 +29,7 @@ import {
 	userListPaginationPageRequestAction,
 	userListPaginationTotalRequestAction
 } from 'store/user/actions';
+import useDidUpdateEffect from 'hooks/useDidUpdateEffect';
 
 type Props = {};
 
@@ -79,7 +80,7 @@ const ListUserComponent: React.FC<Props> = () => {
 		}
 	};
 
-	useEffect(() => {
+	useDidUpdateEffect(() => {
 		dispatch(userListLoadingRequestAction(true));
 		userService
 			.list(userList.pagination.page, userList.pagination.limit, userList.filter.q)
@@ -91,7 +92,7 @@ const ListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userListLoadingRequestAction(false));
 			});
-	}, [dispatch, userList.pagination.page, userList.pagination.limit, userList.filter.q]);
+	}, [userList.pagination.page, userList.pagination.limit, userList.filter.q]);
 
 	return (
 		<Fragment>
@@ -122,7 +123,9 @@ const ListUserComponent: React.FC<Props> = () => {
 										<Fragment>
 											{!userList.data.length ? (
 												<TableComponent.Tr>
-													<TableComponent.Td colSpan={6}>Empty users</TableComponent.Td>
+													<TableComponent.Td className="text-center" colSpan={6}>
+														Empty users
+													</TableComponent.Td>
 												</TableComponent.Tr>
 											) : (
 												userList.data.map((user) => (
@@ -162,8 +165,12 @@ const ListUserComponent: React.FC<Props> = () => {
 															</span>
 														</TableComponent.Td>
 														<TableComponent.Td>{user.role}</TableComponent.Td>
-														<TableComponent.Td>{time.ago(user.updated_at)}</TableComponent.Td>
-														<TableComponent.Td>{time.format(user.created_at)}</TableComponent.Td>
+														<TableComponent.Td className="whitespace-nowrap">
+															{time.ago(user.updated_at)}
+														</TableComponent.Td>
+														<TableComponent.Td className="whitespace-nowrap">
+															{time.format(user.created_at)}
+														</TableComponent.Td>
 														<TableComponent.Td>
 															<div className="flex items-center">
 																<LinkComponent

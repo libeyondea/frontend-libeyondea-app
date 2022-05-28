@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import ButtonComponent from 'components/Button/components';
 
 type Props = {
 	className?: string;
@@ -30,12 +31,7 @@ const FilterComponent: React.FC<Props> = ({ className, q, onChangeSearch, onSubm
 						name="q"
 						id="q"
 					/>
-					<button
-						type="submit"
-						className="flex items-center justify-center py-3 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md"
-					>
-						Search
-					</button>
+					<ButtonComponent>Search</ButtonComponent>
 				</form>
 			</div>
 		</div>

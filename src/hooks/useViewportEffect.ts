@@ -15,7 +15,9 @@ const useViewportEffect = (): { vw: number; vh: number } => {
 		};
 		setSizes();
 		window.addEventListener('resize', setSizes);
-		return () => window.removeEventListener('resize', setSizes);
+		return () => {
+			window.removeEventListener('resize', setSizes);
+		};
 	}, [vh, vw]);
 
 	return { vw, vh };

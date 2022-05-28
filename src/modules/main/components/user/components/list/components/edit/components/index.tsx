@@ -3,10 +3,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
-import classNames from 'classnames';
 import imageService from 'services/imageService';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { UpdateUserFormik } from 'models/user';
 import LoadingComponent from 'components/Loading/components';
 import toastify from 'helpers/toastify';
@@ -26,6 +24,8 @@ import useAppSelector from 'hooks/useAppSelector';
 import { selectUserShow, selectUserUpdate } from 'store/user/selectors';
 import useOutsideClick from 'hooks/useOutsideClick';
 import useScrollLock from 'hooks/useScrollLock';
+import useDidUpdateEffect from 'hooks/useDidUpdateEffect';
+import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
@@ -101,7 +101,6 @@ const EditListUserComponent: React.FC<Props> = () => {
 					image_url: null
 				});
 			}
-
 			setImageUpload({ loading: true });
 			imageService
 				.upload({
@@ -165,7 +164,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useEffect(() => {
+	useDidUpdateEffect(() => {
 		dispatch(userShowLoadingRequestAction(true));
 		userService
 			.show(Number(params.userId))
@@ -176,7 +175,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userShowLoadingRequestAction(false));
 			});
-	}, [dispatch, params.userId]);
+	}, [params.userId]);
 
 	useOutsideClick(
 		() => {
@@ -363,31 +362,12 @@ const EditListUserComponent: React.FC<Props> = () => {
 											/>
 										</div>
 										<div className="col-span-2 flex flex-row-reverse">
-											<button
-												type="submit"
-												className={classNames(
-													'flex items-center justify-center py-3 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md',
-													{
-														'cursor-not-allowed disabled:opacity-50':
-															imageUpload.loading || userUpdate.loading
-													}
-												)}
+											<ButtonComponent
+												isLoading={imageUpload.loading || userUpdate.loading}
 												disabled={imageUpload.loading || userUpdate.loading}
 											>
-												{imageUpload.loading ? (
-													<Fragment>
-														<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-														<span>Uploading</span>
-													</Fragment>
-												) : userUpdate.loading ? (
-													<Fragment>
-														<AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />
-														<span>Updating</span>
-													</Fragment>
-												) : (
-													<span>Submit</span>
-												)}
-											</button>
+												{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Submit'}
+											</ButtonComponent>
 										</div>
 									</div>
 								</Fragment>
