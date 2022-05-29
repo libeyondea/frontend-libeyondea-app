@@ -29,13 +29,29 @@ import {
 	userCreateDataRequestAction,
 	userCreateDataSuccessAction,
 	userCreateLoadingRequestAction,
-	userCreateLoadingSuccessAction
+	userCreateLoadingSuccessAction,
+	userListFilterSortDirectionRequestAction,
+	userListFilterSortDirectionSuccessAction,
+	userListFilterSortByRequestAction,
+	userListFilterSortBySuccessAction
 } from './actions';
 
 export const userListDataEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
 		filter(userListDataRequestAction.match),
 		map((action) => userListDataSuccessAction(action.payload))
+	);
+
+export const userListFilterSortDirectionEpic = (action$: Observable<Action>): Observable<Action> =>
+	action$.pipe(
+		filter(userListFilterSortDirectionRequestAction.match),
+		map((action) => userListFilterSortDirectionSuccessAction(action.payload))
+	);
+
+export const userListFilterSortByEpic = (action$: Observable<Action>): Observable<Action> =>
+	action$.pipe(
+		filter(userListFilterSortByRequestAction.match),
+		map((action) => userListFilterSortBySuccessAction(action.payload))
 	);
 
 export const userListFilterQEpic = (action$: Observable<Action>): Observable<Action> =>

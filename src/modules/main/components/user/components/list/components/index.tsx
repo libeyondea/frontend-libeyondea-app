@@ -2,7 +2,7 @@ import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import LinkComponent from 'components/Link/components';
 import time from 'helpers/time';
-import { useState, Fragment, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
@@ -11,7 +11,6 @@ import classNames from 'classnames';
 import PaginationComponent from 'components/Pagination/components';
 import TableLoadingComponent from 'components/TableLoading/components';
 import BlockUIComponent from 'components/BlockUI/components';
-import FilterComponent from 'components/Filter/components';
 import TableComponent from 'components/Table/components';
 import { errorHandler } from 'helpers/error';
 import { useRoutes } from 'react-router-dom';
@@ -23,12 +22,13 @@ import {
 	userDeleteDataRequestAction,
 	userDeleteLoadingRequestAction,
 	userListDataRequestAction,
-	userListFilterQRequestAction,
 	userListLoadingRequestAction,
 	userListPaginationLimitRequestAction,
 	userListPaginationPageRequestAction,
 	userListPaginationTotalRequestAction
 } from 'store/user/actions';
+import FilterListUserComponent from './filter';
+import useDebounce from 'hooks/useDebounce';
 
 type Props = {};
 
@@ -36,9 +36,7 @@ const ListUserComponent: React.FC<Props> = () => {
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
 	const userDelete = useAppSelector(selectUserDelete);
-	const [filter, setFilter] = useState({
-		q: ''
-	});
+	const userListFilterQ = useDebounce<string>(userList.filter.q, 500);
 
 	const onChangePage = (page: number) => {
 		dispatch(userListPaginationPageRequestAction(page));
@@ -49,7 +47,7 @@ const ListUserComponent: React.FC<Props> = () => {
 		dispatch(userListPaginationLimitRequestAction(limit));
 	};
 
-	const onChangeSearch = (q: string) => {
+	/* const onChangeSearch = (q: string) => {
 		dispatch(userListPaginationPageRequestAction(1));
 		dispatch(userListFilterQRequestAction(q));
 	};
@@ -57,7 +55,7 @@ const ListUserComponent: React.FC<Props> = () => {
 	const onSubmitSearch = () => {
 		dispatch(userListPaginationPageRequestAction(1));
 		dispatch(userListFilterQRequestAction(filter.q));
-	};
+	}; */
 
 	const onDeleteClicked = (userId: number) => {
 		if (window.confirm('Do you want to delete?')) {
@@ -79,7 +77,9 @@ const ListUserComponent: React.FC<Props> = () => {
 		const payload = {
 			page: userList.pagination.page,
 			limit: userList.pagination.limit,
-			q: userList.filter.q
+			q: userListFilterQ,
+			sort_by: userList.filter.sort_by,
+			sort_direction: userList.filter.sort_direction
 		};
 		userService
 			.list(payload)
@@ -92,7 +92,13 @@ const ListUserComponent: React.FC<Props> = () => {
 				dispatch(userListLoadingRequestAction(false));
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userList.pagination.page, userList.pagination.limit, userList.filter.q]);
+	}, [
+		userList.pagination.page,
+		userList.pagination.limit,
+		userListFilterQ,
+		userList.filter.sort_by,
+		userList.filter.sort_direction
+	]);
 
 	return (
 		<Fragment>
@@ -101,12 +107,7 @@ const ListUserComponent: React.FC<Props> = () => {
 				<div className="col-span-1 w-full">
 					<CardComponent header="List users">
 						<div className="relative">
-							<FilterComponent
-								filter={filter}
-								setFilter={setFilter}
-								onChangeSearch={onChangeSearch}
-								onSubmitSearch={onSubmitSearch}
-							/>
+							<FilterListUserComponent />
 							{userList.is_loading ? (
 								<TableLoadingComponent />
 							) : (
@@ -123,7 +124,6 @@ const ListUserComponent: React.FC<Props> = () => {
 											</TableComponent.Th>
 										</TableComponent.Tr>
 									</TableComponent.Thead>
-
 									<TableComponent.Tbody>
 										<Fragment>
 											{!userList.data.length ? (

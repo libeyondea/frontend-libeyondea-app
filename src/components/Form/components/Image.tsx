@@ -32,21 +32,24 @@ const Image: React.FC<Props> = ({
 }) => {
 	const [previewImg, setPreviewImg] = useState(imgUrl);
 
-	const _onChangeFile = (e: React.ChangeEvent<HTMLInputElement>, setFieldValue: onChangeFile) => {
+	const _onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		if (files) {
 			setPreviewImg(URL.createObjectURL(files[0]));
-			setFieldValue(name, files[0]);
+			onChangeFile(name, files[0]);
+			//setFieldValue(name, files[0]);
 			e.target.value = '';
 		}
 	};
 
-	const _onBlurFile = (setFieldTouched: onBlurFile) => {
-		setFieldTouched(name, true);
+	const _onBlurFile = () => {
+		onBlurFile(name, true);
+		//setFieldTouched(name, true);
 	};
 
-	const _onRemoveFile = (setFieldValue: onChangeFile) => {
-		setFieldValue(name, null);
+	const _onRemoveFile = () => {
+		onChangeFile(name, null);
+		//setFieldValue(name, null);
 		setPreviewImg('');
 	};
 
@@ -71,8 +74,8 @@ const Image: React.FC<Props> = ({
 						<input
 							{...props}
 							name={name}
-							onChange={(e) => _onChangeFile(e, onChangeFile)}
-							onBlur={() => _onBlurFile(onBlurFile)}
+							onChange={_onChangeFile}
+							onBlur={_onBlurFile}
 							type="file"
 							accept=".png, .jpg, .jpeg .gif"
 							className="absolute w-full inset-0 opacity-0"
@@ -83,7 +86,7 @@ const Image: React.FC<Props> = ({
 						<button
 							type="button"
 							className="ml-4 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md"
-							onClick={() => _onRemoveFile(onChangeFile)}
+							onClick={_onRemoveFile}
 						>
 							Remove
 						</button>

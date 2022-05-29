@@ -9,6 +9,8 @@ import {
 	userDeleteLoadingSuccessAction,
 	userListDataSuccessAction,
 	userListFilterQSuccessAction,
+	userListFilterSortBySuccessAction,
+	userListFilterSortDirectionSuccessAction,
 	userListLoadingSuccessAction,
 	userListPaginationLimitSuccessAction,
 	userListPaginationPageSuccessAction,
@@ -18,6 +20,7 @@ import {
 	userUpdateDataSuccessAction,
 	userUpdateLoadingSuccessAction
 } from './actions';
+import * as filterConstant from 'constants/filter';
 
 type UserState = {
 	list: ResponseDataWithPaginationAndFilterReducer<User[]>;
@@ -36,7 +39,9 @@ const initialState: UserState = {
 			total: 0
 		},
 		filter: {
-			q: ''
+			q: '',
+			sort_direction: filterConstant.USER_DEFAULT_SORT_DIRECTION,
+			sort_by: filterConstant.USER_DEFAULT_SORT_BY
 		},
 		is_loading: true
 	},
@@ -93,6 +98,26 @@ const userReducer = createReducer(initialState, (builder) => {
 			pagination: {
 				...state.list.pagination,
 				total: action.payload
+			}
+		}
+	}));
+	builder.addCase(userListFilterSortBySuccessAction, (state, action) => ({
+		...state,
+		list: {
+			...state.list,
+			filter: {
+				...state.list.filter,
+				sort_by: action.payload
+			}
+		}
+	}));
+	builder.addCase(userListFilterSortDirectionSuccessAction, (state, action) => ({
+		...state,
+		list: {
+			...state.list,
+			filter: {
+				...state.list.filter,
+				sort_direction: action.payload
 			}
 		}
 	}));

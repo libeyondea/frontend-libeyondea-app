@@ -11,5 +11,7 @@ export interface ResponseDataWithPaginationAndFilterReducer<T> extends ResponseD
 	};
 	filter: {
 		q: string;
+		sort_direction: string;
+		sort_by: string;
 	};
 }

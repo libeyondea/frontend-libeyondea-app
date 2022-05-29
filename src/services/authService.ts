@@ -23,7 +23,7 @@ const authService = {
 		});
 	},
 	signout: (token: string) => {
-		return http.post<ResponseData<any>>({
+		return http.post<ResponseData<null>>({
 			url: config.API.END_POINT.SIGNOUT,
 			token: token
 		});

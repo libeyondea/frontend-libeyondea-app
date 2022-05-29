@@ -52,6 +52,34 @@ export const userListPaginationTotalSuccessAction = createAction(
 	})
 );
 
+export const userListFilterSortDirectionRequestAction = createAction(
+	actionTypes.USER_LIST_FILTER_SORT_DIRECTION_REQUEST,
+	(payload: string) => ({
+		payload: payload
+	})
+);
+
+export const userListFilterSortDirectionSuccessAction = createAction(
+	actionTypes.USER_LIST_FILTER_SORT_DIRECTION_SUCCESS,
+	(payload: string) => ({
+		payload: payload
+	})
+);
+
+export const userListFilterSortByRequestAction = createAction(
+	actionTypes.USER_LIST_FILTER_SORT_BY_REQUEST,
+	(payload: string) => ({
+		payload: payload
+	})
+);
+
+export const userListFilterSortBySuccessAction = createAction(
+	actionTypes.USER_LIST_FILTER_SORT_BY_SUCCESS,
+	(payload: string) => ({
+		payload: payload
+	})
+);
+
 export const userListFilterQRequestAction = createAction(actionTypes.USER_LIST_FILTER_Q_REQUEST, (payload: string) => ({
 	payload: payload
 }));
