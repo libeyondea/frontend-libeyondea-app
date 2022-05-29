@@ -11,7 +11,7 @@ type Props = {
 	onChangeFile: onChangeFile;
 	onBlurFile: onBlurFile;
 	name: string;
-	label: string;
+	label?: string;
 	isError?: boolean;
 	errorMessage?: string;
 	imgUrl?: string;
@@ -52,9 +52,11 @@ const Image: React.FC<Props> = ({
 
 	return (
 		<div className={classNames('', className)}>
-			<label htmlFor={name} className="inline-block font-medium text-gray-600 mb-1">
-				{label}
-			</label>
+			{label && (
+				<label htmlFor={name} className="inline-block font-medium text-gray-600 mb-1">
+					{label}
+				</label>
+			)}
 			<div className="relative">
 				<div className="flex items-start">
 					{previewImg && (

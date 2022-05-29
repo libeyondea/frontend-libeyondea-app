@@ -37,7 +37,7 @@ const ListUserComponent: React.FC<Props> = () => {
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
 	const userDelete = useAppSelector(selectUserDelete);
-	const [formSearch, setFormSearch] = useState({
+	const [filter, setFilter] = useState({
 		q: ''
 	});
 
@@ -51,18 +51,13 @@ const ListUserComponent: React.FC<Props> = () => {
 	};
 
 	const onChangeSearch = (q: string) => {
-		if (!q) {
-			dispatch(userListPaginationPageRequestAction(1));
-			dispatch(userListFilterQRequestAction(q));
-		}
-		setFormSearch({
-			q: q
-		});
+		dispatch(userListPaginationPageRequestAction(1));
+		dispatch(userListFilterQRequestAction(q));
 	};
 
 	const onSubmitSearch = () => {
 		dispatch(userListPaginationPageRequestAction(1));
-		dispatch(userListFilterQRequestAction(formSearch.q));
+		dispatch(userListFilterQRequestAction(filter.q));
 	};
 
 	const onDeleteClicked = (userId: number) => {
@@ -101,7 +96,12 @@ const ListUserComponent: React.FC<Props> = () => {
 				<div className="col-span-1 w-full">
 					<CardComponent header="List users">
 						<div className="relative">
-							<FilterComponent q={formSearch.q} onChangeSearch={onChangeSearch} onSubmitSearch={onSubmitSearch} />
+							<FilterComponent
+								filter={filter}
+								setFilter={setFilter}
+								onChangeSearch={onChangeSearch}
+								onSubmitSearch={onSubmitSearch}
+							/>
 							{userList.loading ? (
 								<TableLoadingComponent />
 							) : (

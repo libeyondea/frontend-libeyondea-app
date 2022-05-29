@@ -1,17 +1,32 @@
 import classNames from 'classnames';
 import ButtonComponent from 'components/Button/components';
+import FormComponent from 'components/Form/components';
 
 type Props = {
 	className?: string;
-	q: string;
+	filter: {
+		q: string;
+	};
+	setFilter: React.Dispatch<
+		React.SetStateAction<{
+			q: string;
+		}>
+	>;
 	onChangeSearch: (q: string) => void;
 	onSubmitSearch: () => void;
 };
 
-const FilterComponent: React.FC<Props> = ({ className, q, onChangeSearch, onSubmitSearch }) => {
+const FilterComponent: React.FC<Props> = ({ className, filter, setFilter, onChangeSearch, onSubmitSearch }) => {
 	const _onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		onChangeSearch(e.target.value);
+		const q = e.target.value;
+		if (!q) {
+			onChangeSearch(q);
+		}
+		setFilter({
+			q: q
+		});
 	};
+
 	const _onSubmitSearch = (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		onSubmitSearch();
@@ -22,12 +37,12 @@ const FilterComponent: React.FC<Props> = ({ className, q, onChangeSearch, onSubm
 			<div className="flex items-center"></div>
 			<div className="ml-auto">
 				<form onSubmit={_onSubmitSearch} className="flex">
-					<input
+					<FormComponent.Input
 						type="text"
 						placeholder="Enter keyword"
-						className="mr-4 rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-						value={q}
+						className="mr-4"
 						onChange={_onChangeSearch}
+						value={filter.q}
 						name="q"
 						id="q"
 					/>
