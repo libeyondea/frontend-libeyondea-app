@@ -30,7 +30,7 @@ const AccessControl: React.FC<Props> = ({ children }) => {
 		);
 	} else if (
 		location.pathname.indexOf(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`) > -1 &&
-		authCurrent.user?.role !== userConstant.USER_ROLE_OWNER
+		authCurrent.data?.role !== userConstant.USER_ROLE_OWNER
 	) {
 		return <Navigate to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`} />;
 	}

@@ -2,7 +2,7 @@ import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import LinkComponent from 'components/Link/components';
 import time from 'helpers/time';
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
@@ -29,7 +29,6 @@ import {
 	userListPaginationPageRequestAction,
 	userListPaginationTotalRequestAction
 } from 'store/user/actions';
-import useDidUpdateEffect from 'hooks/useDidUpdateEffect';
 
 type Props = {};
 
@@ -75,10 +74,15 @@ const ListUserComponent: React.FC<Props> = () => {
 		}
 	};
 
-	useDidUpdateEffect(() => {
+	useEffect(() => {
 		dispatch(userListLoadingRequestAction(true));
+		const payload = {
+			page: userList.pagination.page,
+			limit: userList.pagination.limit,
+			q: userList.filter.q
+		};
 		userService
-			.list(userList.pagination.page, userList.pagination.limit, userList.filter.q)
+			.list(payload)
 			.then((response) => {
 				dispatch(userListDataRequestAction(response.data.data));
 				dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
@@ -87,6 +91,7 @@ const ListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userListLoadingRequestAction(false));
 			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userList.pagination.page, userList.pagination.limit, userList.filter.q]);
 
 	return (
@@ -102,7 +107,7 @@ const ListUserComponent: React.FC<Props> = () => {
 								onChangeSearch={onChangeSearch}
 								onSubmitSearch={onSubmitSearch}
 							/>
-							{userList.loading ? (
+							{userList.is_loading ? (
 								<TableLoadingComponent />
 							) : (
 								<TableComponent>
@@ -196,14 +201,13 @@ const ListUserComponent: React.FC<Props> = () => {
 								</TableComponent>
 							)}
 							<PaginationComponent
-								limits={userList.pagination.limits}
-								total={userList.pagination.total}
+								page={userList.pagination.page}
 								limit={userList.pagination.limit}
-								currentPage={userList.pagination.page}
+								total={userList.pagination.total}
 								onChangePage={onChangePage}
 								onChangeLimit={onChangeLimit}
 							/>
-							<BlockUIComponent isBlocking={userDelete.loading} />
+							<BlockUIComponent isBlocking={userDelete.is_loading} />
 						</div>
 					</CardComponent>
 				</div>

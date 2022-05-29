@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { deleteArrayItemById, insertItemIntoArray, updateArrayItemById } from 'helpers/utils';
+import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'models/reducer';
 import { User } from 'models/user';
 import {
 	userCreateDataSuccessAction,
@@ -19,35 +20,11 @@ import {
 } from './actions';
 
 type UserState = {
-	list: {
-		data: User[];
-		pagination: {
-			page: number;
-			limit: number;
-			limits: number[];
-			total: number;
-		};
-		filter: {
-			q: string;
-		};
-		loading: boolean;
-	};
-	show: {
-		data: User;
-		loading: boolean;
-	};
-	create: {
-		data: User;
-		loading: boolean;
-	};
-	update: {
-		data: User;
-		loading: boolean;
-	};
-	delete: {
-		data: User;
-		loading: boolean;
-	};
+	list: ResponseDataWithPaginationAndFilterReducer<User[]>;
+	show: ResponseDataReducer<User>;
+	create: ResponseDataReducer<User>;
+	update: ResponseDataReducer<User>;
+	delete: ResponseDataReducer<User>;
 };
 
 const initialState: UserState = {
@@ -56,29 +33,28 @@ const initialState: UserState = {
 		pagination: {
 			page: 1,
 			limit: 10,
-			limits: [10, 20, 50, 100],
 			total: 0
 		},
 		filter: {
 			q: ''
 		},
-		loading: true
+		is_loading: true
 	},
 	show: {
 		data: {} as User,
-		loading: true
+		is_loading: true
 	},
 	create: {
 		data: {} as User,
-		loading: false
+		is_loading: false
 	},
 	update: {
 		data: {} as User,
-		loading: false
+		is_loading: false
 	},
 	delete: {
 		data: {} as User,
-		loading: false
+		is_loading: false
 	}
 };
 
@@ -134,7 +110,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		list: {
 			...state.list,
-			loading: action.payload
+			is_loading: action.payload
 		}
 	}));
 	builder.addCase(userShowDataSuccessAction, (state, action) => ({
@@ -148,7 +124,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		show: {
 			...state.show,
-			loading: action.payload
+			is_loading: action.payload
 		}
 	}));
 	builder.addCase(userCreateDataSuccessAction, (state, action) => ({
@@ -170,7 +146,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		create: {
 			...state.create,
-			loading: action.payload
+			is_loading: action.payload
 		}
 	}));
 	builder.addCase(userUpdateDataSuccessAction, (state, action) => ({
@@ -188,7 +164,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		update: {
 			...state.update,
-			loading: action.payload
+			is_loading: action.payload
 		}
 	}));
 	builder.addCase(userDeleteDataSuccessAction, (state, action) => ({
@@ -210,7 +186,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		delete: {
 			...state.delete,
-			loading: action.payload
+			is_loading: action.payload
 		}
 	}));
 });

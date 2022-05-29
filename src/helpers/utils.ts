@@ -1,18 +1,18 @@
 import { MutableRefObject } from 'react';
 
 export const getPageNumbers = ({
-	currentPage,
+	page,
 	limit,
 	total,
 	pageNumbersToShow = 3
 }: {
-	currentPage: number;
+	page: number;
 	limit: number;
 	total: number;
 	pageNumbersToShow?: number;
 }): Array<number | null> => {
 	const lastPageNumber = Math.ceil(total / limit);
-	const currentPageNumber = currentPage <= lastPageNumber ? currentPage : lastPageNumber;
+	const currentPageNumber = page <= lastPageNumber ? page : lastPageNumber;
 	const maxPagesBeforeCurrentPage = Math.floor(pageNumbersToShow / 2);
 	const maxPagesAfterCurrentPage = Math.ceil(pageNumbersToShow / 2) - 1;
 	let startPage = 1;

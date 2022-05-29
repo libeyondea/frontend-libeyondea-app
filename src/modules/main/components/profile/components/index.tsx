@@ -20,8 +20,8 @@ import {
 	profileUpdateDataRequestAction,
 	profileUpdateLoadingRequestAction
 } from 'store/profile/actions';
-import useDidUpdateEffect from 'hooks/useDidUpdateEffect';
 import ButtonComponent from 'components/Button/components';
+import useDidMountEffect from 'hooks/useDidMountEffect';
 
 type Props = {};
 
@@ -29,7 +29,7 @@ const ProfileComponent: React.FC<Props> = () => {
 	const dispatch = useAppDispatch();
 	const profileShow = useAppSelector(selectProfileShow);
 	const profileUpdate = useAppSelector(selectProfileUpdate);
-	const [imageUpload, setImageUpload] = useState({ loading: false });
+	const [imageUpload, setImageUpload] = useState({ is_loading: false });
 
 	const initialValues: UpdateProfileFormik = {
 		first_name: profileShow.data.first_name || '',
@@ -73,7 +73,7 @@ const ProfileComponent: React.FC<Props> = () => {
 					image_url: null
 				});
 			}
-			setImageUpload({ loading: true });
+			setImageUpload({ is_loading: true });
 			imageService
 				.upload({
 					image: values.image
@@ -88,7 +88,7 @@ const ProfileComponent: React.FC<Props> = () => {
 					return reject(error);
 				})
 				.finally(() => {
-					setImageUpload({ loading: false });
+					setImageUpload({ is_loading: false });
 				});
 		})
 			.then((result) => {
@@ -132,7 +132,7 @@ const ProfileComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useDidUpdateEffect(() => {
+	useDidMountEffect(() => {
 		dispatch(profileShowLoadingRequestAction(true));
 		profileService
 			.show()
@@ -143,7 +143,7 @@ const ProfileComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(profileShowLoadingRequestAction(false));
 			});
-	}, []);
+	});
 
 	return (
 		<Fragment>
@@ -151,7 +151,7 @@ const ProfileComponent: React.FC<Props> = () => {
 			<div className="grid grid-cols-1 gap-4">
 				<div className="col-span-1 w-full">
 					<CardComponent header="Profile">
-						{profileShow.loading ? (
+						{profileShow.is_loading ? (
 							<LoadingComponent />
 						) : (
 							<FormComponent<UpdateProfileFormik>
@@ -266,12 +266,12 @@ const ProfileComponent: React.FC<Props> = () => {
 											</div>
 											<div className="col-span-2">
 												<ButtonComponent
-													isLoading={imageUpload.loading || profileUpdate.loading}
-													disabled={imageUpload.loading || profileUpdate.loading}
+													isLoading={imageUpload.is_loading || profileUpdate.is_loading}
+													disabled={imageUpload.is_loading || profileUpdate.is_loading}
 												>
-													{imageUpload.loading
+													{imageUpload.is_loading
 														? 'Uploading'
-														: profileUpdate.loading
+														: profileUpdate.is_loading
 														? 'Updating'
 														: 'Submit'}
 												</ButtonComponent>

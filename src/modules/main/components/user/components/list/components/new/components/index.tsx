@@ -29,7 +29,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const userCreate = useAppSelector(selectUserCreate);
-	const [imageUpload, setImageUpload] = useState({ loading: false });
+	const [imageUpload, setImageUpload] = useState({ is_loading: false });
 
 	const initialValues: CreateUserFormik = {
 		first_name: '',
@@ -91,7 +91,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 					image_url: null
 				});
 			}
-			setImageUpload({ loading: true });
+			setImageUpload({ is_loading: true });
 			imageService
 				.upload({
 					image: values.image
@@ -106,7 +106,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 					return reject(error);
 				})
 				.finally(() => {
-					setImageUpload({ loading: false });
+					setImageUpload({ is_loading: false });
 				});
 		})
 			.then((result) => {
@@ -329,10 +329,10 @@ const NewListUserComponent: React.FC<Props> = () => {
 								</div>
 								<div className="col-span-2 flex flex-row-reverse">
 									<ButtonComponent
-										isLoading={imageUpload.loading || userCreate.loading}
-										disabled={imageUpload.loading || userCreate.loading}
+										isLoading={imageUpload.is_loading || userCreate.is_loading}
+										disabled={imageUpload.is_loading || userCreate.is_loading}
 									>
-										{imageUpload.loading ? 'Uploading' : userCreate.loading ? 'Creating' : 'Submit'}
+										{imageUpload.is_loading ? 'Uploading' : userCreate.is_loading ? 'Creating' : 'Submit'}
 									</ButtonComponent>
 								</div>
 							</div>

@@ -4,7 +4,7 @@ import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
 import imageService from 'services/imageService';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { UpdateUserFormik } from 'models/user';
 import LoadingComponent from 'components/Loading/components';
 import toastify from 'helpers/toastify';
@@ -24,7 +24,6 @@ import useAppSelector from 'hooks/useAppSelector';
 import { selectUserShow, selectUserUpdate } from 'store/user/selectors';
 import useOutsideClick from 'hooks/useOutsideClick';
 import useScrollLock from 'hooks/useScrollLock';
-import useDidUpdateEffect from 'hooks/useDidUpdateEffect';
 import ButtonComponent from 'components/Button/components';
 
 type Props = {};
@@ -38,7 +37,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 	const dispatch = useAppDispatch();
 	const userShow = useAppSelector(selectUserShow);
 	const userUpdate = useAppSelector(selectUserUpdate);
-	const [imageUpload, setImageUpload] = useState({ loading: false });
+	const [imageUpload, setImageUpload] = useState({ is_loading: false });
 
 	const initialValues: UpdateUserFormik = {
 		first_name: userShow.data.first_name || '',
@@ -101,7 +100,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					image_url: null
 				});
 			}
-			setImageUpload({ loading: true });
+			setImageUpload({ is_loading: true });
 			imageService
 				.upload({
 					image: values.image
@@ -116,7 +115,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					return reject(error);
 				})
 				.finally(() => {
-					setImageUpload({ loading: false });
+					setImageUpload({ is_loading: false });
 				});
 		})
 			.then((result) => {
@@ -164,7 +163,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useDidUpdateEffect(() => {
+	useEffect(() => {
 		dispatch(userShowLoadingRequestAction(true));
 		userService
 			.show(Number(params.userId))
@@ -175,6 +174,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userShowLoadingRequestAction(false));
 			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params.userId]);
 
 	useOutsideClick(
@@ -201,7 +201,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					header="Edit user"
 					redirectCloseUrl={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
 				>
-					{userShow.loading ? (
+					{userShow.is_loading ? (
 						<LoadingComponent />
 					) : !Object.keys(userShow.data).length ? (
 						<div className="flex justify-center">Empty user</div>
@@ -363,10 +363,14 @@ const EditListUserComponent: React.FC<Props> = () => {
 										</div>
 										<div className="col-span-2 flex flex-row-reverse">
 											<ButtonComponent
-												isLoading={imageUpload.loading || userUpdate.loading}
-												disabled={imageUpload.loading || userUpdate.loading}
+												isLoading={imageUpload.is_loading || userUpdate.is_loading}
+												disabled={imageUpload.is_loading || userUpdate.is_loading}
 											>
-												{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Submit'}
+												{imageUpload.is_loading
+													? 'Uploading'
+													: userUpdate.is_loading
+													? 'Updating'
+													: 'Submit'}
 											</ButtonComponent>
 										</div>
 									</div>

@@ -14,6 +14,14 @@ export interface User {
 	updated_at: string | null;
 }
 
+export interface ListUser {
+	page?: number;
+	limit?: number;
+	sort_direction?: string;
+	sort_by?: string;
+	q?: string;
+}
+
 export interface CreateUser extends Signup {
 	avatar?: string | null;
 	role: string;

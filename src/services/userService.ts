@@ -1,17 +1,13 @@
 import http from 'helpers/http';
 import config from 'config';
-import { CreateUser, UpdateUser, User } from 'models/user';
+import { CreateUser, ListUser, UpdateUser, User } from 'models/user';
 import { ResponseData, ResponseDataPagination } from 'models/response';
 
 const userService = {
-	list: (page: number = 1, pageSize: number = 10, q?: string) => {
+	list: (params?: ListUser) => {
 		return http.get<ResponseDataPagination<User[]>>({
 			url: config.API.END_POINT.CRUD_USER,
-			params: {
-				page: page,
-				page_size: pageSize,
-				q: q
-			}
+			params: params
 		});
 	},
 	show: (id: number) => {

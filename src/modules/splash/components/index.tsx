@@ -1,6 +1,6 @@
 import { getCookie } from 'helpers/cookies';
 import { appInitializedRequestAction } from 'store/app/actions';
-import { authCurrentRequestAction } from 'store/auth/actions';
+import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
 import ImageComponent from 'components/Image/components';
 import config from 'config';
 import { selectIsAuth } from 'store/auth/selectors';
@@ -38,7 +38,8 @@ const SplashComponent: React.FC<Props> = () => {
 			authService
 				.me(token)
 				.then((response) => {
-					dispatch(authCurrentRequestAction(response.data.data, token));
+					dispatch(authCurrentDataRequestAction(response.data.data));
+					dispatch(authCurrentTokenRequestAction(token));
 					if (initialUrl) {
 						navigate(initialUrl, { replace: true });
 					} else {
@@ -51,7 +52,8 @@ const SplashComponent: React.FC<Props> = () => {
 					signout(navigate);
 				});
 		} else {
-			dispatch(authCurrentRequestAction(null, null));
+			dispatch(authCurrentDataRequestAction(null));
+			dispatch(authCurrentTokenRequestAction(null));
 			if (initialUrl) {
 				navigate(initialUrl, { replace: true });
 			} else {

@@ -6,25 +6,25 @@ import { MdMoreHoriz } from 'react-icons/md';
 
 type Props = {
 	className?: string;
-	limits?: number[];
-	total: number;
+	page: number;
 	limit: number;
-	currentPage: number;
+	total: number;
+	limits?: number[];
 	onChangePage: (page: number) => void;
 	onChangeLimit: (limit: number) => void;
 };
 
 const PaginationComponent: React.FC<Props> = ({
 	className,
-	limits = [10, 20, 50, 100],
-	total,
+	page,
 	limit,
-	currentPage,
+	total,
+	limits = [10, 20, 50, 100],
 	onChangePage,
 	onChangeLimit
 }) => {
 	const totalPage = Math.ceil(total / limit);
-	const pageNumbers = getPageNumbers({ currentPage, limit, total });
+	const pageNumbers = getPageNumbers({ page, limit, total });
 
 	const _onChangePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => {
 		e.preventDefault();
@@ -41,8 +41,8 @@ const PaginationComponent: React.FC<Props> = ({
 			<div className="sm:flex-1 flex flex-col md:flex-row md:items-center md:justify-between">
 				<div className="flex items-center mb-4 md:mb-0 mr-0 md:mr-4">
 					<p className="text-sm text-gray-700">
-						Showing <span className="font-medium">{limit * currentPage - limit + 1}</span> to{' '}
-						<span className="font-medium">{limit * currentPage}</span> of <span className="font-medium">{total}</span>{' '}
+						Showing <span className="font-medium">{limit * page - limit + 1}</span> to{' '}
+						<span className="font-medium">{limit * page}</span> of <span className="font-medium">{total}</span>{' '}
 						results
 					</p>
 					<span className="mx-2 text-sm text-gray-700">|</span>
@@ -63,7 +63,7 @@ const PaginationComponent: React.FC<Props> = ({
 				</div>
 				<div className="flex items-center">
 					<nav className="relative inline-flex flex-wrap rounded-md -space-x-px" aria-label="Pagination">
-						{currentPage !== 1 ? (
+						{page !== 1 ? (
 							<Fragment>
 								<button
 									type="button"
@@ -76,7 +76,7 @@ const PaginationComponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(event) => _onChangePage(event, currentPage === 1 ? 1 : currentPage - 1)}
+									onClick={(event) => _onChangePage(event, page === 1 ? 1 : page - 1)}
 								>
 									<span className="sr-only">Previous</span>
 									<FaAngleLeft className="h-4 w-4" aria-hidden="true" />
@@ -110,7 +110,7 @@ const PaginationComponent: React.FC<Props> = ({
 								>
 									<MdMoreHoriz />
 								</span>
-							) : pageNumber === currentPage ? (
+							) : pageNumber === page ? (
 								<button
 									type="button"
 									aria-current="page"
@@ -130,12 +130,12 @@ const PaginationComponent: React.FC<Props> = ({
 								</button>
 							)
 						)}
-						{currentPage !== totalPage ? (
+						{page !== totalPage ? (
 							<Fragment>
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(e) => _onChangePage(e, currentPage + 1)}
+									onClick={(e) => _onChangePage(e, page + 1)}
 								>
 									<span className="sr-only">Next</span>
 									<FaAngleRight className="h-4 w-4" aria-hidden="true" />

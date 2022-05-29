@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ResponseError } from 'models/response';
 import store from 'store';
-import { authCurrentRequestAction } from 'store/auth/actions';
+import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
 import { removeCookie } from './cookies';
 import toastify from './toastify';
 import * as cookiesConstant from 'constants/cookies';
@@ -23,7 +23,8 @@ export const errorHandler = (
 			options.isAxiosErrorMessage && toastify.error(error.response.data.message);
 			if (error.response.status === 401) {
 				removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
-				store.dispatch(authCurrentRequestAction(null, null));
+				store.dispatch(authCurrentDataRequestAction(null));
+				store.dispatch(authCurrentTokenRequestAction(null));
 			} else if (error.response.data.errors && error.response.status === 400) {
 				callbackFormError && callbackFormError(error.response);
 			} else {
