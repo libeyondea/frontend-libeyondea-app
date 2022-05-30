@@ -8,8 +8,7 @@ const useDidMountEffect = (effect: EffectCallback): void => {
 			effect();
 			mounted.current = true;
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [effect]);
 };
 
 export default useDidMountEffect;

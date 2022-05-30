@@ -36,7 +36,7 @@ const ListUserComponent: React.FC<Props> = () => {
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
 	const userDelete = useAppSelector(selectUserDelete);
-	const userListFilterQ = useDebounce<string>(userList.filter.q, 500);
+	const userListFilterQ = useDebounce(userList.filter.q, 666);
 
 	const onChangePage = (page: number) => {
 		dispatch(userListPaginationPageRequestAction(page));
@@ -47,21 +47,11 @@ const ListUserComponent: React.FC<Props> = () => {
 		dispatch(userListPaginationLimitRequestAction(limit));
 	};
 
-	/* const onChangeSearch = (q: string) => {
-		dispatch(userListPaginationPageRequestAction(1));
-		dispatch(userListFilterQRequestAction(q));
-	};
-
-	const onSubmitSearch = () => {
-		dispatch(userListPaginationPageRequestAction(1));
-		dispatch(userListFilterQRequestAction(filter.q));
-	}; */
-
-	const onDeleteClicked = (userId: number) => {
+	const onClickDelete = (id: number) => {
 		if (window.confirm('Do you want to delete?')) {
 			dispatch(userDeleteLoadingRequestAction(true));
 			userService
-				.delete(userId)
+				.delete(id)
 				.then((response) => {
 					dispatch(userDeleteDataRequestAction(response.data.data));
 				})
@@ -91,8 +81,8 @@ const ListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userListLoadingRequestAction(false));
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
+		dispatch,
 		userList.pagination.page,
 		userList.pagination.limit,
 		userListFilterQ,
@@ -187,7 +177,7 @@ const ListUserComponent: React.FC<Props> = () => {
 																<button
 																	type="button"
 																	className="text-red-600 hover:text-red-900"
-																	onClick={() => onDeleteClicked(user.id)}
+																	onClick={() => onClickDelete(user.id)}
 																>
 																	<FaRegTrashAlt className="h-5 w-5" />
 																</button>

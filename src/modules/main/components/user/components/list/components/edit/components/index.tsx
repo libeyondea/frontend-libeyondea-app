@@ -1,5 +1,5 @@
 import CardComponent from 'components/Card/components';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
@@ -22,8 +22,8 @@ import {
 } from 'store/user/actions';
 import useAppSelector from 'hooks/useAppSelector';
 import { selectUserShow, selectUserUpdate } from 'store/user/selectors';
-import useOutsideClick from 'hooks/useOutsideClick';
-import useScrollLock from 'hooks/useScrollLock';
+import useClickOutside from 'hooks/useClickOutside';
+import useLockScroll from 'hooks/useLockScroll';
 import ButtonComponent from 'components/Button/components';
 
 type Props = {};
@@ -33,7 +33,6 @@ const EditListUserComponent: React.FC<Props> = () => {
 	const cardRef = useRef(null);
 	const navigate = useNavigate();
 	const params = useParams();
-	const location = useLocation();
 	const dispatch = useAppDispatch();
 	const userShow = useAppSelector(selectUserShow);
 	const userUpdate = useAppSelector(selectUserUpdate);
@@ -174,23 +173,13 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userShowLoadingRequestAction(false));
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params.userId]);
+	}, [dispatch, params.userId]);
 
-	useOutsideClick(
-		() => {
-			navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
-		},
-		wrapperRef,
-		[wrapperRef]
-	);
+	useClickOutside(() => {
+		navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
+	}, wrapperRef);
 
-	useScrollLock(
-		location.pathname ===
-			`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${params.userId}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`,
-		cardRef,
-		[cardRef]
-	);
+	useLockScroll(cardRef);
 
 	return (
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">

@@ -1,5 +1,5 @@
 import CardComponent from 'components/Card/components';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
@@ -16,8 +16,8 @@ import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
 import { selectUserCreate } from 'store/user/selectors';
 import { userCreateDataRequestAction, userCreateLoadingRequestAction } from 'store/user/actions';
-import useOutsideClick from 'hooks/useOutsideClick';
-import useScrollLock from 'hooks/useScrollLock';
+import useClickOutside from 'hooks/useClickOutside';
+import useLockScroll from 'hooks/useLockScroll';
 import ButtonComponent from 'components/Button/components';
 
 type Props = {};
@@ -25,7 +25,6 @@ type Props = {};
 const NewListUserComponent: React.FC<Props> = () => {
 	const wrapperRef = useRef(null);
 	const cardRef = useRef(null);
-	const location = useLocation();
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const userCreate = useAppSelector(selectUserCreate);
@@ -151,28 +150,15 @@ const NewListUserComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useOutsideClick(
-		() => {
-			navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
-		},
-		wrapperRef,
-		[wrapperRef]
-	);
+	useClickOutside(() => {
+		navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
+	}, wrapperRef);
 
-	useScrollLock(
-		location.pathname ===
-			`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`,
-		cardRef,
-		[cardRef]
-	);
+	useLockScroll(cardRef);
 
 	return (
-		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto top-0 left-0 z-50">
-			<div className="min-h-full flex items-center py-8 sm:p-16">
-				<div
-					className="fixed inset-0 z-40 transition-opacity bg-black opacity-50 block"
-					onClick={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
-				></div>
+		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">
+			<div className="min-h-full flex items-center py-8 sm:p-16 bg-gray-900/50 z-40">
 				<CardComponent
 					ref={cardRef}
 					className="z-50"

@@ -16,19 +16,16 @@ const FilterListUserComponent: React.FC<Props> = () => {
 	const userList = useAppSelector(selectUserList);
 
 	const onChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const sortBy = e.target.value;
-		dispatch(userListFilterSortByRequestAction(sortBy));
+		dispatch(userListFilterSortByRequestAction(e.target.value));
 	};
 
 	const onChangeSortDirection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const sortDirection = e.target.value;
-		dispatch(userListFilterSortDirectionRequestAction(sortDirection));
+		dispatch(userListFilterSortDirectionRequestAction(e.target.value));
 	};
 
 	const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const q = e.target.value;
 		dispatch(userListPaginationPageRequestAction(1));
-		dispatch(userListFilterQRequestAction(q));
+		dispatch(userListFilterQRequestAction(e.target.value));
 	};
 
 	return (
