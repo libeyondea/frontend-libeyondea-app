@@ -37,19 +37,16 @@ const Image: React.FC<Props> = ({
 		if (files) {
 			setPreviewImg(URL.createObjectURL(files[0]));
 			onChangeFile(name, files[0]);
-			//setFieldValue(name, files[0]);
 			e.target.value = '';
 		}
 	};
 
 	const _onBlurFile = () => {
 		onBlurFile(name, true);
-		//setFieldTouched(name, true);
 	};
 
 	const _onRemoveFile = () => {
 		onChangeFile(name, null);
-		//setFieldValue(name, null);
 		setPreviewImg('');
 	};
 

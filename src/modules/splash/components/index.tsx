@@ -9,7 +9,7 @@ import * as routeConstant from 'constants/route';
 import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
 import { useNavigate, useLocation, Location } from 'react-router-dom';
-import useDidMountEffect from 'hooks/useDidMountEffect';
+import useOnceEffect from 'hooks/useOnceEffect';
 import { signout } from 'helpers/auth';
 import authService from 'services/authService';
 
@@ -23,7 +23,7 @@ const SplashComponent: React.FC<Props> = () => {
 	const isAuth = useAppSelector(selectIsAuth);
 	console.log('SplashComponent');
 
-	useDidMountEffect(() => {
+	useOnceEffect(() => {
 		dispatch(appInitializedRequestAction(true));
 		const token = getCookie(cookiesConstant.COOKIES_KEY_TOKEN);
 		const initialUrl = from?.pathname;

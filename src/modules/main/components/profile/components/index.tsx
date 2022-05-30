@@ -21,7 +21,7 @@ import {
 	profileUpdateLoadingRequestAction
 } from 'store/profile/actions';
 import ButtonComponent from 'components/Button/components';
-import useDidMountEffect from 'hooks/useDidMountEffect';
+import useOnceEffect from 'hooks/useOnceEffect';
 
 type Props = {};
 
@@ -132,7 +132,7 @@ const ProfileComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useDidMountEffect(() => {
+	useOnceEffect(() => {
 		dispatch(profileShowLoadingRequestAction(true));
 		profileService
 			.show()

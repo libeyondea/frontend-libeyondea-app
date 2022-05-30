@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { RefObject } from 'react';
 
 export const getPageNumbers = ({
 	page,
@@ -87,7 +87,7 @@ export const deleteArrayItemById = <T extends { id: number }>(arr: T[], itemId: 
 	return arrClone;
 };
 
-export const getOwnerDocument = <T extends Element | MutableRefObject<Element | null>>(element?: T | null): Document | null => {
+export const getOwnerDocument = <T extends Element | RefObject<Element>>(element?: T | null): Document | null => {
 	if (typeof window === 'undefined') {
 		return null;
 	} else if (element instanceof Node) {

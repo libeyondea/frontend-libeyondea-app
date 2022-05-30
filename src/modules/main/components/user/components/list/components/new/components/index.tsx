@@ -16,15 +16,14 @@ import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
 import { selectUserCreate } from 'store/user/selectors';
 import { userCreateDataRequestAction, userCreateLoadingRequestAction } from 'store/user/actions';
-import useClickOutside from 'hooks/useClickOutside';
-import useLockScroll from 'hooks/useLockScroll';
+import useOnClickOutside from 'hooks/useClickOutside';
+import useLockedScroll from 'hooks/useLockedScroll';
 import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
 const NewListUserComponent: React.FC<Props> = () => {
 	const wrapperRef = useRef(null);
-	const cardRef = useRef(null);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const userCreate = useAppSelector(selectUserCreate);
@@ -150,11 +149,11 @@ const NewListUserComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useClickOutside(() => {
+	useOnClickOutside(wrapperRef, () => {
 		navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
-	}, wrapperRef);
+	});
 
-	useLockScroll(cardRef);
+	useLockedScroll();
 
 	return (
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">

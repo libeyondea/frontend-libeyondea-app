@@ -40,8 +40,8 @@ const initialState: UserState = {
 		},
 		filter: {
 			q: '',
-			sort_direction: filterConstant.USER_DEFAULT_SORT_DIRECTION,
-			sort_by: filterConstant.USER_DEFAULT_SORT_BY
+			sort_direction: filterConstant.FILTER_DEFAULT_SORT_DIRECTION,
+			sort_by: filterConstant.FILTER_DEFAULT_SORT_BY
 		},
 		is_loading: true
 	},
@@ -125,6 +125,10 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		list: {
 			...state.list,
+			pagination: {
+				...state.list.pagination,
+				page: 1
+			},
 			filter: {
 				...state.list.filter,
 				q: action.payload
@@ -203,7 +207,11 @@ const userReducer = createReducer(initialState, (builder) => {
 			data: deleteArrayItemById<User>([...state.list.data], action.payload.id),
 			pagination: {
 				...state.list.pagination,
-				total: state.list.pagination.total - 1
+				total: state.list.pagination.total - 1,
+				...(state.list.data.length === 1 &&
+					state.list.pagination.page > 1 && {
+						page: state.list.pagination.page - 1
+					})
 			}
 		}
 	}));

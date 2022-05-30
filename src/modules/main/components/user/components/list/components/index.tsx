@@ -2,7 +2,7 @@ import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import LinkComponent from 'components/Link/components';
 import time from 'helpers/time';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useCallback } from 'react';
 import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
@@ -28,7 +28,8 @@ import {
 	userListPaginationTotalRequestAction
 } from 'store/user/actions';
 import FilterListUserComponent from './filter';
-import useDebounce from 'hooks/useDebounce';
+import useOnceEffect from 'hooks/useOnceEffect';
+import useUpdateEffect from 'hooks/useUpdateEffect';
 
 type Props = {};
 
@@ -36,7 +37,6 @@ const ListUserComponent: React.FC<Props> = () => {
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
 	const userDelete = useAppSelector(selectUserDelete);
-	const userListFilterQ = useDebounce(userList.filter.q, 666);
 
 	const onChangePage = (page: number) => {
 		dispatch(userListPaginationPageRequestAction(page));
@@ -62,33 +62,44 @@ const ListUserComponent: React.FC<Props> = () => {
 		}
 	};
 
-	useEffect(() => {
-		dispatch(userListLoadingRequestAction(true));
-		const payload = {
-			page: userList.pagination.page,
-			limit: userList.pagination.limit,
-			q: userListFilterQ,
-			sort_by: userList.filter.sort_by,
-			sort_direction: userList.filter.sort_direction
-		};
-		userService
-			.list(payload)
-			.then((response) => {
-				dispatch(userListDataRequestAction(response.data.data));
-				dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
-			})
-			.catch(errorHandler())
-			.finally(() => {
-				dispatch(userListLoadingRequestAction(false));
-			});
-	}, [
-		dispatch,
-		userList.pagination.page,
-		userList.pagination.limit,
-		userListFilterQ,
-		userList.filter.sort_by,
-		userList.filter.sort_direction
-	]);
+	const userListDataCallback = useCallback(
+		() => {
+			dispatch(userListLoadingRequestAction(true));
+			const payload = {
+				page: userList.pagination.page,
+				limit: userList.pagination.limit,
+				q: userList.filter.q,
+				sort_by: userList.filter.sort_by,
+				sort_direction: userList.filter.sort_direction
+			};
+			userService
+				.list(payload)
+				.then((response) => {
+					dispatch(userListDataRequestAction(response.data.data));
+					dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
+				})
+				.catch(errorHandler())
+				.finally(() => {
+					dispatch(userListLoadingRequestAction(false));
+				});
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[
+			userList.filter.q,
+			userList.filter.sort_by,
+			userList.filter.sort_direction,
+			userList.pagination.limit,
+			userList.pagination.page
+		]
+	);
+
+	useOnceEffect(() => {
+		userListDataCallback();
+	});
+
+	useUpdateEffect(() => {
+		userListDataCallback();
+	}, [userListDataCallback]);
 
 	return (
 		<Fragment>

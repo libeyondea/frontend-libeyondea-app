@@ -4,16 +4,29 @@ import useAppSelector from 'hooks/useAppSelector';
 import {
 	userListFilterQRequestAction,
 	userListFilterSortByRequestAction,
-	userListFilterSortDirectionRequestAction,
-	userListPaginationPageRequestAction
+	userListFilterSortDirectionRequestAction
 } from 'store/user/actions';
 import { selectUserList } from 'store/user/selectors';
+import * as filterConstant from 'constants/filter';
+import { useMemo, useState } from 'react';
+import { debounce } from 'lodash';
 
 type Props = {};
 
 const FilterListUserComponent: React.FC<Props> = () => {
+	const [q, setQ] = useState('');
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
+	const userListFilterSortByList = ['user_name', 'created_at', 'updated_at'];
+
+	const userListFilterQDebounced = useMemo(
+		() =>
+			debounce((newValue: string) => {
+				dispatch(userListFilterQRequestAction(newValue));
+			}, 666),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
+	);
 
 	const onChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		dispatch(userListFilterSortByRequestAction(e.target.value));
@@ -24,8 +37,8 @@ const FilterListUserComponent: React.FC<Props> = () => {
 	};
 
 	const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(userListPaginationPageRequestAction(1));
-		dispatch(userListFilterQRequestAction(e.target.value));
+		setQ(e.target.value);
+		userListFilterQDebounced(e.target.value);
 	};
 
 	return (
@@ -33,6 +46,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 			<div className="flex sm:items-center flex-col sm:flex-row mb-4 md:mb-0">
 				<FormComponent.Select
 					className="mr-4 mb-4 sm:mb-0"
+					classNameInput="capitalize"
 					isHorizontal
 					label="Sort by"
 					onChange={onChangeSortBy}
@@ -40,13 +54,14 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					name="sort_by"
 					id="sort_by"
 				>
-					{['user_name', 'created_at'].map((sortBy, index) => (
+					{userListFilterSortByList.map((sortBy, index) => (
 						<option value={sortBy} key={index}>
 							{sortBy}
 						</option>
 					))}
 				</FormComponent.Select>
 				<FormComponent.Select
+					classNameInput="capitalize"
 					isHorizontal
 					label="Sort direction"
 					onChange={onChangeSortDirection}
@@ -54,11 +69,13 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					name="sort_direction"
 					id="sort_direction"
 				>
-					{['desc', 'asc'].map((sortBy, index) => (
-						<option value={sortBy} key={index}>
-							{sortBy}
-						</option>
-					))}
+					{[filterConstant.FILTER_SORT_DIRECTION_DESC, filterConstant.FILTER_SORT_DIRECTION_ASC].map(
+						(sortBy, index) => (
+							<option value={sortBy} key={index}>
+								{sortBy}
+							</option>
+						)
+					)}
 				</FormComponent.Select>
 			</div>
 			<div className="flex items-center">
@@ -67,7 +84,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					placeholder="Enter keyword"
 					className="mr-4"
 					onChange={onChangeSearch}
-					value={userList.filter.q}
+					value={q}
 					name="q"
 					id="q"
 				/>

@@ -4,7 +4,7 @@ import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
 import imageService from 'services/imageService';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { UpdateUserFormik } from 'models/user';
 import LoadingComponent from 'components/Loading/components';
 import toastify from 'helpers/toastify';
@@ -22,15 +22,16 @@ import {
 } from 'store/user/actions';
 import useAppSelector from 'hooks/useAppSelector';
 import { selectUserShow, selectUserUpdate } from 'store/user/selectors';
-import useClickOutside from 'hooks/useClickOutside';
-import useLockScroll from 'hooks/useLockScroll';
+import useOnClickOutside from 'hooks/useClickOutside';
+import useLockedScroll from 'hooks/useLockedScroll';
 import ButtonComponent from 'components/Button/components';
+import useOnceEffect from 'hooks/useOnceEffect';
+import useUpdateEffect from 'hooks/useUpdateEffect';
 
 type Props = {};
 
 const EditListUserComponent: React.FC<Props> = () => {
 	const wrapperRef = useRef(null);
-	const cardRef = useRef(null);
 	const navigate = useNavigate();
 	const params = useParams();
 	const dispatch = useAppDispatch();
@@ -162,7 +163,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useEffect(() => {
+	const userShowDataCallback = useCallback(() => {
 		dispatch(userShowLoadingRequestAction(true));
 		userService
 			.show(Number(params.userId))
@@ -173,13 +174,22 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userShowLoadingRequestAction(false));
 			});
-	}, [dispatch, params.userId]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params.userId]);
 
-	useClickOutside(() => {
+	useOnceEffect(() => {
+		userShowDataCallback();
+	});
+
+	useUpdateEffect(() => {
+		userShowDataCallback();
+	}, [userShowDataCallback]);
+
+	useOnClickOutside(wrapperRef, () => {
 		navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
-	}, wrapperRef);
+	});
 
-	useLockScroll(cardRef);
+	useLockedScroll();
 
 	return (
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">
