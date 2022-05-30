@@ -160,7 +160,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">
 			<div className="min-h-full flex items-center py-8 sm:p-16 bg-gray-900/50 z-40">
 				<CardComponent
-					ref={cardRef}
+					ref={wrapperRef}
 					className="z-50"
 					header="New user"
 					redirectCloseUrl={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
