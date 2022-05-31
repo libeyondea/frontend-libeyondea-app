@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import ImageComponent from 'components/Image/components';
 import LinkComponent from 'components/Link/components';
-import { signout } from 'helpers/auth';
 import { appSidebarRequestAction } from 'store/app/actions';
 import classNames from 'classnames';
 import { selectAppSidebar } from 'store/app/selectors';
@@ -11,13 +10,31 @@ import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
 import { AiOutlineMenu } from 'react-icons/ai';
 import * as routeConstant from 'constants/route';
+import * as cookiesConstant from 'constants/cookies';
+import authService from 'services/authService';
+import { removeCookie } from 'helpers/cookies';
+import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
+import { useNavigate } from 'react-router-dom';
+import toastify from 'helpers/toastify';
 
 type Props = {};
 
 const NavbarComponent: React.FC<Props> = () => {
+	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const appSidebar = useAppSelector(selectAppSidebar);
 	const authCurrent = useAppSelector(selectAuthCurrent);
+
+	const onClickSignout = () => {
+		if (authCurrent.token) {
+			authService.signout(authCurrent.token);
+		}
+		removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
+		dispatch(authCurrentDataRequestAction(null));
+		dispatch(authCurrentTokenRequestAction(null));
+		toastify.success('Sign out success');
+		navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`);
+	};
 
 	return (
 		<nav className="navbar bg-white shadow-lg fixed z-20 inset-x-0 top-0 transition-all ease-in-out duration-500">
@@ -32,10 +49,7 @@ const NavbarComponent: React.FC<Props> = () => {
 						</button>
 						<div className="block">
 							<div className="ml-4 flex items-baseline space-x-4">
-								<LinkComponent
-									className="text-gray-800 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium"
-									to="/"
-								>
+								<LinkComponent className="text-gray-800 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" to="/">
 									Home
 								</LinkComponent>
 							</div>
@@ -46,11 +60,7 @@ const NavbarComponent: React.FC<Props> = () => {
 							<Menu as="div" className="relative inline-block text-left">
 								<div>
 									<Menu.Button className="flex items-center justify-center w-full rounded-md px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none">
-										<ImageComponent
-											className="rounded-full h-8 w-8"
-											src={authCurrent.data?.avatar_url}
-											alt={authCurrent.data?.user_name}
-										/>
+										<ImageComponent className="rounded-full h-8 w-8" src={authCurrent.data?.avatar_url} alt={authCurrent.data?.user_name} />
 									</Menu.Button>
 								</div>
 								<Transition
@@ -97,7 +107,7 @@ const NavbarComponent: React.FC<Props> = () => {
 														'bg-gray-300 text-gray-700': active,
 														'text-gray-900': !active
 													})}
-													onClick={() => signout()}
+													onClick={onClickSignout}
 												>
 													<span>Sign out</span>
 												</button>

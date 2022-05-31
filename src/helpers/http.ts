@@ -79,13 +79,7 @@ const http = {
 			}
 		});
 	},
-	upload: <T>(config: {
-		baseURL?: string;
-		url: string;
-		files?: any;
-		data?: any;
-		token?: string;
-	}): Promise<AxiosResponse<T>> => {
+	upload: <T>(config: { baseURL?: string; url: string; files?: any; data?: any; token?: string }): Promise<AxiosResponse<T>> => {
 		const formData = new FormData();
 		if (config.data) {
 			for (let field in config.data) {

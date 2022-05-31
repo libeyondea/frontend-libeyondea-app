@@ -44,7 +44,7 @@ const MainRouter: RouteObject[] = [
 	},
 	{
 		path: '*',
-		element: <Navigate to={`${routeConstant.ROUTE_NAME_SPLASH}`} />
+		element: <Navigate to={routeConstant.ROUTE_NAME_SPLASH} />
 	}
 ];
 

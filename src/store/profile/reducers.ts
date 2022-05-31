@@ -1,12 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Profile } from 'models/profile';
 import { ResponseDataReducer } from 'models/reducer';
-import {
-	profileShowDataSuccessAction,
-	profileShowLoadingSuccessAction,
-	profileUpdateDataSuccessAction,
-	profileUpdateLoadingSuccessAction
-} from './actions';
+import { profileShowDataSuccessAction, profileShowLoadingSuccessAction, profileUpdateDataSuccessAction, profileUpdateLoadingSuccessAction } from './actions';
 
 type ProfileState = {
 	show: ResponseDataReducer<Profile>;
@@ -16,11 +11,11 @@ type ProfileState = {
 const initialState: ProfileState = {
 	show: {
 		data: {} as Profile,
-		is_loading: true
+		loading: true
 	},
 	update: {
 		data: {} as Profile,
-		is_loading: false
+		loading: false
 	}
 };
 
@@ -36,7 +31,7 @@ const profileReducer = createReducer(initialState, (builder) => {
 		...state,
 		show: {
 			...state.show,
-			is_loading: action.payload
+			loading: action.payload
 		}
 	}));
 
@@ -51,7 +46,7 @@ const profileReducer = createReducer(initialState, (builder) => {
 		...state,
 		update: {
 			...state.update,
-			is_loading: action.payload
+			loading: action.payload
 		}
 	}));
 });

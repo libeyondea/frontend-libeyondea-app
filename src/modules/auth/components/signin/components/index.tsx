@@ -46,13 +46,13 @@ const SigninCompoment: React.FC<Props> = () => {
 					expires: config.AUTH_DATA.EXPIRED_TIME
 				});
 				toastify.success('Sign in success');
-				navigate(routeConstant.ROUTE_NAME_SPLASH, { state: { from: from } });
+				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, { state: { from: from } });
 			})
 			.catch(
 				errorHandler(
 					(axiosError) => {},
-					(stockError) => {},
-					(formError) => formikHelpers.setErrors(formError.data.errors)
+					(formError) => formikHelpers.setErrors(formError.data.errors),
+					(stockError) => {}
 				)
 			)
 			.finally(() => {
@@ -64,18 +64,18 @@ const SigninCompoment: React.FC<Props> = () => {
 		<CardComponent className="m-auto flex flex-col w-full max-w-md sm:p-8">
 			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign in to your Account</div>
 			<FormComponent<SigninFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-				{(formik) => (
+				{(props) => (
 					<Fragment>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
 								type="text"
 								label="User name"
 								placeholder="Enter user name"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.user_name}
-								isError={!!(formik.errors.user_name && formik.touched.user_name)}
-								errorMessage={formik.errors.user_name}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.user_name}
+								isError={!!(props.errors.user_name && props.touched.user_name)}
+								errorMessage={props.errors.user_name}
 								name="user_name"
 								id="user_name"
 							/>
@@ -85,22 +85,22 @@ const SigninCompoment: React.FC<Props> = () => {
 								type="password"
 								label="Password"
 								placeholder="Enter password"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.password}
-								isError={!!(formik.errors.password && formik.touched.password)}
-								errorMessage={formik.errors.password}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.password}
+								isError={!!(props.errors.password && props.touched.password)}
+								errorMessage={props.errors.password}
 								name="password"
 								id="password"
 							/>
 						</div>
 						<div className="flex items-center justify-between mb-6">
 							<FormComponent.Checkbox
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								checked={formik.values.remember_me}
-								isError={!!(formik.errors.remember_me && formik.touched.remember_me)}
-								errorMessage={formik.errors.remember_me}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								checked={props.values.remember_me}
+								isError={!!(props.errors.remember_me && props.touched.remember_me)}
+								errorMessage={props.errors.remember_me}
 								name="remember_me"
 								id="remember_me"
 							>
@@ -113,8 +113,8 @@ const SigninCompoment: React.FC<Props> = () => {
 							</div>
 						</div>
 						<div className="flex w-full">
-							<ButtonComponent className="w-full" isLoading={formik.isSubmitting} disabled={formik.isSubmitting}>
-								{formik.isSubmitting ? 'Signing in' : 'Sign in'}
+							<ButtonComponent className="w-full" loading={props.isSubmitting} disabled={props.isSubmitting}>
+								{props.isSubmitting ? 'Signing in' : 'Sign in'}
 							</ButtonComponent>
 						</div>
 					</Fragment>

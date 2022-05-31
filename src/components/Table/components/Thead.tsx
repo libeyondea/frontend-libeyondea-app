@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
 
-const Thead: React.FC<Props> = ({ className, children, ...props }) => {
+const TheadTableComponent: React.FC<Props> = ({ className, children, ...props }) => {
 	return (
 		<thead {...props} className={classNames('bg-gray-50', className)}>
 			{children}
@@ -13,4 +13,4 @@ const Thead: React.FC<Props> = ({ className, children, ...props }) => {
 	);
 };
 
-export default Thead;
+export default TheadTableComponent;

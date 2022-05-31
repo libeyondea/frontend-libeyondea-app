@@ -14,26 +14,18 @@ type Props = {
 	onChangeLimit: (limit: number) => void;
 };
 
-const PaginationComponent: React.FC<Props> = ({
-	className,
-	page,
-	limit,
-	total,
-	limits = [10, 20, 50, 100],
-	onChangePage,
-	onChangeLimit
-}) => {
+const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, limits = [10, 20, 50, 100], onChangePage, onChangeLimit }) => {
 	const totalPage = Math.ceil(total / limit);
 	const pageNumbers = getPageNumbers({ page, limit, total });
 
-	const _onChangePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => {
-		e.preventDefault();
+	const _onChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => {
+		event.preventDefault();
 		onChangePage(page);
 	};
 
-	const _onChangeLimit = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		e.preventDefault();
-		onChangeLimit(parseInt(e.target.value));
+	const _onChangeLimit = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		event.preventDefault();
+		onChangeLimit(parseInt(event.target.value));
 	};
 
 	return (
@@ -41,9 +33,8 @@ const PaginationComponent: React.FC<Props> = ({
 			<div className="sm:flex-1 flex flex-col md:flex-row md:items-center md:justify-between">
 				<div className="flex items-center mb-4 md:mb-0 mr-0 md:mr-4">
 					<p className="text-sm text-gray-700">
-						Showing <span className="font-medium">{limit * page - limit + 1}</span> to{' '}
-						<span className="font-medium">{limit * page}</span> of <span className="font-medium">{total}</span>{' '}
-						results
+						Showing <span className="font-medium">{limit * page - limit + 1}</span> to <span className="font-medium">{limit * page}</span> of{' '}
+						<span className="font-medium">{total}</span> results
 					</p>
 					<span className="mx-2 text-sm text-gray-700">|</span>
 					<span className="flex items-center text-sm text-gray-700">
@@ -51,7 +42,7 @@ const PaginationComponent: React.FC<Props> = ({
 						<select
 							className="ml-2 rounded-md appearance-none border border-gray-300 py-2 pl-4 pr-8 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
 							value={limit}
-							onChange={(e) => _onChangeLimit(e)}
+							onChange={(event) => _onChangeLimit(event)}
 						>
 							{limits.map((limit, index) => (
 								<option key={index} value={limit}>
@@ -123,7 +114,7 @@ const PaginationComponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-									onClick={(e) => _onChangePage(e, Number(pageNumber))}
+									onClick={(event) => _onChangePage(event, Number(pageNumber))}
 									key={pageNumber}
 								>
 									{pageNumber}
@@ -135,7 +126,7 @@ const PaginationComponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(e) => _onChangePage(e, page + 1)}
+									onClick={(event) => _onChangePage(event, page + 1)}
 								>
 									<span className="sr-only">Next</span>
 									<FaAngleRight className="h-4 w-4" aria-hidden="true" />
@@ -143,7 +134,7 @@ const PaginationComponent: React.FC<Props> = ({
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(e) => _onChangePage(e, totalPage)}
+									onClick={(event) => _onChangePage(event, totalPage)}
 								>
 									<span className="sr-only">Last</span>
 									<FaAngleDoubleRight className="h-4 w-4" aria-hidden="true" />

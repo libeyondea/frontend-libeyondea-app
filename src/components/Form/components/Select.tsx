@@ -10,16 +10,7 @@ type Props = {
 	errorMessage?: string;
 } & React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
 
-const Select: React.FC<Props> = ({
-	className,
-	classNameInput,
-	name,
-	label,
-	isHorizontal = false,
-	isError = false,
-	errorMessage,
-	...props
-}) => {
+const SelectFormComponent: React.FC<Props> = ({ className, classNameInput, name, label, isHorizontal = false, isError = false, errorMessage, ...props }) => {
 	return (
 		<div
 			className={classNames(
@@ -61,4 +52,4 @@ const Select: React.FC<Props> = ({
 	);
 };
 
-export default Select;
+export default SelectFormComponent;

@@ -1,43 +1,40 @@
-import { FormikConfig, FormikHelpers, FormikProps, useFormik } from 'formik';
+import { Formik, FormikConfig, FormikHelpers, FormikProps, FormikValues } from 'formik';
 import classNames from 'classnames';
-import Input from './Input';
-import Select from './Select';
-import Image from './Image';
-import Checkbox from './Checkbox';
+import InputFormComponent from './Input';
+import SelectFormComponent from './Select';
+import CheckboxFormComponent from './Checkbox';
+import ImageFormComponent from './Image';
 
-type FormProps<TFormValues> = {
+type FormProps<Values> = {
 	className?: string;
-	initialValues: TFormValues;
+	initialValues: Values;
 	validationSchema?: any;
-	onSubmit: (values: TFormValues, formikHelpers: FormikHelpers<TFormValues>) => void | Promise<any>;
-	children: (formik: FormikProps<TFormValues>) => React.ReactNode;
-} & FormikConfig<TFormValues>;
+	onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void | Promise<any>;
+	children: (props: FormikProps<Values>) => React.ReactNode;
+} & FormikConfig<Values>;
 
-const FormComponent = <TFormValues extends Record<string, any> = Record<string, any>>({
+const FormComponent = <Values extends FormikValues = FormikValues>({
 	className,
 	initialValues,
 	validationSchema,
 	onSubmit,
 	children,
 	...props
-}: FormProps<TFormValues>) => {
-	const formik: FormikProps<TFormValues> = useFormik<TFormValues>({
-		...props,
-		initialValues,
-		validationSchema,
-		onSubmit
-	});
-
+}: FormProps<Values>): JSX.Element => {
 	return (
-		<form className={classNames('', className)} onSubmit={formik.handleSubmit}>
-			{children(formik)}
-		</form>
+		<Formik {...props} initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+			{(props) => (
+				<form className={classNames('', className)} onSubmit={props.handleSubmit}>
+					{children(props)}
+				</form>
+			)}
+		</Formik>
 	);
 };
 
 export default Object.assign(FormComponent, {
-	Input: Input,
-	Select: Select,
-	Checkbox: Checkbox,
-	Image: Image
+	Input: InputFormComponent,
+	Select: SelectFormComponent,
+	Checkbox: CheckboxFormComponent,
+	Image: ImageFormComponent
 });

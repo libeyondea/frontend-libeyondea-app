@@ -43,23 +43,23 @@ const initialState: UserState = {
 			sort_direction: filterConstant.FILTER_DEFAULT_SORT_DIRECTION,
 			sort_by: filterConstant.FILTER_DEFAULT_SORT_BY
 		},
-		is_loading: true
+		loading: true
 	},
 	show: {
 		data: {} as User,
-		is_loading: true
+		loading: true
 	},
 	create: {
 		data: {} as User,
-		is_loading: false
+		loading: false
 	},
 	update: {
 		data: {} as User,
-		is_loading: false
+		loading: false
 	},
 	delete: {
 		data: {} as User,
-		is_loading: false
+		loading: false
 	}
 };
 
@@ -139,7 +139,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		list: {
 			...state.list,
-			is_loading: action.payload
+			loading: action.payload
 		}
 	}));
 	builder.addCase(userShowDataSuccessAction, (state, action) => ({
@@ -153,7 +153,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		show: {
 			...state.show,
-			is_loading: action.payload
+			loading: action.payload
 		}
 	}));
 	builder.addCase(userCreateDataSuccessAction, (state, action) => ({
@@ -175,7 +175,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		create: {
 			...state.create,
-			is_loading: action.payload
+			loading: action.payload
 		}
 	}));
 	builder.addCase(userUpdateDataSuccessAction, (state, action) => ({
@@ -193,7 +193,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		update: {
 			...state.update,
-			is_loading: action.payload
+			loading: action.payload
 		}
 	}));
 	builder.addCase(userDeleteDataSuccessAction, (state, action) => ({
@@ -208,10 +208,9 @@ const userReducer = createReducer(initialState, (builder) => {
 			pagination: {
 				...state.list.pagination,
 				total: state.list.pagination.total - 1,
-				...(state.list.data.length === 1 &&
-					state.list.pagination.page > 1 && {
-						page: state.list.pagination.page - 1
-					})
+				...(Math.ceil(state.list.pagination.total - 1) / state.list.pagination.limit < state.list.pagination.page && {
+					page: Math.ceil(state.list.pagination.total - 1) / state.list.pagination.limit
+				})
 			}
 		}
 	}));
@@ -219,7 +218,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		...state,
 		delete: {
 			...state.delete,
-			is_loading: action.payload
+			loading: action.payload
 		}
 	}));
 });

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import Tbody from './Tbody';
-import Td from './Td';
-import Th from './Th';
-import Thead from './Thead';
-import Tr from './Tr';
+import TbodyTableComponent from './Tbody';
+import TdTableComponent from './Td';
+import ThTableComponent from './Th';
+import TheadTableComponent from './Thead';
+import TrTableComponent from './Tr';
 
 type Props = {
 	className?: string;
@@ -27,9 +27,9 @@ const TableComponent: React.FC<Props> = ({ className, children, ...props }) => {
 };
 
 export default Object.assign(TableComponent, {
-	Thead: Thead,
-	Tr: Tr,
-	Th: Th,
-	Tbody: Tbody,
-	Td: Td
+	Thead: TheadTableComponent,
+	Tr: TrTableComponent,
+	Th: ThTableComponent,
+	Tbody: TbodyTableComponent,
+	Td: TdTableComponent
 });

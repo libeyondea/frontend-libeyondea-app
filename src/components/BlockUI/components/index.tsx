@@ -3,11 +3,11 @@ import { RiLoader2Line } from 'react-icons/ri';
 
 type Props = {
 	className?: string;
-	isBlocking?: boolean;
+	blocked?: boolean;
 };
 
-const BlockUIComponent: React.FC<Props> = ({ className, isBlocking = false }) => {
-	return isBlocking ? (
+const BlockUIComponent: React.FC<Props> = ({ className, blocked = false }) => {
+	return blocked ? (
 		<div className={classNames('absolute inset-0 w-full h-full cursor-wait overflow-hidden', className)}>
 			<div className="w-full h-full opacity-75 bg-gray-400"></div>
 			<div className="absolute top-1/2 right-1/2 text-center -translate-y-1/2 translate-x-1/2">

@@ -10,11 +10,7 @@ interface IOverload {
 	): void;
 }
 
-const useEventListener: IOverload = <
-	KW extends keyof WindowEventMap,
-	KH extends keyof HTMLElementEventMap,
-	T extends HTMLElement
->(
+const useEventListener: IOverload = <KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap, T extends HTMLElement>(
 	eventName: KW | KH,
 	handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
 	ref?: React.RefObject<T>

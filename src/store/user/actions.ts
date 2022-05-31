@@ -10,75 +10,45 @@ export const userListDataSuccessAction = createAction(actionTypes.USER_LIST_DATA
 	payload: payload
 }));
 
-export const userListPaginationPageRequestAction = createAction(
-	actionTypes.USER_LIST_PAGINATION_PAGE_REQUEST,
-	(payload: number) => ({
-		payload: payload
-	})
-);
+export const userListPaginationPageRequestAction = createAction(actionTypes.USER_LIST_PAGINATION_PAGE_REQUEST, (payload: number) => ({
+	payload: payload
+}));
 
-export const userListPaginationPageSuccessAction = createAction(
-	actionTypes.USER_LIST_PAGINATION_PAGE_SUCCESS,
-	(payload: number) => ({
-		payload: payload
-	})
-);
+export const userListPaginationPageSuccessAction = createAction(actionTypes.USER_LIST_PAGINATION_PAGE_SUCCESS, (payload: number) => ({
+	payload: payload
+}));
 
-export const userListPaginationLimitRequestAction = createAction(
-	actionTypes.USER_LIST_PAGINATION_LIMIT_REQUEST,
-	(payload: number) => ({
-		payload: payload
-	})
-);
+export const userListPaginationLimitRequestAction = createAction(actionTypes.USER_LIST_PAGINATION_LIMIT_REQUEST, (payload: number) => ({
+	payload: payload
+}));
 
-export const userListPaginationLimitSuccessAction = createAction(
-	actionTypes.USER_LIST_PAGINATION_LIMIT_SUCCESS,
-	(payload: number) => ({
-		payload: payload
-	})
-);
+export const userListPaginationLimitSuccessAction = createAction(actionTypes.USER_LIST_PAGINATION_LIMIT_SUCCESS, (payload: number) => ({
+	payload: payload
+}));
 
-export const userListPaginationTotalRequestAction = createAction(
-	actionTypes.USER_LIST_PAGINATION_TOTAL_REQUEST,
-	(payload: number) => ({
-		payload: payload
-	})
-);
+export const userListPaginationTotalRequestAction = createAction(actionTypes.USER_LIST_PAGINATION_TOTAL_REQUEST, (payload: number) => ({
+	payload: payload
+}));
 
-export const userListPaginationTotalSuccessAction = createAction(
-	actionTypes.USER_LIST_PAGINATION_TOTAL_SUCCESS,
-	(payload: number) => ({
-		payload: payload
-	})
-);
+export const userListPaginationTotalSuccessAction = createAction(actionTypes.USER_LIST_PAGINATION_TOTAL_SUCCESS, (payload: number) => ({
+	payload: payload
+}));
 
-export const userListFilterSortDirectionRequestAction = createAction(
-	actionTypes.USER_LIST_FILTER_SORT_DIRECTION_REQUEST,
-	(payload: string) => ({
-		payload: payload
-	})
-);
+export const userListFilterSortDirectionRequestAction = createAction(actionTypes.USER_LIST_FILTER_SORT_DIRECTION_REQUEST, (payload: string) => ({
+	payload: payload
+}));
 
-export const userListFilterSortDirectionSuccessAction = createAction(
-	actionTypes.USER_LIST_FILTER_SORT_DIRECTION_SUCCESS,
-	(payload: string) => ({
-		payload: payload
-	})
-);
+export const userListFilterSortDirectionSuccessAction = createAction(actionTypes.USER_LIST_FILTER_SORT_DIRECTION_SUCCESS, (payload: string) => ({
+	payload: payload
+}));
 
-export const userListFilterSortByRequestAction = createAction(
-	actionTypes.USER_LIST_FILTER_SORT_BY_REQUEST,
-	(payload: string) => ({
-		payload: payload
-	})
-);
+export const userListFilterSortByRequestAction = createAction(actionTypes.USER_LIST_FILTER_SORT_BY_REQUEST, (payload: string) => ({
+	payload: payload
+}));
 
-export const userListFilterSortBySuccessAction = createAction(
-	actionTypes.USER_LIST_FILTER_SORT_BY_SUCCESS,
-	(payload: string) => ({
-		payload: payload
-	})
-);
+export const userListFilterSortBySuccessAction = createAction(actionTypes.USER_LIST_FILTER_SORT_BY_SUCCESS, (payload: string) => ({
+	payload: payload
+}));
 
 export const userListFilterQRequestAction = createAction(actionTypes.USER_LIST_FILTER_Q_REQUEST, (payload: string) => ({
 	payload: payload

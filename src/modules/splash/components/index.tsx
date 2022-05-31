@@ -10,8 +10,8 @@ import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
 import { useNavigate, useLocation, Location } from 'react-router-dom';
 import useOnceEffect from 'hooks/useOnceEffect';
-import { signout } from 'helpers/auth';
 import authService from 'services/authService';
+import { errorHandler } from 'helpers/error';
 
 type Props = {};
 
@@ -26,7 +26,7 @@ const SplashComponent: React.FC<Props> = () => {
 	useOnceEffect(() => {
 		dispatch(appInitializedRequestAction(true));
 		const token = getCookie(cookiesConstant.COOKIES_KEY_TOKEN);
-		const initialUrl = from?.pathname;
+		const initialUrl = from?.pathname + from?.search;
 
 		if (isAuth) {
 			if (initialUrl) {
@@ -48,9 +48,15 @@ const SplashComponent: React.FC<Props> = () => {
 						});
 					}
 				})
-				.catch((error) => {
-					signout(navigate);
-				});
+				.catch(
+					errorHandler(
+						(axiosError) => {
+							navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true });
+						},
+						(stockError) => {},
+						(formError) => {}
+					)
+				);
 		} else {
 			dispatch(authCurrentDataRequestAction(null));
 			dispatch(authCurrentTokenRequestAction(null));
@@ -64,7 +70,7 @@ const SplashComponent: React.FC<Props> = () => {
 
 	return (
 		<div className="flex h-screen">
-			<ImageComponent className="m-auto animate-spin rounded-full h-32 w-32" src={config.LOGO_URL} alt="Loading..." />
+			<ImageComponent className="m-auto animate-spin rounded-full h-32 w-32" src={config.LOGO_URL} alt="Loading" />
 		</div>
 	);
 };

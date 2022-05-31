@@ -24,11 +24,7 @@ const CardComponent = forwardRef<HTMLDivElement, Props>(({ className, header, re
 					<h3 className="flex items-center font-bold text-lg text-black">{header}</h3>
 					{redirectCloseUrl && (
 						<div className="ml-auto">
-							<button
-								type="button"
-								onClick={() => navigate(redirectCloseUrl)}
-								className="flex items-center bg-white hover:bg-gray-300 p-1 rounded-md"
-							>
+							<button type="button" onClick={() => navigate(redirectCloseUrl)} className="flex items-center bg-white hover:bg-gray-300 p-1 rounded-md">
 								<FaTimes className="w-6 h-6" />
 							</button>
 						</div>

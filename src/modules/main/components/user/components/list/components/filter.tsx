@@ -1,15 +1,11 @@
 import FormComponent from 'components/Form/components';
 import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
-import {
-	userListFilterQRequestAction,
-	userListFilterSortByRequestAction,
-	userListFilterSortDirectionRequestAction
-} from 'store/user/actions';
+import { userListFilterQRequestAction, userListFilterSortByRequestAction, userListFilterSortDirectionRequestAction } from 'store/user/actions';
 import { selectUserList } from 'store/user/selectors';
 import * as filterConstant from 'constants/filter';
-import { useMemo, useState } from 'react';
-import { debounce } from 'lodash';
+import { useState } from 'react';
+import useDebouncedCallback from 'hooks/useDebouncedCallback';
 
 type Props = {};
 
@@ -19,26 +15,19 @@ const FilterListUserComponent: React.FC<Props> = () => {
 	const userList = useAppSelector(selectUserList);
 	const userListFilterSortByList = ['user_name', 'created_at', 'updated_at'];
 
-	const userListFilterQDebounced = useMemo(
-		() =>
-			debounce((newValue: string) => {
-				dispatch(userListFilterQRequestAction(newValue));
-			}, 666),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[]
-	);
+	const userListFilterQDebounced = useDebouncedCallback((nextValue: string) => dispatch(userListFilterQRequestAction(nextValue)));
 
-	const onChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		dispatch(userListFilterSortByRequestAction(e.target.value));
+	const onChangeSortBy = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		dispatch(userListFilterSortByRequestAction(event.target.value));
 	};
 
-	const onChangeSortDirection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		dispatch(userListFilterSortDirectionRequestAction(e.target.value));
+	const onChangeSortDirection = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		dispatch(userListFilterSortDirectionRequestAction(event.target.value));
 	};
 
-	const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setQ(e.target.value);
-		userListFilterQDebounced(e.target.value);
+	const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setQ(event.target.value);
+		userListFilterQDebounced(event.target.value);
 	};
 
 	return (
@@ -69,25 +58,15 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					name="sort_direction"
 					id="sort_direction"
 				>
-					{[filterConstant.FILTER_SORT_DIRECTION_DESC, filterConstant.FILTER_SORT_DIRECTION_ASC].map(
-						(sortBy, index) => (
-							<option value={sortBy} key={index}>
-								{sortBy}
-							</option>
-						)
-					)}
+					{[filterConstant.FILTER_SORT_DIRECTION_DESC, filterConstant.FILTER_SORT_DIRECTION_ASC].map((sortBy, index) => (
+						<option value={sortBy} key={index}>
+							{sortBy}
+						</option>
+					))}
 				</FormComponent.Select>
 			</div>
 			<div className="flex items-center">
-				<FormComponent.Input
-					type="text"
-					placeholder="Enter keyword"
-					className="mr-4"
-					onChange={onChangeSearch}
-					value={q}
-					name="q"
-					id="q"
-				/>
+				<FormComponent.Input type="text" placeholder="Enter keyword" className="mr-4" onChange={onChangeSearch} value={q} name="q" id="q" />
 			</div>
 		</div>
 	);

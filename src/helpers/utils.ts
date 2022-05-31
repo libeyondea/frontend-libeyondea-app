@@ -1,16 +1,11 @@
-import { RefObject } from 'react';
-
-export const getPageNumbers = ({
-	page,
-	limit,
-	total,
-	pageNumbersToShow = 3
-}: {
+type GetPageNumbersProps = {
 	page: number;
 	limit: number;
 	total: number;
 	pageNumbersToShow?: number;
-}): Array<number | null> => {
+};
+
+export const getPageNumbers = ({ page, limit, total, pageNumbersToShow = 3 }: GetPageNumbersProps): Array<number | null> => {
 	const lastPageNumber = Math.ceil(total / limit);
 	const currentPageNumber = page <= lastPageNumber ? page : lastPageNumber;
 	const maxPagesBeforeCurrentPage = Math.floor(pageNumbersToShow / 2);
@@ -52,8 +47,7 @@ export const getPageNumbers = ({
 		if (pageNumbers[pageNumbers.length - 1] === lastPageNumber - 1) {
 			pageNumbers = [...pageNumbers, lastPageNumber];
 		} else {
-			const ellipsis: number | null =
-				Number(pageNumbers[pageNumbers.length - 1]) < lastPageNumber - 2 ? null : lastPageNumber - 1;
+			const ellipsis: number | null = Number(pageNumbers[pageNumbers.length - 1]) < lastPageNumber - 2 ? null : lastPageNumber - 1;
 			pageNumbers = [...pageNumbers, ellipsis, lastPageNumber];
 		}
 	}
@@ -61,7 +55,7 @@ export const getPageNumbers = ({
 	return pageNumbers;
 };
 
-export const insertItemIntoArray = <T extends object | string | number>(arr: T[], item: T, index = 0): T[] => {
+export const insertItemIntoArray = <T extends any>(arr: T[], item: T, index = 0): T[] => {
 	const arrClone = [...arr];
 	arrClone.splice(index, 0, item);
 	return arrClone;
@@ -87,7 +81,7 @@ export const deleteArrayItemById = <T extends { id: number }>(arr: T[], itemId: 
 	return arrClone;
 };
 
-export const getOwnerDocument = <T extends Element | RefObject<Element>>(element?: T | null): Document | null => {
+export const getOwnerDocument = <T extends Element | React.RefObject<Element>>(element?: T | null): Document | null => {
 	if (typeof window === 'undefined') {
 		return null;
 	} else if (element instanceof Node) {

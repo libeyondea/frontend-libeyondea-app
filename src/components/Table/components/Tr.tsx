@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>;
 
-const Tr: React.FC<Props> = ({ className, children, ...props }) => {
+const TrTableComponent: React.FC<Props> = ({ className, children, ...props }) => {
 	return (
 		<tr {...props} className={classNames('', className)}>
 			{children}
@@ -13,4 +13,4 @@ const Tr: React.FC<Props> = ({ className, children, ...props }) => {
 	);
 };
 
-export default Tr;
+export default TrTableComponent;

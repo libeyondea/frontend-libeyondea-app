@@ -11,6 +11,7 @@ type Props = {
 
 const NavLinkComponent: React.FC<Props> = ({ className, activeClassName, notActiveClassName, to, children, ...props }) => (
 	<NavLink
+		{...props}
 		to={to}
 		className={({ isActive }) =>
 			classNames(className, {
@@ -19,7 +20,6 @@ const NavLinkComponent: React.FC<Props> = ({ className, activeClassName, notActi
 			})
 		}
 		end
-		{...props}
 	>
 		{children}
 	</NavLink>

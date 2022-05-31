@@ -1,12 +1,7 @@
 import { Observable } from 'rxjs';
 import { Action } from '@reduxjs/toolkit';
 import { filter, map } from 'rxjs/operators';
-import {
-	appInitializedRequestAction,
-	appInitializedSuccessAction,
-	appSidebarRequestAction,
-	appSidebarSuccessAction
-} from './actions';
+import { appInitializedRequestAction, appInitializedSuccessAction, appSidebarRequestAction, appSidebarSuccessAction } from './actions';
 
 export const appInitializedEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(

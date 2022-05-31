@@ -1,12 +1,7 @@
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action } from '@reduxjs/toolkit';
-import {
-	authCurrentDataRequestAction,
-	authCurrentDataSuccessAction,
-	authCurrentTokenRequestAction,
-	authCurrentTokenSuccessAction
-} from './actions';
+import { authCurrentDataRequestAction, authCurrentDataSuccessAction, authCurrentTokenRequestAction, authCurrentTokenSuccessAction } from './actions';
 
 export const authCurrentDataEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(

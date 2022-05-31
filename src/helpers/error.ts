@@ -8,8 +8,8 @@ import * as cookiesConstant from 'constants/cookies';
 
 export const errorHandler = (
 	callbackAxiosError?: (err: AxiosResponse<ResponseError>) => void,
-	callbackStockError?: (err: Error) => void,
 	callbackFormError?: (err: AxiosResponse<ResponseError>) => void,
+	callbackStockError?: (err: Error) => void,
 	options: {
 		isAxiosErrorMessage?: boolean;
 		isStockErrorMessage?: boolean;
@@ -25,7 +25,8 @@ export const errorHandler = (
 				removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
 				store.dispatch(authCurrentDataRequestAction(null));
 				store.dispatch(authCurrentTokenRequestAction(null));
-			} else if (error.response.data.errors && error.response.status === 400) {
+			}
+			if (error.response.status === 400 && error.response.data.errors) {
 				callbackFormError && callbackFormError(error.response);
 			} else {
 				callbackAxiosError && callbackAxiosError(error.response);

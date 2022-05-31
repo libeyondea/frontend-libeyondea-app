@@ -8,6 +8,7 @@ type onBlurFile = (field: string, isTouched?: boolean, shouldValidate?: boolean)
 
 type Props = {
 	className?: string;
+	classNameInput?: string;
 	onChangeFile: onChangeFile;
 	onBlurFile: onBlurFile;
 	name: string;
@@ -18,26 +19,27 @@ type Props = {
 	canDelete?: boolean;
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const Image: React.FC<Props> = ({
+const ImageFormComponent: React.FC<Props> = ({
 	className,
+	classNameInput,
 	onChangeFile,
 	onBlurFile,
 	name,
 	label,
 	isError = false,
 	errorMessage,
-	imgUrl = '',
+	imgUrl,
 	canDelete = false,
 	...props
 }) => {
-	const [previewImg, setPreviewImg] = useState(imgUrl);
+	const [previewImg, setPreviewImg] = useState(imgUrl || null);
 
-	const _onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const files = e.target.files;
+	const _onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const files = event.target.files;
 		if (files) {
 			setPreviewImg(URL.createObjectURL(files[0]));
 			onChangeFile(name, files[0]);
-			e.target.value = '';
+			event.target.value = '';
 		}
 	};
 
@@ -47,7 +49,7 @@ const Image: React.FC<Props> = ({
 
 	const _onRemoveFile = () => {
 		onChangeFile(name, null);
-		setPreviewImg('');
+		setPreviewImg(null);
 	};
 
 	return (
@@ -61,7 +63,7 @@ const Image: React.FC<Props> = ({
 				<div className="flex items-start">
 					{previewImg && (
 						<span className="mr-4 inline-block h-20 w-20 rounded-full overflow-hidden">
-							<ImageComponent src={previewImg} className="h-full w-full" />
+							<ImageComponent className="h-full w-full" src={previewImg} alt="Image" />
 						</span>
 					)}
 					<button
@@ -75,16 +77,12 @@ const Image: React.FC<Props> = ({
 							onBlur={_onBlurFile}
 							type="file"
 							accept=".png, .jpg, .jpeg .gif"
-							className="absolute w-full inset-0 opacity-0"
+							className={classNames('absolute w-full inset-0 opacity-0', classNameInput)}
 						/>
 						Change
 					</button>
 					{previewImg && canDelete && (
-						<button
-							type="button"
-							className="ml-4 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md"
-							onClick={_onRemoveFile}
-						>
+						<button type="button" className="ml-4 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md" onClick={_onRemoveFile}>
 							Remove
 						</button>
 					)}
@@ -95,4 +93,4 @@ const Image: React.FC<Props> = ({
 	);
 };
 
-export default Image;
+export default ImageFormComponent;

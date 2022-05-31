@@ -9,7 +9,7 @@ type Props = {
 	errorMessage?: string;
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const Input: React.FC<Props> = ({ className, classNameInput, name, label, isError = false, errorMessage, ...props }) => {
+const InputFormComponent: React.FC<Props> = ({ className, classNameInput, name, label, isError = false, errorMessage, ...props }) => {
 	return (
 		<div className={classNames('', className)}>
 			{label && (
@@ -35,4 +35,4 @@ const Input: React.FC<Props> = ({ className, classNameInput, name, label, isErro
 	);
 };
 
-export default Input;
+export default InputFormComponent;

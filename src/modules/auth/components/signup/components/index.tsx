@@ -28,12 +28,8 @@ const SignupComponent: React.FC<Props> = () => {
 	};
 
 	const validationSchema = Yup.object({
-		first_name: Yup.string()
-			.required('The first name is required')
-			.max(20, 'The first name must not be greater than 20 characters'),
-		last_name: Yup.string()
-			.required('The last name is required')
-			.max(20, 'The last name must not be greater than 20 characters'),
+		first_name: Yup.string().required('The first name is required').max(20, 'The first name must not be greater than 20 characters'),
+		last_name: Yup.string().required('The last name is required').max(20, 'The last name must not be greater than 20 characters'),
 		email: Yup.string().required('Email is required'),
 		user_name: Yup.string()
 			.required('The user name is required')
@@ -68,8 +64,8 @@ const SignupComponent: React.FC<Props> = () => {
 			.catch(
 				errorHandler(
 					(axiosError) => {},
-					(stockError) => {},
-					(formError) => formikHelpers.setErrors(formError.data.errors)
+					(formError) => formikHelpers.setErrors(formError.data.errors),
+					(stockError) => {}
 				)
 			)
 			.finally(() => {
@@ -81,18 +77,18 @@ const SignupComponent: React.FC<Props> = () => {
 		<CardComponent className="m-auto flex flex-col w-full max-w-md sm:p-8">
 			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign up your Account</div>
 			<FormComponent<SignupFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-				{(formik) => (
+				{(props) => (
 					<Fragment>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
 								type="text"
 								label="First name"
 								placeholder="Enter first name"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.first_name}
-								isError={!!(formik.errors.first_name && formik.touched.first_name)}
-								errorMessage={formik.errors.first_name}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.first_name}
+								isError={!!(props.errors.first_name && props.touched.first_name)}
+								errorMessage={props.errors.first_name}
 								name="first_name"
 								id="first_name"
 							/>
@@ -102,11 +98,11 @@ const SignupComponent: React.FC<Props> = () => {
 								type="text"
 								label="Last name"
 								placeholder="Enter last name"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.last_name}
-								isError={!!(formik.errors.last_name && formik.touched.last_name)}
-								errorMessage={formik.errors.last_name}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.last_name}
+								isError={!!(props.errors.last_name && props.touched.last_name)}
+								errorMessage={props.errors.last_name}
 								name="last_name"
 								id="last_name"
 							/>
@@ -116,11 +112,11 @@ const SignupComponent: React.FC<Props> = () => {
 								type="text"
 								label="User name"
 								placeholder="Enter user name"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.user_name}
-								isError={!!(formik.errors.user_name && formik.touched.user_name)}
-								errorMessage={formik.errors.user_name}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.user_name}
+								isError={!!(props.errors.user_name && props.touched.user_name)}
+								errorMessage={props.errors.user_name}
 								name="user_name"
 								id="user_name"
 							/>
@@ -130,11 +126,11 @@ const SignupComponent: React.FC<Props> = () => {
 								type="text"
 								label="Email"
 								placeholder="Enter email"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.email}
-								isError={!!(formik.errors.email && formik.touched.email)}
-								errorMessage={formik.errors.email}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.email}
+								isError={!!(props.errors.email && props.touched.email)}
+								errorMessage={props.errors.email}
 								name="email"
 								id="email"
 							/>
@@ -144,11 +140,11 @@ const SignupComponent: React.FC<Props> = () => {
 								type="password"
 								label="Password"
 								placeholder="Enter password"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.password}
-								isError={!!(formik.errors.password && formik.touched.password)}
-								errorMessage={formik.errors.password}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.password}
+								isError={!!(props.errors.password && props.touched.password)}
+								errorMessage={props.errors.password}
 								name="password"
 								id="password"
 							/>
@@ -158,22 +154,22 @@ const SignupComponent: React.FC<Props> = () => {
 								type="password"
 								label="Password confirmation"
 								placeholder="Enter password confirmation"
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								value={formik.values.password_confirmation}
-								isError={!!(formik.errors.password_confirmation && formik.touched.password_confirmation)}
-								errorMessage={formik.errors.password_confirmation}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								value={props.values.password_confirmation}
+								isError={!!(props.errors.password_confirmation && props.touched.password_confirmation)}
+								errorMessage={props.errors.password_confirmation}
 								name="password_confirmation"
 								id="password_confirmation"
 							/>
 						</div>
 						<div className="flex items-center mb-6">
 							<FormComponent.Checkbox
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								checked={formik.values.terms}
-								isError={!!(formik.errors.terms && formik.touched.terms)}
-								errorMessage={formik.errors.terms}
+								onChange={props.handleChange}
+								onBlur={props.handleBlur}
+								checked={props.values.terms}
+								isError={!!(props.errors.terms && props.touched.terms)}
+								errorMessage={props.errors.terms}
 								name="terms"
 								id="terms"
 							>
@@ -193,8 +189,8 @@ const SignupComponent: React.FC<Props> = () => {
 							</FormComponent.Checkbox>
 						</div>
 						<div className="flex w-full">
-							<ButtonComponent className="w-full" isLoading={formik.isSubmitting} disabled={formik.isSubmitting}>
-								{formik.isSubmitting ? 'Signing up' : 'Sign up'}
+							<ButtonComponent className="w-full" loading={props.isSubmitting} disabled={props.isSubmitting}>
+								{props.isSubmitting ? 'Signing up' : 'Sign up'}
 							</ButtonComponent>
 						</div>
 					</Fragment>

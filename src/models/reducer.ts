@@ -1,6 +1,6 @@
 export interface ResponseDataReducer<T> {
 	data: T;
-	is_loading: boolean;
+	loading: boolean;
 }
 
 export interface ResponseDataWithPaginationAndFilterReducer<T> extends ResponseDataReducer<T> {

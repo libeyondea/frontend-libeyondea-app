@@ -9,6 +9,56 @@ import { useLocation } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
 import NavLinkComponent from 'components/NavLink/components';
 import { FaChevronLeft, FaCog, FaEllipsisH, FaPlusCircle, FaRegListAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { Fragment } from 'react';
+
+type SidebarMenuProps = Array<{
+	name: string;
+	icon: JSX.Element;
+	to: string | null;
+	children: Array<{
+		name: string;
+		icon: JSX.Element;
+		to: string;
+	}>;
+}>;
+
+const sidebarMenu: SidebarMenuProps = [
+	{
+		name: 'Dashboard',
+		icon: <FaTachometerAlt className="w-6 h-6" />,
+		to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`,
+		children: []
+	},
+	{
+		name: 'Users',
+		icon: <FaUsers className="w-6 h-6" />,
+		to: null,
+		children: [
+			{
+				name: 'List',
+				icon: <FaRegListAlt className="w-6 h-6" />,
+				to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`
+			},
+			{
+				name: 'New',
+				icon: <FaPlusCircle className="w-6 h-6" />,
+				to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`
+			}
+		]
+	},
+	{
+		name: 'More',
+		icon: <FaEllipsisH className="w-6 h-6" />,
+		to: null,
+		children: [
+			{
+				name: 'Settings',
+				icon: <FaCog className="w-6 h-6" />,
+				to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`
+			}
+		]
+	}
+];
 
 type Props = {};
 
@@ -32,136 +82,81 @@ const SidebarComponent: React.FC<Props> = () => {
 						<div className="flex">
 							<LinkComponent to="/" className="flex items-center text-left focus:outline-none">
 								<ImageComponent className="rounded-full h-8 w-8" src={config.LOGO_URL} alt={config.APP_NAME} />
-								<h2 className="text-lg text-white font-bold tracking-tighter cursor-pointer ml-3">
-									{config.APP_NAME}
-								</h2>
+								<h2 className="text-lg text-white font-bold tracking-tighter cursor-pointer ml-3">{config.APP_NAME}</h2>
 							</LinkComponent>
 						</div>
 					</div>
 					<div className="flex flex-col overflow-y-auto p-4 mt-14">
 						<nav className="flex-1 bg-gray-800">
 							<ul className="space-y-3">
-								<li>
-									<NavLinkComponent
-										to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`}
-										className="inline-flex items-center w-full px-4 py-2 text-base transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline"
-										activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-										notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
-									>
-										<FaTachometerAlt className="w-6 h-6" />
-										<span className="ml-4">Dashboard</span>
-									</NavLinkComponent>
-								</li>
-								{/* <li className="px-4 pt-6 pb-2 font-medium uppercase text-gray-200">Settings</li> */}
-								<li>
-									<Disclosure
-										defaultOpen={
-											!![
-												`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`,
-												`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`
-											]
-												.map((href) => href)
-												.includes(location.pathname)
-										}
-									>
-										{({ open }) => (
-											<>
-												<Disclosure.Button
-													className={classNames(
-														'inline-flex items-center w-full px-4 py-2 text-base transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
-														!![
-															`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`,
-															`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`
-														]
+								{sidebarMenu.map((menu, index) => (
+									<Fragment key={index}>
+										{!menu.children.length && menu.to && (
+											<li>
+												<NavLinkComponent
+													to={menu.to}
+													className="inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline"
+													activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+													notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+												>
+													{menu.icon}
+													<span className="ml-4">{menu.name}</span>
+												</NavLinkComponent>
+											</li>
+										)}
+										{!!menu.children.length && (
+											<li>
+												<Disclosure
+													defaultOpen={
+														!!menu.children
+															.map((menu) => menu.to)
 															.map((href) => href)
 															.includes(location.pathname)
-															? 'bg-gray-900 text-white'
-															: 'text-gray-400'
-													)}
+													}
 												>
-													<FaUsers className="w-6 h-6" />
-													<span className="ml-4">Users</span>
-													<FaChevronLeft
-														className={classNames('w-6 h-6 ml-auto', {
-															'transform -rotate-90': open
-														})}
-													/>
-												</Disclosure.Button>
-												<Disclosure.Panel as="ul" className="space-y-4 mt-4">
-													<li>
-														<NavLinkComponent
-															to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
-															className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline"
-															activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-															notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
-														>
-															<FaRegListAlt className="w-6 h-6" />
-															<span className="ml-4">List</span>
-														</NavLinkComponent>
-													</li>
-													<li>
-														<NavLinkComponent
-															to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`}
-															className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline"
-															activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-															notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
-														>
-															<FaPlusCircle className="w-6 h-6" />
-															<span className="ml-4">New</span>
-														</NavLinkComponent>
-													</li>
-												</Disclosure.Panel>
-											</>
-										)}
-									</Disclosure>
-								</li>
-								<li>
-									<Disclosure
-										defaultOpen={
-											!![`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`]
-												.map((href) => href)
-												.includes(location.pathname)
-										}
-									>
-										{({ open }) => (
-											<>
-												<Disclosure.Button
-													className={classNames(
-														'inline-flex items-center w-full px-4 py-2 text-base transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
-														!![
-															`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`
-														]
-															.map((href) => href)
-															.includes(location.pathname)
-															? 'bg-gray-900 text-white'
-															: 'text-gray-400'
+													{({ open }) => (
+														<Fragment>
+															<Disclosure.Button
+																className={classNames(
+																	'inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
+																	!!menu.children
+																		.map((menu) => menu.to)
+																		.map((href) => href)
+																		.includes(location.pathname)
+																		? 'bg-gray-900 text-white'
+																		: 'text-gray-400'
+																)}
+															>
+																{menu.icon}
+																<span className="ml-4">{menu.name}</span>
+																<FaChevronLeft
+																	className={classNames('w-6 h-6 ml-auto', {
+																		'transform -rotate-90': open
+																	})}
+																/>
+															</Disclosure.Button>
+															<Disclosure.Panel as="ul" className="space-y-4 mt-4">
+																{menu.children.map((menu, index) => (
+																	<li key={index}>
+																		<NavLinkComponent
+																			to={menu.to}
+																			className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
+																			activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+																			notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+																		>
+																			{menu.icon}
+																			<span className="ml-4">{menu.name}</span>
+																		</NavLinkComponent>
+																	</li>
+																))}
+															</Disclosure.Panel>
+														</Fragment>
 													)}
-												>
-													<FaEllipsisH className="w-6 h-6" />
-													<span className="ml-4">More</span>
-													<FaChevronLeft
-														className={classNames('w-6 h-6 ml-auto', {
-															'transform -rotate-90': open
-														})}
-													/>
-												</Disclosure.Button>
-												<Disclosure.Panel as="ul" className="space-y-4 mt-4">
-													<li>
-														<NavLinkComponent
-															to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
-															className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline"
-															activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-															notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
-														>
-															<FaCog className="w-6 h-6" />
-															<span className="ml-4">Settings</span>
-														</NavLinkComponent>
-													</li>
-												</Disclosure.Panel>
-											</>
+												</Disclosure>
+											</li>
 										)}
-									</Disclosure>
-								</li>
+									</Fragment>
+								))}
 							</ul>
 						</nav>
 					</div>

@@ -4,19 +4,12 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 type Props = {
 	className?: string;
 	type?: 'button' | 'submit' | 'reset';
-	isLoading?: boolean;
+	loading?: boolean;
 	disabled?: boolean;
 	children: React.ReactNode;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
-const ButtonComponent: React.FC<Props> = ({
-	className,
-	type = 'submit',
-	isLoading = false,
-	disabled = false,
-	children,
-	...props
-}) => (
+const ButtonComponent: React.FC<Props> = ({ className, type = 'submit', loading = false, disabled = false, children, ...props }) => (
 	<button
 		type={type}
 		className={classNames(
@@ -29,7 +22,7 @@ const ButtonComponent: React.FC<Props> = ({
 		disabled={disabled}
 		{...props}
 	>
-		{isLoading && <AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />}
+		{loading && <AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />}
 		<span>{children}</span>
 	</button>
 );

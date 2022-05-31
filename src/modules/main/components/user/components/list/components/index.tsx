@@ -84,13 +84,7 @@ const ListUserComponent: React.FC<Props> = () => {
 				});
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[
-			userList.filter.q,
-			userList.filter.sort_by,
-			userList.filter.sort_direction,
-			userList.pagination.limit,
-			userList.pagination.page
-		]
+		[userList.filter.q, userList.filter.sort_by, userList.filter.sort_direction, userList.pagination.limit, userList.pagination.page]
 	);
 
 	useOnceEffect(() => {
@@ -109,7 +103,7 @@ const ListUserComponent: React.FC<Props> = () => {
 					<CardComponent header="List users">
 						<div className="relative">
 							<FilterListUserComponent />
-							{userList.is_loading ? (
+							{userList.loading ? (
 								<TableLoadingComponent />
 							) : (
 								<TableComponent>
@@ -139,11 +133,7 @@ const ListUserComponent: React.FC<Props> = () => {
 														<TableComponent.Td>
 															<div className="flex items-center">
 																<div className="flex-shrink-0 h-10 w-10">
-																	<img
-																		className="h-10 w-10 rounded-full"
-																		src={user.avatar_url}
-																		alt={user.user_name}
-																	/>
+																	<img className="h-10 w-10 rounded-full" src={user.avatar_url} alt={user.user_name} />
 																</div>
 																<div className="ml-4">
 																	<div className="text-sm font-medium text-gray-900">
@@ -155,28 +145,18 @@ const ListUserComponent: React.FC<Props> = () => {
 														</TableComponent.Td>
 														<TableComponent.Td>
 															<span
-																className={classNames(
-																	'px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize',
-																	{
-																		'bg-green-100 text-green-800':
-																			user.status === userConstant.USER_STATUS_ACTIVE,
-																		'bg-yellow-100 text-yellow-800':
-																			user.status === userConstant.USER_STATUS_INACTIVE,
-																		'bg-red-100 text-red-800':
-																			user.status === userConstant.USER_STATUS_BANNED
-																	}
-																)}
+																className={classNames('px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize', {
+																	'bg-green-100 text-green-800': user.status === userConstant.USER_STATUS_ACTIVE,
+																	'bg-yellow-100 text-yellow-800': user.status === userConstant.USER_STATUS_INACTIVE,
+																	'bg-red-100 text-red-800': user.status === userConstant.USER_STATUS_BANNED
+																})}
 															>
 																{user.status}
 															</span>
 														</TableComponent.Td>
 														<TableComponent.Td>{user.role}</TableComponent.Td>
-														<TableComponent.Td className="whitespace-nowrap">
-															{time.ago(user.updated_at)}
-														</TableComponent.Td>
-														<TableComponent.Td className="whitespace-nowrap">
-															{time.format(user.created_at)}
-														</TableComponent.Td>
+														<TableComponent.Td className="whitespace-nowrap">{time.ago(user.updated_at)}</TableComponent.Td>
+														<TableComponent.Td className="whitespace-nowrap">{time.format(user.created_at)}</TableComponent.Td>
 														<TableComponent.Td>
 															<div className="flex items-center">
 																<LinkComponent
@@ -208,7 +188,7 @@ const ListUserComponent: React.FC<Props> = () => {
 								onChangePage={onChangePage}
 								onChangeLimit={onChangeLimit}
 							/>
-							<BlockUIComponent isBlocking={userDelete.is_loading} />
+							<BlockUIComponent blocked={userDelete.loading} />
 						</div>
 					</CardComponent>
 				</div>
