@@ -23,7 +23,7 @@ import ButtonComponent from 'components/Button/components';
 type Props = {};
 
 const NewListUserComponent: React.FC<Props> = () => {
-	const wrapperRef = useRef(null);
+	const outsideRef = useRef(null);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const userCreate = useAppSelector(selectUserCreate);
@@ -137,7 +137,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useOnClickOutside(wrapperRef, () => {
+	useOnClickOutside(outsideRef, () => {
 		navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
 	});
 
@@ -147,7 +147,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">
 			<div className="min-h-full flex items-center py-8 sm:px-16 bg-gray-900/50 z-40 justify-center">
 				<CardComponent
-					ref={wrapperRef}
+					ref={outsideRef}
 					className="max-w-5xl z-50"
 					header="New user"
 					redirectCloseUrl={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}

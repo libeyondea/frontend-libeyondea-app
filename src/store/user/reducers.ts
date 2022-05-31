@@ -208,8 +208,8 @@ const userReducer = createReducer(initialState, (builder) => {
 			pagination: {
 				...state.list.pagination,
 				total: state.list.pagination.total - 1,
-				...(Math.ceil(state.list.pagination.total - 1) / state.list.pagination.limit < state.list.pagination.page && {
-					page: Math.ceil(state.list.pagination.total - 1) / state.list.pagination.limit
+				...(Math.ceil((state.list.pagination.total - 1) / state.list.pagination.limit) < state.list.pagination.page && {
+					page: Math.ceil((state.list.pagination.total - 1) / state.list.pagination.limit)
 				})
 			}
 		}

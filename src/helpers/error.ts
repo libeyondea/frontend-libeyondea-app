@@ -11,28 +11,26 @@ export const errorHandler = (
 	callbackFormError?: (err: AxiosResponse<ResponseError>) => void,
 	callbackStockError?: (err: Error) => void,
 	options: {
-		isAxiosErrorMessage?: boolean;
-		isStockErrorMessage?: boolean;
+		isErrorMessage?: boolean;
 	} = {
-		isAxiosErrorMessage: true,
-		isStockErrorMessage: true
+		isErrorMessage: true
 	}
 ) => {
 	return (error: Error | AxiosError<ResponseError>) => {
 		if (axios.isAxiosError(error) && error.response) {
-			options.isAxiosErrorMessage && toastify.error(error.response.data.message);
+			options.isErrorMessage && toastify.error(error.response.data.message);
 			if (error.response.status === 401) {
 				removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
 				store.dispatch(authCurrentDataRequestAction(null));
 				store.dispatch(authCurrentTokenRequestAction(null));
 			}
-			if (error.response.status === 400 && error.response.data.errors) {
+			if (error.response.status === 400) {
 				callbackFormError && callbackFormError(error.response);
 			} else {
 				callbackAxiosError && callbackAxiosError(error.response);
 			}
 		} else {
-			options.isStockErrorMessage && toastify.error(error.message);
+			options.isErrorMessage && toastify.error(error.message);
 			callbackStockError && callbackStockError(error);
 		}
 	};

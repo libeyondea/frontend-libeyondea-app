@@ -66,7 +66,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 				</FormComponent.Select>
 			</div>
 			<div className="flex items-center">
-				<FormComponent.Input type="text" placeholder="Enter keyword" className="mr-4" onChange={onChangeSearch} value={q} name="q" id="q" />
+				<FormComponent.Input type="text" placeholder="Enter keyword" onChange={onChangeSearch} value={q} name="q" id="q" />
 			</div>
 		</div>
 	);

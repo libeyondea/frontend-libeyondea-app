@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import config from 'config';
 import store from 'store';
-import { ResponseError } from 'models/response';
 
 const instance = axios.create({
 	baseURL: config.API.URL.API_URL,
@@ -29,7 +28,7 @@ instance.interceptors.response.use(
 	(response: AxiosResponse) => {
 		return response;
 	},
-	(error: AxiosError<ResponseError>) => {
+	(error: AxiosError) => {
 		return Promise.reject(error);
 	}
 );

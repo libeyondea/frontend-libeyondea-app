@@ -27,7 +27,11 @@ const NavbarComponent: React.FC<Props> = () => {
 
 	const onClickSignout = () => {
 		if (authCurrent.token) {
-			authService.signout(authCurrent.token);
+			authService
+				.signout(authCurrent.token)
+				.then(() => {})
+				.catch(() => {})
+				.finally(() => {});
 		}
 		removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
 		dispatch(authCurrentDataRequestAction(null));
