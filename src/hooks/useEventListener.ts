@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
 
-interface IOverload {
+type IOverload = {
 	<K extends keyof WindowEventMap>(eventName: K, handler: (event: WindowEventMap[K]) => void): void;
 	<K extends keyof HTMLElementEventMap, T extends HTMLElement = HTMLElement>(
 		eventName: K,
 		handler: (event: HTMLElementEventMap[K]) => void,
 		element: React.RefObject<T>
 	): void;
-}
+};
 
 const useEventListener: IOverload = <KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap, T extends HTMLElement>(
 	eventName: KW | KH,
