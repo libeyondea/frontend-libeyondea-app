@@ -120,7 +120,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					.catch(
 						errorHandler(
 							(axiosError) => {},
-							(formError) => formikHelpers.setErrors(formError.data.errors),
+							(validationError) => formikHelpers.setErrors(validationError.data.errors),
 							(stockError) => {}
 						)
 					)
@@ -131,7 +131,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.catch(
 				errorHandler(
 					(axiosError) => {},
-					(formError) => formikHelpers.setErrors(formError.data.errors),
+					(validationError) => formikHelpers.setErrors(validationError.data.errors),
 					(stockError) => {}
 				)
 			)

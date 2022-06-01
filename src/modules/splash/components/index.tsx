@@ -52,7 +52,7 @@ const SplashComponent: React.FC<Props> = () => {
 					errorHandler(
 						(axiosError) => navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true }),
 						(stockError) => {},
-						(formError) => {}
+						(validationError) => {}
 					)
 				);
 		} else {
