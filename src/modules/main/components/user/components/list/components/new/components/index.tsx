@@ -70,12 +70,9 @@ const NewListUserComponent: React.FC<Props> = () => {
 	});
 
 	const onSubmit = (values: CreateUserFormik, formikHelpers: FormikHelpers<CreateUserFormik>) => {
-		new Promise<Image>((resolve, reject) => {
+		new Promise<Image | null>((resolve, reject) => {
 			if (!values.image) {
-				return resolve({
-					image_name: null,
-					image_url: null
-				});
+				return resolve(null);
 			}
 			setImageUpload({ loading: true });
 			imageService
@@ -83,10 +80,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 					image: values.image
 				})
 				.then((response) => {
-					return resolve({
-						image_name: response.data.data.image_name,
-						image_url: response.data.data.image_url
-					});
+					return resolve(response.data.data);
 				})
 				.catch((error) => {
 					return reject(error);
@@ -105,7 +99,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 					password: values.password,
 					role: values.role,
 					status: values.status,
-					...(result.image_name && {
+					...(result && {
 						avatar: result.image_name
 					})
 				};

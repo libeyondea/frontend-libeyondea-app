@@ -80,15 +80,3 @@ export const deleteArrayItemById = <T extends { id: number }>(arr: T[], itemId: 
 	}
 	return arrClone;
 };
-
-export const getOwnerDocument = <T extends Element | React.RefObject<Element>>(element?: T | null): Document | null => {
-	if (typeof window === 'undefined') {
-		return null;
-	} else if (element instanceof Node) {
-		return element.ownerDocument;
-	} else if (element?.hasOwnProperty('current') && element.current instanceof Node) {
-		return element.current.ownerDocument;
-	} else {
-		return document;
-	}
-};
