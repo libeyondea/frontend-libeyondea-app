@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { deleteArrayItemById, insertItemIntoArray, updateArrayItemById } from 'helpers/utils';
-import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'models/reducer';
-import { User } from 'models/user';
+import { deleteArrayItemById, insertItemIntoArray, updateArrayItemById } from 'helpers/array';
+import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'types/reducer';
+import { User } from 'types/user';
 import {
 	userCreateDataSuccessAction,
 	userCreateLoadingSuccessAction,
@@ -21,6 +21,8 @@ import {
 	userUpdateLoadingSuccessAction
 } from './actions';
 import * as filterConstant from 'constants/filter';
+import * as paginationConstant from 'constants/pagination';
+import { getTotalPages } from 'helpers/pagination';
 
 type UserState = {
 	list: ResponseDataWithPaginationAndFilterReducer<User[]>;
@@ -34,8 +36,8 @@ const initialState: UserState = {
 	list: {
 		data: [],
 		pagination: {
-			page: 1,
-			limit: 10,
+			page: paginationConstant.PAGINATION_DEFAULT_PAGE,
+			limit: paginationConstant.PAGINATION_DEFAULT_LIMIT,
 			total: 0
 		},
 		filter: {
@@ -208,8 +210,8 @@ const userReducer = createReducer(initialState, (builder) => {
 			pagination: {
 				...state.list.pagination,
 				total: state.list.pagination.total - 1,
-				...(Math.ceil((state.list.pagination.total - 1) / state.list.pagination.limit) < state.list.pagination.page && {
-					page: Math.ceil((state.list.pagination.total - 1) / state.list.pagination.limit)
+				...(getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit) < state.list.pagination.page && {
+					page: getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit)
 				})
 			}
 		}

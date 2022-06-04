@@ -1,11 +1,4 @@
-type GetPageNumbersProps = {
-	page: number;
-	limit: number;
-	total: number;
-	pageNumbersToShow?: number;
-};
-
-export const getPageNumbers = ({ page, limit, total, pageNumbersToShow = 3 }: GetPageNumbersProps): Array<number | null> => {
+export const getPageNumbers = (page: number, limit: number, total: number, pageNumbersToShow: number = 3): Array<number | null> => {
 	const lastPageNumber = Math.ceil(total / limit);
 	const currentPageNumber = page <= lastPageNumber ? page : lastPageNumber;
 	const maxPagesBeforeCurrentPage = Math.floor(pageNumbersToShow / 2);
@@ -55,28 +48,4 @@ export const getPageNumbers = ({ page, limit, total, pageNumbersToShow = 3 }: Ge
 	return pageNumbers;
 };
 
-export const insertItemIntoArray = <T extends any>(arr: T[], item: T, index = 0): T[] => {
-	const arrClone = [...arr];
-	arrClone.splice(index, 0, item);
-	return arrClone;
-};
-
-export const updateArrayItemById = <T extends { id: number }>(arr: T[], itemId: number, fields: T): T[] => {
-	const arrClone = [...arr];
-	const item = arrClone.find((i) => i.id === itemId);
-	if (item) {
-		const itemIndex = arrClone.indexOf(item);
-		arrClone.splice(itemIndex, 1, { ...item, ...fields });
-	}
-	return arrClone;
-};
-
-export const deleteArrayItemById = <T extends { id: number }>(arr: T[], itemId: number): T[] => {
-	const arrClone = [...arr];
-	const item = arrClone.find((i) => i.id === itemId);
-	if (item) {
-		const itemIndex = arrClone.indexOf(item);
-		arrClone.splice(itemIndex, 1);
-	}
-	return arrClone;
-};
+export const getTotalPages = (total: number, limit: number): number => Math.ceil(total / limit);

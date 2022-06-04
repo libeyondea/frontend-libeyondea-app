@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Profile } from 'models/profile';
+import { Profile } from 'types/profile';
 import * as actionTypes from './actionTypes';
 
 export const profileShowDataRequestAction = createAction(actionTypes.PROFILE_SHOW_DATA_REQUEST, (payload: Profile) => ({

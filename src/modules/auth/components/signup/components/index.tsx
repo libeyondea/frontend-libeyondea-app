@@ -5,7 +5,7 @@ import * as routeConstant from 'constants/route';
 import { useNavigate } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
-import { SignupFormik } from 'models/auth';
+import { SignupFormik } from 'types/auth';
 import FormComponent from 'components/Form/components';
 import { Fragment } from 'react';
 import toastify from 'helpers/toastify';

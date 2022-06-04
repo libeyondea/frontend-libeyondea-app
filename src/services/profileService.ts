@@ -1,7 +1,7 @@
 import http from 'helpers/http';
 import config from 'config';
-import { UpdateProfile, Profile } from 'models/profile';
-import { ResponseData } from 'models/response';
+import { UpdateProfile, Profile } from 'types/profile';
+import { ResponseData } from 'types/response';
 import { AxiosResponse } from 'axios';
 
 const profileService = {

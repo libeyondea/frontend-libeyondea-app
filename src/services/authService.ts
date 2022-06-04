@@ -1,7 +1,7 @@
 import http from 'helpers/http';
 import config from 'config';
-import { Me, Signin, Signup, Token } from 'models/auth';
-import { ResponseData } from 'models/response';
+import { Me, Signin, Signup, Token } from 'types/auth';
+import { ResponseData } from 'types/response';
 import { AxiosResponse } from 'axios';
 
 const authService = {

@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Me } from 'models/auth';
+import { Me } from 'types/auth';
 import { authCurrentDataSuccessAction, authCurrentTokenSuccessAction } from './actions';
 
 type AuthState = {

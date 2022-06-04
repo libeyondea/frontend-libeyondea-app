@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { ResponseError } from 'models/response';
+import { ResponseError } from 'types/response';
 import store from 'store';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
 import { removeCookie } from './cookies';

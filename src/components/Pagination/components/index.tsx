@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { getPageNumbers } from 'helpers/utils';
+import { getPageNumbers, getTotalPages } from 'helpers/pagination';
 import { Fragment } from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { MdMoreHoriz } from 'react-icons/md';
@@ -15,8 +15,8 @@ type Props = {
 };
 
 const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, limits = [10, 20, 50, 100], onChangePage, onChangeLimit }) => {
-	const totalPage = Math.ceil(total / limit);
-	const pageNumbers = getPageNumbers({ page, limit, total });
+	const totalPages = getTotalPages(total, limit);
+	const pageNumbers = getPageNumbers(page, limit, total);
 
 	const _onChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => {
 		event.preventDefault();
@@ -121,7 +121,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								</button>
 							)
 						)}
-						{page !== totalPage ? (
+						{page !== totalPages ? (
 							<Fragment>
 								<button
 									type="button"
@@ -134,7 +134,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								<button
 									type="button"
 									className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-									onClick={(event) => _onChangePage(event, totalPage)}
+									onClick={(event) => _onChangePage(event, totalPages)}
 								>
 									<span className="sr-only">Last</span>
 									<FaAngleDoubleRight className="h-4 w-4" aria-hidden="true" />

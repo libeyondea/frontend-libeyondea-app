@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { User } from 'models/user';
+import { User } from 'types/user';
 import * as actionTypes from './actionTypes';
 
 export const userListDataRequestAction = createAction(actionTypes.USER_LIST_DATA_REQUEST, (payload: User[]) => ({

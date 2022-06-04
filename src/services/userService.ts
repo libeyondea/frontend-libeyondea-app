@@ -1,7 +1,7 @@
 import http from 'helpers/http';
 import config from 'config';
-import { CreateUser, ListUser, UpdateUser, User } from 'models/user';
-import { ResponseData, ResponseDataPagination } from 'models/response';
+import { CreateUser, ListUser, UpdateUser, User } from 'types/user';
+import { ResponseData, ResponseDataPagination } from 'types/response';
 import { AxiosResponse } from 'axios';
 
 const userService = {

@@ -8,7 +8,7 @@ import config from 'config';
 import { useNavigate, useLocation, Location } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
-import { SigninFormik } from 'models/auth';
+import { SigninFormik } from 'types/auth';
 import FormComponent from 'components/Form/components';
 import { Fragment } from 'react';
 import toastify from 'helpers/toastify';

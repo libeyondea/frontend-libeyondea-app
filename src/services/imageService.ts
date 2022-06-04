@@ -1,7 +1,7 @@
 import http from 'helpers/http';
 import config from 'config';
-import { ResponseData } from 'models/response';
-import { Image, UploadImage } from 'models/image';
+import { ResponseData } from 'types/response';
+import { Image, UploadImage } from 'types/image';
 import { AxiosResponse } from 'axios';
 
 const imageService = {

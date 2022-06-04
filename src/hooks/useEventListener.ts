@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
 
-type IOverload = {
+type EventListenerProps = {
 	<K extends keyof WindowEventMap>(eventName: K, handler: (event: WindowEventMap[K]) => void): void;
 	<K extends keyof HTMLElementEventMap, T extends HTMLElement = HTMLElement>(
 		eventName: K,
@@ -10,7 +10,7 @@ type IOverload = {
 	): void;
 };
 
-const useEventListener: IOverload = <KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap, T extends HTMLElement>(
+const useEventListener: EventListenerProps = <KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap, T extends HTMLElement>(
 	eventName: KW | KH,
 	handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
 	ref?: React.RefObject<T>

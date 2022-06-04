@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Me } from 'models/auth';
+import { Me } from 'types/auth';
 import * as actionTypes from './actionTypes';
 
 export const authCurrentDataRequestAction = createAction(actionTypes.AUTH_CURRENT_DATA_REQUEST, (payload: Me | null) => ({
