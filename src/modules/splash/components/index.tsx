@@ -15,10 +15,15 @@ import { errorHandler } from 'helpers/error';
 
 type Props = {};
 
+type LocationProps = {
+	state?: {
+		from?: Location;
+	};
+};
+
 const SplashComponent: React.FC<Props> = () => {
 	const navigate = useNavigate();
-	const location = useLocation();
-	const from = (location.state as { from: Location })?.from;
+	const location = useLocation() as unknown as LocationProps;
 	const dispatch = useAppDispatch();
 	const isAuth = useAppSelector(selectIsAuth);
 	console.log('SplashComponent');
@@ -26,7 +31,7 @@ const SplashComponent: React.FC<Props> = () => {
 	useOnceEffect(() => {
 		dispatch(appInitializedRequestAction(true));
 		const token = getCookie(cookiesConstant.COOKIES_KEY_TOKEN);
-		const initialUrl = from?.pathname + from?.search;
+		const initialUrl = location.state?.from?.pathname;
 
 		if (isAuth) {
 			if (initialUrl) {
@@ -50,19 +55,19 @@ const SplashComponent: React.FC<Props> = () => {
 				})
 				.catch(
 					errorHandler(
-						(axiosError) => navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true }),
-						(stockError) => {},
-						(validationError) => {}
+						(axiosError) =>
+							navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, {
+								replace: true,
+								state: { from: location.state?.from }
+							}),
+						(validationError) => {},
+						(stockError) => {}
 					)
 				);
 		} else {
 			dispatch(authCurrentDataRequestAction(null));
 			dispatch(authCurrentTokenRequestAction(null));
-			if (initialUrl) {
-				navigate(initialUrl, { replace: true });
-			} else {
-				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true });
-			}
+			navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true, state: { from: location.state?.from } });
 		}
 	});
 

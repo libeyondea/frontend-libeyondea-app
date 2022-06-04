@@ -17,10 +17,15 @@ import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
+type LocationProps = {
+	state?: {
+		from?: Location;
+	};
+};
+
 const SigninCompoment: React.FC<Props> = () => {
 	const navigate = useNavigate();
-	const location = useLocation();
-	const from = (location.state as { from: Location })?.from;
+	const location = useLocation() as unknown as LocationProps;
 
 	const initialValues: SigninFormik = {
 		user_name: '',
@@ -46,7 +51,7 @@ const SigninCompoment: React.FC<Props> = () => {
 					expires: config.AUTH_DATA.EXPIRED_TIME
 				});
 				toastify.success('Sign in success');
-				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, { state: { from: from } });
+				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, { state: { from: location?.state?.from } });
 			})
 			.catch(
 				errorHandler(
