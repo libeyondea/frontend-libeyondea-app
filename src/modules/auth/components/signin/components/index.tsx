@@ -112,7 +112,7 @@ const SigninCompoment: React.FC<Props> = () => {
 								Remember me
 							</FormComponent.Checkbox>
 							<div className="text-sm">
-								<LinkComponent to="/" className="font-medium text-purple-600">
+								<LinkComponent href="/" className="font-medium text-purple-600">
 									Forgot your password?
 								</LinkComponent>
 							</div>
@@ -136,7 +136,7 @@ const SigninCompoment: React.FC<Props> = () => {
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<LinkComponent className="text-purple-600 ml-1" to="/auth/signup">
+					<LinkComponent className="text-purple-600 ml-1" href="/auth/signup">
 						Sign up
 					</LinkComponent>
 				</span>

@@ -174,15 +174,15 @@ const SignupComponent: React.FC<Props> = () => {
 								id="terms"
 							>
 								By signing up, you agree to our{' '}
-								<LinkComponent className="text-purple-600 font-medium" to="/">
+								<LinkComponent className="text-purple-600 font-medium" href="/">
 									Terms
 								</LinkComponent>{' '}
 								,{' '}
-								<LinkComponent className="text-purple-600 font-medium" to="/">
+								<LinkComponent className="text-purple-600 font-medium" href="/">
 									Data Policy
 								</LinkComponent>{' '}
 								and{' '}
-								<LinkComponent className="text-purple-600 font-medium" to="/">
+								<LinkComponent className="text-purple-600 font-medium" href="/">
 									Cookies Policy
 								</LinkComponent>
 								.
@@ -207,7 +207,7 @@ const SignupComponent: React.FC<Props> = () => {
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<LinkComponent className="text-purple-600 ml-1" to="/auth/signin">
+					<LinkComponent className="text-purple-600 ml-1" href="/auth/signin">
 						Sign in
 					</LinkComponent>
 				</span>

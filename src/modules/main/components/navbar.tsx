@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import ImageComponent from 'components/Image/components';
 import LinkComponent from 'components/Link/components';
@@ -53,7 +52,7 @@ const NavbarComponent: React.FC<Props> = () => {
 						</button>
 						<div className="block">
 							<div className="ml-4 flex items-baseline space-x-4">
-								<LinkComponent className="text-gray-800 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" to="/">
+								<LinkComponent className="text-gray-800 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" href="/">
 									Home
 								</LinkComponent>
 							</div>
@@ -68,7 +67,6 @@ const NavbarComponent: React.FC<Props> = () => {
 									</Menu.Button>
 								</div>
 								<Transition
-									as={Fragment}
 									enter="transition ease-out duration-100"
 									enterFrom="transform opacity-0 scale-95"
 									enterTo="transform opacity-100 scale-100"
@@ -80,7 +78,7 @@ const NavbarComponent: React.FC<Props> = () => {
 										<Menu.Item>
 											{({ active }) => (
 												<LinkComponent
-													to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_PROFILE}`}
+													href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_PROFILE}`}
 													className={classNames('block px-4 py-2 rounded-md text-md', {
 														'bg-gray-300 text-gray-700': active,
 														'text-gray-900': !active
@@ -93,7 +91,7 @@ const NavbarComponent: React.FC<Props> = () => {
 										<Menu.Item>
 											{({ active }) => (
 												<LinkComponent
-													to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
+													href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
 													className={classNames('block px-4 py-2 rounded-md text-md', {
 														'bg-gray-300 text-gray-700': active,
 														'text-gray-900': !active

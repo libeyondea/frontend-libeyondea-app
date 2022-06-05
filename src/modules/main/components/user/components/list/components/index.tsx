@@ -160,7 +160,7 @@ const ListUserComponent: React.FC<Props> = () => {
 														<TableComponent.Td>
 															<div className="flex items-center">
 																<LinkComponent
-																	to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}
+																	href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}
 																	className="text-indigo-600 hover:text-indigo-900 mr-2"
 																>
 																	<FaRegEdit className="h-5 w-5" />

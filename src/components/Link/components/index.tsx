@@ -5,12 +5,12 @@ import classNames from 'classnames';
 
 type Props = {
 	className?: string;
-	to: To;
+	href?: To;
 	children: React.ReactNode;
-} & LinkProps;
+} & Omit<LinkProps, 'to'>;
 
-const LinkComponent = forwardRef<HTMLAnchorElement, Props>(({ className, to, children, ...props }, ref) => (
-	<Link {...props} ref={ref} className={classNames('', className)} to={to}>
+const LinkComponent = forwardRef<HTMLAnchorElement, Props>(({ className, href = '/', children, ...props }, ref) => (
+	<Link {...props} ref={ref} className={classNames('', className)} to={href}>
 		{children}
 	</Link>
 ));

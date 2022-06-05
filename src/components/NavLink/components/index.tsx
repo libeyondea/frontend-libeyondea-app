@@ -5,14 +5,14 @@ type Props = {
 	className?: string;
 	activeClassName: string;
 	notActiveClassName?: string;
-	to: To;
+	href?: To;
 	children: React.ReactNode;
-} & NavLinkProps;
+} & Omit<NavLinkProps, 'to'>;
 
-const NavLinkComponent: React.FC<Props> = ({ className, activeClassName, notActiveClassName, to, children, ...props }) => (
+const NavLinkComponent: React.FC<Props> = ({ className, activeClassName, notActiveClassName, href = '/', children, ...props }) => (
 	<NavLink
 		{...props}
-		to={to}
+		to={href}
 		className={({ isActive }) =>
 			classNames(className, {
 				[activeClassName]: isActive,
