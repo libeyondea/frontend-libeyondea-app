@@ -14,57 +14,6 @@ import { Fragment } from 'react';
 import useAppSelector from 'hooks/useAppSelector';
 import { selectAuthCurrent } from 'store/auth/selectors';
 
-type SidebarMenuProps = Array<{
-	name: string;
-	icon: JSX.Element;
-	to?: string;
-	roles?: string[];
-	children?: Array<{
-		name: string;
-		icon: JSX.Element;
-		to: string;
-		roles?: string[];
-	}>;
-}>;
-
-const sidebarMenu: SidebarMenuProps = [
-	{
-		name: 'Dashboard',
-		icon: <FaTachometerAlt className="w-6 h-6" />,
-		to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`
-	},
-	{
-		name: 'Users',
-		icon: <FaUsers className="w-6 h-6" />,
-		roles: [userConstant.USER_ROLE_OWNER],
-		children: [
-			{
-				name: 'List',
-				icon: <FaRegListAlt className="w-6 h-6" />,
-				to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`,
-				roles: [userConstant.USER_ROLE_OWNER]
-			},
-			{
-				name: 'New',
-				icon: <FaPlusCircle className="w-6 h-6" />,
-				to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`,
-				roles: [userConstant.USER_ROLE_OWNER]
-			}
-		]
-	},
-	{
-		name: 'More',
-		icon: <FaEllipsisH className="w-6 h-6" />,
-		children: [
-			{
-				name: 'Settings',
-				icon: <FaCog className="w-6 h-6" />,
-				to: `/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`
-			}
-		]
-	}
-];
-
 type Props = {};
 
 const SidebarComponent: React.FC<Props> = () => {
@@ -95,77 +44,132 @@ const SidebarComponent: React.FC<Props> = () => {
 					<div className="flex flex-col overflow-y-auto p-4 mt-14">
 						<nav className="flex-1 bg-gray-800">
 							<ul className="space-y-3">
-								{sidebarMenu.map(
-									(menu, index) =>
-										(!menu.roles || !menu.roles.length || (authCurrent.data?.role && !!menu.roles.includes(authCurrent.data.role))) &&
-										(!menu.children || !menu.children.length ? (
-											<li key={index}>
-												<NavLinkComponent
-													href={menu.to}
-													className="inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline"
-													activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-													notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+								<li>
+									<NavLinkComponent
+										href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`}
+										className="inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline"
+										activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+										notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+									>
+										<FaTachometerAlt className="w-6 h-6" />
+										<span className="ml-4">Dashboard</span>
+									</NavLinkComponent>
+								</li>
+								{authCurrent.data?.role && [userConstant.USER_ROLE_OWNER].includes(authCurrent.data.role) && (
+									<Disclosure
+										as="li"
+										defaultOpen={[
+											`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`,
+											`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`
+										].includes(location.pathname)}
+									>
+										{({ open }) => (
+											<Fragment>
+												<Disclosure.Button
+													className={classNames(
+														'inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
+														[
+															`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`,
+															`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`
+														].includes(location.pathname)
+															? 'bg-gray-900 text-white'
+															: 'text-gray-400'
+													)}
 												>
-													{menu.icon}
-													<span className="ml-4">{menu.name}</span>
-												</NavLinkComponent>
-											</li>
-										) : (
-											<Disclosure as="li" defaultOpen={!!menu.children.map((subMenu) => subMenu.to).includes(location.pathname)} key={index}>
-												{({ open }) => (
-													<Fragment>
-														<Disclosure.Button
-															className={classNames(
-																'inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
-																!!menu.children && !!menu.children.map((subMenu) => subMenu.to).includes(location.pathname)
-																	? 'bg-gray-900 text-white'
-																	: 'text-gray-400'
-															)}
-														>
-															{menu.icon}
-															<span className="ml-4">{menu.name}</span>
-															<FaChevronLeft
-																className={classNames('w-6 h-6 ml-auto', {
-																	'transform -rotate-90': open
-																})}
-															/>
-														</Disclosure.Button>
-														<Transition
-															show={open}
-															enter="transition duration-100 ease-out"
-															enterFrom="transform scale-95 opacity-0"
-															enterTo="transform scale-100 opacity-100"
-															leave="transition duration-75 ease-out"
-															leaveFrom="transform scale-100 opacity-100"
-															leaveTo="transform scale-95 opacity-0"
-														>
-															<Disclosure.Panel static as="ul" className="space-y-4 mt-4">
-																{!!menu.children &&
-																	menu.children.map(
-																		(subMenu, index) =>
-																			(!subMenu.roles ||
-																				!subMenu.roles.length ||
-																				(authCurrent.data?.role && !!subMenu.roles.includes(authCurrent.data.role))) && (
-																				<li key={index}>
-																					<NavLinkComponent
-																						href={subMenu.to}
-																						className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
-																						activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-																						notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
-																					>
-																						{subMenu.icon}
-																						<span className="ml-4">{subMenu.name}</span>
-																					</NavLinkComponent>
-																				</li>
-																			)
-																	)}
-															</Disclosure.Panel>
-														</Transition>
-													</Fragment>
-												)}
-											</Disclosure>
-										))
+													<FaUsers className="w-6 h-6" />
+													<span className="ml-4">Users</span>
+													<FaChevronLeft
+														className={classNames('w-6 h-6 ml-auto', {
+															'transform -rotate-90': open
+														})}
+													/>
+												</Disclosure.Button>
+												<Transition
+													show={open}
+													enter="transition duration-100 ease-out"
+													enterFrom="transform scale-95 opacity-0"
+													enterTo="transform scale-100 opacity-100"
+													leave="transition duration-75 ease-out"
+													leaveFrom="transform scale-100 opacity-100"
+													leaveTo="transform scale-95 opacity-0"
+												>
+													<Disclosure.Panel static as="ul" className="space-y-4 mt-4">
+														<li>
+															<NavLinkComponent
+																href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
+																className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
+																activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+																notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+															>
+																<FaRegListAlt className="w-6 h-6" />
+																<span className="ml-4">List</span>
+															</NavLinkComponent>
+														</li>
+														<li>
+															<NavLinkComponent
+																href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`}
+																className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
+																activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+																notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+															>
+																<FaPlusCircle className="w-6 h-6" />
+																<span className="ml-4">New</span>
+															</NavLinkComponent>
+														</li>
+													</Disclosure.Panel>
+												</Transition>
+											</Fragment>
+										)}
+									</Disclosure>
 								)}
+								<Disclosure
+									as="li"
+									defaultOpen={[`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`].includes(location.pathname)}
+								>
+									{({ open }) => (
+										<Fragment>
+											<Disclosure.Button
+												className={classNames(
+													'inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
+													[`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`].includes(location.pathname)
+														? 'bg-gray-900 text-white'
+														: 'text-gray-400'
+												)}
+											>
+												<FaEllipsisH className="w-6 h-6" />
+												<span className="ml-4">More</span>
+												<FaChevronLeft
+													className={classNames('w-6 h-6 ml-auto', {
+														'transform -rotate-90': open
+													})}
+												/>
+											</Disclosure.Button>
+											<Transition
+												show={open}
+												enter="transition duration-100 ease-out"
+												enterFrom="transform scale-95 opacity-0"
+												enterTo="transform scale-100 opacity-100"
+												leave="transition duration-75 ease-out"
+												leaveFrom="transform scale-100 opacity-100"
+												leaveTo="transform scale-95 opacity-0"
+											>
+												<Disclosure.Panel static as="ul" className="space-y-4 mt-4">
+													<li>
+														<NavLinkComponent
+															href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
+															className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
+															activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+															notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+														>
+															<FaCog className="w-6 h-6" />
+															<span className="ml-4">Settings</span>
+														</NavLinkComponent>
+													</li>
+												</Disclosure.Panel>
+											</Transition>
+										</Fragment>
+									)}
+								</Disclosure>
 							</ul>
 						</nav>
 					</div>
