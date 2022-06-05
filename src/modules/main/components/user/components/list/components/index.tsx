@@ -137,7 +137,7 @@ const ListUserComponent: React.FC<Props> = () => {
 																</div>
 																<div className="ml-4">
 																	<div className="text-sm font-medium text-gray-900">
-																		{user.last_name} {user.first_name} ({user.user_name})
+																		{user.first_name} {user.last_name} ({user.user_name})
 																	</div>
 																	<div className="text-sm text-gray-500">{user.email}</div>
 																</div>

@@ -13,7 +13,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 	const [q, setQ] = useState('');
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
-	const userListFilterSortByList = ['user_name', 'created_at', 'updated_at'];
+	const userListFilterSortByList = ['first_name', 'last_name', 'user_name', 'email', 'status', 'role', 'created_at', 'updated_at'];
 
 	const userListFilterQDebounced = useDebouncedCallback((nextValue: string) => dispatch(userListFilterQRequestAction(nextValue)));
 
