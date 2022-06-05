@@ -67,7 +67,11 @@ const SplashComponent: React.FC<Props> = () => {
 		} else {
 			dispatch(authCurrentDataRequestAction(null));
 			dispatch(authCurrentTokenRequestAction(null));
-			navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true, state: { from: location.state?.from } });
+			if (initialUrl) {
+				navigate(initialUrl, { replace: true });
+			} else {
+				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true, state: { from: location.state?.from } });
+			}
 		}
 	});
 

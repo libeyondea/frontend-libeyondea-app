@@ -83,6 +83,7 @@ const SigninCompoment: React.FC<Props> = () => {
 								errorMessage={props.errors.user_name}
 								name="user_name"
 								id="user_name"
+								autoComplete="username"
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
@@ -97,6 +98,7 @@ const SigninCompoment: React.FC<Props> = () => {
 								errorMessage={props.errors.password}
 								name="password"
 								id="password"
+								autoComplete="current-password"
 							/>
 						</div>
 						<div className="flex items-center justify-between mb-6">

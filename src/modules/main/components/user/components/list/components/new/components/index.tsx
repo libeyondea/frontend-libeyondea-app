@@ -189,6 +189,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 										errorMessage={props.errors.user_name}
 										name="user_name"
 										id="user_name"
+										autoComplete="username"
 									/>
 								</div>
 								<div className="col-span-2 md:col-span-1">
@@ -217,6 +218,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 										errorMessage={props.errors.password}
 										name="password"
 										id="password"
+										autoComplete="new-password"
 									/>
 								</div>
 								<div className="col-span-2 md:col-span-1">
@@ -231,11 +233,11 @@ const NewListUserComponent: React.FC<Props> = () => {
 										errorMessage={props.errors.password_confirmation}
 										name="password_confirmation"
 										id="password_confirmation"
+										autoComplete="new-password"
 									/>
 								</div>
 								<div className="col-span-2 md:col-span-1">
 									<FormComponent.Select
-										classNameInput="capitalize"
 										label="Role"
 										onChange={props.handleChange}
 										onBlur={props.handleBlur}
@@ -246,20 +248,31 @@ const NewListUserComponent: React.FC<Props> = () => {
 										id="role"
 									>
 										{[
-											userConstant.USER_ROLE_MEMBER,
-											userConstant.USER_ROLE_MODERATOR,
-											userConstant.USER_ROLE_ADMIN,
-											userConstant.USER_ROLE_OWNER
+											{
+												value: userConstant.USER_ROLE_MEMBER,
+												label: 'Member'
+											},
+											{
+												value: userConstant.USER_ROLE_MODERATOR,
+												label: 'Moderator'
+											},
+											{
+												value: userConstant.USER_ROLE_ADMIN,
+												label: 'Admin'
+											},
+											{
+												value: userConstant.USER_ROLE_OWNER,
+												label: 'Owner'
+											}
 										].map((role, index) => (
-											<option value={role} key={index}>
-												{role}
+											<option value={role.value} key={index}>
+												{role.label}
 											</option>
 										))}
 									</FormComponent.Select>
 								</div>
 								<div className="col-span-2 md:col-span-1">
 									<FormComponent.Select
-										classNameInput="capitalize"
 										label="Status"
 										onChange={props.handleChange}
 										onBlur={props.handleBlur}
@@ -269,13 +282,24 @@ const NewListUserComponent: React.FC<Props> = () => {
 										name="status"
 										id="status"
 									>
-										{[userConstant.USER_STATUS_INACTIVE, userConstant.USER_STATUS_ACTIVE, userConstant.USER_STATUS_BANNED].map(
-											(status, index) => (
-												<option value={status} key={index}>
-													{status}
-												</option>
-											)
-										)}
+										{[
+											{
+												value: userConstant.USER_STATUS_INACTIVE,
+												label: 'Inactive'
+											},
+											{
+												value: userConstant.USER_STATUS_ACTIVE,
+												label: 'Active'
+											},
+											{
+												value: userConstant.USER_STATUS_BANNED,
+												label: 'Banned'
+											}
+										].map((status, index) => (
+											<option value={status.value} key={index}>
+												{status.label}
+											</option>
+										))}
 									</FormComponent.Select>
 								</div>
 								<div className="col-span-2 md:col-span-1">
