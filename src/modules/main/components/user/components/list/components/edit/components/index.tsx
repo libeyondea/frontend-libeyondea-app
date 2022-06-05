@@ -263,6 +263,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Select
+											classNameInput="capitalize"
 											label="Role"
 											onChange={props.handleChange}
 											onBlur={props.handleBlur}
@@ -286,6 +287,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Select
+											classNameInput="capitalize"
 											label="Status"
 											onChange={props.handleChange}
 											onBlur={props.handleBlur}

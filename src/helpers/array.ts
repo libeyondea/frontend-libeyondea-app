@@ -1,10 +1,10 @@
-export const insertItemIntoArray = <T extends any>(arr: T[], item: T, index = 0): T[] => {
+export const insertItemIntoArray = <T extends { id: number; [field: string]: any }>(arr: T[], item: T, index = 0): T[] => {
 	const arrClone = [...arr];
 	arrClone.splice(index, 0, item);
 	return arrClone;
 };
 
-export const updateArrayItemById = <T extends { id: number }>(arr: T[], itemId: number, fields: T): T[] => {
+export const updateArrayItemById = <T extends { id: number; [field: string]: any }>(arr: T[], itemId: number, fields: T): T[] => {
 	const arrClone = [...arr];
 	const item = arrClone.find((i) => i.id === itemId);
 	if (item) {
@@ -14,7 +14,7 @@ export const updateArrayItemById = <T extends { id: number }>(arr: T[], itemId: 
 	return arrClone;
 };
 
-export const deleteArrayItemById = <T extends { id: number }>(arr: T[], itemId: number): T[] => {
+export const deleteArrayItemById = <T extends { id: number; [field: string]: any }>(arr: T[], itemId: number): T[] => {
 	const arrClone = [...arr];
 	const item = arrClone.find((i) => i.id === itemId);
 	if (item) {
