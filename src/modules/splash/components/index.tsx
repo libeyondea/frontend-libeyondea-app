@@ -8,22 +8,17 @@ import * as cookiesConstant from 'constants/cookies';
 import * as routeConstant from 'constants/route';
 import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
-import { useNavigate, useLocation, Location } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useOnceEffect from 'hooks/useOnceEffect';
 import authService from 'services/authService';
 import { errorHandler } from 'helpers/error';
+import { LocationState } from 'types/router';
 
 type Props = {};
 
-type LocationProps = {
-	state?: {
-		from?: Location;
-	};
-};
-
 const SplashComponent: React.FC<Props> = () => {
 	const navigate = useNavigate();
-	const location = useLocation() as unknown as LocationProps;
+	const location = useLocation() as LocationState;
 	const dispatch = useAppDispatch();
 	const isAuth = useAppSelector(selectIsAuth);
 	console.log('SplashComponent');

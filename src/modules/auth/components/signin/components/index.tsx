@@ -5,7 +5,7 @@ import CardComponent from 'components/Card/components';
 import * as cookiesConstant from 'constants/cookies';
 import * as routeConstant from 'constants/route';
 import config from 'config';
-import { useNavigate, useLocation, Location } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
 import { SigninFormik } from 'types/auth';
@@ -14,18 +14,13 @@ import { Fragment } from 'react';
 import toastify from 'helpers/toastify';
 import { errorHandler } from 'helpers/error';
 import ButtonComponent from 'components/Button/components';
+import { LocationState } from 'types/router';
 
 type Props = {};
 
-type LocationProps = {
-	state?: {
-		from?: Location;
-	};
-};
-
 const SigninCompoment: React.FC<Props> = () => {
 	const navigate = useNavigate();
-	const location = useLocation() as unknown as LocationProps;
+	const location = useLocation() as LocationState;
 
 	const initialValues: SigninFormik = {
 		user_name: '',

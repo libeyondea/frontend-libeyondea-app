@@ -1,8 +1,14 @@
 import { useCallback, useRef } from 'react';
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
 
 const useDebouncedCallback = <A extends any[]>(callback: (...args: A) => void, wait: number = 666): ((...args: A) => void) => {
 	const argsRef = useRef<A>();
+	const callbackRef = useRef(callback);
 	const timeout = useRef<ReturnType<typeof setTimeout>>();
+
+	useIsomorphicLayoutEffect(() => {
+		callbackRef.current = callback;
+	}, [callback]);
 
 	return useCallback(
 		(...args: A) => {
@@ -14,13 +20,13 @@ const useDebouncedCallback = <A extends any[]>(callback: (...args: A) => void, w
 
 			const later = () => {
 				if (argsRef.current) {
-					callback(...args);
+					callbackRef.current(...args);
 				}
 			};
 
 			timeout.current = setTimeout(later, wait);
 		},
-		[callback, wait]
+		[wait]
 	);
 };
 
