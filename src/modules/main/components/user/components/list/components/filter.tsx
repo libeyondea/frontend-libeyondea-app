@@ -14,7 +14,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
 
-	const userListFilterQDebounced = useDebouncedCallback((nextValue: string) => dispatch(userListFilterQRequestAction(nextValue)));
+	const userListFilterQDebouncedCallback = useDebouncedCallback((nextValue: string) => dispatch(userListFilterQRequestAction(nextValue)));
 
 	const onChangeSortBy = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		dispatch(userListFilterSortByRequestAction(event.target.value));
@@ -26,7 +26,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 
 	const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setQ(event.target.value);
-		userListFilterQDebounced(event.target.value);
+		userListFilterQDebouncedCallback(event.target.value);
 	};
 
 	return (

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import useEventListener from './useEventListener';
+import { useEffect, useState } from 'react';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
 
 type WindowSize = {
@@ -20,10 +19,16 @@ const useWindowSize = (): WindowSize => {
 		});
 	};
 
-	useEventListener('resize', handleResize);
-
 	useIsomorphicLayoutEffect(() => {
 		handleResize();
+	}, []);
+
+	useEffect(() => {
+		document.addEventListener('resize', handleResize);
+
+		return () => {
+			document.removeEventListener('resize', handleResize);
+		};
 	}, []);
 
 	return windowSize;

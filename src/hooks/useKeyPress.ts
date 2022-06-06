@@ -1,26 +1,30 @@
-import { useState } from 'react';
-import useEventListener from './useEventListener';
+import { useEffect, useState } from 'react';
 
 const useKeyPress = (targetKey: string): boolean => {
 	const [keyPressed, setKeyPressed] = useState(false);
 
-	useEventListener('keydown', (event) => {
+	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.key === targetKey) {
 				setKeyPressed(true);
 			}
 		};
-		handleKeyDown(event);
-	});
 
-	useEventListener('keyup', (event) => {
 		const handleKeyUp = (event: KeyboardEvent) => {
 			if (event.key === targetKey) {
 				setKeyPressed(false);
 			}
 		};
-		handleKeyUp(event);
-	});
+
+		document.addEventListener('keydown', handleKeyDown);
+		document.addEventListener('keyup', handleKeyUp);
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+			document.removeEventListener('keyup', handleKeyUp);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return keyPressed;
 };
