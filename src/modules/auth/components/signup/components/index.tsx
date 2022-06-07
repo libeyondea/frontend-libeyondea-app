@@ -28,23 +28,23 @@ const SignupComponent: React.FC<Props> = () => {
 	};
 
 	const validationSchema = Yup.object({
-		first_name: Yup.string().required('The first name is required').max(20, 'The first name must not be greater than 20 characters'),
-		last_name: Yup.string().required('The last name is required').max(20, 'The last name must not be greater than 20 characters'),
-		email: Yup.string().required('Email is required'),
+		first_name: Yup.string().required('The first name is required').max(20, 'The first name must not be greater than 20 characters.'),
+		last_name: Yup.string().required('The last name is required').max(20, 'The last name must not be greater than 20 characters.'),
+		email: Yup.string().required('Email is required.'),
 		user_name: Yup.string()
-			.required('The user name is required')
-			.min(3, 'The user name must be at least 3 characters')
-			.max(20, 'The user name must not be greater than 20 characters'),
+			.required('The user name is required.')
+			.min(3, 'The user name must be at least 3 characters.')
+			.max(20, 'The user name must not be greater than 20 characters.'),
 		password: Yup.string()
-			.required('The password is required')
-			.min(6, 'The password must be at least 6 characters')
-			.max(66, 'The password must not be greater than 66 characters'),
+			.required('The password is required.')
+			.min(6, 'The password must be at least 6 characters.')
+			.max(66, 'The password must not be greater than 66 characters.'),
 		password_confirmation: Yup.string()
-			.required('The password confirmation is required')
+			.required('The password confirmation is required.')
 			.test('passwords-match', 'The password confirmation does not match.', function (value) {
 				return this.parent.password === value;
 			}),
-		terms: Yup.boolean().oneOf([true], 'You must accept the terms')
+		terms: Yup.boolean().oneOf([true], 'You must accept the terms.')
 	});
 
 	const onSubmit = (values: SignupFormik, formikHelpers: FormikHelpers<SignupFormik>) => {
