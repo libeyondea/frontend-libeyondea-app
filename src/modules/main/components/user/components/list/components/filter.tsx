@@ -40,8 +40,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					value={userList.filter.sort_by}
 					name="sort_by"
 					id="sort_by"
-				>
-					{[
+					options={[
 						{
 							value: 'first_name',
 							label: 'First name'
@@ -74,12 +73,8 @@ const FilterListUserComponent: React.FC<Props> = () => {
 							value: 'created_at',
 							label: 'Created at'
 						}
-					].map((sortBy, index) => (
-						<option value={sortBy.value} key={index}>
-							{sortBy.label}
-						</option>
-					))}
-				</FormComponent.Select>
+					]}
+				/>
 				<FormComponent.Select
 					isHorizontal
 					label="Sort direction"
@@ -87,8 +82,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					value={userList.filter.sort_direction}
 					name="sort_direction"
 					id="sort_direction"
-				>
-					{[
+					options={[
 						{
 							value: filterConstant.FILTER_SORT_DIRECTION_ASC,
 							label: 'Ascending'
@@ -97,12 +91,8 @@ const FilterListUserComponent: React.FC<Props> = () => {
 							value: filterConstant.FILTER_SORT_DIRECTION_DESC,
 							label: 'Descending'
 						}
-					].map((sortBy, index) => (
-						<option value={sortBy.value} key={index}>
-							{sortBy.label}
-						</option>
-					))}
-				</FormComponent.Select>
+					]}
+				/>
 			</div>
 			<div className="flex items-center">
 				<FormComponent.Input type="text" placeholder="Enter keyword" onChange={onChangeSearch} value={q} name="q" id="q" />

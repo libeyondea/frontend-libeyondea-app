@@ -81,100 +81,80 @@ const SignupComponent: React.FC<Props> = () => {
 					<Fragment>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="first_name"
 								type="text"
 								label="First name"
 								placeholder="Enter first name"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.first_name}
-								isError={!!(props.errors.first_name && props.touched.first_name)}
-								errorMessage={props.errors.first_name}
-								name="first_name"
-								id="first_name"
+								error={props.errors.first_name}
+								touched={props.touched.first_name}
+								{...props.getFieldProps('first_name')}
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="last_name"
 								type="text"
 								label="Last name"
 								placeholder="Enter last name"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.last_name}
-								isError={!!(props.errors.last_name && props.touched.last_name)}
-								errorMessage={props.errors.last_name}
-								name="last_name"
-								id="last_name"
+								error={props.errors.last_name}
+								touched={props.touched.last_name}
+								{...props.getFieldProps('last_name')}
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="user_name"
 								type="text"
 								label="User name"
 								placeholder="Enter user name"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.user_name}
-								isError={!!(props.errors.user_name && props.touched.user_name)}
-								errorMessage={props.errors.user_name}
-								name="user_name"
-								id="user_name"
+								error={props.errors.user_name}
+								touched={props.touched.user_name}
 								autoComplete="username"
+								{...props.getFieldProps('user_name')}
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="email"
 								type="text"
 								label="Email"
 								placeholder="Enter email"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.email}
-								isError={!!(props.errors.email && props.touched.email)}
-								errorMessage={props.errors.email}
-								name="email"
-								id="email"
+								error={props.errors.email}
+								touched={props.touched.email}
+								{...props.getFieldProps('email')}
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="password"
 								type="password"
 								label="Password"
 								placeholder="Enter password"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.password}
-								isError={!!(props.errors.password && props.touched.password)}
-								errorMessage={props.errors.password}
-								name="password"
-								id="password"
+								error={props.errors.password}
+								touched={props.touched.password}
 								autoComplete="new-password"
+								{...props.getFieldProps('password')}
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="password_confirmation"
 								type="password"
 								label="Password confirmation"
 								placeholder="Enter password confirmation"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.password_confirmation}
-								isError={!!(props.errors.password_confirmation && props.touched.password_confirmation)}
-								errorMessage={props.errors.password_confirmation}
-								name="password_confirmation"
-								id="password_confirmation"
+								error={props.errors.password_confirmation}
+								touched={props.touched.password_confirmation}
 								autoComplete="new-password"
+								{...props.getFieldProps('password_confirmation')}
 							/>
 						</div>
 						<div className="flex items-center mb-6">
 							<FormComponent.Checkbox
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								checked={props.values.terms}
-								isError={!!(props.errors.terms && props.touched.terms)}
-								errorMessage={props.errors.terms}
-								name="terms"
 								id="terms"
+								checked={props.values.terms}
+								error={props.errors.terms}
+								touched={props.touched.terms}
+								{...props.getFieldProps('terms')}
 							>
 								By signing up, you agree to our{' '}
 								<LinkComponent className="text-purple-600 font-medium" href="/">

@@ -2,37 +2,37 @@ import classNames from 'classnames';
 import ImageComponent from 'components/Image/components';
 import { useState } from 'react';
 
-type onChangeFile = (field: string, value: File | null, shouldValidate?: boolean) => void;
+type OnChangeFile = (field: string, value: File | null, shouldValidate?: boolean) => void;
 
-type onBlurFile = (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
+type OnBlurFile = (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
 
 type Props = {
 	className?: string;
-	classNameInput?: string;
-	onChangeFile: onChangeFile;
-	onBlurFile: onBlurFile;
+	onChangeFile: OnChangeFile;
+	onBlurFile: OnBlurFile;
 	name: string;
 	label?: string;
-	isError?: boolean;
-	errorMessage?: string;
+	isHorizontal?: boolean;
+	error?: string;
+	touched?: boolean;
 	imgUrl?: string;
 	canDelete?: boolean;
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 const ImageFormComponent: React.FC<Props> = ({
 	className,
-	classNameInput,
 	onChangeFile,
 	onBlurFile,
 	name,
 	label,
-	isError = false,
-	errorMessage,
+	isHorizontal = false,
+	error,
+	touched = false,
 	imgUrl,
 	canDelete = false,
 	...props
 }) => {
-	const [previewImg, setPreviewImg] = useState(imgUrl || null);
+	const [previewImg, setPreviewImg] = useState(imgUrl || '');
 
 	const _onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const files = event.target.files;
@@ -49,13 +49,21 @@ const ImageFormComponent: React.FC<Props> = ({
 
 	const _onRemoveFile = () => {
 		onChangeFile(name, null);
-		setPreviewImg(null);
+		setPreviewImg('');
 	};
 
 	return (
-		<div className={classNames('', className)}>
+		<div
+			className={classNames(
+				'',
+				{
+					'flex items-center': isHorizontal
+				},
+				className
+			)}
+		>
 			{label && (
-				<label htmlFor={name} className="inline-block font-medium text-gray-600 mb-1">
+				<label htmlFor={name} className={classNames('inline-block font-medium text-gray-600', isHorizontal ? 'mr-1' : 'mb-1')}>
 					{label}
 				</label>
 			)}
@@ -68,16 +76,22 @@ const ImageFormComponent: React.FC<Props> = ({
 					)}
 					<button
 						type="button"
-						className="relative bg-white py-3 px-4 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						className={classNames(
+							'relative bg-white py-3 px-4 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500',
+							{
+								'focus:ring-red-600 border-red-600': error && touched
+							}
+						)}
 					>
 						<input
 							{...props}
+							type="file"
 							name={name}
+							value=""
 							onChange={_onChangeFile}
 							onBlur={_onBlurFile}
-							type="file"
 							accept=".png, .jpg, .jpeg .gif"
-							className={classNames('absolute w-full inset-0 opacity-0', classNameInput)}
+							className="absolute w-full inset-0 opacity-0"
 						/>
 						Change
 					</button>
@@ -88,7 +102,7 @@ const ImageFormComponent: React.FC<Props> = ({
 					)}
 				</div>
 			</div>
-			{isError && <div className="text-red-700 mt-1 text-sm">{errorMessage}</div>}
+			{error && touched && <div className="text-red-700 mt-1 text-sm">{error}</div>}
 		</div>
 	);
 };

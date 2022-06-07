@@ -15,6 +15,7 @@ import { removeCookie } from 'helpers/cookies';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
 import { useNavigate } from 'react-router-dom';
 import toastify from 'helpers/toastify';
+import { Fragment } from 'react';
 
 type Props = {};
 
@@ -67,6 +68,7 @@ const NavbarComponent: React.FC<Props> = () => {
 									</Menu.Button>
 								</div>
 								<Transition
+									as={Fragment}
 									enter="transition ease-out duration-100"
 									enterFrom="transform opacity-0 scale-95"
 									enterTo="transform opacity-100 scale-100"

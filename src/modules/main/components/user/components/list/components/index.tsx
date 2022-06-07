@@ -62,30 +62,26 @@ const ListUserComponent: React.FC<Props> = () => {
 		}
 	};
 
-	const userListDataCallback = useCallback(
-		() => {
-			dispatch(userListLoadingRequestAction(true));
-			const payload = {
-				page: userList.pagination.page,
-				limit: userList.pagination.limit,
-				q: userList.filter.q,
-				sort_by: userList.filter.sort_by,
-				sort_direction: userList.filter.sort_direction
-			};
-			userService
-				.list(payload)
-				.then((response) => {
-					dispatch(userListDataRequestAction(response.data.data));
-					dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
-				})
-				.catch(errorHandler())
-				.finally(() => {
-					dispatch(userListLoadingRequestAction(false));
-				});
-		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[userList.filter.q, userList.filter.sort_by, userList.filter.sort_direction, userList.pagination.limit, userList.pagination.page]
-	);
+	const userListDataCallback = useCallback(() => {
+		dispatch(userListLoadingRequestAction(true));
+		const payload = {
+			page: userList.pagination.page,
+			limit: userList.pagination.limit,
+			q: userList.filter.q,
+			sort_by: userList.filter.sort_by,
+			sort_direction: userList.filter.sort_direction
+		};
+		userService
+			.list(payload)
+			.then((response) => {
+				dispatch(userListDataRequestAction(response.data.data));
+				dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
+			})
+			.catch(errorHandler())
+			.finally(() => {
+				dispatch(userListLoadingRequestAction(false));
+			});
+	}, [dispatch, userList.filter.q, userList.filter.sort_by, userList.filter.sort_direction, userList.pagination.limit, userList.pagination.page]);
 
 	useOnceEffect(() => {
 		userListDataCallback();

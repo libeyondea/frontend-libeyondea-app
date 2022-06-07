@@ -85,6 +85,7 @@ const SidebarComponent: React.FC<Props> = () => {
 													/>
 												</Disclosure.Button>
 												<Transition
+													as={Fragment}
 													show={open}
 													enter="transition duration-100 ease-out"
 													enterFrom="transform scale-95 opacity-0"
@@ -145,6 +146,7 @@ const SidebarComponent: React.FC<Props> = () => {
 												/>
 											</Disclosure.Button>
 											<Transition
+												as={Fragment}
 												show={open}
 												enter="transition duration-100 ease-out"
 												enterFrom="transform scale-95 opacity-0"

@@ -143,8 +143,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			.finally(() => {
 				dispatch(userShowLoadingRequestAction(false));
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params.userId]);
+	}, [dispatch, params.userId]);
 
 	useOnceEffect(() => {
 		userShowDataCallback();
@@ -179,103 +178,78 @@ const EditListUserComponent: React.FC<Props> = () => {
 								<div className="grid grid-cols-2 gap-4">
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Input
+											id="first_name"
 											type="text"
 											label="First name"
 											placeholder="Enter first name"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.first_name}
-											isError={!!(props.errors.first_name && props.touched.first_name)}
-											errorMessage={props.errors.first_name}
-											name="first_name"
-											id="first_name"
+											error={props.errors.first_name}
+											touched={props.touched.first_name}
+											{...props.getFieldProps('first_name')}
 										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Input
+											id="last_name"
 											type="text"
 											label="Last name"
 											placeholder="Enter last name"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.last_name}
-											isError={!!(props.errors.last_name && props.touched.last_name)}
-											errorMessage={props.errors.last_name}
-											name="last_name"
-											id="last_name"
+											error={props.errors.last_name}
+											touched={props.touched.last_name}
+											{...props.getFieldProps('last_name')}
 										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Input
+											id="user_name"
 											type="text"
 											label="User name"
 											placeholder="Enter user name"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.user_name}
-											isError={!!(props.errors.user_name && props.touched.user_name)}
-											errorMessage={props.errors.user_name}
-											name="user_name"
-											id="user_name"
+											error={props.errors.user_name}
+											touched={props.touched.user_name}
 											autoComplete="username"
+											{...props.getFieldProps('user_name')}
 										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Input
+											id="email"
 											type="text"
 											label="Email"
 											placeholder="Enter email"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.email}
-											isError={!!(props.errors.email && props.touched.email)}
-											errorMessage={props.errors.email}
-											name="email"
-											id="email"
+											error={props.errors.email}
+											touched={props.touched.email}
+											{...props.getFieldProps('email')}
 										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Input
+											id="password"
 											type="password"
 											label="Password"
 											placeholder="Enter password"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.password}
-											isError={!!(props.errors.password && props.touched.password)}
-											errorMessage={props.errors.password}
-											name="password"
-											id="password"
+											error={props.errors.password}
+											touched={props.touched.password}
 											autoComplete="new-password"
+											{...props.getFieldProps('password')}
 										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Input
+											id="password_confirmation"
 											type="password"
 											label="Password confirmation"
 											placeholder="Enter password confirmation"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.password_confirmation}
-											isError={!!(props.errors.password_confirmation && props.touched.password_confirmation)}
-											errorMessage={props.errors.password_confirmation}
-											name="password_confirmation"
-											id="password_confirmation"
+											error={props.errors.password_confirmation}
+											touched={props.touched.password_confirmation}
 											autoComplete="new-password"
+											{...props.getFieldProps('password_confirmation')}
 										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Select
-											label="Role"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.role}
-											isError={!!(props.errors.role && props.touched.role)}
-											errorMessage={props.errors.role}
-											name="role"
 											id="role"
-										>
-											{[
+											label="Role"
+											options={[
 												{
 													value: userConstant.USER_ROLE_MEMBER,
 													label: 'Member'
@@ -292,25 +266,17 @@ const EditListUserComponent: React.FC<Props> = () => {
 													value: userConstant.USER_ROLE_OWNER,
 													label: 'Owner'
 												}
-											].map((role, index) => (
-												<option value={role.value} key={index}>
-													{role.label}
-												</option>
-											))}
-										</FormComponent.Select>
+											]}
+											error={props.errors.role}
+											touched={props.touched.role}
+											{...props.getFieldProps('role')}
+										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Select
-											label="Status"
-											onChange={props.handleChange}
-											onBlur={props.handleBlur}
-											value={props.values.status}
-											isError={!!(props.errors.status && props.touched.status)}
-											errorMessage={props.errors.status}
-											name="status"
 											id="status"
-										>
-											{[
+											label="Status"
+											options={[
 												{
 													value: userConstant.USER_STATUS_INACTIVE,
 													label: 'Inactive'
@@ -323,23 +289,22 @@ const EditListUserComponent: React.FC<Props> = () => {
 													value: userConstant.USER_STATUS_BANNED,
 													label: 'Banned'
 												}
-											].map((status, index) => (
-												<option value={status.value} key={index}>
-													{status.label}
-												</option>
-											))}
-										</FormComponent.Select>
+											]}
+											error={props.errors.status}
+											touched={props.touched.status}
+											{...props.getFieldProps('status')}
+										/>
 									</div>
 									<div className="col-span-2 md:col-span-1">
 										<FormComponent.Image
 											id="image"
-											name="image"
 											label="Avatar"
-											isError={!!(props.errors.image && props.touched.image)}
-											errorMessage={props.errors.image}
+											error={props.errors.image}
+											touched={props.touched.image}
 											onChangeFile={props.setFieldValue}
 											onBlurFile={props.setFieldTouched}
 											imgUrl={userShow.data.avatar_url}
+											{...props.getFieldProps('image')}
 										/>
 									</div>
 									<div className="col-span-2 flex flex-row-reverse">

@@ -1,11 +1,12 @@
-import { Formik, FormikConfig, FormikHelpers, FormikProps, FormikValues } from 'formik';
+import { FormikConfig, FormikHelpers, FormikProps, FormikValues, useFormik } from 'formik';
 import classNames from 'classnames';
 import InputFormComponent from './Input';
 import SelectFormComponent from './Select';
 import CheckboxFormComponent from './Checkbox';
 import ImageFormComponent from './Image';
+import SelectTestFormComponent from './SelectTest';
 
-type FormProps<Values> = {
+type FormComponentProps<Values> = {
 	className?: string;
 	initialValues: Values;
 	validationSchema?: any;
@@ -20,15 +21,18 @@ const FormComponent = <Values extends FormikValues = FormikValues>({
 	onSubmit,
 	children,
 	...props
-}: FormProps<Values>): JSX.Element => {
+}: FormComponentProps<Values>): JSX.Element => {
+	const formik: FormikProps<Values> = useFormik<Values>({
+		...props,
+		initialValues,
+		validationSchema,
+		onSubmit
+	});
+
 	return (
-		<Formik {...props} initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-			{(props) => (
-				<form className={classNames('', className)} onSubmit={props.handleSubmit}>
-					{children(props)}
-				</form>
-			)}
-		</Formik>
+		<form className={classNames('', className)} onSubmit={formik.handleSubmit}>
+			{children(formik)}
+		</form>
 	);
 };
 
@@ -36,5 +40,6 @@ export default Object.assign(FormComponent, {
 	Input: InputFormComponent,
 	Select: SelectFormComponent,
 	Checkbox: CheckboxFormComponent,
-	Image: ImageFormComponent
+	Image: ImageFormComponent,
+	SelectTest: SelectTestFormComponent
 });

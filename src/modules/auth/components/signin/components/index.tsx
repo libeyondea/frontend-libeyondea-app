@@ -68,43 +68,35 @@ const SigninCompoment: React.FC<Props> = () => {
 					<Fragment>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="user_name"
 								type="text"
 								label="User name"
 								placeholder="Enter user name"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.user_name}
-								isError={!!(props.errors.user_name && props.touched.user_name)}
-								errorMessage={props.errors.user_name}
-								name="user_name"
-								id="user_name"
+								error={props.errors.user_name}
+								touched={props.touched.user_name}
 								autoComplete="username"
+								{...props.getFieldProps('user_name')}
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
 							<FormComponent.Input
+								id="password"
 								type="password"
 								label="Password"
 								placeholder="Enter password"
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								value={props.values.password}
-								isError={!!(props.errors.password && props.touched.password)}
-								errorMessage={props.errors.password}
-								name="password"
-								id="password"
+								error={props.errors.password}
+								touched={props.touched.password}
 								autoComplete="current-password"
+								{...props.getFieldProps('password')}
 							/>
 						</div>
 						<div className="flex items-center justify-between mb-6">
 							<FormComponent.Checkbox
-								onChange={props.handleChange}
-								onBlur={props.handleBlur}
-								checked={props.values.remember_me}
-								isError={!!(props.errors.remember_me && props.touched.remember_me)}
-								errorMessage={props.errors.remember_me}
-								name="remember_me"
 								id="remember_me"
+								checked={props.values.remember_me}
+								error={props.errors.remember_me}
+								touched={props.touched.remember_me}
+								{...props.getFieldProps('remember_me')}
 							>
 								Remember me
 							</FormComponent.Checkbox>
