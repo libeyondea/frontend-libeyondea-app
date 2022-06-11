@@ -1,7 +1,11 @@
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
 
-const useLockedScroll = (): void => {
+const useLockedScroll = (locked = true): void => {
 	useIsomorphicLayoutEffect(() => {
+		if (!locked) {
+			return;
+		}
+
 		let documentElement = document.documentElement;
 		let ownerWindow = document.defaultView ?? window;
 
@@ -22,7 +26,7 @@ const useLockedScroll = (): void => {
 			documentElement.style.overflow = overflow;
 			documentElement.style.paddingRight = paddingRight;
 		};
-	}, []);
+	}, [locked]);
 };
 
 export default useLockedScroll;

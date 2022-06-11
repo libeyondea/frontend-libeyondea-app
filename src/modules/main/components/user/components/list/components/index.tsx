@@ -2,7 +2,7 @@ import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import LinkComponent from 'components/Link/components';
 import time from 'helpers/time';
-import { Fragment, useCallback } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import userService from 'services/userService';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
@@ -31,10 +31,13 @@ import FilterListUserComponent from './filter';
 import useOnceEffect from 'hooks/useOnceEffect';
 import useUpdateEffect from 'hooks/useUpdateEffect';
 import toastify from 'helpers/toastify';
+import ModalComponent from 'components/Modal/components';
 
 type Props = {};
 
 const ListUserComponent: React.FC<Props> = () => {
+	const [id, setId] = useState<number | null>(null);
+	const [showModal, setShowModal] = useState(false);
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
 	const userDelete = useAppSelector(selectUserDelete);
@@ -49,19 +52,17 @@ const ListUserComponent: React.FC<Props> = () => {
 	};
 
 	const onClickDelete = (id: number) => {
-		if (window.confirm('Do you want to delete?')) {
-			dispatch(userDeleteLoadingRequestAction(true));
-			userService
-				.delete(id)
-				.then((response) => {
-					dispatch(userDeleteDataRequestAction(response.data.data));
-					toastify.success('User deleted successfully');
-				})
-				.catch(errorHandler())
-				.finally(() => {
-					dispatch(userDeleteLoadingRequestAction(false));
-				});
-		}
+		dispatch(userDeleteLoadingRequestAction(true));
+		userService
+			.delete(id)
+			.then((response) => {
+				dispatch(userDeleteDataRequestAction(response.data.data));
+				toastify.success('User deleted successfully');
+			})
+			.catch(errorHandler())
+			.finally(() => {
+				dispatch(userDeleteLoadingRequestAction(false));
+			});
 	};
 
 	const userListDataCallback = useCallback(() => {
@@ -118,64 +119,65 @@ const ListUserComponent: React.FC<Props> = () => {
 										</TableComponent.Tr>
 									</TableComponent.Thead>
 									<TableComponent.Tbody>
-										<Fragment>
-											{!userList.data.length ? (
-												<TableComponent.Tr>
-													<TableComponent.Td className="text-center" colSpan={6}>
-														No data
+										{!userList.data.length ? (
+											<TableComponent.Tr>
+												<TableComponent.Td className="text-center" colSpan={6}>
+													No data
+												</TableComponent.Td>
+											</TableComponent.Tr>
+										) : (
+											userList.data.map((user) => (
+												<TableComponent.Tr key={user.id}>
+													<TableComponent.Td>
+														<div className="flex items-center">
+															<div className="flex-shrink-0 h-10 w-10">
+																<img className="h-10 w-10 rounded-full" src={user.avatar_url} alt={user.user_name} />
+															</div>
+															<div className="ml-4">
+																<div className="text-sm font-medium text-gray-900">
+																	{user.first_name} {user.last_name} ({user.user_name})
+																</div>
+																<div className="text-sm text-gray-500">{user.email}</div>
+															</div>
+														</div>
+													</TableComponent.Td>
+													<TableComponent.Td>
+														<span
+															className={classNames('px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize', {
+																'bg-green-100 text-green-800': user.status === userConstant.USER_STATUS_ACTIVE,
+																'bg-yellow-100 text-yellow-800': user.status === userConstant.USER_STATUS_INACTIVE,
+																'bg-red-100 text-red-800': user.status === userConstant.USER_STATUS_BANNED
+															})}
+														>
+															{user.status}
+														</span>
+													</TableComponent.Td>
+													<TableComponent.Td>{user.role}</TableComponent.Td>
+													<TableComponent.Td className="whitespace-nowrap">{time.ago(user.updated_at)}</TableComponent.Td>
+													<TableComponent.Td className="whitespace-nowrap">{time.format(user.created_at)}</TableComponent.Td>
+													<TableComponent.Td>
+														<div className="flex items-center">
+															<LinkComponent
+																href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}
+																className="text-indigo-600 hover:text-indigo-900 mr-2"
+															>
+																<FaRegEdit className="h-5 w-5" />
+															</LinkComponent>
+															<button
+																type="button"
+																className="text-red-600 hover:text-red-900"
+																onClick={() => {
+																	setId(user.id);
+																	setShowModal(true);
+																}}
+															>
+																<FaRegTrashAlt className="h-5 w-5" />
+															</button>
+														</div>
 													</TableComponent.Td>
 												</TableComponent.Tr>
-											) : (
-												userList.data.map((user) => (
-													<TableComponent.Tr key={user.id}>
-														<TableComponent.Td>
-															<div className="flex items-center">
-																<div className="flex-shrink-0 h-10 w-10">
-																	<img className="h-10 w-10 rounded-full" src={user.avatar_url} alt={user.user_name} />
-																</div>
-																<div className="ml-4">
-																	<div className="text-sm font-medium text-gray-900">
-																		{user.first_name} {user.last_name} ({user.user_name})
-																	</div>
-																	<div className="text-sm text-gray-500">{user.email}</div>
-																</div>
-															</div>
-														</TableComponent.Td>
-														<TableComponent.Td>
-															<span
-																className={classNames('px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize', {
-																	'bg-green-100 text-green-800': user.status === userConstant.USER_STATUS_ACTIVE,
-																	'bg-yellow-100 text-yellow-800': user.status === userConstant.USER_STATUS_INACTIVE,
-																	'bg-red-100 text-red-800': user.status === userConstant.USER_STATUS_BANNED
-																})}
-															>
-																{user.status}
-															</span>
-														</TableComponent.Td>
-														<TableComponent.Td>{user.role}</TableComponent.Td>
-														<TableComponent.Td className="whitespace-nowrap">{time.ago(user.updated_at)}</TableComponent.Td>
-														<TableComponent.Td className="whitespace-nowrap">{time.format(user.created_at)}</TableComponent.Td>
-														<TableComponent.Td>
-															<div className="flex items-center">
-																<LinkComponent
-																	href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}
-																	className="text-indigo-600 hover:text-indigo-900 mr-2"
-																>
-																	<FaRegEdit className="h-5 w-5" />
-																</LinkComponent>
-																<button
-																	type="button"
-																	className="text-red-600 hover:text-red-900"
-																	onClick={() => onClickDelete(user.id)}
-																>
-																	<FaRegTrashAlt className="h-5 w-5" />
-																</button>
-															</div>
-														</TableComponent.Td>
-													</TableComponent.Tr>
-												))
-											)}
-										</Fragment>
+											))
+										)}
 									</TableComponent.Tbody>
 								</TableComponent>
 							)}
@@ -191,6 +193,15 @@ const ListUserComponent: React.FC<Props> = () => {
 					</CardComponent>
 				</div>
 			</div>
+			<ModalComponent
+				title="Do you want to delete this user?"
+				show={showModal}
+				setShow={setShowModal}
+				onClick={() => {
+					setShowModal(false);
+					id && onClickDelete(id);
+				}}
+			/>
 			{useRoutes(ListUserRouter)}
 		</Fragment>
 	);
