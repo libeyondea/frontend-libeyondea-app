@@ -1,6 +1,6 @@
 import http from 'helpers/http';
 import config from 'config';
-import { Me, Signin, Signup, Token } from 'types/auth';
+import { Me, SignIn, SignUp, Token } from 'types/auth';
 import { ResponseData } from 'types/response';
 import { AxiosResponse } from 'axios';
 
@@ -11,21 +11,21 @@ const authService = {
 			token: token
 		});
 	},
-	signin: (data: Signin): Promise<AxiosResponse<ResponseData<Token>>> => {
+	signIn: (data: SignIn): Promise<AxiosResponse<ResponseData<Token>>> => {
 		return http.post<ResponseData<Token>>({
-			url: config.API.END_POINT.SIGNIN,
+			url: config.API.END_POINT.SIGN_IN,
 			data: data
 		});
 	},
-	signup: (data: Signup): Promise<AxiosResponse<ResponseData<Me>>> => {
+	signUp: (data: SignUp): Promise<AxiosResponse<ResponseData<Me>>> => {
 		return http.post<ResponseData<Me>>({
-			url: config.API.END_POINT.SIGNUP,
+			url: config.API.END_POINT.SIGN_UP,
 			data: data
 		});
 	},
-	signout: (token: string): Promise<AxiosResponse<ResponseData<null>>> => {
+	signOut: (token: string): Promise<AxiosResponse<ResponseData<null>>> => {
 		return http.post<ResponseData<null>>({
-			url: config.API.END_POINT.SIGNOUT,
+			url: config.API.END_POINT.SIGN_OUT,
 			token: token
 		});
 	}

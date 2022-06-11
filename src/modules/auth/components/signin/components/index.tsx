@@ -8,7 +8,7 @@ import config from 'config';
 import { useNavigate, useLocation } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
-import { SigninFormik } from 'types/auth';
+import { SignInFormik } from 'types/auth';
 import FormComponent from 'components/Form/components';
 import { Fragment } from 'react';
 import toastify from 'helpers/toastify';
@@ -18,11 +18,11 @@ import { LocationState } from 'types/router';
 
 type Props = {};
 
-const SigninCompoment: React.FC<Props> = () => {
+const SignInCompoment: React.FC<Props> = () => {
 	const navigate = useNavigate();
 	const location = useLocation() as LocationState;
 
-	const initialValues: SigninFormik = {
+	const initialValues: SignInFormik = {
 		user_name: '',
 		password: '',
 		remember_me: false
@@ -33,19 +33,19 @@ const SigninCompoment: React.FC<Props> = () => {
 		password: Yup.string().required('The password is required.')
 	});
 
-	const onSubmit = (values: SigninFormik, formikHelpers: FormikHelpers<SigninFormik>) => {
+	const onSubmit = (values: SignInFormik, formikHelpers: FormikHelpers<SignInFormik>) => {
 		const payload = {
 			user_name: values.user_name,
 			password: values.password,
 			remember_me: values.remember_me
 		};
 		authService
-			.signin(payload)
+			.signIn(payload)
 			.then((response) => {
 				setCookie(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
 					expires: config.AUTH_DATA.EXPIRED_TIME
 				});
-				toastify.success('Sign in success');
+				toastify.success('Signed in successfully');
 				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, { state: { from: location?.state?.from } });
 			})
 			.catch(
@@ -62,8 +62,8 @@ const SigninCompoment: React.FC<Props> = () => {
 
 	return (
 		<CardComponent className="m-auto flex flex-col w-full max-w-md sm:p-8">
-			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign in to your Account</div>
-			<FormComponent<SigninFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign in to your account</div>
+			<FormComponent<SignInFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(props) => (
 					<Fragment>
 						<div className="flex flex-col mb-4">
@@ -102,7 +102,7 @@ const SigninCompoment: React.FC<Props> = () => {
 							</FormComponent.Checkbox>
 							<div className="text-sm">
 								<LinkComponent href="/" className="font-medium text-purple-600">
-									Forgot your password?
+									Forgot password?
 								</LinkComponent>
 							</div>
 						</div>
@@ -119,7 +119,7 @@ const SigninCompoment: React.FC<Props> = () => {
 					<div className="w-full border-t border-gray-400"></div>
 				</div>
 				<div className="relative flex justify-center text-sm">
-					<span className="px-2 text-neutral-700 bg-white leading-none"> Or continue with </span>
+					<span className="px-2 text-neutral-700 bg-white leading-none">Or continue with</span>
 				</div>
 			</div>
 			<div className="flex items-center justify-center">
@@ -134,4 +134,4 @@ const SigninCompoment: React.FC<Props> = () => {
 	);
 };
 
-export default SigninCompoment;
+export default SignInCompoment;

@@ -1,9 +1,9 @@
-import { Signup } from './auth';
+import { SignUp } from './auth';
 import { User } from './user';
 
 export interface Profile extends User {}
 
-export interface UpdateProfile extends Omit<Signup, 'password'> {
+export interface UpdateProfile extends Omit<SignUp, 'password'> {
 	password?: string;
 	avatar?: string | null;
 }

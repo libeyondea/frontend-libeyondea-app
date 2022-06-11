@@ -25,10 +25,10 @@ const NavbarComponent: React.FC<Props> = () => {
 	const appSidebar = useAppSelector(selectAppSidebar);
 	const authCurrent = useAppSelector(selectAuthCurrent);
 
-	const onClickSignout = () => {
+	const onClickSignOut = () => {
 		if (authCurrent.token) {
 			authService
-				.signout(authCurrent.token)
+				.signOut(authCurrent.token)
 				.then(() => {})
 				.catch(() => {})
 				.finally(() => {});
@@ -36,12 +36,17 @@ const NavbarComponent: React.FC<Props> = () => {
 		removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
 		dispatch(authCurrentDataRequestAction(null));
 		dispatch(authCurrentTokenRequestAction(null));
-		toastify.success('Sign out success');
-		navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`);
+		toastify.success('Signed out successfully');
+		navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`);
 	};
 
 	return (
-		<nav className="navbar bg-white shadow-lg fixed z-20 inset-x-0 top-0 transition-all ease-in-out duration-500">
+		<nav
+			className={classNames('navbar bg-white shadow-lg z-20 inset-x-0 top-0 transition-all ease-in-out duration-500', {
+				fixed: authCurrent.data?.setting.navbar === 'fixed',
+				static: authCurrent.data?.setting.navbar === 'static'
+			})}
+		>
 			<div className="xl:container mx-auto px-4">
 				<div className="flex items-center py-2">
 					<div className="flex items-center mr-auto">
@@ -111,7 +116,7 @@ const NavbarComponent: React.FC<Props> = () => {
 														'bg-gray-300 text-gray-700': active,
 														'text-gray-900': !active
 													})}
-													onClick={onClickSignout}
+													onClick={onClickSignOut}
 												>
 													<span>Sign out</span>
 												</button>

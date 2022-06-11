@@ -10,12 +10,13 @@ const config = {
 			API_URL: process.env.REACT_APP_API_URL
 		},
 		END_POINT: {
-			SIGNIN: '/auth/signin',
-			SIGNUP: '/auth/signup',
-			SIGNOUT: '/auth/signout',
+			SIGN_IN: '/auth/signin',
+			SIGN_UP: '/auth/signup',
+			SIGN_OUT: '/auth/signout',
 			ME: '/auth/me',
 			PROFILE: '/profile',
-			CRUD_USER: '/users',
+			USER: '/users',
+			SETTING: '/settings',
 			UPLOAD_IMAGE: '/images/upload'
 		}
 	},

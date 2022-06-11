@@ -4,23 +4,23 @@ import { lazy, Suspense } from 'react';
 
 import type { RouteObject } from 'react-router-dom';
 
-const SigninCompoment = lazy(() => import('./signin/components'));
-const SignupComponent = lazy(() => import('./signup/components'));
+const SignInCompoment = lazy(() => import('./signIn/components'));
+const SignUpComponent = lazy(() => import('./signUp/components'));
 
 const AuthRouter: RouteObject[] = [
 	{
-		path: `${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`,
+		path: `${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`,
 		element: (
 			<Suspense fallback={null}>
-				<SigninCompoment />
+				<SignInCompoment />
 			</Suspense>
 		)
 	},
 	{
-		path: `${routeConstant.ROUTE_NAME_AUTH_SIGNUP}`,
+		path: `${routeConstant.ROUTE_NAME_AUTH_SIGN_UP}`,
 		element: (
 			<Suspense fallback={null}>
-				<SignupComponent />
+				<SignUpComponent />
 			</Suspense>
 		)
 	},

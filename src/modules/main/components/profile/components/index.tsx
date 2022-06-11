@@ -93,7 +93,7 @@ const ProfileComponent: React.FC<Props> = () => {
 					.update(payload)
 					.then((response) => {
 						dispatch(profileUpdateDataRequestAction(response.data.data));
-						toastify.success('Update profile success');
+						toastify.success('Profile updated successfully');
 					})
 					.catch(
 						errorHandler(
@@ -138,7 +138,7 @@ const ProfileComponent: React.FC<Props> = () => {
 						{profileShow.loading ? (
 							<LoadingComponent />
 						) : !Object.keys(profileShow.data).length ? (
-							<div className="flex justify-center">Empty profile</div>
+							<div className="flex justify-center">Not found</div>
 						) : (
 							<FormComponent<UpdateProfileFormik>
 								initialValues={initialValues}
@@ -220,7 +220,7 @@ const ProfileComponent: React.FC<Props> = () => {
 										<div className="col-span-2 md:col-span-1">
 											<FormComponent.Image
 												id="image"
-												label="Avatar"
+												label="Image"
 												error={props.errors.image}
 												touched={props.touched.image}
 												onChangeFile={props.setFieldValue}
@@ -234,7 +234,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												loading={imageUpload.loading || profileUpdate.loading}
 												disabled={imageUpload.loading || profileUpdate.loading}
 											>
-												{imageUpload.loading ? 'Uploading' : profileUpdate.loading ? 'Updating' : 'Submit'}
+												{imageUpload.loading ? 'Uploading' : profileUpdate.loading ? 'Updating' : 'Update'}
 											</ButtonComponent>
 										</div>
 									</div>

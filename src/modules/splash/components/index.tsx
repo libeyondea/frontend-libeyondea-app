@@ -51,7 +51,7 @@ const SplashComponent: React.FC<Props> = () => {
 				.catch(
 					errorHandler(
 						(axiosError) =>
-							navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, {
+							navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
 								replace: true,
 								state: { from: location.state?.from }
 							}),
@@ -65,7 +65,7 @@ const SplashComponent: React.FC<Props> = () => {
 			if (initialUrl) {
 				navigate(initialUrl, { replace: true });
 			} else {
-				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`, { replace: true, state: { from: location.state?.from } });
+				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, { replace: true, state: { from: location.state?.from } });
 			}
 		}
 	});

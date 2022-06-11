@@ -1,14 +1,14 @@
 import { User } from './user';
 
-export interface Signin {
+export interface SignIn {
 	user_name: string;
 	password: string;
 	remember_me: boolean;
 }
 
-export interface SigninFormik extends Signin {}
+export interface SignInFormik extends SignIn {}
 
-export interface Signup {
+export interface SignUp {
 	first_name: string;
 	last_name: string;
 	user_name: string;
@@ -16,12 +16,19 @@ export interface Signup {
 	password: string;
 }
 
-export interface SignupFormik extends Signup {
+export interface SignUpFormik extends SignUp {
 	password_confirmation: string;
 	terms: boolean;
 }
 
-export interface Me extends User {}
+export interface Me extends User {
+	setting: {
+		id: number;
+		navbar: string;
+		created_at: string | null;
+		updated_at: string | null;
+	};
+}
 
 export interface Token {
 	token: string;

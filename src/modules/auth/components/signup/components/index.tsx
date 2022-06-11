@@ -5,7 +5,7 @@ import * as routeConstant from 'constants/route';
 import { useNavigate } from 'react-router-dom';
 import LinkComponent from 'components/Link/components';
 import authService from 'services/authService';
-import { SignupFormik } from 'types/auth';
+import { SignUpFormik } from 'types/auth';
 import FormComponent from 'components/Form/components';
 import { Fragment } from 'react';
 import toastify from 'helpers/toastify';
@@ -14,10 +14,10 @@ import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
-const SignupComponent: React.FC<Props> = () => {
+const SignUpComponent: React.FC<Props> = () => {
 	const navigate = useNavigate();
 
-	const initialValues: SignupFormik = {
+	const initialValues: SignUpFormik = {
 		first_name: '',
 		last_name: '',
 		email: '',
@@ -47,7 +47,7 @@ const SignupComponent: React.FC<Props> = () => {
 		terms: Yup.boolean().oneOf([true], 'You must accept the terms.')
 	});
 
-	const onSubmit = (values: SignupFormik, formikHelpers: FormikHelpers<SignupFormik>) => {
+	const onSubmit = (values: SignUpFormik, formikHelpers: FormikHelpers<SignUpFormik>) => {
 		const payload = {
 			first_name: values.first_name,
 			last_name: values.last_name,
@@ -56,10 +56,10 @@ const SignupComponent: React.FC<Props> = () => {
 			password: values.password
 		};
 		authService
-			.signup(payload)
+			.signUp(payload)
 			.then((response) => {
-				toastify.success('Sign up success');
-				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGNIN}`);
+				toastify.success('Signed up successfully');
+				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`);
 			})
 			.catch(
 				errorHandler(
@@ -76,7 +76,7 @@ const SignupComponent: React.FC<Props> = () => {
 	return (
 		<CardComponent className="m-auto flex flex-col w-full max-w-md sm:p-8">
 			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign up your Account</div>
-			<FormComponent<SignupFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+			<FormComponent<SignUpFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(props) => (
 					<Fragment>
 						<div className="flex flex-col mb-4">
@@ -199,4 +199,4 @@ const SignupComponent: React.FC<Props> = () => {
 	);
 };
 
-export default SignupComponent;
+export default SignUpComponent;

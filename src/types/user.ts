@@ -1,4 +1,4 @@
-import { Signup } from './auth';
+import { SignUp } from './auth';
 
 export interface User {
 	id: number;
@@ -22,7 +22,7 @@ export interface ListUser {
 	q: string;
 }
 
-export interface CreateUser extends Signup {
+export interface CreateUser extends SignUp {
 	avatar?: string | null;
 	role: string;
 	status: string;

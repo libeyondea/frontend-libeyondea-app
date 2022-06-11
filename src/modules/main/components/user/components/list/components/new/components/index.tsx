@@ -107,7 +107,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 					.create(payload)
 					.then((response) => {
 						dispatch(userCreateDataRequestAction(response.data.data));
-						toastify.success('Create user success');
+						toastify.success('User created successfully');
 						navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
 					})
 					.catch(
@@ -282,7 +282,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 								</div>
 								<div className="col-span-2 flex flex-row-reverse">
 									<ButtonComponent loading={imageUpload.loading || userCreate.loading} disabled={imageUpload.loading || userCreate.loading}>
-										{imageUpload.loading ? 'Uploading' : userCreate.loading ? 'Creating' : 'Submit'}
+										{imageUpload.loading ? 'Uploading' : userCreate.loading ? 'Creating' : 'Create'}
 									</ButtonComponent>
 								</div>
 							</div>

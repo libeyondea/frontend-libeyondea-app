@@ -30,6 +30,7 @@ import {
 import FilterListUserComponent from './filter';
 import useOnceEffect from 'hooks/useOnceEffect';
 import useUpdateEffect from 'hooks/useUpdateEffect';
+import toastify from 'helpers/toastify';
 
 type Props = {};
 
@@ -54,6 +55,7 @@ const ListUserComponent: React.FC<Props> = () => {
 				.delete(id)
 				.then((response) => {
 					dispatch(userDeleteDataRequestAction(response.data.data));
+					toastify.success('User deleted successfully');
 				})
 				.catch(errorHandler())
 				.finally(() => {
@@ -120,7 +122,7 @@ const ListUserComponent: React.FC<Props> = () => {
 											{!userList.data.length ? (
 												<TableComponent.Tr>
 													<TableComponent.Td className="text-center" colSpan={6}>
-														Empty users
+														No data
 													</TableComponent.Td>
 												</TableComponent.Tr>
 											) : (

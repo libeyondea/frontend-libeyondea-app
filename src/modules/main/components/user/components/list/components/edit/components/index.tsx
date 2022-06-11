@@ -109,7 +109,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					.update(Number(params.userId), payload)
 					.then((response) => {
 						dispatch(userUpdateDataRequestAction(response.data.data));
-						toastify.success('Update user success');
+						toastify.success('User updated successfully');
 					})
 					.catch(
 						errorHandler(
@@ -171,7 +171,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					{userShow.loading ? (
 						<LoadingComponent />
 					) : !Object.keys(userShow.data).length ? (
-						<div className="flex justify-center">Empty user</div>
+						<div className="flex justify-center">Not found</div>
 					) : (
 						<FormComponent<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
 							{(props) => (
@@ -309,7 +309,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 									</div>
 									<div className="col-span-2 flex flex-row-reverse">
 										<ButtonComponent loading={imageUpload.loading || userUpdate.loading} disabled={imageUpload.loading || userUpdate.loading}>
-											{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Submit'}
+											{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Update'}
 										</ButtonComponent>
 									</div>
 								</div>

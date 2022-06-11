@@ -6,11 +6,13 @@ import { selectAppSidebar } from 'store/app/selectors';
 import useAppSelector from 'hooks/useAppSelector';
 import { useRoutes } from 'react-router-dom';
 import FooterComponent from './footer';
+import { selectAuthCurrent } from 'store/auth/selectors';
 
 type Props = {};
 
 const MainComponent: React.FC<Props> = () => {
 	const appSidebar = useAppSelector(selectAppSidebar);
+	const authCurrent = useAppSelector(selectAuthCurrent);
 	console.log('MainComponent');
 
 	return (
@@ -21,7 +23,12 @@ const MainComponent: React.FC<Props> = () => {
 		>
 			<NavbarComponent />
 			<SidebarComponent />
-			<div className="main mt-14 transition-all ease-in-out duration-500">
+			<div
+				className={classNames('main transition-all ease-in-out duration-500', {
+					'mt-14': authCurrent.data?.setting.navbar === 'fixed',
+					'mt-0': authCurrent.data?.setting.navbar === 'static'
+				})}
+			>
 				<div className="xl:container mx-auto px-0 sm:px-4 py-4">{useRoutes(MainRouter)}</div>
 			</div>
 			<FooterComponent />
