@@ -42,7 +42,8 @@ const NavbarComponent: React.FC<Props> = () => {
 
 	return (
 		<nav
-			className={classNames('navbar bg-white shadow-lg z-20 inset-x-0 top-0 transition-all ease-in-out duration-500', {
+			className={classNames('bg-white shadow-lg z-20 inset-x-0 top-0 transition-all ease-in-out duration-500', {
+				'lg:ml-64': appSidebar,
 				fixed: authCurrent.data?.setting.navbar === 'fixed',
 				static: authCurrent.data?.setting.navbar === 'static'
 			})}

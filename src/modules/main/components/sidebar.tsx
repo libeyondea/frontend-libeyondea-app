@@ -13,23 +13,26 @@ import { FaChevronLeft, FaCog, FaEllipsisH, FaPlusCircle, FaRegListAlt, FaTachom
 import { Fragment } from 'react';
 import useAppSelector from 'hooks/useAppSelector';
 import { selectAuthCurrent } from 'store/auth/selectors';
+import { selectAppSidebar } from 'store/app/selectors';
 
 type Props = {};
 
 const SidebarComponent: React.FC<Props> = () => {
 	const location = useLocation();
 	const dispatch = useAppDispatch();
+	const appSidebar = useAppSelector(selectAppSidebar);
 	const authCurrent = useAppSelector(selectAuthCurrent);
 
 	return (
 		<div className="sidebar flex">
 			<div
-				className="sidebar-event fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden block"
+				className={classNames('fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden', appSidebar ? 'hidden' : 'block')}
 				onClick={() => dispatch(appSidebarRequestAction(true))}
 			></div>
 			<div
 				className={classNames(
-					'sidebar-menu fixed inset-y-0 left-0 max-w-full flex transition-all ease-in-out duration-500 flex-shrink-0 z-30 ml-0 lg:-ml-64'
+					'fixed inset-y-0 left-0 max-w-full flex transition-all ease-in-out duration-500 flex-shrink-0 z-30',
+					appSidebar ? '-ml-64 lg:ml-0' : 'ml-0 lg:-ml-64'
 				)}
 			>
 				<div className="flex flex-col w-64 bg-gray-800">
