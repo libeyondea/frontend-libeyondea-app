@@ -22,12 +22,10 @@ const ButtonComponent: React.FC<Props> = ({ className, type = 'button', loading 
 				'bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white': styleType === 'success',
 				'bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white': styleType === 'danger',
 				'bg-orange-600 hover:bg-orange-700 focus:ring-orange-500 focus:ring-offset-orange-200 text-white': styleType === 'warning',
-				'bg-gray-100 hover:bg-gray-300 focus:ring-gray-200 focus:ring-offset-gray-100 text-gray-900': styleType === 'default'
-			},
-			className,
-			{
+				'bg-gray-100 hover:bg-gray-300 focus:ring-gray-200 focus:ring-offset-gray-100 text-gray-900': styleType === 'default',
 				'cursor-not-allowed disabled:opacity-50': disabled
-			}
+			},
+			className
 		)}
 		disabled={disabled}
 	>
