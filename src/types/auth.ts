@@ -1,5 +1,3 @@
-import { User } from './user';
-
 export interface SignIn {
 	user_name: string;
 	password: string;
@@ -21,7 +19,18 @@ export interface SignUpFormik extends SignUp {
 	terms: boolean;
 }
 
-export interface Me extends User {
+export interface Me {
+	id: number;
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	avatar_url: string;
+	email: string;
+	email_verified_at: string | null;
+	role: string;
+	status: string;
+	created_at: string | null;
+	updated_at: string | null;
 	setting: {
 		id: number;
 		navbar: string;

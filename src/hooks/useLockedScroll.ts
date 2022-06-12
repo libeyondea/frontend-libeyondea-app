@@ -1,6 +1,6 @@
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
 
-const useLockedScroll = (locked = true): void => {
+const useLockedScroll = (locked: boolean = true): void => {
 	useIsomorphicLayoutEffect(() => {
 		if (!locked) {
 			return;

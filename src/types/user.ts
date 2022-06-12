@@ -1,5 +1,3 @@
-import { SignUp } from './auth';
-
 export interface User {
 	id: number;
 	first_name: string;
@@ -22,7 +20,12 @@ export interface ListUser {
 	q: string;
 }
 
-export interface CreateUser extends SignUp {
+export interface CreateUser {
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	email: string;
+	password: string;
 	avatar?: string | null;
 	role: string;
 	status: string;

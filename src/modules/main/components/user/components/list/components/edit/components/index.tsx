@@ -166,7 +166,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					ref={outsideRef}
 					className="max-w-5xl z-50"
 					header="Edit user"
-					redirectCloseUrl={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
+					onClickClose={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
 				>
 					{userShow.loading ? (
 						<LoadingComponent />

@@ -21,8 +21,7 @@ const MainComponent: React.FC<Props> = () => {
 			<NavbarComponent />
 			<SidebarComponent />
 			<main
-				className={classNames('main transition-all ease-in-out duration-500', {
-					'lg:ml-64': appSidebar,
+				className={classNames('transition-all ease-in-out duration-500', appSidebar ? 'lg:ml-64' : 'ml-0', {
 					'mt-14': authCurrent.data?.setting.navbar === 'fixed',
 					'mt-0': authCurrent.data?.setting.navbar === 'static'
 				})}

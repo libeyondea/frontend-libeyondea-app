@@ -6,10 +6,7 @@
 	body {
 		@apply bg-gray-100;
 	}
-}
-
-@layer utilities {
-	.main {
+	main {
 		min-height: calc(100vh - calc(theme('spacing.14') + theme('spacing.16')));
 	}
 }

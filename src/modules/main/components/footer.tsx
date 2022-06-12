@@ -10,11 +10,7 @@ const FooterComponent: React.FC<Props> = () => {
 	const appSidebar = useAppSelector(selectAppSidebar);
 
 	return (
-		<footer
-			className={classNames('py-4 bg-gray-200 transition-all ease-in-out duration-500', {
-				'lg:ml-64': appSidebar
-			})}
-		>
+		<footer className={classNames('py-4 bg-gray-200 transition-all ease-in-out duration-500', appSidebar ? 'lg:ml-64' : 'ml-0')}>
 			<div className="xl:container mx-auto px-4">
 				<div className="flex justify-center items-center">
 					<ImageComponent className="rounded-full h-8 w-8 mr-2" src={config.LOGO_URL} alt={config.APP_NAME} />
