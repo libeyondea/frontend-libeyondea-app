@@ -229,7 +229,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('image')}
 											/>
 										</div>
-										<div className="col-span-2">
+										<div className="col-span-2 flex flex-row-reverse">
 											<ButtonComponent
 												loading={imageUpload.loading || profileUpdate.loading}
 												disabled={imageUpload.loading || profileUpdate.loading}

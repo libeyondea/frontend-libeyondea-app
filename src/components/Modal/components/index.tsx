@@ -11,7 +11,7 @@ type Props = {
 	content?: string;
 	show: boolean;
 	setShow: React.Dispatch<React.SetStateAction<boolean>>;
-	onClick: () => void;
+	onClick?: () => void;
 };
 
 const ModalComponent: React.FC<Props> = ({ className, title, content, show, setShow, onClick }) => {

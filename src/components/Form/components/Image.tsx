@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import ButtonComponent from 'components/Button/components';
 import ImageComponent from 'components/Image/components';
 import { useState } from 'react';
 
@@ -74,15 +75,7 @@ const ImageFormComponent: React.FC<Props> = ({
 							<ImageComponent className="h-full w-full" src={previewImg} alt="Image" />
 						</span>
 					)}
-					<button
-						type="button"
-						className={classNames(
-							'relative bg-white py-3 px-4 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500',
-							{
-								'focus:ring-red-600 border-red-600': error && touched
-							}
-						)}
-					>
+					<ButtonComponent className="relative" type="button" styleType="secondary">
 						<input
 							{...props}
 							type="file"
@@ -94,11 +87,11 @@ const ImageFormComponent: React.FC<Props> = ({
 							className="absolute w-full inset-0 opacity-0"
 						/>
 						Change
-					</button>
+					</ButtonComponent>
 					{previewImg && canDelete && (
-						<button type="button" className="ml-4 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md" onClick={_onRemoveFile}>
+						<ButtonComponent className="ml-4" type="button" styleType="danger" onClick={_onRemoveFile}>
 							Remove
-						</button>
+						</ButtonComponent>
 					)}
 				</div>
 			</div>
