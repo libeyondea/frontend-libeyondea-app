@@ -172,7 +172,7 @@ const SignUpComponent: React.FC<Props> = () => {
 							</FormComponent.Checkbox>
 						</div>
 						<div className="flex w-full">
-							<ButtonComponent className="w-full" loading={props.isSubmitting} disabled={props.isSubmitting}>
+							<ButtonComponent className="w-full" type="submit" loading={props.isSubmitting} disabled={props.isSubmitting}>
 								{props.isSubmitting ? 'Signing up' : 'Sign up'}
 							</ButtonComponent>
 						</div>

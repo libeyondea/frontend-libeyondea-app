@@ -107,7 +107,7 @@ const SignInCompoment: React.FC<Props> = () => {
 							</div>
 						</div>
 						<div className="flex w-full">
-							<ButtonComponent className="w-full" loading={props.isSubmitting} disabled={props.isSubmitting}>
+							<ButtonComponent className="w-full" type="submit" loading={props.isSubmitting} disabled={props.isSubmitting}>
 								{props.isSubmitting ? 'Signing in' : 'Sign in'}
 							</ButtonComponent>
 						</div>

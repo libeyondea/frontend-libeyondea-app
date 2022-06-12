@@ -308,7 +308,11 @@ const EditListUserComponent: React.FC<Props> = () => {
 										/>
 									</div>
 									<div className="col-span-2 flex flex-row-reverse">
-										<ButtonComponent loading={imageUpload.loading || userUpdate.loading} disabled={imageUpload.loading || userUpdate.loading}>
+										<ButtonComponent
+											type="submit"
+											loading={imageUpload.loading || userUpdate.loading}
+											disabled={imageUpload.loading || userUpdate.loading}
+										>
 											{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Update'}
 										</ButtonComponent>
 									</div>

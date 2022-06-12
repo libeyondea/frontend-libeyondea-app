@@ -75,7 +75,7 @@ const ImageFormComponent: React.FC<Props> = ({
 							<ImageComponent className="h-full w-full" src={previewImg} alt="Image" />
 						</span>
 					)}
-					<ButtonComponent className="relative" type="button" styleType="secondary">
+					<ButtonComponent className="relative" styleType="secondary">
 						<input
 							{...props}
 							type="file"
@@ -89,7 +89,7 @@ const ImageFormComponent: React.FC<Props> = ({
 						Change
 					</ButtonComponent>
 					{previewImg && canDelete && (
-						<ButtonComponent className="ml-4" type="button" styleType="danger" onClick={_onRemoveFile}>
+						<ButtonComponent className="ml-4" styleType="danger" onClick={_onRemoveFile}>
 							Remove
 						</ButtonComponent>
 					)}

@@ -84,7 +84,7 @@ const SettingComponent: React.FC<Props> = () => {
 						{settingShow.loading ? (
 							<LoadingComponent />
 						) : !Object.keys(settingShow.data).length ? (
-							<div className="flex justify-center">Not found</div>
+							<div className="flex justify-center">Not found.</div>
 						) : (
 							<FormComponent<UpdateSettingFormik>
 								initialValues={initialValues}
@@ -113,8 +113,8 @@ const SettingComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('navbar')}
 											/>
 										</div>
-										<div className="col-span-2">
-											<ButtonComponent loading={settingUpdate.loading} disabled={settingUpdate.loading}>
+										<div className="col-span-2 flex flex-row-reverse">
+											<ButtonComponent type="submit" loading={settingUpdate.loading} disabled={settingUpdate.loading}>
 												{settingUpdate.loading ? 'Updating' : 'Update'}
 											</ButtonComponent>
 										</div>

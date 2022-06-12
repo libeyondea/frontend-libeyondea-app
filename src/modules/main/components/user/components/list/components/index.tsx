@@ -122,7 +122,7 @@ const ListUserComponent: React.FC<Props> = () => {
 										{!userList.data.length ? (
 											<TableComponent.Tr>
 												<TableComponent.Td className="text-center" colSpan={6}>
-													No data
+													No data.
 												</TableComponent.Td>
 											</TableComponent.Tr>
 										) : (
@@ -201,6 +201,7 @@ const ListUserComponent: React.FC<Props> = () => {
 					setShowModal(false);
 					id && onClickDelete(id);
 				}}
+				styleType="danger"
 			/>
 			{useRoutes(ListUserRouter)}
 		</Fragment>

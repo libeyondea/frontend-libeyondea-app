@@ -10,7 +10,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
-const ButtonComponent: React.FC<Props> = ({ className, type = 'submit', loading = false, disabled = false, styleType = 'primary', children, ...props }) => (
+const ButtonComponent: React.FC<Props> = ({ className, type = 'button', loading = false, disabled = false, styleType = 'primary', children, ...props }) => (
 	<button
 		{...props}
 		type={type}

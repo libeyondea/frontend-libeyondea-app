@@ -231,6 +231,7 @@ const ProfileComponent: React.FC<Props> = () => {
 										</div>
 										<div className="col-span-2 flex flex-row-reverse">
 											<ButtonComponent
+												type="submit"
 												loading={imageUpload.loading || profileUpdate.loading}
 												disabled={imageUpload.loading || profileUpdate.loading}
 											>

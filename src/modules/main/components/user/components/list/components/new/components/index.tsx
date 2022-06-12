@@ -281,7 +281,11 @@ const NewListUserComponent: React.FC<Props> = () => {
 									/>
 								</div>
 								<div className="col-span-2 flex flex-row-reverse">
-									<ButtonComponent loading={imageUpload.loading || userCreate.loading} disabled={imageUpload.loading || userCreate.loading}>
+									<ButtonComponent
+										type="submit"
+										loading={imageUpload.loading || userCreate.loading}
+										disabled={imageUpload.loading || userCreate.loading}
+									>
 										{imageUpload.loading ? 'Uploading' : userCreate.loading ? 'Creating' : 'Create'}
 									</ButtonComponent>
 								</div>
