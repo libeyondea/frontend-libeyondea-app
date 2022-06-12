@@ -14,15 +14,15 @@ const useDebouncedCallback = <A extends any[]>(callback: (...args: A) => void, w
 		(...args: A) => {
 			argsRef.current = args;
 
-			if (timeout.current) {
-				clearTimeout(timeout.current);
-			}
-
 			const later = () => {
 				if (argsRef.current) {
 					callbackRef.current(...args);
 				}
 			};
+
+			if (timeout.current) {
+				clearTimeout(timeout.current);
+			}
 
 			timeout.current = setTimeout(later, wait);
 		},

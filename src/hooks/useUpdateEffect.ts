@@ -6,7 +6,7 @@ const useUpdateEffect = (effect: React.EffectCallback, deps?: React.DependencyLi
 
 	useEffect(() => {
 		if (!isFirst) {
-			effect();
+			return effect();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, deps);
