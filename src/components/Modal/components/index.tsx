@@ -51,7 +51,7 @@ const ModalComponent: React.FC<Props> = ({ className, title, content, show, setS
 						</div>
 					)}
 					<div className="sm:flex sm:flex-row-reverse mt-4">
-						<ButtonComponent className="w-full sm:w-auto sm:ml-3" styleType={styleType} onClick={onClick ? onClick : () => setShow(false)}>
+						<ButtonComponent className="w-full sm:w-auto sm:ml-3" styleType={styleType} onClick={onClick || (() => setShow(false))}>
 							OK
 						</ButtonComponent>
 						<ButtonComponent className="w-full sm:w-auto mt-3 sm:mt-0" styleType="default" onClick={() => setShow(false)}>

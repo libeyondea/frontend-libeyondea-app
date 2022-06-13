@@ -6,19 +6,19 @@ const useLockedScroll = (locked: boolean = true): void => {
 			return;
 		}
 
-		let documentElement = document.documentElement;
-		let ownerWindow = document.defaultView ?? window;
+		const documentElement = document.documentElement;
+		const ownerWindow = document.defaultView ?? window;
 
-		let overflow = documentElement.style.overflow;
-		let paddingRight = documentElement.style.paddingRight;
+		const overflow = documentElement.style.overflow;
+		const paddingRight = documentElement.style.paddingRight;
 
-		let scrollbarWidthBefore = ownerWindow.innerWidth - documentElement.clientWidth;
+		const scrollbarWidthBefore = ownerWindow.innerWidth - documentElement.clientWidth;
 
 		documentElement.style.overflow = 'hidden';
 
 		if (scrollbarWidthBefore > 0) {
-			let scrollbarWidthAfter = documentElement.clientWidth - documentElement.offsetWidth;
-			let scrollbarWidth = scrollbarWidthBefore - scrollbarWidthAfter;
+			const scrollbarWidthAfter = documentElement.clientWidth - documentElement.offsetWidth;
+			const scrollbarWidth = scrollbarWidthBefore - scrollbarWidthAfter;
 			documentElement.style.paddingRight = `${scrollbarWidth}px`;
 		}
 
