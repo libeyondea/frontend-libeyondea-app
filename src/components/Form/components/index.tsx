@@ -23,9 +23,9 @@ const FormComponent = <Values extends FormikValues = FormikValues>({
 }: FormComponentProps<Values>): JSX.Element => {
 	const formik: FormikProps<Values> = useFormik<Values>({
 		...props,
-		initialValues,
-		validationSchema,
-		onSubmit
+		initialValues: initialValues,
+		validationSchema: validationSchema,
+		onSubmit: onSubmit
 	});
 
 	return (
