@@ -99,7 +99,7 @@ const ListUserComponent: React.FC<Props> = () => {
 			<BreadcrumbComponent className="mb-4">List users</BreadcrumbComponent>
 			<div className="grid grid-cols-1 gap-4">
 				<div className="col-span-1 w-full">
-					<CardComponent header="List users">
+					<CardComponent title="List users">
 						<div className="relative">
 							<FilterListUserComponent />
 							{userList.loading ? (

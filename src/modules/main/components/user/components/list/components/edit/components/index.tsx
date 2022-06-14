@@ -153,7 +153,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 				<CardComponent
 					ref={outsideRef}
 					className="max-w-5xl z-50"
-					header="Edit user"
+					title="Edit user"
 					onClickClose={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
 				>
 					{userShow.loading ? (
@@ -297,11 +297,18 @@ const EditListUserComponent: React.FC<Props> = () => {
 									</div>
 									<div className="col-span-2 flex flex-row-reverse">
 										<ButtonComponent
+											className="ml-4"
 											type="submit"
 											loading={imageUpload.loading || userUpdate.loading}
 											disabled={imageUpload.loading || userUpdate.loading}
 										>
 											{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Update'}
+										</ButtonComponent>
+										<ButtonComponent
+											styleType="default"
+											onClick={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
+										>
+											Cancel
 										</ButtonComponent>
 									</div>
 								</div>

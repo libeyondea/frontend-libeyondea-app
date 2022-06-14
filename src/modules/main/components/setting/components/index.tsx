@@ -80,7 +80,7 @@ const SettingComponent: React.FC<Props> = () => {
 			<BreadcrumbComponent className="mb-4">Settings</BreadcrumbComponent>
 			<div className="grid grid-cols-1 gap-4">
 				<div className="col-span-1 w-full">
-					<CardComponent header="Settings">
+					<CardComponent title="Settings">
 						{settingShow.loading ? (
 							<LoadingComponent />
 						) : !Object.keys(settingShow.data).length ? (

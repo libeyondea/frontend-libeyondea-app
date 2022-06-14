@@ -131,7 +131,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 				<CardComponent
 					ref={outsideRef}
 					className="max-w-5xl z-50"
-					header="New user"
+					title="New user"
 					onClickClose={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
 				>
 					<FormComponent<CreateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -270,11 +270,18 @@ const NewListUserComponent: React.FC<Props> = () => {
 								</div>
 								<div className="col-span-2 flex flex-row-reverse">
 									<ButtonComponent
+										className="ml-4"
 										type="submit"
 										loading={imageUpload.loading || userCreate.loading}
 										disabled={imageUpload.loading || userCreate.loading}
 									>
 										{imageUpload.loading ? 'Uploading' : userCreate.loading ? 'Creating' : 'Create'}
+									</ButtonComponent>
+									<ButtonComponent
+										styleType="default"
+										onClick={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
+									>
+										Cancel
 									</ButtonComponent>
 								</div>
 							</div>

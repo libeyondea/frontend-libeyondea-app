@@ -122,7 +122,7 @@ const ProfileComponent: React.FC<Props> = () => {
 			<BreadcrumbComponent className="mb-4">Profile</BreadcrumbComponent>
 			<div className="grid grid-cols-1 gap-4">
 				<div className="col-span-1 w-full">
-					<CardComponent header="Profile">
+					<CardComponent title="Profile">
 						{profileShow.loading ? (
 							<LoadingComponent />
 						) : !Object.keys(profileShow.data).length ? (
