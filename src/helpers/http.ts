@@ -1,105 +1,97 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import config from 'config';
-import store from 'store';
+import { AxiosResponse } from 'axios';
+import instance from './instance';
 
-const instance = axios.create({
-	baseURL: config.API.URL.API_URL,
-	headers: {
-		Accept: 'application/json',
-		'Content-Type': 'application/json'
-	},
-	timeout: config.REQUEST.TIMEOUT
-});
+type GetProps = {
+	baseURL?: string;
+	url: string;
+	params?: any;
+	token?: string;
+};
 
-instance.interceptors.request.use(
-	(config: AxiosRequestConfig) => {
-		const token = store.getState().authState.current.token;
-		if (config.headers && !config.headers.Authorization && token) {
-			config.headers.Authorization = `Bearer ${token}`;
-		}
-		return config;
-	},
-	(error: Error) => {
-		return Promise.reject(error);
-	}
-);
+type PostProps = {
+	baseURL?: string;
+	url: string;
+	params?: any;
+	data?: any;
+	token?: string;
+};
 
-instance.interceptors.response.use(
-	(response: AxiosResponse) => {
-		return response;
-	},
-	(error: AxiosError) => {
-		return Promise.reject(error);
-	}
-);
+type PutProps = PostProps;
+
+type DeleteProps = GetProps;
+
+type UploadProps = {
+	files?: any;
+} & PostProps;
 
 const http = {
-	get: <T>(config: { baseURL?: string; url: string; params?: any; token?: string }): Promise<AxiosResponse<T>> => {
+	get: <T>({ baseURL, url, params, token }: GetProps): Promise<AxiosResponse<T>> => {
 		return instance.request<T>({
-			baseURL: config.baseURL,
+			baseURL: baseURL,
 			method: 'GET',
-			url: config.url,
-			params: config.params,
+			url: url,
+			params: params,
 			headers: {
-				...(config.token && { Authorization: `Bearer ${config.token}` })
+				...(token && { Authorization: `Bearer ${token}` })
 			}
 		});
 	},
-	post: <T>(config: { baseURL?: string; url: string; data?: any; token?: string }): Promise<AxiosResponse<T>> => {
+	post: <T>({ baseURL, url, params, data, token }: PostProps): Promise<AxiosResponse<T>> => {
 		return instance.request<T>({
-			baseURL: config.baseURL,
+			baseURL: baseURL,
 			method: 'POST',
-			url: config.url,
-			data: config.data,
+			url: url,
+			params: params,
+			data: data,
 			headers: {
-				...(config.token && { Authorization: `Bearer ${config.token}` })
+				...(token && { Authorization: `Bearer ${token}` })
 			}
 		});
 	},
-	put: <T>(config: { baseURL?: string; url: string; data?: any; token?: string }): Promise<AxiosResponse<T>> => {
+	put: <T>({ baseURL, url, params, data, token }: PutProps): Promise<AxiosResponse<T>> => {
 		return instance.request<T>({
-			baseURL: config.baseURL,
+			baseURL: baseURL,
 			method: 'PUT',
-			url: config.url,
-			data: config.data,
+			url: url,
+			params: params,
+			data: data,
 			headers: {
-				...(config.token && { Authorization: `Bearer ${config.token}` })
+				...(token && { Authorization: `Bearer ${token}` })
 			}
 		});
 	},
-	delete: <T>(config: { baseURL?: string; url: string; params?: any; token?: string }): Promise<AxiosResponse<T>> => {
+	delete: <T>({ baseURL, url, params, token }: DeleteProps): Promise<AxiosResponse<T>> => {
 		return instance.request<T>({
-			baseURL: config.baseURL,
+			baseURL: baseURL,
 			method: 'DELETE',
-			url: config.url,
-			params: config.params,
+			url: url,
+			params: params,
 			headers: {
-				...(config.token && { Authorization: `Bearer ${config.token}` })
+				...(token && { Authorization: `Bearer ${token}` })
 			}
 		});
 	},
-	upload: <T>(config: { baseURL?: string; url: string; files?: any; data?: any; token?: string }): Promise<AxiosResponse<T>> => {
+	upload: <T>({ baseURL, url, params, data, files, token }: UploadProps): Promise<AxiosResponse<T>> => {
 		const formData = new FormData();
-		if (config.data) {
-			for (const field in config.data) {
-				formData.set(field, config.data[field]);
+		if (data) {
+			for (const field in data) {
+				formData.set(field, data[field]);
 			}
 		}
-		if (config.files) {
-			for (const field in config.files) {
-				if (config.files[field]) {
-					formData.append(field, config.files[field], config.files[field].name);
-				}
+		if (files) {
+			for (const field in files) {
+				formData.append(field, files[field], files[field].name);
 			}
 		}
 		return instance.request<T>({
-			baseURL: config.baseURL,
+			baseURL: baseURL,
 			method: 'POST',
-			url: config.url,
+			url: url,
+			params: params,
 			data: formData,
 			headers: {
 				'Content-Type': 'multipart/form-data',
-				...(config.token && { Authorization: `Bearer ${config.token}` })
+				...(token && { Authorization: `Bearer ${token}` })
 			}
 		});
 	}

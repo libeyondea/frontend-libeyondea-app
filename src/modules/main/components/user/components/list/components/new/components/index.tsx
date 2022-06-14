@@ -110,24 +110,12 @@ const NewListUserComponent: React.FC<Props> = () => {
 						toastify.success('User created successfully');
 						navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
 					})
-					.catch(
-						errorHandler(
-							(axiosError) => {},
-							(validationError) => formikHelpers.setErrors(validationError.data.errors),
-							(stockError) => {}
-						)
-					)
+					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 					.finally(() => {
 						dispatch(userCreateLoadingRequestAction(false));
 					});
 			})
-			.catch(
-				errorHandler(
-					(axiosError) => {},
-					(validationError) => formikHelpers.setErrors(validationError.data.errors),
-					(stockError) => {}
-				)
-			)
+			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 			.finally(() => {});
 	};
 

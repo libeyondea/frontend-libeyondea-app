@@ -46,15 +46,13 @@ const SignInCompoment: React.FC<Props> = () => {
 					expires: config.AUTH_DATA.EXPIRED_TIME
 				});
 				toastify.success('Signed in successfully');
-				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, { state: { from: location?.state?.from } });
+				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, {
+					state: {
+						from: location?.state?.from
+					}
+				});
 			})
-			.catch(
-				errorHandler(
-					(axiosError) => {},
-					(validationError) => formikHelpers.setErrors(validationError.data.errors),
-					(stockError) => {}
-				)
-			)
+			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 			.finally(() => {
 				formikHelpers.setSubmitting(false);
 			});

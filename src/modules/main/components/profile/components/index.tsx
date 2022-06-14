@@ -95,24 +95,12 @@ const ProfileComponent: React.FC<Props> = () => {
 						dispatch(profileUpdateDataRequestAction(response.data.data));
 						toastify.success('Profile updated successfully');
 					})
-					.catch(
-						errorHandler(
-							(axiosError) => {},
-							(validationError) => formikHelpers.setErrors(validationError.data.errors),
-							(stockError) => {}
-						)
-					)
+					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 					.finally(() => {
 						dispatch(profileUpdateLoadingRequestAction(false));
 					});
 			})
-			.catch(
-				errorHandler(
-					(axiosError) => {},
-					(validationError) => formikHelpers.setErrors(validationError.data.errors),
-					(stockError) => {}
-				)
-			)
+			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 			.finally(() => {});
 	};
 

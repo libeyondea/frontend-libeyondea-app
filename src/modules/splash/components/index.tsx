@@ -30,9 +30,13 @@ const SplashComponent: React.FC<Props> = () => {
 
 		if (isAuth) {
 			if (initialUrl) {
-				navigate(initialUrl, { replace: true });
+				navigate(initialUrl, {
+					replace: true
+				});
 			} else {
-				navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`, { replace: true });
+				navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`, {
+					replace: true
+				});
 			}
 		} else if (token) {
 			authService
@@ -41,7 +45,9 @@ const SplashComponent: React.FC<Props> = () => {
 					dispatch(authCurrentDataRequestAction(response.data.data));
 					dispatch(authCurrentTokenRequestAction(token));
 					if (initialUrl) {
-						navigate(initialUrl, { replace: true });
+						navigate(initialUrl, {
+							replace: true
+						});
 					} else {
 						navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`, {
 							replace: true
@@ -49,23 +55,29 @@ const SplashComponent: React.FC<Props> = () => {
 					}
 				})
 				.catch(
-					errorHandler(
-						(axiosError) =>
-							navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
-								replace: true,
-								state: { from: location.state?.from }
-							}),
-						(validationError) => {},
-						(stockError) => {}
+					errorHandler(() =>
+						navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
+							replace: true,
+							state: {
+								from: location.state?.from
+							}
+						})
 					)
 				);
 		} else {
 			dispatch(authCurrentDataRequestAction(null));
 			dispatch(authCurrentTokenRequestAction(null));
 			if (initialUrl) {
-				navigate(initialUrl, { replace: true });
+				navigate(initialUrl, {
+					replace: true
+				});
 			} else {
-				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, { replace: true, state: { from: location.state?.from } });
+				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
+					replace: true,
+					state: {
+						from: location.state?.from
+					}
+				});
 			}
 		}
 	});

@@ -61,13 +61,7 @@ const SignUpComponent: React.FC<Props> = () => {
 				toastify.success('Signed up successfully');
 				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`);
 			})
-			.catch(
-				errorHandler(
-					(axiosError) => {},
-					(validationError) => formikHelpers.setErrors(validationError.data.errors),
-					(stockError) => {}
-				)
-			)
+			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 			.finally(() => {
 				formikHelpers.setSubmitting(false);
 			});

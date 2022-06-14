@@ -111,24 +111,12 @@ const EditListUserComponent: React.FC<Props> = () => {
 						dispatch(userUpdateDataRequestAction(response.data.data));
 						toastify.success('User updated successfully');
 					})
-					.catch(
-						errorHandler(
-							(axiosError) => {},
-							(validationError) => formikHelpers.setErrors(validationError.data.errors),
-							(stockError) => {}
-						)
-					)
+					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 					.finally(() => {
 						dispatch(userUpdateLoadingRequestAction(false));
 					});
 			})
-			.catch(
-				errorHandler(
-					(axiosError) => {},
-					(validationError) => formikHelpers.setErrors(validationError.data.errors),
-					(stockError) => {}
-				)
-			)
+			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 			.finally(() => {});
 	};
 
