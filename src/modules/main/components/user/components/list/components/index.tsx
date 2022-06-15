@@ -56,8 +56,9 @@ const ListUserComponent: React.FC<Props> = () => {
 		userService
 			.delete(id)
 			.then((response) => {
-				dispatch(userDeleteDataRequestAction(response.data.data));
 				toastify.success('User deleted successfully');
+				dispatch(userDeleteDataRequestAction(response.data.data));
+				userListDataCallback();
 			})
 			.catch(errorHandler())
 			.finally(() => {

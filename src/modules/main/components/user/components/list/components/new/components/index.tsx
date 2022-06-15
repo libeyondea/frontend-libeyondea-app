@@ -14,8 +14,14 @@ import { FormikHelpers } from 'formik';
 import { errorHandler } from 'helpers/error';
 import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
-import { selectUserCreate } from 'store/user/selectors';
-import { userCreateDataRequestAction, userCreateLoadingRequestAction } from 'store/user/actions';
+import { selectUserCreate, selectUserList } from 'store/user/selectors';
+import {
+	userCreateDataRequestAction,
+	userCreateLoadingRequestAction,
+	userListDataRequestAction,
+	userListLoadingRequestAction,
+	userListPaginationTotalRequestAction
+} from 'store/user/actions';
 import useOnClickOutside from 'hooks/useClickOutside';
 import useLockedScroll from 'hooks/useLockedScroll';
 import ButtonComponent from 'components/Button/components';
@@ -26,6 +32,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 	const outsideRef = useRef(null);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
+	const userList = useAppSelector(selectUserList);
 	const userCreate = useAppSelector(selectUserCreate);
 	const [imageUpload, setImageUpload] = useState({ loading: false });
 
@@ -106,9 +113,27 @@ const NewListUserComponent: React.FC<Props> = () => {
 				userService
 					.create(payload)
 					.then((response) => {
-						dispatch(userCreateDataRequestAction(response.data.data));
 						toastify.success('User created successfully');
-						navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
+						dispatch(userCreateDataRequestAction(response.data.data));
+						dispatch(userListLoadingRequestAction(true));
+						const payload = {
+							page: userList.pagination.page,
+							limit: userList.pagination.limit,
+							q: userList.filter.q,
+							sort_by: userList.filter.sort_by,
+							sort_direction: userList.filter.sort_direction
+						};
+						userService
+							.list(payload)
+							.then((response) => {
+								dispatch(userListDataRequestAction(response.data.data));
+								dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
+							})
+							.catch(errorHandler())
+							.finally(() => {
+								dispatch(userListLoadingRequestAction(false));
+							});
+						/* navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`); */
 					})
 					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 					.finally(() => {

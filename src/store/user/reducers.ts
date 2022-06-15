@@ -166,12 +166,20 @@ const userReducer = createReducer(initialState, (builder) => {
 		},
 		list: {
 			...state.list,
+			pagination: {
+				...state.list.pagination,
+				page: 1
+			}
+		}
+		/* ,
+		list: {
+			...state.list,
 			data: insertItemIntoArray<User>(state.list.data, action.payload),
 			pagination: {
 				...state.list.pagination,
 				total: state.list.pagination.total + 1
 			}
-		}
+		} */
 	}));
 	builder.addCase(userCreateLoadingSuccessAction, (state, action) => ({
 		...state,
@@ -185,11 +193,11 @@ const userReducer = createReducer(initialState, (builder) => {
 		update: {
 			...state.update,
 			data: action.payload
-		},
+		} /* ,
 		list: {
 			...state.list,
 			data: updateArrayItemById<User>([...state.list.data], action.payload.id, action.payload)
-		}
+		} */
 	}));
 	builder.addCase(userUpdateLoadingSuccessAction, (state, action) => ({
 		...state,
@@ -203,18 +211,19 @@ const userReducer = createReducer(initialState, (builder) => {
 		delete: {
 			...state.delete,
 			data: action.payload
-		},
+		} /* ,
 		list: {
 			...state.list,
 			data: deleteArrayItemById<User>([...state.list.data], action.payload.id),
 			pagination: {
 				...state.list.pagination,
 				total: state.list.pagination.total - 1,
-				...(getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit) < state.list.pagination.page && {
-					page: getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit)
-				})
+				...(state.list.pagination.total > 1 &&
+					getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit) < state.list.pagination.page && {
+						page: getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit)
+					})
 			}
-		}
+		} */
 	}));
 	builder.addCase(userDeleteLoadingSuccessAction, (state, action) => ({
 		...state,

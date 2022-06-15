@@ -14,9 +14,17 @@ import { FormikHelpers } from 'formik';
 import { errorHandler } from 'helpers/error';
 import * as routeConstant from 'constants/route';
 import useAppDispatch from 'hooks/useAppDispatch';
-import { userShowDataRequestAction, userShowLoadingRequestAction, userUpdateDataRequestAction, userUpdateLoadingRequestAction } from 'store/user/actions';
+import {
+	userListDataRequestAction,
+	userListLoadingRequestAction,
+	userListPaginationTotalRequestAction,
+	userShowDataRequestAction,
+	userShowLoadingRequestAction,
+	userUpdateDataRequestAction,
+	userUpdateLoadingRequestAction
+} from 'store/user/actions';
 import useAppSelector from 'hooks/useAppSelector';
-import { selectUserShow, selectUserUpdate } from 'store/user/selectors';
+import { selectUserList, selectUserShow, selectUserUpdate } from 'store/user/selectors';
 import useOnClickOutside from 'hooks/useClickOutside';
 import useLockedScroll from 'hooks/useLockedScroll';
 import ButtonComponent from 'components/Button/components';
@@ -30,6 +38,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 	const navigate = useNavigate();
 	const params = useParams();
 	const dispatch = useAppDispatch();
+	const userList = useAppSelector(selectUserList);
 	const userShow = useAppSelector(selectUserShow);
 	const userUpdate = useAppSelector(selectUserUpdate);
 	const [imageUpload, setImageUpload] = useState({ loading: false });
@@ -108,8 +117,26 @@ const EditListUserComponent: React.FC<Props> = () => {
 				userService
 					.update(Number(params.userId), payload)
 					.then((response) => {
-						dispatch(userUpdateDataRequestAction(response.data.data));
 						toastify.success('User updated successfully');
+						dispatch(userUpdateDataRequestAction(response.data.data));
+						dispatch(userListLoadingRequestAction(true));
+						const payload = {
+							page: userList.pagination.page,
+							limit: userList.pagination.limit,
+							q: userList.filter.q,
+							sort_by: userList.filter.sort_by,
+							sort_direction: userList.filter.sort_direction
+						};
+						userService
+							.list(payload)
+							.then((response) => {
+								dispatch(userListDataRequestAction(response.data.data));
+								dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
+							})
+							.catch(errorHandler())
+							.finally(() => {
+								dispatch(userListLoadingRequestAction(false));
+							});
 					})
 					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 					.finally(() => {
