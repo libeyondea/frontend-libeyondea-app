@@ -13,7 +13,6 @@ import TableLoadingComponent from 'components/TableLoading/components';
 import BlockUIComponent from 'components/BlockUI/components';
 import TableComponent from 'components/Table/components';
 import { errorHandler } from 'helpers/error';
-import { useRoutes } from 'react-router-dom';
 import ListUserRouter from './router';
 import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
@@ -204,7 +203,7 @@ const ListUserComponent: React.FC<Props> = () => {
 				}}
 				styleType="danger"
 			/>
-			{useRoutes(ListUserRouter)}
+			<ListUserRouter />
 		</Fragment>
 	);
 };

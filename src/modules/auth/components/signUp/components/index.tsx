@@ -184,7 +184,7 @@ const SignUpComponent: React.FC<Props> = () => {
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<LinkComponent className="text-purple-600 ml-1" href="/auth/signin">
+					<LinkComponent className="text-purple-600 ml-1" href={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`}>
 						Sign in
 					</LinkComponent>
 				</span>

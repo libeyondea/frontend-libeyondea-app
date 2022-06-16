@@ -4,7 +4,6 @@ import MainRouter from './router';
 import classNames from 'classnames';
 import { selectAppSidebar } from 'store/app/selectors';
 import useAppSelector from 'hooks/useAppSelector';
-import { useRoutes } from 'react-router-dom';
 import FooterComponent from './footer';
 import { selectAuthCurrent } from 'store/auth/selectors';
 import { Fragment } from 'react';
@@ -26,7 +25,9 @@ const MainComponent: React.FC<Props> = () => {
 					'mt-0': authCurrent.data?.setting.navbar === 'static'
 				})}
 			>
-				<div className="xl:container mx-auto px-0 sm:px-4 py-4">{useRoutes(MainRouter)}</div>
+				<div className="xl:container mx-auto px-0 sm:px-4 py-4">
+					<MainRouter />
+				</div>
 			</main>
 			<FooterComponent />
 		</Fragment>
