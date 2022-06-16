@@ -5,7 +5,7 @@ import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
 import imageService from 'services/imageService';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { CreateUserFormik } from 'types/user';
 import toastify from 'helpers/toastify';
 import { Image } from 'types/image';
@@ -22,14 +22,12 @@ import {
 	userListLoadingRequestAction,
 	userListPaginationTotalRequestAction
 } from 'store/user/actions';
-import useOnClickOutside from 'hooks/useClickOutside';
 import useLockedScroll from 'hooks/useLockedScroll';
 import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
 const NewListUserComponent: React.FC<Props> = () => {
-	const outsideRef = useRef(null);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
@@ -133,7 +131,6 @@ const NewListUserComponent: React.FC<Props> = () => {
 							.finally(() => {
 								dispatch(userListLoadingRequestAction(false));
 							});
-						/* navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`); */
 					})
 					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 					.finally(() => {
@@ -144,17 +141,12 @@ const NewListUserComponent: React.FC<Props> = () => {
 			.finally(() => {});
 	};
 
-	useOnClickOutside(outsideRef, () => {
-		navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
-	});
-
 	useLockedScroll();
 
 	return (
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">
 			<div className="min-h-full flex items-center py-8 sm:px-16 bg-gray-900/50 z-40 justify-center">
 				<CardComponent
-					ref={outsideRef}
 					className="max-w-5xl z-50"
 					title="New user"
 					onClickClose={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}

@@ -4,7 +4,7 @@ import * as userConstant from 'constants/user';
 import * as Yup from 'yup';
 import userService from 'services/userService';
 import imageService from 'services/imageService';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { UpdateUserFormik } from 'types/user';
 import LoadingComponent from 'components/Loading/components';
 import toastify from 'helpers/toastify';
@@ -25,7 +25,6 @@ import {
 } from 'store/user/actions';
 import useAppSelector from 'hooks/useAppSelector';
 import { selectUserList, selectUserShow, selectUserUpdate } from 'store/user/selectors';
-import useOnClickOutside from 'hooks/useClickOutside';
 import useLockedScroll from 'hooks/useLockedScroll';
 import ButtonComponent from 'components/Button/components';
 import useOnceEffect from 'hooks/useOnceEffect';
@@ -34,7 +33,6 @@ import useUpdateEffect from 'hooks/useUpdateEffect';
 type Props = {};
 
 const EditListUserComponent: React.FC<Props> = () => {
-	const outsideRef = useRef(null);
 	const navigate = useNavigate();
 	const params = useParams();
 	const dispatch = useAppDispatch();
@@ -168,17 +166,12 @@ const EditListUserComponent: React.FC<Props> = () => {
 		userShowDataCallback();
 	}, [userShowDataCallback]);
 
-	useOnClickOutside(outsideRef, () => {
-		navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`);
-	});
-
 	useLockedScroll();
 
 	return (
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">
 			<div className="min-h-full flex items-center py-8 sm:px-16 bg-gray-900/50 z-40 justify-center">
 				<CardComponent
-					ref={outsideRef}
 					className="max-w-5xl z-50"
 					title="Edit user"
 					onClickClose={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}

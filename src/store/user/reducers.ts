@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { deleteArrayItemById, insertItemIntoArray, updateArrayItemById } from 'helpers/array';
 import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'types/reducer';
 import { User } from 'types/user';
 import {
@@ -22,7 +21,6 @@ import {
 } from './actions';
 import * as filterConstant from 'constants/filter';
 import * as paginationConstant from 'constants/pagination';
-import { getTotalPages } from 'helpers/pagination';
 
 type UserState = {
 	list: ResponseDataWithPaginationAndFilterReducer<User[]>;
@@ -171,15 +169,6 @@ const userReducer = createReducer(initialState, (builder) => {
 				page: 1
 			}
 		}
-		/* ,
-		list: {
-			...state.list,
-			data: insertItemIntoArray<User>(state.list.data, action.payload),
-			pagination: {
-				...state.list.pagination,
-				total: state.list.pagination.total + 1
-			}
-		} */
 	}));
 	builder.addCase(userCreateLoadingSuccessAction, (state, action) => ({
 		...state,
@@ -193,11 +182,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		update: {
 			...state.update,
 			data: action.payload
-		} /* ,
-		list: {
-			...state.list,
-			data: updateArrayItemById<User>([...state.list.data], action.payload.id, action.payload)
-		} */
+		}
 	}));
 	builder.addCase(userUpdateLoadingSuccessAction, (state, action) => ({
 		...state,
@@ -211,19 +196,7 @@ const userReducer = createReducer(initialState, (builder) => {
 		delete: {
 			...state.delete,
 			data: action.payload
-		} /* ,
-		list: {
-			...state.list,
-			data: deleteArrayItemById<User>([...state.list.data], action.payload.id),
-			pagination: {
-				...state.list.pagination,
-				total: state.list.pagination.total - 1,
-				...(state.list.pagination.total > 1 &&
-					getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit) < state.list.pagination.page && {
-						page: getTotalPages(state.list.pagination.total - 1, state.list.pagination.limit)
-					})
-			}
-		} */
+		}
 	}));
 	builder.addCase(userDeleteLoadingSuccessAction, (state, action) => ({
 		...state,
