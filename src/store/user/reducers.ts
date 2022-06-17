@@ -18,10 +18,10 @@ import {
 	userUpdateDataSuccessAction,
 	userUpdateLoadingSuccessAction
 } from './actions';
-import * as filterConstant from 'constants/filter';
-import * as paginationConstant from 'constants/pagination';
-import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'types/reducer';
-import { User } from 'types/user';
+import * as filterConstant from 'src/constants/filter';
+import * as paginationConstant from 'src/constants/pagination';
+import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'src/types/reducer';
+import { User } from 'src/types/user';
 
 type UserState = {
 	list: ResponseDataWithPaginationAndFilterReducer<User[]>;

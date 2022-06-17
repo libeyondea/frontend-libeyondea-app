@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import * as actionTypes from './actionTypes';
-import { Setting } from 'types/setting';
+import { Setting } from 'src/types/setting';
 
 export const settingShowDataRequestAction = createAction(actionTypes.SETTING_SHOW_DATA_REQUEST, (payload: Setting) => ({
 	payload: payload

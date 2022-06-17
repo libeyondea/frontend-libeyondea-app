@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 
-import * as routeConstant from 'constants/route';
+import * as routeConstant from 'src/constants/route';
 
 const DashboardComponent = lazy(() => import('./dashboard/components'));
 const SettingComponent = lazy(() => import('./setting/components'));

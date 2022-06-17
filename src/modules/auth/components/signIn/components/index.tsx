@@ -3,19 +3,19 @@ import { Fragment } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import ButtonComponent from 'components/Button/components';
-import CardComponent from 'components/Card/components';
-import FormComponent from 'components/Form/components';
-import LinkComponent from 'components/Link/components';
-import config from 'config';
-import * as cookiesConstant from 'constants/cookies';
-import * as routeConstant from 'constants/route';
-import { setCookie } from 'helpers/cookies';
-import { errorHandler } from 'helpers/error';
-import toastify from 'helpers/toastify';
-import authService from 'services/authService';
-import { SignInFormik } from 'types/auth';
-import { LocationState } from 'types/router';
+import ButtonComponent from 'src/components/Button/components';
+import CardComponent from 'src/components/Card/components';
+import FormComponent from 'src/components/Form/components';
+import LinkComponent from 'src/components/Link/components';
+import config from 'src/config';
+import * as cookiesConstant from 'src/constants/cookies';
+import * as routeConstant from 'src/constants/route';
+import { setCookie } from 'src/helpers/cookies';
+import { errorHandler } from 'src/helpers/error';
+import toastify from 'src/helpers/toastify';
+import authService from 'src/services/authService';
+import { SignInFormik } from 'src/types/auth';
+import { LocationState } from 'src/types/router';
 
 type Props = {};
 

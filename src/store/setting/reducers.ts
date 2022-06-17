@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { settingShowDataSuccessAction, settingShowLoadingSuccessAction, settingUpdateDataSuccessAction, settingUpdateLoadingSuccessAction } from './actions';
-import { ResponseDataReducer } from 'types/reducer';
-import { Setting } from 'types/setting';
+import { ResponseDataReducer } from 'src/types/reducer';
+import { Setting } from 'src/types/setting';
 
 type SettingState = {
 	show: ResponseDataReducer<Setting>;

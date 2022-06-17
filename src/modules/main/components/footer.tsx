@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 
-import ImageComponent from 'components/Image/components';
-import config from 'config';
-import useAppSelector from 'hooks/useAppSelector';
-import { selectAppSidebar } from 'store/app/selectors';
+import ImageComponent from 'src/components/Image/components';
+import config from 'src/config';
+import useAppSelector from 'src/hooks/useAppSelector';
+import { selectAppSidebar } from 'src/store/app/selectors';
 
 type Props = {};
 

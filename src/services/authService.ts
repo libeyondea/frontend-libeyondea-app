@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 
-import config from 'config';
-import http from 'helpers/http';
-import { Me, SignIn, SignUp, Token } from 'types/auth';
-import { ResponseData } from 'types/response';
+import config from 'src/config';
+import http from 'src/helpers/http';
+import { Me, SignIn, SignUp, Token } from 'src/types/auth';
+import { ResponseData } from 'src/types/response';
 
 const authService = {
 	me: (token: string): Promise<AxiosResponse<ResponseData<Me>>> => {

@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 
-import config from 'config';
-import http from 'helpers/http';
-import { ResponseData } from 'types/response';
-import { Setting, UpdateSetting } from 'types/setting';
+import config from 'src/config';
+import http from 'src/helpers/http';
+import { ResponseData } from 'src/types/response';
+import { Setting, UpdateSetting } from 'src/types/setting';
 
 const settingService = {
 	show: (): Promise<AxiosResponse<ResponseData<Setting>>> => {

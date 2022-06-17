@@ -6,7 +6,7 @@
 	"trailingComma": "none",
 	"singleQuote": true,
 	"semi": true,
-	"importOrder": ["^components|constants|helpers|hooks|modules|root|services|store|styles|types|config|\\.\\/(.*)$"],
+	"importOrder": ["^src|\\.\\/(.*)$"],
 	"importOrderSeparation": true,
 	"importOrderSortSpecifiers": true
 }

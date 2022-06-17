@@ -4,8 +4,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import RootRouter from './router';
-import store from 'store';
-import 'styles/index.scss';
+import store from 'src/store';
+import 'src/styles/index.scss';
 
 type Props = {};
 

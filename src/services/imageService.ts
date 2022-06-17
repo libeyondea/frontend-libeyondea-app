@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 
-import config from 'config';
-import http from 'helpers/http';
-import { Image, UploadImage } from 'types/image';
-import { ResponseData } from 'types/response';
+import config from 'src/config';
+import http from 'src/helpers/http';
+import { Image, UploadImage } from 'src/types/image';
+import { ResponseData } from 'src/types/response';
 
 const imageService = {
 	upload: (files: UploadImage): Promise<AxiosResponse<ResponseData<Image>>> => {

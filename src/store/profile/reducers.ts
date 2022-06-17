@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { profileShowDataSuccessAction, profileShowLoadingSuccessAction, profileUpdateDataSuccessAction, profileUpdateLoadingSuccessAction } from './actions';
-import { Profile } from 'types/profile';
-import { ResponseDataReducer } from 'types/reducer';
+import { Profile } from 'src/types/profile';
+import { ResponseDataReducer } from 'src/types/reducer';
 
 type ProfileState = {
 	show: ResponseDataReducer<Profile>;

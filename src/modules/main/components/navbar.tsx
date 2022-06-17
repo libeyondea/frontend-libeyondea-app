@@ -4,19 +4,19 @@ import { Fragment } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
-import ImageComponent from 'components/Image/components';
-import LinkComponent from 'components/Link/components';
-import * as cookiesConstant from 'constants/cookies';
-import * as routeConstant from 'constants/route';
-import { removeCookie } from 'helpers/cookies';
-import toastify from 'helpers/toastify';
-import useAppDispatch from 'hooks/useAppDispatch';
-import useAppSelector from 'hooks/useAppSelector';
-import authService from 'services/authService';
-import { appSidebarRequestAction } from 'store/app/actions';
-import { selectAppSidebar } from 'store/app/selectors';
-import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
-import { selectAuthCurrent } from 'store/auth/selectors';
+import ImageComponent from 'src/components/Image/components';
+import LinkComponent from 'src/components/Link/components';
+import * as cookiesConstant from 'src/constants/cookies';
+import * as routeConstant from 'src/constants/route';
+import { removeCookie } from 'src/helpers/cookies';
+import toastify from 'src/helpers/toastify';
+import useAppDispatch from 'src/hooks/useAppDispatch';
+import useAppSelector from 'src/hooks/useAppSelector';
+import authService from 'src/services/authService';
+import { appSidebarRequestAction } from 'src/store/app/actions';
+import { selectAppSidebar } from 'src/store/app/selectors';
+import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
+import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 type Props = {};
 

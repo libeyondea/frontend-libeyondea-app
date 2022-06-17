@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import config from 'config';
-import store from 'store';
+import config from 'src/config';
+import store from 'src/store';
 
 const instance = axios.create({
 	baseURL: config.API.URL.API_URL,

@@ -1,19 +1,19 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import ImageComponent from 'components/Image/components';
-import config from 'config';
-import * as cookiesConstant from 'constants/cookies';
-import * as routeConstant from 'constants/route';
-import { getCookie } from 'helpers/cookies';
-import { errorHandler } from 'helpers/error';
-import useAppDispatch from 'hooks/useAppDispatch';
-import useAppSelector from 'hooks/useAppSelector';
-import useOnceEffect from 'hooks/useOnceEffect';
-import authService from 'services/authService';
-import { appInitializedRequestAction } from 'store/app/actions';
-import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
-import { selectIsAuth } from 'store/auth/selectors';
-import { LocationState } from 'types/router';
+import ImageComponent from 'src/components/Image/components';
+import config from 'src/config';
+import * as cookiesConstant from 'src/constants/cookies';
+import * as routeConstant from 'src/constants/route';
+import { getCookie } from 'src/helpers/cookies';
+import { errorHandler } from 'src/helpers/error';
+import useAppDispatch from 'src/hooks/useAppDispatch';
+import useAppSelector from 'src/hooks/useAppSelector';
+import useOnceEffect from 'src/hooks/useOnceEffect';
+import authService from 'src/services/authService';
+import { appInitializedRequestAction } from 'src/store/app/actions';
+import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
+import { selectIsAuth } from 'src/store/auth/selectors';
+import { LocationState } from 'src/types/router';
 
 type Props = {};
 

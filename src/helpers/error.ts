@@ -2,10 +2,10 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import { removeCookie } from './cookies';
 import toastify from './toastify';
-import * as cookiesConstant from 'constants/cookies';
-import store from 'store';
-import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'store/auth/actions';
-import { ResponseError } from 'types/response';
+import * as cookiesConstant from 'src/constants/cookies';
+import store from 'src/store';
+import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
+import { ResponseError } from 'src/types/response';
 
 export const errorHandler = (
 	callbackAxiosError?: (err: AxiosResponse<ResponseError>) => void,

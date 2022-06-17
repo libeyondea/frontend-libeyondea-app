@@ -5,9 +5,9 @@ import FooterComponent from './footer';
 import NavbarComponent from './navbar';
 import MainRouter from './router';
 import SidebarComponent from './sidebar';
-import useAppSelector from 'hooks/useAppSelector';
-import { selectAppSidebar } from 'store/app/selectors';
-import { selectAuthCurrent } from 'store/auth/selectors';
+import useAppSelector from 'src/hooks/useAppSelector';
+import { selectAppSidebar } from 'src/store/app/selectors';
+import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 type Props = {};
 

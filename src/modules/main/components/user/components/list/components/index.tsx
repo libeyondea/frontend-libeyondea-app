@@ -4,24 +4,24 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 
 import FilterListUserComponent from './filter';
 import ListUserRouter from './router';
-import BlockUIComponent from 'components/BlockUI/components';
-import BreadcrumbComponent from 'components/Breadcrumb/components';
-import CardComponent from 'components/Card/components';
-import LinkComponent from 'components/Link/components';
-import ModalComponent from 'components/Modal/components';
-import PaginationComponent from 'components/Pagination/components';
-import TableComponent from 'components/Table/components';
-import TableLoadingComponent from 'components/TableLoading/components';
-import * as routeConstant from 'constants/route';
-import * as userConstant from 'constants/user';
-import { errorHandler } from 'helpers/error';
-import time from 'helpers/time';
-import toastify from 'helpers/toastify';
-import useAppDispatch from 'hooks/useAppDispatch';
-import useAppSelector from 'hooks/useAppSelector';
-import useOnceEffect from 'hooks/useOnceEffect';
-import useUpdateEffect from 'hooks/useUpdateEffect';
-import userService from 'services/userService';
+import BlockUIComponent from 'src/components/BlockUI/components';
+import BreadcrumbComponent from 'src/components/Breadcrumb/components';
+import CardComponent from 'src/components/Card/components';
+import LinkComponent from 'src/components/Link/components';
+import ModalComponent from 'src/components/Modal/components';
+import PaginationComponent from 'src/components/Pagination/components';
+import TableComponent from 'src/components/Table/components';
+import TableLoadingComponent from 'src/components/TableLoading/components';
+import * as routeConstant from 'src/constants/route';
+import * as userConstant from 'src/constants/user';
+import { errorHandler } from 'src/helpers/error';
+import time from 'src/helpers/time';
+import toastify from 'src/helpers/toastify';
+import useAppDispatch from 'src/hooks/useAppDispatch';
+import useAppSelector from 'src/hooks/useAppSelector';
+import useOnceEffect from 'src/hooks/useOnceEffect';
+import useUpdateEffect from 'src/hooks/useUpdateEffect';
+import userService from 'src/services/userService';
 import {
 	userDeleteDataRequestAction,
 	userDeleteLoadingRequestAction,
@@ -30,8 +30,8 @@ import {
 	userListPaginationLimitRequestAction,
 	userListPaginationPageRequestAction,
 	userListPaginationTotalRequestAction
-} from 'store/user/actions';
-import { selectUserDelete, selectUserList } from 'store/user/selectors';
+} from 'src/store/user/actions';
+import { selectUserDelete, selectUserList } from 'src/store/user/selectors';
 
 type Props = {};
 

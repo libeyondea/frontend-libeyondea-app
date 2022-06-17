@@ -3,21 +3,21 @@ import { useCallback, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import ButtonComponent from 'components/Button/components';
-import CardComponent from 'components/Card/components';
-import FormComponent from 'components/Form/components';
-import LoadingComponent from 'components/Loading/components';
-import * as routeConstant from 'constants/route';
-import * as userConstant from 'constants/user';
-import { errorHandler } from 'helpers/error';
-import toastify from 'helpers/toastify';
-import useAppDispatch from 'hooks/useAppDispatch';
-import useAppSelector from 'hooks/useAppSelector';
-import useLockedScroll from 'hooks/useLockedScroll';
-import useOnceEffect from 'hooks/useOnceEffect';
-import useUpdateEffect from 'hooks/useUpdateEffect';
-import imageService from 'services/imageService';
-import userService from 'services/userService';
+import ButtonComponent from 'src/components/Button/components';
+import CardComponent from 'src/components/Card/components';
+import FormComponent from 'src/components/Form/components';
+import LoadingComponent from 'src/components/Loading/components';
+import * as routeConstant from 'src/constants/route';
+import * as userConstant from 'src/constants/user';
+import { errorHandler } from 'src/helpers/error';
+import toastify from 'src/helpers/toastify';
+import useAppDispatch from 'src/hooks/useAppDispatch';
+import useAppSelector from 'src/hooks/useAppSelector';
+import useLockedScroll from 'src/hooks/useLockedScroll';
+import useOnceEffect from 'src/hooks/useOnceEffect';
+import useUpdateEffect from 'src/hooks/useUpdateEffect';
+import imageService from 'src/services/imageService';
+import userService from 'src/services/userService';
 import {
 	userListDataRequestAction,
 	userListLoadingRequestAction,
@@ -26,10 +26,10 @@ import {
 	userShowLoadingRequestAction,
 	userUpdateDataRequestAction,
 	userUpdateLoadingRequestAction
-} from 'store/user/actions';
-import { selectUserList, selectUserShow, selectUserUpdate } from 'store/user/selectors';
-import { Image } from 'types/image';
-import { UpdateUserFormik } from 'types/user';
+} from 'src/store/user/actions';
+import { selectUserList, selectUserShow, selectUserUpdate } from 'src/store/user/selectors';
+import { Image } from 'src/types/image';
+import { UpdateUserFormik } from 'src/types/user';
 
 type Props = {};
 

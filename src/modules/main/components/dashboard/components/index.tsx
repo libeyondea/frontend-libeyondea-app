@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
-import BreadcrumbComponent from 'components/Breadcrumb/components';
-import CardComponent from 'components/Card/components';
+import BreadcrumbComponent from 'src/components/Breadcrumb/components';
+import CardComponent from 'src/components/Card/components';
 
 type Props = {};
 

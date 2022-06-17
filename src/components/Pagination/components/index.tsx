@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { MdMoreHoriz } from 'react-icons/md';
 
-import { getPageNumbers, getTotalPages } from 'helpers/pagination';
+import { getPageNumbers, getTotalPages } from 'src/helpers/pagination';
 
 type Props = {
 	className?: string;

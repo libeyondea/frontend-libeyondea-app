@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 
-import config from 'config';
-import http from 'helpers/http';
-import { Profile, UpdateProfile } from 'types/profile';
-import { ResponseData } from 'types/response';
+import config from 'src/config';
+import http from 'src/helpers/http';
+import { Profile, UpdateProfile } from 'src/types/profile';
+import { ResponseData } from 'src/types/response';
 
 const profileService = {
 	show: (): Promise<AxiosResponse<ResponseData<Profile>>> => {

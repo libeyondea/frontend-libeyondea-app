@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import TableComponent from 'components/Table/components';
+import TableComponent from 'src/components/Table/components';
 
 type Props = {
 	className?: string;

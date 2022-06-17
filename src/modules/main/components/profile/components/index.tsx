@@ -2,27 +2,27 @@ import { FormikHelpers } from 'formik';
 import { Fragment, useState } from 'react';
 import * as Yup from 'yup';
 
-import BreadcrumbComponent from 'components/Breadcrumb/components';
-import ButtonComponent from 'components/Button/components';
-import CardComponent from 'components/Card/components';
-import FormComponent from 'components/Form/components';
-import LoadingComponent from 'components/Loading/components';
-import { errorHandler } from 'helpers/error';
-import toastify from 'helpers/toastify';
-import useAppDispatch from 'hooks/useAppDispatch';
-import useAppSelector from 'hooks/useAppSelector';
-import useOnceEffect from 'hooks/useOnceEffect';
-import imageService from 'services/imageService';
-import profileService from 'services/profileService';
+import BreadcrumbComponent from 'src/components/Breadcrumb/components';
+import ButtonComponent from 'src/components/Button/components';
+import CardComponent from 'src/components/Card/components';
+import FormComponent from 'src/components/Form/components';
+import LoadingComponent from 'src/components/Loading/components';
+import { errorHandler } from 'src/helpers/error';
+import toastify from 'src/helpers/toastify';
+import useAppDispatch from 'src/hooks/useAppDispatch';
+import useAppSelector from 'src/hooks/useAppSelector';
+import useOnceEffect from 'src/hooks/useOnceEffect';
+import imageService from 'src/services/imageService';
+import profileService from 'src/services/profileService';
 import {
 	profileShowDataRequestAction,
 	profileShowLoadingRequestAction,
 	profileUpdateDataRequestAction,
 	profileUpdateLoadingRequestAction
-} from 'store/profile/actions';
-import { selectProfileShow, selectProfileUpdate } from 'store/profile/selectors';
-import { Image } from 'types/image';
-import { UpdateProfileFormik } from 'types/profile';
+} from 'src/store/profile/actions';
+import { selectProfileShow, selectProfileUpdate } from 'src/store/profile/selectors';
+import { Image } from 'src/types/image';
+import { UpdateProfileFormik } from 'src/types/profile';
 
 type Props = {};
 

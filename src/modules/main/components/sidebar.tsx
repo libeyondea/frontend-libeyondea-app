@@ -4,17 +4,17 @@ import { Fragment } from 'react';
 import { FaChevronLeft, FaCog, FaEllipsisH, FaPlusCircle, FaRegListAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 
-import ImageComponent from 'components/Image/components';
-import LinkComponent from 'components/Link/components';
-import NavLinkComponent from 'components/NavLink/components';
-import config from 'config';
-import * as routeConstant from 'constants/route';
-import * as userConstant from 'constants/user';
-import useAppDispatch from 'hooks/useAppDispatch';
-import useAppSelector from 'hooks/useAppSelector';
-import { appSidebarRequestAction } from 'store/app/actions';
-import { selectAppSidebar } from 'store/app/selectors';
-import { selectAuthCurrent } from 'store/auth/selectors';
+import ImageComponent from 'src/components/Image/components';
+import LinkComponent from 'src/components/Link/components';
+import NavLinkComponent from 'src/components/NavLink/components';
+import config from 'src/config';
+import * as routeConstant from 'src/constants/route';
+import * as userConstant from 'src/constants/user';
+import useAppDispatch from 'src/hooks/useAppDispatch';
+import useAppSelector from 'src/hooks/useAppSelector';
+import { appSidebarRequestAction } from 'src/store/app/actions';
+import { selectAppSidebar } from 'src/store/app/selectors';
+import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 type Props = {};
 

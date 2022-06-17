@@ -3,11 +3,11 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 
 import AccessControl from './accessControl';
-import * as routeConstant from 'constants/route';
+import * as routeConstant from 'src/constants/route';
 
-const AuthComponent = lazy(() => import('modules/auth/components'));
-const MainComponent = lazy(() => import('modules/main/components'));
-const SplashComponent = lazy(() => import('modules/splash/components'));
+const AuthComponent = lazy(() => import('src/modules/auth/components'));
+const MainComponent = lazy(() => import('src/modules/main/components'));
+const SplashComponent = lazy(() => import('src/modules/splash/components'));
 
 const RootRouter = () => {
 	const routes: RouteObject[] = [
