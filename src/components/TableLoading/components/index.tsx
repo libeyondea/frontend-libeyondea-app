@@ -11,34 +11,34 @@ const TableLoadingComponent: React.FC<Props> = ({ className }) => {
 			<TableComponent.Thead>
 				<TableComponent.Tr>
 					<TableComponent.Th>
-						<div className="h-6 bg-slate-200 rounded-md"></div>
+						<div className="h-6 bg-slate-200 rounded-md" />
 					</TableComponent.Th>
 				</TableComponent.Tr>
 			</TableComponent.Thead>
 			<TableComponent.Tbody>
 				<TableComponent.Tr>
 					<TableComponent.Td>
-						<div className="h-6 bg-slate-200 rounded-md"></div>
+						<div className="h-6 bg-slate-200 rounded-md" />
 					</TableComponent.Td>
 				</TableComponent.Tr>
 				<TableComponent.Tr>
 					<TableComponent.Td>
-						<div className="h-6 bg-slate-200 rounded-md"></div>
+						<div className="h-6 bg-slate-200 rounded-md" />
 					</TableComponent.Td>
 				</TableComponent.Tr>
 				<TableComponent.Tr>
 					<TableComponent.Td>
-						<div className="h-6 bg-slate-200 rounded-md"></div>
+						<div className="h-6 bg-slate-200 rounded-md" />
 					</TableComponent.Td>
 				</TableComponent.Tr>
 				<TableComponent.Tr>
 					<TableComponent.Td>
-						<div className="h-6 bg-slate-200 rounded-md"></div>
+						<div className="h-6 bg-slate-200 rounded-md" />
 					</TableComponent.Td>
 				</TableComponent.Tr>
 				<TableComponent.Tr>
 					<TableComponent.Td>
-						<div className="h-6 bg-slate-200 rounded-md"></div>
+						<div className="h-6 bg-slate-200 rounded-md" />
 					</TableComponent.Td>
 				</TableComponent.Tr>
 			</TableComponent.Tbody>

@@ -197,10 +197,7 @@ const ListUserComponent: React.FC<Props> = () => {
 				title="Do you want to delete this user?"
 				show={showModal}
 				setShow={setShowModal}
-				onClick={() => {
-					setShowModal(false);
-					id && onClickDelete(id);
-				}}
+				onClick={() => id && onClickDelete(id)}
 				styleType="danger"
 			/>
 			<ListUserRouter />

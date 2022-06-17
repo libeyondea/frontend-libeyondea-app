@@ -24,11 +24,12 @@ const SidebarComponent: React.FC<Props> = () => {
 	const authCurrent = useAppSelector(selectAuthCurrent);
 
 	return (
-		<div className="sidebar flex">
+		<div className="flex">
 			<div
-				className={classNames('fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden', appSidebar ? 'hidden' : 'block')}
-				onClick={() => dispatch(appSidebarRequestAction(true))}
-			></div>
+				className={classNames('fixed inset-0 z-20 bg-gray-900/50 lg:hidden', appSidebar ? 'hidden' : 'block')}
+				onMouseDown={() => dispatch(appSidebarRequestAction(true))}
+				onTouchStart={() => dispatch(appSidebarRequestAction(true))}
+			/>
 			<div
 				className={classNames(
 					'fixed inset-y-0 left-0 max-w-full flex transition-all ease-in-out duration-500 flex-shrink-0 z-30',
@@ -89,7 +90,6 @@ const SidebarComponent: React.FC<Props> = () => {
 												</Disclosure.Button>
 												<Transition
 													as={Fragment}
-													show={open}
 													enter="transition duration-100 ease-out"
 													enterFrom="transform scale-95 opacity-0"
 													enterTo="transform scale-100 opacity-100"
@@ -150,7 +150,6 @@ const SidebarComponent: React.FC<Props> = () => {
 											</Disclosure.Button>
 											<Transition
 												as={Fragment}
-												show={open}
 												enter="transition duration-100 ease-out"
 												enterFrom="transform scale-95 opacity-0"
 												enterTo="transform scale-100 opacity-100"

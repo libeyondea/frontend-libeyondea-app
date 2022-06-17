@@ -30,7 +30,14 @@ const ModalComponent: React.FC<Props> = ({ className, title, content, show, setS
 				<CardComponent ref={outsideRef} className={classNames('sm:max-w-lg z-50', className)} title={title} onClickClose={() => setShow(false)}>
 					{content && <p className="text-sm text-gray-500 text-center mb-4">{content}</p>}
 					<div className="sm:flex sm:flex-row-reverse">
-						<ButtonComponent className="w-full sm:w-auto sm:ml-4" styleType={styleType} onClick={onClick || (() => setShow(false))}>
+						<ButtonComponent
+							className="w-full sm:w-auto sm:ml-4"
+							styleType={styleType}
+							onClick={() => {
+								onClick && onClick();
+								setShow(false);
+							}}
+						>
 							OK
 						</ButtonComponent>
 						<ButtonComponent className="w-full sm:w-auto mt-4 sm:mt-0" styleType="default" onClick={() => setShow(false)}>
