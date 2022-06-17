@@ -1,15 +1,16 @@
-import { filter, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Action } from '@reduxjs/toolkit';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
 import {
-	settingUpdateDataRequestAction,
-	settingUpdateDataSuccessAction,
-	settingUpdateLoadingRequestAction,
-	settingUpdateLoadingSuccessAction,
 	settingShowDataRequestAction,
 	settingShowDataSuccessAction,
 	settingShowLoadingRequestAction,
-	settingShowLoadingSuccessAction
+	settingShowLoadingSuccessAction,
+	settingUpdateDataRequestAction,
+	settingUpdateDataSuccessAction,
+	settingUpdateLoadingRequestAction,
+	settingUpdateLoadingSuccessAction
 } from './actions';
 
 export const settingShowDataEpic = (action$: Observable<Action>): Observable<Action> =>

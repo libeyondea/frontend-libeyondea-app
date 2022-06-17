@@ -1,8 +1,9 @@
-import http from 'helpers/http';
-import config from 'config';
-import { CreateUser, ListUser, UpdateUser, User } from 'types/user';
-import { ResponseData, ResponseDataPagination } from 'types/response';
 import { AxiosResponse } from 'axios';
+
+import config from 'config';
+import http from 'helpers/http';
+import { ResponseData, ResponseDataPagination } from 'types/response';
+import { CreateUser, ListUser, UpdateUser, User } from 'types/user';
 
 const userService = {
 	list: (params?: ListUser): Promise<AxiosResponse<ResponseDataPagination<User[]>>> => {

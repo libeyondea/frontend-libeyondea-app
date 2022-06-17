@@ -1,7 +1,12 @@
 {
-	"endOfLine": "auto",
-	"singleQuote": true,
-	"trailingComma": "none",
+	"endOfLine": "lf",
 	"useTabs": true,
-	"printWidth": 166
+	"printWidth": 166,
+	"tabWidth": 4,
+	"trailingComma": "none",
+	"singleQuote": true,
+	"semi": true,
+	"importOrder": ["^components|constants|helpers|hooks|modules|root|services|store|styles|types|config|\\.\\/(.*)$"],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true
 }

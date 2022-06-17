@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Me } from 'types/auth';
+
 import { authCurrentDataSuccessAction, authCurrentTokenSuccessAction } from './actions';
+import { Me } from 'types/auth';
 
 type AuthState = {
 	current: {

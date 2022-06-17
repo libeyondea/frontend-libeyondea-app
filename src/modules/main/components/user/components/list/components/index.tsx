@@ -1,22 +1,27 @@
+import classNames from 'classnames';
+import { Fragment, useCallback, useState } from 'react';
+import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
+
+import FilterListUserComponent from './filter';
+import ListUserRouter from './router';
+import BlockUIComponent from 'components/BlockUI/components';
 import BreadcrumbComponent from 'components/Breadcrumb/components';
 import CardComponent from 'components/Card/components';
 import LinkComponent from 'components/Link/components';
-import time from 'helpers/time';
-import { Fragment, useCallback, useState } from 'react';
-import userService from 'services/userService';
+import ModalComponent from 'components/Modal/components';
+import PaginationComponent from 'components/Pagination/components';
+import TableComponent from 'components/Table/components';
+import TableLoadingComponent from 'components/TableLoading/components';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
-import classNames from 'classnames';
-import PaginationComponent from 'components/Pagination/components';
-import TableLoadingComponent from 'components/TableLoading/components';
-import BlockUIComponent from 'components/BlockUI/components';
-import TableComponent from 'components/Table/components';
 import { errorHandler } from 'helpers/error';
-import ListUserRouter from './router';
+import time from 'helpers/time';
+import toastify from 'helpers/toastify';
 import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
-import { selectUserDelete, selectUserList } from 'store/user/selectors';
+import useOnceEffect from 'hooks/useOnceEffect';
+import useUpdateEffect from 'hooks/useUpdateEffect';
+import userService from 'services/userService';
 import {
 	userDeleteDataRequestAction,
 	userDeleteLoadingRequestAction,
@@ -26,11 +31,7 @@ import {
 	userListPaginationPageRequestAction,
 	userListPaginationTotalRequestAction
 } from 'store/user/actions';
-import FilterListUserComponent from './filter';
-import useOnceEffect from 'hooks/useOnceEffect';
-import useUpdateEffect from 'hooks/useUpdateEffect';
-import toastify from 'helpers/toastify';
-import ModalComponent from 'components/Modal/components';
+import { selectUserDelete, selectUserList } from 'store/user/selectors';
 
 type Props = {};
 

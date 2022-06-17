@@ -1,12 +1,13 @@
-import NavbarComponent from './navbar';
-import SidebarComponent from './sidebar';
-import MainRouter from './router';
 import classNames from 'classnames';
-import { selectAppSidebar } from 'store/app/selectors';
-import useAppSelector from 'hooks/useAppSelector';
-import FooterComponent from './footer';
-import { selectAuthCurrent } from 'store/auth/selectors';
 import { Fragment } from 'react';
+
+import FooterComponent from './footer';
+import NavbarComponent from './navbar';
+import MainRouter from './router';
+import SidebarComponent from './sidebar';
+import useAppSelector from 'hooks/useAppSelector';
+import { selectAppSidebar } from 'store/app/selectors';
+import { selectAuthCurrent } from 'store/auth/selectors';
 
 type Props = {};
 

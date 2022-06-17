@@ -1,26 +1,27 @@
-import BreadcrumbComponent from 'components/Breadcrumb/components';
-import CardComponent from 'components/Card/components';
-import * as Yup from 'yup';
-import { Fragment } from 'react';
-import { UpdateSettingFormik } from 'types/setting';
-import LoadingComponent from 'components/Loading/components';
-import settingService from 'services/settingService';
-import toastify from 'helpers/toastify';
-import FormComponent from 'components/Form/components';
 import { FormikHelpers } from 'formik';
+import { Fragment } from 'react';
+import * as Yup from 'yup';
+
+import BreadcrumbComponent from 'components/Breadcrumb/components';
+import ButtonComponent from 'components/Button/components';
+import CardComponent from 'components/Card/components';
+import FormComponent from 'components/Form/components';
+import LoadingComponent from 'components/Loading/components';
+import * as settingConstant from 'constants/setting';
 import { errorHandler } from 'helpers/error';
-import useAppSelector from 'hooks/useAppSelector';
+import toastify from 'helpers/toastify';
 import useAppDispatch from 'hooks/useAppDispatch';
-import { selectSettingShow, selectSettingUpdate } from 'store/setting/selectors';
+import useAppSelector from 'hooks/useAppSelector';
+import useOnceEffect from 'hooks/useOnceEffect';
+import settingService from 'services/settingService';
 import {
 	settingShowDataRequestAction,
 	settingShowLoadingRequestAction,
 	settingUpdateDataRequestAction,
 	settingUpdateLoadingRequestAction
 } from 'store/setting/actions';
-import ButtonComponent from 'components/Button/components';
-import useOnceEffect from 'hooks/useOnceEffect';
-import * as settingConstant from 'constants/setting';
+import { selectSettingShow, selectSettingUpdate } from 'store/setting/selectors';
+import { UpdateSettingFormik } from 'types/setting';
 
 type Props = {};
 

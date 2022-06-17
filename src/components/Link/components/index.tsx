@@ -1,7 +1,7 @@
+import classNames from 'classnames';
+import { forwardRef } from 'react';
 import { Link, To } from 'react-router-dom';
 import type { LinkProps } from 'react-router-dom';
-import { forwardRef } from 'react';
-import classNames from 'classnames';
 
 type Props = {
 	className?: string;

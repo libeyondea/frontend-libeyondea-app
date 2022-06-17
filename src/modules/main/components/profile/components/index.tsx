@@ -1,27 +1,28 @@
-import BreadcrumbComponent from 'components/Breadcrumb/components';
-import CardComponent from 'components/Card/components';
-import * as Yup from 'yup';
-import imageService from 'services/imageService';
-import { Fragment, useState } from 'react';
-import { UpdateProfileFormik } from 'types/profile';
-import LoadingComponent from 'components/Loading/components';
-import profileService from 'services/profileService';
-import toastify from 'helpers/toastify';
-import { Image } from 'types/image';
-import FormComponent from 'components/Form/components';
 import { FormikHelpers } from 'formik';
+import { Fragment, useState } from 'react';
+import * as Yup from 'yup';
+
+import BreadcrumbComponent from 'components/Breadcrumb/components';
+import ButtonComponent from 'components/Button/components';
+import CardComponent from 'components/Card/components';
+import FormComponent from 'components/Form/components';
+import LoadingComponent from 'components/Loading/components';
 import { errorHandler } from 'helpers/error';
-import useAppSelector from 'hooks/useAppSelector';
+import toastify from 'helpers/toastify';
 import useAppDispatch from 'hooks/useAppDispatch';
-import { selectProfileShow, selectProfileUpdate } from 'store/profile/selectors';
+import useAppSelector from 'hooks/useAppSelector';
+import useOnceEffect from 'hooks/useOnceEffect';
+import imageService from 'services/imageService';
+import profileService from 'services/profileService';
 import {
 	profileShowDataRequestAction,
 	profileShowLoadingRequestAction,
 	profileUpdateDataRequestAction,
 	profileUpdateLoadingRequestAction
 } from 'store/profile/actions';
-import ButtonComponent from 'components/Button/components';
-import useOnceEffect from 'hooks/useOnceEffect';
+import { selectProfileShow, selectProfileUpdate } from 'store/profile/selectors';
+import { Image } from 'types/image';
+import { UpdateProfileFormik } from 'types/profile';
 
 type Props = {};
 

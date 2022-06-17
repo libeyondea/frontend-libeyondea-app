@@ -1,15 +1,16 @@
-import { filter, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Action } from '@reduxjs/toolkit';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
 import {
-	profileUpdateDataRequestAction,
-	profileUpdateDataSuccessAction,
-	profileUpdateLoadingRequestAction,
-	profileUpdateLoadingSuccessAction,
 	profileShowDataRequestAction,
 	profileShowDataSuccessAction,
 	profileShowLoadingRequestAction,
-	profileShowLoadingSuccessAction
+	profileShowLoadingSuccessAction,
+	profileUpdateDataRequestAction,
+	profileUpdateDataSuccessAction,
+	profileUpdateLoadingRequestAction,
+	profileUpdateLoadingSuccessAction
 } from './actions';
 
 export const profileShowDataEpic = (action$: Observable<Action>): Observable<Action> =>

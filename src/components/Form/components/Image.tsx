@@ -1,7 +1,8 @@
 import classNames from 'classnames';
+import { useState } from 'react';
+
 import ButtonComponent from 'components/Button/components';
 import ImageComponent from 'components/Image/components';
-import { useState } from 'react';
 
 type OnChangeFile = (field: string, value: File | null, shouldValidate?: boolean) => void;
 

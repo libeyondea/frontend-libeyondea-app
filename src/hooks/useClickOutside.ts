@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
 
 const useOnClickOutside = <T extends HTMLElement = HTMLElement>(ref: React.RefObject<T>, handler: (event: MouseEvent | TouchEvent) => void): void => {

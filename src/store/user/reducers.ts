@@ -1,6 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'types/reducer';
-import { User } from 'types/user';
+
 import {
 	userCreateDataSuccessAction,
 	userCreateLoadingSuccessAction,
@@ -21,6 +20,8 @@ import {
 } from './actions';
 import * as filterConstant from 'constants/filter';
 import * as paginationConstant from 'constants/pagination';
+import { ResponseDataReducer, ResponseDataWithPaginationAndFilterReducer } from 'types/reducer';
+import { User } from 'types/user';
 
 type UserState = {
 	list: ResponseDataWithPaginationAndFilterReducer<User[]>;

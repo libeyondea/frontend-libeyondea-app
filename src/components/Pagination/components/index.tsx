@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import { getPageNumbers, getTotalPages } from 'helpers/pagination';
 import { Fragment } from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { MdMoreHoriz } from 'react-icons/md';
+
+import { getPageNumbers, getTotalPages } from 'helpers/pagination';
 
 type Props = {
 	className?: string;

@@ -1,7 +1,8 @@
-import http from 'helpers/http';
-import config from 'config';
-import { ResponseData } from 'types/response';
 import { AxiosResponse } from 'axios';
+
+import config from 'config';
+import http from 'helpers/http';
+import { ResponseData } from 'types/response';
 import { Setting, UpdateSetting } from 'types/setting';
 
 const settingService = {

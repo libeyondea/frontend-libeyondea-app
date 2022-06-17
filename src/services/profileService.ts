@@ -1,8 +1,9 @@
-import http from 'helpers/http';
-import config from 'config';
-import { UpdateProfile, Profile } from 'types/profile';
-import { ResponseData } from 'types/response';
 import { AxiosResponse } from 'axios';
+
+import config from 'config';
+import http from 'helpers/http';
+import { Profile, UpdateProfile } from 'types/profile';
+import { ResponseData } from 'types/response';
 
 const profileService = {
 	show: (): Promise<AxiosResponse<ResponseData<Profile>>> => {

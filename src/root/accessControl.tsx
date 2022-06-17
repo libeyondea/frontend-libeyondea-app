@@ -1,9 +1,10 @@
-import { selectAuthCurrent, selectIsAuth } from 'store/auth/selectors';
-import { selectAppInitialized } from 'store/app/selectors';
+import { Navigate, useLocation } from 'react-router-dom';
+
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
 import useAppSelector from 'hooks/useAppSelector';
-import { useLocation, Navigate } from 'react-router-dom';
+import { selectAppInitialized } from 'store/app/selectors';
+import { selectAuthCurrent, selectIsAuth } from 'store/auth/selectors';
 
 type Props = {
 	children: JSX.Element;

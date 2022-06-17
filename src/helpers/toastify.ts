@@ -1,4 +1,4 @@
-import { toast, ToastOptions } from 'react-toastify';
+import { ToastOptions, toast } from 'react-toastify';
 
 const toastifyConfig: ToastOptions = {
 	position: toast.POSITION.BOTTOM_RIGHT,

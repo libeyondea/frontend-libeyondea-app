@@ -1,11 +1,24 @@
-import { filter, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Action } from '@reduxjs/toolkit';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
 import {
+	userCreateDataRequestAction,
+	userCreateDataSuccessAction,
+	userCreateLoadingRequestAction,
+	userCreateLoadingSuccessAction,
+	userDeleteDataRequestAction,
+	userDeleteDataSuccessAction,
+	userDeleteLoadingRequestAction,
+	userDeleteLoadingSuccessAction,
 	userListDataRequestAction,
 	userListDataSuccessAction,
 	userListFilterQRequestAction,
 	userListFilterQSuccessAction,
+	userListFilterSortByRequestAction,
+	userListFilterSortBySuccessAction,
+	userListFilterSortDirectionRequestAction,
+	userListFilterSortDirectionSuccessAction,
 	userListLoadingRequestAction,
 	userListLoadingSuccessAction,
 	userListPaginationLimitRequestAction,
@@ -14,26 +27,14 @@ import {
 	userListPaginationPageSuccessAction,
 	userListPaginationTotalRequestAction,
 	userListPaginationTotalSuccessAction,
-	userDeleteLoadingRequestAction,
-	userDeleteLoadingSuccessAction,
-	userUpdateDataRequestAction,
-	userUpdateDataSuccessAction,
-	userUpdateLoadingRequestAction,
-	userUpdateLoadingSuccessAction,
-	userDeleteDataSuccessAction,
-	userDeleteDataRequestAction,
 	userShowDataRequestAction,
 	userShowDataSuccessAction,
 	userShowLoadingRequestAction,
 	userShowLoadingSuccessAction,
-	userCreateDataRequestAction,
-	userCreateDataSuccessAction,
-	userCreateLoadingRequestAction,
-	userCreateLoadingSuccessAction,
-	userListFilterSortDirectionRequestAction,
-	userListFilterSortDirectionSuccessAction,
-	userListFilterSortByRequestAction,
-	userListFilterSortBySuccessAction
+	userUpdateDataRequestAction,
+	userUpdateDataSuccessAction,
+	userUpdateLoadingRequestAction,
+	userUpdateLoadingSuccessAction
 } from './actions';
 
 export const userListDataEpic = (action$: Observable<Action>): Observable<Action> =>

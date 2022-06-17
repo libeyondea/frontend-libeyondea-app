@@ -1,9 +1,9 @@
+import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import * as routeConstant from 'constants/route';
-import { lazy, Suspense } from 'react';
-import AccessControl from './accessControl';
-
 import type { RouteObject } from 'react-router-dom';
+
+import AccessControl from './accessControl';
+import * as routeConstant from 'constants/route';
 
 const AuthComponent = lazy(() => import('modules/auth/components'));
 const MainComponent = lazy(() => import('modules/main/components'));

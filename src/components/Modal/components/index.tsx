@@ -1,9 +1,10 @@
 import classNames from 'classnames';
+import { useRef } from 'react';
+
 import ButtonComponent from 'components/Button/components';
 import CardComponent from 'components/Card/components';
 import useOnClickOutside from 'hooks/useClickOutside';
 import useLockedScroll from 'hooks/useLockedScroll';
-import { useRef } from 'react';
 
 type Props = {
 	className?: string;

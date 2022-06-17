@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+
 import TableComponent from 'components/Table/components';
 
 type Props = {

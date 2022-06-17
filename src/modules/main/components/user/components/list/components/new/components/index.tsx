@@ -1,20 +1,20 @@
-import CardComponent from 'components/Card/components';
+import { FormikHelpers } from 'formik';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import ButtonComponent from 'components/Button/components';
+import CardComponent from 'components/Card/components';
+import FormComponent from 'components/Form/components';
 import * as routeConstant from 'constants/route';
 import * as userConstant from 'constants/user';
-import * as Yup from 'yup';
-import userService from 'services/userService';
-import imageService from 'services/imageService';
-import { useState } from 'react';
-import { CreateUserFormik } from 'types/user';
-import toastify from 'helpers/toastify';
-import { Image } from 'types/image';
-import FormComponent from 'components/Form/components';
-import { FormikHelpers } from 'formik';
 import { errorHandler } from 'helpers/error';
+import toastify from 'helpers/toastify';
 import useAppDispatch from 'hooks/useAppDispatch';
 import useAppSelector from 'hooks/useAppSelector';
-import { selectUserCreate, selectUserList } from 'store/user/selectors';
+import useLockedScroll from 'hooks/useLockedScroll';
+import imageService from 'services/imageService';
+import userService from 'services/userService';
 import {
 	userCreateDataRequestAction,
 	userCreateLoadingRequestAction,
@@ -22,8 +22,9 @@ import {
 	userListLoadingRequestAction,
 	userListPaginationTotalRequestAction
 } from 'store/user/actions';
-import useLockedScroll from 'hooks/useLockedScroll';
-import ButtonComponent from 'components/Button/components';
+import { selectUserCreate, selectUserList } from 'store/user/selectors';
+import { Image } from 'types/image';
+import { CreateUserFormik } from 'types/user';
 
 type Props = {};
 

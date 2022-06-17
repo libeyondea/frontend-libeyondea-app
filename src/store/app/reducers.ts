@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
+
 import { appInitializedSuccessAction, appSidebarSuccessAction } from './actions';
 
 type AppState = {

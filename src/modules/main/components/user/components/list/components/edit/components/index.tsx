@@ -1,19 +1,23 @@
-import CardComponent from 'components/Card/components';
-import { useNavigate, useParams } from 'react-router-dom';
-import * as userConstant from 'constants/user';
-import * as Yup from 'yup';
-import userService from 'services/userService';
-import imageService from 'services/imageService';
-import { useCallback, useState } from 'react';
-import { UpdateUserFormik } from 'types/user';
-import LoadingComponent from 'components/Loading/components';
-import toastify from 'helpers/toastify';
-import { Image } from 'types/image';
-import FormComponent from 'components/Form/components';
 import { FormikHelpers } from 'formik';
-import { errorHandler } from 'helpers/error';
+import { useCallback, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import ButtonComponent from 'components/Button/components';
+import CardComponent from 'components/Card/components';
+import FormComponent from 'components/Form/components';
+import LoadingComponent from 'components/Loading/components';
 import * as routeConstant from 'constants/route';
+import * as userConstant from 'constants/user';
+import { errorHandler } from 'helpers/error';
+import toastify from 'helpers/toastify';
 import useAppDispatch from 'hooks/useAppDispatch';
+import useAppSelector from 'hooks/useAppSelector';
+import useLockedScroll from 'hooks/useLockedScroll';
+import useOnceEffect from 'hooks/useOnceEffect';
+import useUpdateEffect from 'hooks/useUpdateEffect';
+import imageService from 'services/imageService';
+import userService from 'services/userService';
 import {
 	userListDataRequestAction,
 	userListLoadingRequestAction,
@@ -23,12 +27,9 @@ import {
 	userUpdateDataRequestAction,
 	userUpdateLoadingRequestAction
 } from 'store/user/actions';
-import useAppSelector from 'hooks/useAppSelector';
 import { selectUserList, selectUserShow, selectUserUpdate } from 'store/user/selectors';
-import useLockedScroll from 'hooks/useLockedScroll';
-import ButtonComponent from 'components/Button/components';
-import useOnceEffect from 'hooks/useOnceEffect';
-import useUpdateEffect from 'hooks/useUpdateEffect';
+import { Image } from 'types/image';
+import { UpdateUserFormik } from 'types/user';
 
 type Props = {};
 

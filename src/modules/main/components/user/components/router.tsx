@@ -1,8 +1,8 @@
+import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import * as routeConstant from 'constants/route';
-import { lazy, Suspense } from 'react';
-
 import type { RouteObject } from 'react-router-dom';
+
+import * as routeConstant from 'constants/route';
 
 const ListUserComponent = lazy(() => import('./list/components'));
 

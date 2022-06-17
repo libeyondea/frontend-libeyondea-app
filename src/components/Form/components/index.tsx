@@ -1,9 +1,10 @@
-import { FormikConfig, FormikHelpers, FormikProps, FormikValues, useFormik } from 'formik';
 import classNames from 'classnames';
-import InputFormComponent from './Input';
-import SelectFormComponent from './Select';
+import { FormikConfig, FormikHelpers, FormikProps, FormikValues, useFormik } from 'formik';
+
 import CheckboxFormComponent from './Checkbox';
 import ImageFormComponent from './Image';
+import InputFormComponent from './Input';
+import SelectFormComponent from './Select';
 
 type FormComponentProps<Values> = {
 	className?: string;

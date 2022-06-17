@@ -1,10 +1,11 @@
 import { Provider } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router } from 'react-router-dom';
-import store from 'store';
-import RootRouter from './router';
-import 'styles/index.scss';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+
+import RootRouter from './router';
+import store from 'store';
+import 'styles/index.scss';
 
 type Props = {};
 

@@ -1,16 +1,17 @@
 import { FormikHelpers } from 'formik';
-import * as Yup from 'yup';
-import CardComponent from 'components/Card/components';
-import * as routeConstant from 'constants/route';
+import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import ButtonComponent from 'components/Button/components';
+import CardComponent from 'components/Card/components';
+import FormComponent from 'components/Form/components';
 import LinkComponent from 'components/Link/components';
+import * as routeConstant from 'constants/route';
+import { errorHandler } from 'helpers/error';
+import toastify from 'helpers/toastify';
 import authService from 'services/authService';
 import { SignUpFormik } from 'types/auth';
-import FormComponent from 'components/Form/components';
-import { Fragment } from 'react';
-import toastify from 'helpers/toastify';
-import { errorHandler } from 'helpers/error';
-import ButtonComponent from 'components/Button/components';
 
 type Props = {};
 
