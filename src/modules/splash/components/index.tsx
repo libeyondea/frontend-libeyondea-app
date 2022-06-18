@@ -9,6 +9,7 @@ import { errorHandler } from 'src/helpers/error';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
+import Logo from 'src/images/logo.png';
 import authService from 'src/services/authService';
 import { appInitializedRequestAction } from 'src/store/app/actions';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
@@ -85,7 +86,7 @@ const SplashComponent: React.FC<Props> = () => {
 
 	return (
 		<div className="flex h-screen">
-			<ImageComponent className="m-auto animate-spin rounded-full h-32 w-32" src={config.LOGO_URL} alt="Loading" />
+			<ImageComponent className="m-auto animate-spin rounded-full h-32 w-32" src={Logo} alt={config.APP_NAME} />
 		</div>
 	);
 };

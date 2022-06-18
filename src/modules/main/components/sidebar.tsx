@@ -12,6 +12,7 @@ import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
+import Logo from 'src/images/logo.png';
 import { appSidebarRequestAction } from 'src/store/app/actions';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
@@ -41,7 +42,7 @@ const SidebarComponent: React.FC<Props> = () => {
 					<div className="bg-gray-800 flex flex-col flex-shrink-0 fixed w-64 z-50 py-3 px-7">
 						<div className="flex">
 							<LinkComponent href="/" className="flex items-center text-left focus:outline-none">
-								<ImageComponent className="rounded-full h-8 w-8" src={config.LOGO_URL} alt={config.APP_NAME} />
+								<ImageComponent className="rounded-full h-8 w-8" src={Logo} alt={config.APP_NAME} />
 								<h2 className="text-lg text-white font-bold tracking-tighter cursor-pointer ml-3">{config.APP_NAME}</h2>
 							</LinkComponent>
 						</div>

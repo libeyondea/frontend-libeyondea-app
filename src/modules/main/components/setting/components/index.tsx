@@ -31,19 +31,24 @@ const SettingComponent: React.FC<Props> = () => {
 	const settingUpdate = useAppSelector(selectSettingUpdate);
 
 	const initialValues: UpdateSettingFormik = {
-		navbar: settingShow.data.navbar || ''
+		navbar: settingShow.data.navbar || settingConstant.SETTING_NAVBAR_FIXED,
+		footer: settingShow.data.footer || settingConstant.SETTING_FOOTER_STATIC
 	};
 
 	const validationSchema = Yup.object({
 		navbar: Yup.string()
 			.required('The navbar is required.')
-			.oneOf([settingConstant.SETTING_NAVBAR_FIXED, settingConstant.SETTING_NAVBAR_STATIC], 'The navbar invalid.')
+			.oneOf([settingConstant.SETTING_NAVBAR_FIXED, settingConstant.SETTING_NAVBAR_STATIC], 'The navbar invalid.'),
+		footer: Yup.string()
+			.required('The footer is required.')
+			.oneOf([settingConstant.SETTING_FOOTER_FIXED, settingConstant.SETTING_FOOTER_STATIC], 'The footer invalid.')
 	});
 
 	const onSubmit = (values: UpdateSettingFormik, formikHelpers: FormikHelpers<UpdateSettingFormik>) => {
 		dispatch(settingUpdateLoadingRequestAction(true));
 		const payload = {
-			navbar: values.navbar
+			navbar: values.navbar,
+			footer: values.footer
 		};
 		settingService
 			.update(payload)
@@ -51,13 +56,7 @@ const SettingComponent: React.FC<Props> = () => {
 				dispatch(settingUpdateDataRequestAction(response.data.data));
 				toastify.success('Setting updated successfully');
 			})
-			.catch(
-				errorHandler(
-					(axiosError) => {},
-					(validationError) => formikHelpers.setErrors(validationError.data.errors),
-					(stockError) => {}
-				)
-			)
+			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
 			.finally(() => {
 				dispatch(settingUpdateLoadingRequestAction(false));
 			});
@@ -112,6 +111,25 @@ const SettingComponent: React.FC<Props> = () => {
 												error={props.errors.navbar}
 												touched={props.touched.navbar}
 												{...props.getFieldProps('navbar')}
+											/>
+										</div>
+										<div className="col-span-2 md:col-span-1">
+											<FormComponent.Select
+												id="footer"
+												label="Footer"
+												options={[
+													{
+														value: settingConstant.SETTING_FOOTER_FIXED,
+														label: 'Fixed'
+													},
+													{
+														value: settingConstant.SETTING_FOOTER_STATIC,
+														label: 'Static'
+													}
+												]}
+												error={props.errors.footer}
+												touched={props.touched.footer}
+												{...props.getFieldProps('footer')}
 											/>
 										</div>
 										<div className="col-span-2 flex flex-row-reverse">

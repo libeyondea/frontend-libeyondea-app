@@ -4,14 +4,10 @@ import { useState } from 'react';
 import ButtonComponent from 'src/components/Button/components';
 import ImageComponent from 'src/components/Image/components';
 
-type OnChangeFile = (field: string, value: File | null, shouldValidate?: boolean) => void;
-
-type OnBlurFile = (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
-
 type Props = {
 	className?: string;
-	onChangeFile: OnChangeFile;
-	onBlurFile: OnBlurFile;
+	onChangeFile: (field: string, value: File | null, shouldValidate?: boolean) => void;
+	onBlurFile: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
 	name: string;
 	label?: string;
 	isHorizontal?: boolean;
@@ -30,11 +26,11 @@ const ImageFormComponent: React.FC<Props> = ({
 	isHorizontal = false,
 	error,
 	touched = false,
-	imgUrl,
+	imgUrl = '',
 	canDelete = false,
 	...props
 }) => {
-	const [previewImg, setPreviewImg] = useState(imgUrl || '');
+	const [previewImg, setPreviewImg] = useState(imgUrl);
 
 	const _onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const files = event.target.files;

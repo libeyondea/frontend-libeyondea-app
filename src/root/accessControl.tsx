@@ -29,6 +29,7 @@ const AccessControl: React.FC<Props> = ({ children }) => {
 	) {
 		return <Navigate to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`} />;
 	}
+
 	return children;
 };
 

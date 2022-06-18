@@ -2,7 +2,6 @@ import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import { Fragment } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
 
 import ImageComponent from 'src/components/Image/components';
 import LinkComponent from 'src/components/Link/components';
@@ -21,7 +20,6 @@ import { selectAuthCurrent } from 'src/store/auth/selectors';
 type Props = {};
 
 const NavbarComponent: React.FC<Props> = () => {
-	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const appSidebar = useAppSelector(selectAppSidebar);
 	const authCurrent = useAppSelector(selectAuthCurrent);
@@ -38,7 +36,6 @@ const NavbarComponent: React.FC<Props> = () => {
 		dispatch(authCurrentDataRequestAction(null));
 		dispatch(authCurrentTokenRequestAction(null));
 		toastify.success('Signed out successfully');
-		navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`);
 	};
 
 	return (

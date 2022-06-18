@@ -63,7 +63,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									onClick={(event) => _onChangePage(event, 1)}
 								>
 									<span className="sr-only">First</span>
-									<FaAngleDoubleLeft className="h-4 w-4" aria-hidden="true" />
+									<FaAngleDoubleLeft className="h-4 w-4" />
 								</button>
 								<button
 									type="button"
@@ -71,7 +71,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									onClick={(event) => _onChangePage(event, page === 1 ? 1 : page - 1)}
 								>
 									<span className="sr-only">Previous</span>
-									<FaAngleLeft className="h-4 w-4" aria-hidden="true" />
+									<FaAngleLeft className="h-4 w-4" />
 								</button>
 							</Fragment>
 						) : (
@@ -82,7 +82,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									disabled
 								>
 									<span className="sr-only">No first</span>
-									<FaAngleDoubleLeft className="h-4 w-4" aria-hidden="true" />
+									<FaAngleDoubleLeft className="h-4 w-4" />
 								</button>
 								<button
 									type="button"
@@ -90,7 +90,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									disabled
 								>
 									<span className="sr-only">No previous</span>
-									<FaAngleLeft className="h-4 w-4" aria-hidden="true" />
+									<FaAngleLeft className="h-4 w-4" />
 								</button>
 							</Fragment>
 						)}
@@ -130,7 +130,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									onClick={(event) => _onChangePage(event, page + 1)}
 								>
 									<span className="sr-only">Next</span>
-									<FaAngleRight className="h-4 w-4" aria-hidden="true" />
+									<FaAngleRight className="h-4 w-4" />
 								</button>
 								<button
 									type="button"
@@ -138,7 +138,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									onClick={(event) => _onChangePage(event, totalPages)}
 								>
 									<span className="sr-only">Last</span>
-									<FaAngleDoubleRight className="h-4 w-4" aria-hidden="true" />
+									<FaAngleDoubleRight className="h-4 w-4" />
 								</button>
 							</Fragment>
 						) : (
@@ -149,7 +149,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									disabled
 								>
 									<span className="sr-only">No next</span>
-									<FaAngleRight className="h-4 w-4" aria-hidden="true" />
+									<FaAngleRight className="h-4 w-4" />
 								</button>
 								<button
 									type="button"
@@ -157,7 +157,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 									disabled
 								>
 									<span className="sr-only">No last</span>
-									<FaAngleDoubleRight className="h-4 w-4" aria-hidden="true" />
+									<FaAngleDoubleRight className="h-4 w-4" />
 								</button>
 							</Fragment>
 						)}
