@@ -1,10 +1,11 @@
 export interface SignIn {
 	user_name: string;
 	password: string;
-	remember_me: boolean;
 }
 
-export interface SignInFormik extends SignIn {}
+export interface SignInFormik extends SignIn {
+	remember_me: boolean;
+}
 
 export interface SignUp {
 	first_name: string;

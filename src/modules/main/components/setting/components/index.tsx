@@ -56,7 +56,11 @@ const SettingComponent: React.FC<Props> = () => {
 				dispatch(settingUpdateDataRequestAction(response.data.data));
 				toastify.success('Setting updated successfully');
 			})
-			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
+			.catch(
+				errorHandler(undefined, (validationError) => {
+					formikHelpers.setErrors(validationError.data.errors);
+				})
+			)
 			.finally(() => {
 				dispatch(settingUpdateLoadingRequestAction(false));
 			});

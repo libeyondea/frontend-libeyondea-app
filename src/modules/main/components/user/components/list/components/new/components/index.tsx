@@ -133,12 +133,20 @@ const NewListUserComponent: React.FC<Props> = () => {
 								dispatch(userListLoadingRequestAction(false));
 							});
 					})
-					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
+					.catch(
+						errorHandler(undefined, (validationError) => {
+							formikHelpers.setErrors(validationError.data.errors);
+						})
+					)
 					.finally(() => {
 						dispatch(userCreateLoadingRequestAction(false));
 					});
 			})
-			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
+			.catch(
+				errorHandler(undefined, (validationError) => {
+					formikHelpers.setErrors(validationError.data.errors);
+				})
+			)
 			.finally(() => {});
 	};
 

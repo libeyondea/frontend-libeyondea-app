@@ -137,12 +137,20 @@ const EditListUserComponent: React.FC<Props> = () => {
 								dispatch(userListLoadingRequestAction(false));
 							});
 					})
-					.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
+					.catch(
+						errorHandler(undefined, (validationError) => {
+							formikHelpers.setErrors(validationError.data.errors);
+						})
+					)
 					.finally(() => {
 						dispatch(userUpdateLoadingRequestAction(false));
 					});
 			})
-			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
+			.catch(
+				errorHandler(undefined, (validationError) => {
+					formikHelpers.setErrors(validationError.data.errors);
+				})
+			)
 			.finally(() => {});
 	};
 

@@ -37,14 +37,13 @@ const SignInCompoment: React.FC<Props> = () => {
 	const onSubmit = (values: SignInFormik, formikHelpers: FormikHelpers<SignInFormik>) => {
 		const payload = {
 			user_name: values.user_name,
-			password: values.password,
-			remember_me: values.remember_me
+			password: values.password
 		};
 		authService
 			.signIn(payload)
 			.then((response) => {
 				setCookie(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
-					expires: config.AUTH_DATA.EXPIRED_TIME
+					expires: values.remember_me ? config.AUTH_DATA.EXPIRED_TIME_REMEMBER_ME : config.AUTH_DATA.EXPIRED_TIME
 				});
 				toastify.success('Signed in successfully');
 				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, {
@@ -53,7 +52,11 @@ const SignInCompoment: React.FC<Props> = () => {
 					}
 				});
 			})
-			.catch(errorHandler(undefined, (validationError) => formikHelpers.setErrors(validationError.data.errors)))
+			.catch(
+				errorHandler(undefined, (validationError) => {
+					formikHelpers.setErrors(validationError.data.errors);
+				})
+			)
 			.finally(() => {
 				formikHelpers.setSubmitting(false);
 			});

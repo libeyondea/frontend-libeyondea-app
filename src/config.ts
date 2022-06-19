@@ -23,7 +23,8 @@ const config = {
 		TIMEOUT: 30000
 	},
 	AUTH_DATA: {
-		EXPIRED_TIME: 365
+		EXPIRED_TIME: 3 / 24,
+		EXPIRED_TIME_REMEMBER_ME: 365
 	}
 };
 
