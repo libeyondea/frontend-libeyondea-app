@@ -10,7 +10,7 @@ type Props = {
 	onBlurFile: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
 	name: string;
 	label?: string;
-	isHorizontal?: boolean;
+	horizontal?: boolean;
 	error?: string;
 	touched?: boolean;
 	imgUrl?: string;
@@ -23,7 +23,7 @@ const ImageFormComponent: React.FC<Props> = ({
 	onBlurFile,
 	name,
 	label,
-	isHorizontal = false,
+	horizontal = false,
 	error,
 	touched = false,
 	imgUrl = '',
@@ -55,13 +55,13 @@ const ImageFormComponent: React.FC<Props> = ({
 			className={classNames(
 				'',
 				{
-					'flex items-center': isHorizontal
+					'flex items-center': horizontal
 				},
 				className
 			)}
 		>
 			{label && (
-				<label htmlFor={name} className={classNames('inline-block font-medium text-gray-600', isHorizontal ? 'mr-1' : 'mb-1')}>
+				<label htmlFor={name} className={classNames('inline-block font-medium text-gray-600', horizontal ? 'mr-1' : 'mb-1')}>
 					{label}
 				</label>
 			)}

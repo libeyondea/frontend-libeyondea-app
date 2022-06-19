@@ -35,7 +35,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 			<div className="flex sm:items-center flex-col sm:flex-row mb-4 md:mb-0">
 				<FormComponent.Select
 					className="mr-4 mb-4 sm:mb-0"
-					isHorizontal
+					horizontal
 					label="Sort by"
 					onChange={onChangeSortBy}
 					value={userList.filter.sort_by}
@@ -77,7 +77,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					]}
 				/>
 				<FormComponent.Select
-					isHorizontal
+					horizontal
 					label="Sort direction"
 					onChange={onChangeSortDirection}
 					value={userList.filter.sort_direction}

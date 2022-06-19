@@ -5,24 +5,24 @@ type Props = {
 	name: string;
 	label?: string;
 	options: Array<{ value: any; label: any }>;
-	isHorizontal?: boolean;
+	horizontal?: boolean;
 	error?: string;
 	touched?: boolean;
 } & React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
 
-const SelectFormComponent: React.FC<Props> = ({ className, name, label, options, isHorizontal = false, error, touched = false, ...props }) => {
+const SelectFormComponent: React.FC<Props> = ({ className, name, label, options, horizontal = false, error, touched = false, ...props }) => {
 	return (
 		<div
 			className={classNames(
 				'',
 				{
-					'flex items-center': isHorizontal
+					'flex items-center': horizontal
 				},
 				className
 			)}
 		>
 			{label && (
-				<label htmlFor={name} className={classNames('inline-block font-medium text-gray-600', isHorizontal ? 'mr-1' : 'mb-1')}>
+				<label htmlFor={name} className={classNames('inline-block font-medium text-gray-600', horizontal ? 'mr-1' : 'mb-1')}>
 					{label}
 				</label>
 			)}
@@ -31,7 +31,7 @@ const SelectFormComponent: React.FC<Props> = ({ className, name, label, options,
 					{...props}
 					name={name}
 					className={classNames(
-						'rounded-md flex-1 appearance-none border border-gray-300 w-full py-2 pl-4 pr-8 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
+						'rounded-md border-gray-300 w-full text-gray-700 placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent',
 						{
 							'focus:ring-red-600 border-red-600': error && touched
 						}

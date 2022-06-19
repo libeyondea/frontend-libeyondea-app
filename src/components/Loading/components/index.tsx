@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { RiLoader2Line } from 'react-icons/ri';
+import { FaSyncAlt } from 'react-icons/fa';
 
 type Props = {
 	className?: string;
@@ -8,7 +8,7 @@ type Props = {
 const LoadingComponent: React.FC<Props> = ({ className }) => {
 	return (
 		<div className={classNames('flex justify-center', className)}>
-			<RiLoader2Line className="animate-spin w-10 h-10 text-gray-600" />
+			<FaSyncAlt className="animate-spin w-8 h-8 text-gray-600" />
 		</div>
 	);
 };

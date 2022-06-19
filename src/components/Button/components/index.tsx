@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { FaSyncAlt } from 'react-icons/fa';
 
 type Props = {
 	className?: string;
@@ -29,7 +29,7 @@ const ButtonComponent: React.FC<Props> = ({ className, type = 'button', loading 
 		)}
 		disabled={disabled}
 	>
-		{loading && <AiOutlineLoading3Quarters className="animate-spin h-4 w-4 mr-2 font-medium" />}
+		{loading && <FaSyncAlt className="animate-spin h-4 w-4 mr-2" />}
 		<span>{children}</span>
 	</button>
 );
