@@ -304,7 +304,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 										{imageUpload.loading ? 'Uploading' : userCreate.loading ? 'Creating' : 'Create'}
 									</ButtonComponent>
 									<ButtonComponent
-										styleType="default"
+										styleType="light"
 										onClick={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
 									>
 										Cancel

@@ -1,9 +1,9 @@
-import classNames from 'classnames';
 import { Fragment, useCallback, useState } from 'react';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 
 import FilterListUserComponent from './filter';
 import ListUserRouter from './router';
+import BadgeComponent from 'src/components/Badge/components';
 import BlockUIComponent from 'src/components/BlockUI/components';
 import BreadcrumbComponent from 'src/components/Breadcrumb/components';
 import CardComponent from 'src/components/Card/components';
@@ -143,15 +143,17 @@ const ListUserComponent: React.FC<Props> = () => {
 														</div>
 													</TableComponent.Td>
 													<TableComponent.Td>
-														<span
-															className={classNames('px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize', {
-																'bg-green-100 text-green-800': user.status === userConstant.USER_STATUS_ACTIVE,
-																'bg-yellow-100 text-yellow-800': user.status === userConstant.USER_STATUS_INACTIVE,
-																'bg-red-100 text-red-800': user.status === userConstant.USER_STATUS_BANNED
-															})}
+														<BadgeComponent
+															className="capitalize"
+															styleType={
+																(user.status === userConstant.USER_STATUS_ACTIVE && 'success') ||
+																(user.status === userConstant.USER_STATUS_INACTIVE && 'warning') ||
+																(user.status === userConstant.USER_STATUS_BANNED && 'danger') ||
+																undefined
+															}
 														>
 															{user.status}
-														</span>
+														</BadgeComponent>
 													</TableComponent.Td>
 													<TableComponent.Td>{user.role}</TableComponent.Td>
 													<TableComponent.Td className="whitespace-nowrap">{time.ago(user.updated_at)}</TableComponent.Td>

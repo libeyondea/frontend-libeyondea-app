@@ -13,7 +13,7 @@ type Props = {
 	show: boolean;
 	setShow: React.Dispatch<React.SetStateAction<boolean>>;
 	onClick?: () => void;
-	styleType?: 'success' | 'warning' | 'danger';
+	styleType?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
 };
 
 const ModalComponent: React.FC<Props> = ({ className, title, content, show, setShow, onClick, styleType = 'success' }) => {
@@ -41,7 +41,7 @@ const ModalComponent: React.FC<Props> = ({ className, title, content, show, setS
 						>
 							OK
 						</ButtonComponent>
-						<ButtonComponent className="w-full sm:w-auto mt-4 sm:mt-0" styleType="default" onClick={() => setShow(false)}>
+						<ButtonComponent className="w-full sm:w-auto mt-4 sm:mt-0" styleType="light" onClick={() => setShow(false)}>
 							Cancel
 						</ButtonComponent>
 					</div>

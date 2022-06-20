@@ -17,8 +17,8 @@ const CardComponent = forwardRef<HTMLDivElement, Props>(({ className, title, onC
 					<h3 className="flex items-center font-bold text-lg text-gray-900">{title}</h3>
 					{onClickClose && (
 						<div className="ml-auto -mt-1">
-							<button type="button" onClick={onClickClose} className="flex items-center bg-white hover:bg-gray-300 p-1 rounded-md">
-								<FaTimes className="w-6 h-6 text-gray-700" />
+							<button type="button" onClick={onClickClose} className="flex items-center text-gray-600 bg-white hover:bg-gray-300 p-1 rounded-md">
+								<FaTimes className="w-6 h-6" />
 							</button>
 						</div>
 					)}
