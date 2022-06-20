@@ -34,8 +34,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 		<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
 			<div className="flex sm:items-center flex-col sm:flex-row mb-4 md:mb-0">
 				<FormComponent.Select
-					className="mr-4 mb-4 sm:mb-0"
-					horizontal
+					className="mr-0 sm:mr-4 mb-4 sm:mb-0 sm:w-36 min-w-full sm:min-w-0"
 					label="Sort by"
 					onChange={onChangeSortBy}
 					value={userList.filter.sort_by}
@@ -59,8 +58,8 @@ const FilterListUserComponent: React.FC<Props> = () => {
 							label: 'Email'
 						},
 						{
-							value: 'status',
-							label: 'Status'
+							value: 'actived',
+							label: 'Actived'
 						},
 						{
 							value: 'role',
@@ -77,7 +76,7 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					]}
 				/>
 				<FormComponent.Select
-					horizontal
+					className="sm:w-36 min-w-full sm:min-w-0"
 					label="Sort direction"
 					onChange={onChangeSortDirection}
 					value={userList.filter.sort_direction}
@@ -95,8 +94,17 @@ const FilterListUserComponent: React.FC<Props> = () => {
 					]}
 				/>
 			</div>
-			<div className="flex items-center">
-				<FormComponent.Input type="text" placeholder="Enter keyword" onChange={onChangeSearch} value={q} name="q" id="q" />
+			<div className="flex sm:items-center flex-col sm:flex-row">
+				<FormComponent.Input
+					className="min-w-full sm:w-72 sm:min-w-0"
+					label="Search"
+					type="text"
+					placeholder="Enter keyword"
+					onChange={onChangeSearch}
+					value={q}
+					name="q"
+					id="q"
+				/>
 			</div>
 		</div>
 	);

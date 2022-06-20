@@ -13,7 +13,6 @@ import PaginationComponent from 'src/components/Pagination/components';
 import TableComponent from 'src/components/Table/components';
 import TableLoadingComponent from 'src/components/TableLoading/components';
 import * as routeConstant from 'src/constants/route';
-import * as userConstant from 'src/constants/user';
 import { errorHandler } from 'src/helpers/error';
 import time from 'src/helpers/time';
 import toastify from 'src/helpers/toastify';
@@ -110,7 +109,7 @@ const ListUserComponent: React.FC<Props> = () => {
 									<TableComponent.Thead>
 										<TableComponent.Tr>
 											<TableComponent.Th>User</TableComponent.Th>
-											<TableComponent.Th>Status</TableComponent.Th>
+											<TableComponent.Th>Actived</TableComponent.Th>
 											<TableComponent.Th>Role</TableComponent.Th>
 											<TableComponent.Th>Updated at</TableComponent.Th>
 											<TableComponent.Th>Created at</TableComponent.Th>
@@ -143,16 +142,8 @@ const ListUserComponent: React.FC<Props> = () => {
 														</div>
 													</TableComponent.Td>
 													<TableComponent.Td>
-														<BadgeComponent
-															className="capitalize"
-															styleType={
-																(user.status === userConstant.USER_STATUS_ACTIVE && 'success') ||
-																(user.status === userConstant.USER_STATUS_INACTIVE && 'warning') ||
-																(user.status === userConstant.USER_STATUS_BANNED && 'danger') ||
-																undefined
-															}
-														>
-															{user.status}
+														<BadgeComponent className="capitalize" styleType={user.actived ? 'success' : 'danger'}>
+															{user.actived.toString()}
 														</BadgeComponent>
 													</TableComponent.Td>
 													<TableComponent.Td>{user.role}</TableComponent.Td>

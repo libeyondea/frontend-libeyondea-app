@@ -5,9 +5,8 @@ export interface User {
 	user_name: string;
 	avatar_url: string;
 	email: string;
-	email_verified_at: string | null;
 	role: string;
-	status: string;
+	actived: boolean;
 	created_at: string | null;
 	updated_at: string | null;
 }
@@ -28,7 +27,7 @@ export interface CreateUser {
 	password: string;
 	avatar?: string | null;
 	role: string;
-	status: string;
+	actived: boolean;
 }
 
 export interface CreateUserFormik extends Omit<CreateUser, 'avatar'> {

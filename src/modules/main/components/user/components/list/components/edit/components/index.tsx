@@ -50,7 +50,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 		password: '',
 		password_confirmation: '',
 		role: userShow.data.role || userConstant.USER_ROLE_MEMBER,
-		status: userShow.data.status || userConstant.USER_STATUS_INACTIVE,
+		actived: userShow.data.actived || false,
 		image: null
 	};
 
@@ -72,9 +72,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 				[userConstant.USER_ROLE_OWNER, userConstant.USER_ROLE_ADMIN, userConstant.USER_ROLE_MODERATOR, userConstant.USER_ROLE_MEMBER],
 				'The role invalid.'
 			),
-		status: Yup.string()
-			.required('The status is required.')
-			.oneOf([userConstant.USER_STATUS_ACTIVE, userConstant.USER_STATUS_INACTIVE, userConstant.USER_STATUS_BANNED], 'The status invalid.')
+		actived: Yup.boolean()
 	});
 
 	const onSubmit = (values: UpdateUserFormik, formikHelpers: FormikHelpers<UpdateUserFormik>) => {
@@ -105,7 +103,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					email: values.email,
 					user_name: values.user_name,
 					role: values.role,
-					status: values.status,
+					actived: values.actived,
 					...(values.password && {
 						password: values.password
 					}),
@@ -192,8 +190,8 @@ const EditListUserComponent: React.FC<Props> = () => {
 					) : (
 						<FormComponent<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
 							{(props) => (
-								<div className="grid grid-cols-2 gap-4">
-									<div className="col-span-2 md:col-span-1">
+								<div className="grid grid-cols-12 gap-4">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
 										<FormComponent.Input
 											id="first_name"
 											type="text"
@@ -204,7 +202,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('first_name')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
 										<FormComponent.Input
 											id="last_name"
 											type="text"
@@ -215,7 +213,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('last_name')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
 										<FormComponent.Input
 											id="user_name"
 											type="text"
@@ -227,7 +225,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('user_name')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
 										<FormComponent.Input
 											id="email"
 											type="text"
@@ -238,7 +236,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('email')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
 										<FormComponent.Input
 											id="password"
 											type="password"
@@ -250,7 +248,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('password')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
 										<FormComponent.Input
 											id="password_confirmation"
 											type="password"
@@ -262,7 +260,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('password_confirmation')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
 										<FormComponent.Select
 											id="role"
 											label="Role"
@@ -289,30 +287,17 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('role')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
-										<FormComponent.Select
-											id="status"
-											label="Status"
-											options={[
-												{
-													value: userConstant.USER_STATUS_INACTIVE,
-													label: 'Inactive'
-												},
-												{
-													value: userConstant.USER_STATUS_ACTIVE,
-													label: 'Active'
-												},
-												{
-													value: userConstant.USER_STATUS_BANNED,
-													label: 'Banned'
-												}
-											]}
-											error={props.errors.status}
-											touched={props.touched.status}
-											{...props.getFieldProps('status')}
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<FormComponent.Toggle
+											id="actived"
+											label="Actived"
+											checked={props.values.actived}
+											error={props.errors.actived}
+											touched={props.touched.actived}
+											{...props.getFieldProps('actived')}
 										/>
 									</div>
-									<div className="col-span-2 md:col-span-1">
+									<div className="col-span-12">
 										<FormComponent.Image
 											id="image"
 											label="Avatar"
@@ -324,7 +309,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 											{...props.getFieldProps('image')}
 										/>
 									</div>
-									<div className="col-span-2 flex flex-row-reverse">
+									<div className="col-span-12 flex flex-row-reverse">
 										<ButtonComponent
 											className="ml-4"
 											type="submit"

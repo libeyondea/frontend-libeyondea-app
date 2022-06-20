@@ -59,7 +59,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 							<Fragment>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-200"
 									onClick={(event) => _onChangePage(event, 1)}
 								>
 									<span className="sr-only">First</span>
@@ -67,7 +67,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								</button>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-200"
 									onClick={(event) => _onChangePage(event, page === 1 ? 1 : page - 1)}
 								>
 									<span className="sr-only">Previous</span>
@@ -78,7 +78,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 							<Fragment>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-400"
 									disabled
 								>
 									<span className="sr-only">No first</span>
@@ -86,7 +86,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								</button>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-400"
 									disabled
 								>
 									<span className="sr-only">No previous</span>
@@ -97,7 +97,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 						{pageNumbers.map((pageNumber, i) =>
 							!pageNumber ? (
 								<span
-									className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+									className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-400"
 									key={`${pageNumber}${i}`}
 								>
 									<MdMoreHoriz />
@@ -114,7 +114,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 							) : (
 								<button
 									type="button"
-									className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+									className="bg-white border-gray-300 text-gray-700 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
 									onClick={(event) => _onChangePage(event, Number(pageNumber))}
 									key={pageNumber}
 								>
@@ -126,7 +126,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 							<Fragment>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-200"
 									onClick={(event) => _onChangePage(event, page + 1)}
 								>
 									<span className="sr-only">Next</span>
@@ -134,7 +134,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								</button>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-200"
 									onClick={(event) => _onChangePage(event, totalPages)}
 								>
 									<span className="sr-only">Last</span>
@@ -145,7 +145,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 							<Fragment>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-400"
 									disabled
 								>
 									<span className="sr-only">No next</span>
@@ -153,7 +153,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								</button>
 								<button
 									type="button"
-									className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+									className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-400"
 									disabled
 								>
 									<span className="sr-only">No last</span>

@@ -15,10 +15,11 @@ const FooterComponent: React.FC<Props> = () => {
 
 	return (
 		<footer
-			className={classNames('py-4 bg-gray-200 transition-all ease-in-out duration-500 inset-x-0 bottom-0', appSidebar ? 'lg:ml-64' : 'ml-0', {
-				fixed: authCurrent.data?.setting.footer === 'fixed',
-				static: authCurrent.data?.setting.footer === 'static'
-			})}
+			className={classNames(
+				'py-4 bg-gray-200 transition-all ease-in-out duration-500 inset-x-0 bottom-0',
+				appSidebar ? 'lg:ml-64' : 'ml-0',
+				authCurrent.data?.setting.fixed_footer ? 'fixed' : 'static'
+			)}
 		>
 			<div className="xl:container mx-auto px-4">
 				<div className="flex justify-center items-center">

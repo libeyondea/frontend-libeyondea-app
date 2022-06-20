@@ -21,10 +21,12 @@ const MainComponent: React.FC<Props> = () => {
 			<NavbarComponent />
 			<SidebarComponent />
 			<main
-				className={classNames('transition-all ease-in-out duration-500', appSidebar ? 'lg:ml-64' : 'ml-0', {
-					'mt-14': authCurrent.data?.setting.navbar === 'fixed',
-					'mt-0': authCurrent.data?.setting.navbar === 'static'
-				})}
+				className={classNames(
+					'transition-all ease-in-out duration-500',
+					appSidebar ? 'lg:ml-64' : 'ml-0',
+					authCurrent.data?.setting.fixed_navbar ? 'mt-14' : 'mt-0',
+					authCurrent.data?.setting.fixed_footer ? 'mb-16' : 'mb-0'
+				)}
 			>
 				<div className="xl:container mx-auto px-0 sm:px-4 py-4">
 					<MainRouter />

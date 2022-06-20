@@ -7,7 +7,6 @@ import ButtonComponent from 'src/components/Button/components';
 import CardComponent from 'src/components/Card/components';
 import FormComponent from 'src/components/Form/components';
 import LoadingComponent from 'src/components/Loading/components';
-import * as settingConstant from 'src/constants/setting';
 import { errorHandler } from 'src/helpers/error';
 import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
@@ -31,24 +30,20 @@ const SettingComponent: React.FC<Props> = () => {
 	const settingUpdate = useAppSelector(selectSettingUpdate);
 
 	const initialValues: UpdateSettingFormik = {
-		navbar: settingShow.data.navbar || settingConstant.SETTING_NAVBAR_FIXED,
-		footer: settingShow.data.footer || settingConstant.SETTING_FOOTER_STATIC
+		fixed_navbar: true,
+		fixed_footer: settingShow.data.fixed_footer
 	};
 
 	const validationSchema = Yup.object({
-		navbar: Yup.string()
-			.required('The navbar is required.')
-			.oneOf([settingConstant.SETTING_NAVBAR_FIXED, settingConstant.SETTING_NAVBAR_STATIC], 'The navbar invalid.'),
-		footer: Yup.string()
-			.required('The footer is required.')
-			.oneOf([settingConstant.SETTING_FOOTER_FIXED, settingConstant.SETTING_FOOTER_STATIC], 'The footer invalid.')
+		fixed_navbar: Yup.boolean(),
+		fixed_footer: Yup.boolean()
 	});
 
 	const onSubmit = (values: UpdateSettingFormik, formikHelpers: FormikHelpers<UpdateSettingFormik>) => {
 		dispatch(settingUpdateLoadingRequestAction(true));
 		const payload = {
-			navbar: values.navbar,
-			footer: values.footer
+			fixed_navbar: values.fixed_navbar,
+			fixed_footer: values.fixed_footer
 		};
 		settingService
 			.update(payload)
@@ -99,41 +94,23 @@ const SettingComponent: React.FC<Props> = () => {
 								{(props) => (
 									<div className="grid grid-cols-2 gap-4">
 										<div className="col-span-2 md:col-span-1">
-											<FormComponent.Select
-												id="navbar"
-												label="Navbar"
-												options={[
-													{
-														value: settingConstant.SETTING_NAVBAR_FIXED,
-														label: 'Fixed'
-													},
-													{
-														value: settingConstant.SETTING_NAVBAR_STATIC,
-														label: 'Static'
-													}
-												]}
-												error={props.errors.navbar}
-												touched={props.touched.navbar}
-												{...props.getFieldProps('navbar')}
+											<FormComponent.Toggle
+												id="fixed_navbar"
+												label="Fixed navbar"
+												checked={props.values.fixed_navbar}
+												error={props.errors.fixed_navbar}
+												touched={props.touched.fixed_navbar}
+												{...props.getFieldProps('fixed_navbar')}
 											/>
 										</div>
 										<div className="col-span-2 md:col-span-1">
-											<FormComponent.Select
-												id="footer"
-												label="Footer"
-												options={[
-													{
-														value: settingConstant.SETTING_FOOTER_FIXED,
-														label: 'Fixed'
-													},
-													{
-														value: settingConstant.SETTING_FOOTER_STATIC,
-														label: 'Static'
-													}
-												]}
-												error={props.errors.footer}
-												touched={props.touched.footer}
-												{...props.getFieldProps('footer')}
+											<FormComponent.Toggle
+												id="fixed_footer"
+												label="Fixed footer"
+												checked={props.values.fixed_footer}
+												error={props.errors.fixed_footer}
+												touched={props.touched.fixed_footer}
+												{...props.getFieldProps('fixed_footer')}
 											/>
 										</div>
 										<div className="col-span-2 flex flex-row-reverse">

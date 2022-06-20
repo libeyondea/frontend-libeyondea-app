@@ -1,9 +1,21 @@
-import { SignUp } from './auth';
-import { User } from './user';
+export interface Profile {
+	id: number;
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	avatar_url: string;
+	email: string;
+	role: string;
+	actived: boolean;
+	created_at: string | null;
+	updated_at: string | null;
+}
 
-export interface Profile extends User {}
-
-export interface UpdateProfile extends Omit<SignUp, 'password'> {
+export interface UpdateProfile {
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	email: string;
 	password?: string;
 	avatar?: string | null;
 }

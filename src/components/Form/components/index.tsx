@@ -5,6 +5,7 @@ import CheckboxFormComponent from './Checkbox';
 import ImageFormComponent from './Image';
 import InputFormComponent from './Input';
 import SelectFormComponent from './Select';
+import ToggleFormComponent from './Toggle';
 
 type FormComponentProps<Values> = {
 	className?: string;
@@ -40,5 +41,6 @@ export default Object.assign(FormComponent, {
 	Input: InputFormComponent,
 	Select: SelectFormComponent,
 	Checkbox: CheckboxFormComponent,
-	Image: ImageFormComponent
+	Image: ImageFormComponent,
+	Toggle: ToggleFormComponent
 });

@@ -40,10 +40,11 @@ const NavbarComponent: React.FC<Props> = () => {
 
 	return (
 		<nav
-			className={classNames('bg-white shadow-lg z-20 inset-x-0 top-0 transition-all ease-in-out duration-500', appSidebar ? 'lg:ml-64' : 'ml-0', {
-				fixed: authCurrent.data?.setting.navbar === 'fixed',
-				static: authCurrent.data?.setting.navbar === 'static'
-			})}
+			className={classNames(
+				'bg-white shadow-lg z-20 inset-x-0 top-0 transition-all ease-in-out duration-500',
+				appSidebar ? 'lg:ml-64' : 'ml-0',
+				authCurrent.data?.setting.fixed_navbar ? 'fixed' : 'static'
+			)}
 		>
 			<div className="xl:container mx-auto px-4">
 				<div className="flex items-center py-2">

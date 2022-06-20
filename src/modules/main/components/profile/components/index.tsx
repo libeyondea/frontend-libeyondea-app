@@ -144,8 +144,8 @@ const ProfileComponent: React.FC<Props> = () => {
 								enableReinitialize
 							>
 								{(props) => (
-									<div className="grid grid-cols-2 gap-4">
-										<div className="col-span-2 md:col-span-1">
+									<div className="grid grid-cols-12 gap-4">
+										<div className="col-span-12 sm:col-span-6">
 											<FormComponent.Input
 												id="first_name"
 												type="text"
@@ -156,7 +156,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('first_name')}
 											/>
 										</div>
-										<div className="col-span-2 md:col-span-1">
+										<div className="col-span-12 sm:col-span-6">
 											<FormComponent.Input
 												id="last_name"
 												type="text"
@@ -167,7 +167,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('last_name')}
 											/>
 										</div>
-										<div className="col-span-2 md:col-span-1">
+										<div className="col-span-12 sm:col-span-6">
 											<FormComponent.Input
 												id="user_name"
 												type="text"
@@ -179,7 +179,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('user_name')}
 											/>
 										</div>
-										<div className="col-span-2 md:col-span-1">
+										<div className="col-span-12 sm:col-span-6">
 											<FormComponent.Input
 												id="email"
 												type="text"
@@ -190,7 +190,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('email')}
 											/>
 										</div>
-										<div className="col-span-2 md:col-span-1">
+										<div className="col-span-12 sm:col-span-6">
 											<FormComponent.Input
 												id="password"
 												type="password"
@@ -202,7 +202,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('password')}
 											/>
 										</div>
-										<div className="col-span-2 md:col-span-1">
+										<div className="col-span-12 sm:col-span-6">
 											<FormComponent.Input
 												id="password_confirmation"
 												type="password"
@@ -214,7 +214,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('password_confirmation')}
 											/>
 										</div>
-										<div className="col-span-2 md:col-span-1">
+										<div className="col-span-12">
 											<FormComponent.Image
 												id="image"
 												label="Image"
@@ -226,7 +226,7 @@ const ProfileComponent: React.FC<Props> = () => {
 												{...props.getFieldProps('image')}
 											/>
 										</div>
-										<div className="col-span-2 flex flex-row-reverse">
+										<div className="col-span-12 flex flex-row-reverse">
 											<ButtonComponent
 												type="submit"
 												loading={imageUpload.loading || profileUpdate.loading}
