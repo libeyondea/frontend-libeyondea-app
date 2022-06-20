@@ -30,7 +30,7 @@ const SettingComponent: React.FC<Props> = () => {
 	const settingUpdate = useAppSelector(selectSettingUpdate);
 
 	const initialValues: UpdateSettingFormik = {
-		fixed_navbar: true,
+		fixed_navbar: settingShow.data.fixed_navbar,
 		fixed_footer: settingShow.data.fixed_footer
 	};
 
