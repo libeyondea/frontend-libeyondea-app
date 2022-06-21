@@ -31,7 +31,7 @@ const SelectFormComponent: React.FC<Props> = ({ className, name, label, options,
 					{...props}
 					name={name}
 					className={classNames(
-						'rounded-md border-gray-300 w-full text-gray-700 placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent',
+						'py-[7px] rounded-md border-gray-300 w-full text-gray-700 placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent',
 						{
 							'focus:ring-red-600 border-red-600': error && touched
 						}

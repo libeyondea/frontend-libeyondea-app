@@ -15,7 +15,7 @@ const ButtonComponent: React.FC<Props> = ({ className, type = 'button', loading 
 		{...props}
 		type={type}
 		className={classNames(
-			'flex items-center justify-center py-3 px-4 transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md',
+			'flex items-center justify-center py-2 px-4 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md',
 			{
 				'bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white': styleType === 'primary',
 				'bg-gray-500 hover:bg-gray-600 focus:ring-gray-400 focus:ring-offset-gray-100 text-white': styleType === 'secondary',
