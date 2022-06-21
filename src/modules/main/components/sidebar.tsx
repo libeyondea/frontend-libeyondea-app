@@ -1,7 +1,7 @@
 import { Disclosure, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { FaChevronLeft, FaCog, FaEllipsisH, FaPlusCircle, FaRegListAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { FaChevronLeft, FaCog, FaEllipsisH, FaPlusCircle, FaRegListAlt, FaTachometerAlt, FaTimes, FaUsers } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 
 import ImageComponent from 'src/components/Image/components';
@@ -40,11 +40,17 @@ const SidebarComponent: React.FC<Props> = () => {
 			>
 				<div className="flex flex-col w-64 bg-gray-800">
 					<div className="bg-gray-800 flex flex-col flex-shrink-0 fixed w-64 z-50 py-3 px-7">
-						<div className="flex">
+						<div className="flex justify-between">
 							<LinkComponent href="/" className="flex items-center text-left focus:outline-none">
 								<ImageComponent className="rounded-full h-8 w-8" src={Logo} alt={config.APP_NAME} />
 								<h2 className="text-lg text-white font-bold tracking-tighter cursor-pointer ml-3">{config.APP_NAME}</h2>
 							</LinkComponent>
+							<button
+								className="inline-flex items-center text-gray-400 hover:bg-gray-500 hover:text-white p-1 rounded-md lg:hidden -mr-1"
+								onClick={() => dispatch(appSidebarRequestAction(true))}
+							>
+								<FaTimes className="h-6 w-6" />
+							</button>
 						</div>
 					</div>
 					<div className="flex flex-col overflow-y-auto p-4 mt-14">

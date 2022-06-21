@@ -65,12 +65,10 @@ const NavbarComponent: React.FC<Props> = () => {
 					</div>
 					<div className="block">
 						<div className="flex items-center">
-							<Menu as="div" className="relative inline-block text-left">
-								<div>
-									<Menu.Button className="flex items-center justify-center w-full rounded-md px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none">
-										<ImageComponent className="rounded-full h-8 w-8" src={authCurrent.data?.avatar_url} alt={authCurrent.data?.user_name} />
-									</Menu.Button>
-								</div>
+							<Menu as="div" className="relative inline-block">
+								<Menu.Button className="flex items-center justify-center w-full rounded-md px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none">
+									<ImageComponent className="rounded-full h-8 w-8" src={authCurrent.data?.avatar_url} alt={authCurrent.data?.user_name} />
+								</Menu.Button>
 								<Transition
 									as={Fragment}
 									enter="transition ease-out duration-100"
