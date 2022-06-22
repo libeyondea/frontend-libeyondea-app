@@ -50,6 +50,9 @@ const SettingComponent: React.FC<Props> = () => {
 			.then((response) => {
 				dispatch(settingUpdateDataRequestAction(response.data.data));
 				toastify.success('Setting updated successfully');
+				setTimeout(() => {
+					window.location.reload();
+				}, 666);
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {
@@ -82,7 +85,7 @@ const SettingComponent: React.FC<Props> = () => {
 					<CardComponent title="Settings">
 						{settingShow.loading ? (
 							<LoadingComponent />
-						) : !Object.keys(settingShow.data).length ? (
+						) : !settingShow.data.id ? (
 							<div className="flex justify-center">Not found.</div>
 						) : (
 							<FormComponent<UpdateSettingFormik>

@@ -10,5 +10,5 @@ export interface ResponseDataPagination<T> extends ResponseData<T> {
 
 export interface ResponseError {
 	message: string;
-	errors: any;
+	errors?: any;
 }

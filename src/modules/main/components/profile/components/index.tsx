@@ -134,8 +134,8 @@ const ProfileComponent: React.FC<Props> = () => {
 					<CardComponent title="Profile">
 						{profileShow.loading ? (
 							<LoadingComponent />
-						) : !Object.keys(profileShow.data).length ? (
-							<div className="flex justify-center">Not found</div>
+						) : !profileShow.data.id ? (
+							<div className="flex justify-center">Not found.</div>
 						) : (
 							<FormComponent<UpdateProfileFormik>
 								initialValues={initialValues}

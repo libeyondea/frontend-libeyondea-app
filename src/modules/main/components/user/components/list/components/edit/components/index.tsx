@@ -185,8 +185,8 @@ const EditListUserComponent: React.FC<Props> = () => {
 				>
 					{userShow.loading ? (
 						<LoadingComponent />
-					) : !Object.keys(userShow.data).length ? (
-						<div className="flex justify-center">Not found</div>
+					) : !userShow.data.id ? (
+						<div className="flex justify-center">Not found.</div>
 					) : (
 						<FormComponent<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
 							{(props) => (
