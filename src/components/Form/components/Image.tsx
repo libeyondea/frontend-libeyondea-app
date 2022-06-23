@@ -15,9 +15,9 @@ type Props = {
 	touched?: boolean;
 	imgUrl?: string;
 	canDelete?: boolean;
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+} & React.ComponentPropsWithoutRef<'input'>;
 
-const ImageFormComponent: React.FC<Props> = ({
+const ImageFormComponent = ({
 	className,
 	onChangeFile,
 	onBlurFile,
@@ -29,7 +29,7 @@ const ImageFormComponent: React.FC<Props> = ({
 	imgUrl = '',
 	canDelete = false,
 	...props
-}) => {
+}: Props) => {
 	const [previewImg, setPreviewImg] = useState(imgUrl);
 
 	const _onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,6 @@ const ImageFormComponent: React.FC<Props> = ({
 	return (
 		<div
 			className={classNames(
-				'',
 				{
 					'flex items-center': horizontal
 				},

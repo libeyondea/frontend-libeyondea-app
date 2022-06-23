@@ -16,7 +16,7 @@ type Props = {
 	styleType?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
 };
 
-const ModalComponent: React.FC<Props> = ({ className, title, content, show, setShow, onClick, styleType = 'success' }) => {
+const ModalComponent = ({ className, title, content, show, setShow, onClick, styleType = 'success' }: Props) => {
 	const outsideRef = useRef(null);
 
 	useOnClickOutside(outsideRef, () => {

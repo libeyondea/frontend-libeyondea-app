@@ -9,9 +9,9 @@ import TrTableComponent from './Tr';
 type Props = {
 	className?: string;
 	children: React.ReactNode;
-} & React.DetailedHTMLProps<React.TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>;
+} & React.ComponentPropsWithoutRef<'table'>;
 
-const TableComponent: React.FC<Props> = ({ className, children, ...props }) => {
+const TableComponent = ({ className, children, ...props }: Props) => {
 	return (
 		<div className="flex flex-col">
 			<div className="overflow-x-auto">

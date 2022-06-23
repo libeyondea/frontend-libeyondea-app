@@ -10,12 +10,11 @@ type Props = {
 	children: JSX.Element;
 };
 
-const AccessControl: React.FC<Props> = ({ children }) => {
+const AccessControl = ({ children }: Props) => {
 	const location = useLocation();
 	const isAuth = useAppSelector(selectIsAuth);
 	const authCurrent = useAppSelector(selectAuthCurrent);
 	const appInitialized = useAppSelector(selectAppInitialized);
-	console.log('AccessControl');
 
 	if (!appInitialized) {
 		return <Navigate to={`${routeConstant.ROUTE_NAME_SPLASH}`} state={{ from: location }} />;

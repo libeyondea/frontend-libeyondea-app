@@ -3,6 +3,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 
 import AccessControl from './accessControl';
+import ErrorBoundary from 'src/components/ErrorBoundary/components';
 import * as routeConstant from 'src/constants/route';
 
 const AuthComponent = lazy(() => import('src/modules/auth/components'));
@@ -15,7 +16,9 @@ const RootRouter = () => {
 			path: `${routeConstant.ROUTE_NAME_SPLASH}`,
 			element: (
 				<Suspense fallback={null}>
-					<SplashComponent />
+					<ErrorBoundary>
+						<SplashComponent />
+					</ErrorBoundary>
 				</Suspense>
 			)
 		},
@@ -24,7 +27,9 @@ const RootRouter = () => {
 			element: (
 				<Suspense fallback={null}>
 					<AccessControl>
-						<AuthComponent />
+						<ErrorBoundary>
+							<AuthComponent />
+						</ErrorBoundary>
 					</AccessControl>
 				</Suspense>
 			)
@@ -33,9 +38,11 @@ const RootRouter = () => {
 			path: `/${routeConstant.ROUTE_NAME_MAIN}/*`,
 			element: (
 				<Suspense fallback={null}>
-					<AccessControl>
-						<MainComponent />
-					</AccessControl>
+					<ErrorBoundary>
+						<AccessControl>
+							<MainComponent />
+						</AccessControl>
+					</ErrorBoundary>
 				</Suspense>
 			)
 		},

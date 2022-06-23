@@ -8,9 +8,7 @@ import useDebouncedCallback from 'src/hooks/useDebouncedCallback';
 import { userListFilterQRequestAction, userListFilterSortByRequestAction, userListFilterSortDirectionRequestAction } from 'src/store/user/actions';
 import { selectUserList } from 'src/store/user/selectors';
 
-type Props = {};
-
-const FilterListUserComponent: React.FC<Props> = () => {
+const FilterListUserComponent = () => {
 	const [q, setQ] = useState('');
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);

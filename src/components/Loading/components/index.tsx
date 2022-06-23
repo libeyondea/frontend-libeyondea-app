@@ -1,14 +1,15 @@
 import classNames from 'classnames';
-import { FaSyncAlt } from 'react-icons/fa';
+
+import { SyncIconComponent } from 'src/components/Icon/components';
 
 type Props = {
 	className?: string;
 };
 
-const LoadingComponent: React.FC<Props> = ({ className }) => {
+const LoadingComponent = ({ className }: Props) => {
 	return (
 		<div className={classNames('flex justify-center', className)}>
-			<FaSyncAlt className="animate-spin w-8 h-8 text-gray-600" />
+			<SyncIconComponent className="animate-spin w-8 h-8 text-gray-600" />
 		</div>
 	);
 };

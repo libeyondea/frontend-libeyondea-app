@@ -4,9 +4,9 @@ type Props = {
 	className?: string;
 	src?: string;
 	alt?: string;
-} & React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
+} & React.ComponentPropsWithoutRef<'img'>;
 
-const ImageComponent: React.FC<Props> = ({ src, alt, className, ...props }) => {
+const ImageComponent = ({ className, src, alt, ...props }: Props) => {
 	return <img {...props} className={classNames('', className)} src={src} alt={alt} />;
 };
 

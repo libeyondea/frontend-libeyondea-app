@@ -1,9 +1,18 @@
 import { Disclosure, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { FaChevronLeft, FaCog, FaEllipsisH, FaPlusCircle, FaRegListAlt, FaTachometerAlt, FaTimes, FaUsers } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 
+import {
+	ChevronLeftIconComponent,
+	CogIconComponent,
+	EllipsisHorizontalIconComponent,
+	ListIconComponent,
+	PlusCircleIconComponent,
+	TachometerIconComponent,
+	TimesIconComponent,
+	UserIconComponent
+} from 'src/components/Icon/components';
 import ImageComponent from 'src/components/Image/components';
 import LinkComponent from 'src/components/Link/components';
 import NavLinkComponent from 'src/components/NavLink/components';
@@ -17,9 +26,7 @@ import { appSidebarRequestAction } from 'src/store/app/actions';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
-type Props = {};
-
-const SidebarComponent: React.FC<Props> = () => {
+const SidebarComponent = () => {
 	const location = useLocation();
 	const dispatch = useAppDispatch();
 	const appSidebar = useAppSelector(selectAppSidebar);
@@ -41,7 +48,7 @@ const SidebarComponent: React.FC<Props> = () => {
 				<div className="flex flex-col w-64 bg-gray-800">
 					<div className="bg-gray-800 flex flex-col flex-shrink-0 fixed w-64 z-50 py-3 px-7">
 						<div className="flex justify-between">
-							<LinkComponent href="/" className="flex items-center text-left focus:outline-none">
+							<LinkComponent to="/" className="flex items-center text-left focus:outline-none">
 								<ImageComponent className="rounded-full h-8 w-8" src={Logo} alt={config.APP_NAME} />
 								<h2 className="text-lg text-white font-bold tracking-tighter cursor-pointer ml-3">{config.APP_NAME}</h2>
 							</LinkComponent>
@@ -49,7 +56,7 @@ const SidebarComponent: React.FC<Props> = () => {
 								className="inline-flex items-center text-gray-400 hover:bg-gray-500 hover:text-white p-1 rounded-md lg:hidden -mr-1"
 								onClick={() => dispatch(appSidebarRequestAction(true))}
 							>
-								<FaTimes className="h-6 w-6" />
+								<TimesIconComponent className="h-6 w-6" />
 							</button>
 						</div>
 					</div>
@@ -58,12 +65,12 @@ const SidebarComponent: React.FC<Props> = () => {
 							<ul className="space-y-3">
 								<li>
 									<NavLinkComponent
-										href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`}
+										to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`}
 										className="inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline"
-										activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-										notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+										classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+										classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"
 									>
-										<FaTachometerAlt className="w-6 h-6" />
+										<TachometerIconComponent className="w-6 h-6" />
 										<span className="ml-4">Dashboard</span>
 									</NavLinkComponent>
 								</li>
@@ -88,9 +95,9 @@ const SidebarComponent: React.FC<Props> = () => {
 															: 'text-gray-400'
 													)}
 												>
-													<FaUsers className="w-6 h-6" />
+													<UserIconComponent className="w-6 h-6" />
 													<span className="ml-4">Users</span>
-													<FaChevronLeft
+													<ChevronLeftIconComponent
 														className={classNames('w-6 h-6 ml-auto', {
 															'transform -rotate-90': open
 														})}
@@ -108,23 +115,23 @@ const SidebarComponent: React.FC<Props> = () => {
 													<Disclosure.Panel static as="ul" className="space-y-4 mt-4">
 														<li>
 															<NavLinkComponent
-																href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
+																to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
 																className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
-																activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-																notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+																classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+																classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"
 															>
-																<FaRegListAlt className="w-6 h-6" />
+																<ListIconComponent className="w-6 h-6" />
 																<span className="ml-4">List</span>
 															</NavLinkComponent>
 														</li>
 														<li>
 															<NavLinkComponent
-																href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`}
+																to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`}
 																className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
-																activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-																notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+																classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+																classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"
 															>
-																<FaPlusCircle className="w-6 h-6" />
+																<PlusCircleIconComponent className="w-6 h-6" />
 																<span className="ml-4">New</span>
 															</NavLinkComponent>
 														</li>
@@ -148,9 +155,9 @@ const SidebarComponent: React.FC<Props> = () => {
 														: 'text-gray-400'
 												)}
 											>
-												<FaEllipsisH className="w-6 h-6" />
+												<EllipsisHorizontalIconComponent className="w-6 h-6" />
 												<span className="ml-4">More</span>
-												<FaChevronLeft
+												<ChevronLeftIconComponent
 													className={classNames('w-6 h-6 ml-auto', {
 														'transform -rotate-90': open
 													})}
@@ -168,12 +175,12 @@ const SidebarComponent: React.FC<Props> = () => {
 												<Disclosure.Panel static as="ul" className="space-y-4 mt-4">
 													<li>
 														<NavLinkComponent
-															href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
+															to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
 															className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
-															activeClassName="bg-gray-500 hover:bg-gray-500 font-bold text-white"
-															notActiveClassName="hover:bg-gray-900 hover:text-white text-gray-400"
+															classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
+															classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"
 														>
-															<FaCog className="w-6 h-6" />
+															<CogIconComponent className="w-6 h-6" />
 															<span className="ml-4">Settings</span>
 														</NavLinkComponent>
 													</li>

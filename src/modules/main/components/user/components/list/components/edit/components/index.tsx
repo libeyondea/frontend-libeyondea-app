@@ -31,9 +31,7 @@ import { selectUserList, selectUserShow, selectUserUpdate } from 'src/store/user
 import { Image } from 'src/types/image';
 import { UpdateUserFormik } from 'src/types/user';
 
-type Props = {};
-
-const EditListUserComponent: React.FC<Props> = () => {
+const EditListUserComponent = () => {
 	const navigate = useNavigate();
 	const params = useParams();
 	const dispatch = useAppDispatch();
@@ -137,7 +135,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 					})
 					.catch(
 						errorHandler(undefined, (validationError) => {
-							formikHelpers.setErrors(validationError.data.errors);
+							formikHelpers.setErrors(validationError.response?.data?.errors);
 						})
 					)
 					.finally(() => {
@@ -146,7 +144,7 @@ const EditListUserComponent: React.FC<Props> = () => {
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.data.errors);
+					formikHelpers.setErrors(validationError.response?.data?.errors);
 				})
 			)
 			.finally(() => {});

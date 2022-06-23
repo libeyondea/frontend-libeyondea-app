@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { removeCookie } from './cookies';
 import toastify from './toastify';
@@ -8,24 +8,24 @@ import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src
 import { ResponseError } from 'src/types/response';
 
 export const errorHandler = (
-	callbackAxiosError?: (err: AxiosResponse<ResponseError>) => void,
-	callbackValidationError?: (err: AxiosResponse<ResponseError>) => void,
+	callbackAxiosError?: (err: AxiosError<ResponseError | undefined>) => void,
+	callbackValidationError?: (err: AxiosError<ResponseError | undefined>) => void,
+	callbackUnauthorizedError?: (err: AxiosError<ResponseError | undefined>) => void,
 	callbackStockError?: (err: Error) => void
 ) => {
-	return (error: Error | AxiosError<ResponseError>) => {
+	return (error: Error | AxiosError<ResponseError | undefined>) => {
 		if (axios.isAxiosError(error)) {
-			if (error.response?.data) {
-				toastify.error(error.response.data.message);
-				if (error.response.status === 401) {
-					removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
-					store.dispatch(authCurrentDataRequestAction(null));
-					store.dispatch(authCurrentTokenRequestAction(null));
-				} else if (error.response.status === 400) {
-					callbackValidationError && callbackValidationError(error.response);
-				}
-				callbackAxiosError && callbackAxiosError(error.response);
+			toastify.error(error.response?.data?.message || error.message);
+			const status = error.response?.status || null;
+			if (status === 401) {
+				removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
+				store.dispatch(authCurrentDataRequestAction(null));
+				store.dispatch(authCurrentTokenRequestAction(null));
+				callbackUnauthorizedError && callbackUnauthorizedError(error);
+			} else if (status === 400) {
+				callbackValidationError && callbackValidationError(error);
 			} else {
-				toastify.error(error.message);
+				callbackAxiosError && callbackAxiosError(error);
 			}
 		} else {
 			toastify.error(error.message);

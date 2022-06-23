@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { FaSyncAlt } from 'react-icons/fa';
+
+import { SyncIconComponent } from 'src/components/Icon/components';
 
 type Props = {
 	className?: string;
@@ -8,9 +9,9 @@ type Props = {
 	disabled?: boolean;
 	styleType?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
 	children: React.ReactNode;
-} & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+} & React.ComponentPropsWithoutRef<'button'>;
 
-const ButtonComponent: React.FC<Props> = ({ className, type = 'button', loading = false, disabled = false, styleType = 'primary', children, ...props }) => (
+const ButtonComponent = ({ className, type = 'button', loading = false, disabled = false, styleType = 'primary', children, ...props }: Props) => (
 	<button
 		{...props}
 		type={type}
@@ -31,7 +32,7 @@ const ButtonComponent: React.FC<Props> = ({ className, type = 'button', loading 
 		)}
 		disabled={disabled}
 	>
-		{loading && <FaSyncAlt className="animate-spin h-4 w-4 mr-2" />}
+		{loading && <SyncIconComponent className="animate-spin h-4 w-4 mr-2" />}
 		<span>{children}</span>
 	</button>
 );

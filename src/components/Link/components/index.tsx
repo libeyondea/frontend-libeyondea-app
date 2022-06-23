@@ -1,18 +1,17 @@
-import classNames from 'classnames';
 import { forwardRef } from 'react';
 import { Link, To } from 'react-router-dom';
 import type { LinkProps } from 'react-router-dom';
 
 type Props = {
 	className?: string;
-	href: To;
+	to: To;
 	children: React.ReactNode;
-} & Omit<LinkProps, 'to'>;
+} & LinkProps;
 
-const LinkComponent = forwardRef<HTMLAnchorElement, Props>(({ className, href, children, ...props }, ref) => (
-	<Link {...props} ref={ref} className={classNames('', className)} to={href}>
+const LinkComponent = ({ className, to, children, ...props }: Props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
+	<Link {...props} className={className} to={to} ref={ref}>
 		{children}
 	</Link>
-));
+);
 
-export default LinkComponent;
+export default forwardRef(LinkComponent);

@@ -1,8 +1,8 @@
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
 
+import { BarsIconComponent } from 'src/components/Icon/components';
 import ImageComponent from 'src/components/Image/components';
 import LinkComponent from 'src/components/Link/components';
 import * as cookiesConstant from 'src/constants/cookies';
@@ -17,9 +17,7 @@ import { selectAppSidebar } from 'src/store/app/selectors';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
-type Props = {};
-
-const NavbarComponent: React.FC<Props> = () => {
+const NavbarComponent = () => {
 	const dispatch = useAppDispatch();
 	const appSidebar = useAppSelector(selectAppSidebar);
 	const authCurrent = useAppSelector(selectAuthCurrent);
@@ -53,11 +51,11 @@ const NavbarComponent: React.FC<Props> = () => {
 							className="text-gray-800 inline-flex items-center justify-center rounded-md focus:outline-none"
 							onClick={() => dispatch(appSidebarRequestAction(!appSidebar))}
 						>
-							<AiOutlineMenu className="h-6 w-6" />
+							<BarsIconComponent className="h-6 w-6" />
 						</button>
 						<div className="block">
 							<div className="ml-4 flex items-baseline space-x-4">
-								<LinkComponent className="text-gray-800 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" href="/">
+								<LinkComponent className="text-gray-800 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" to="/">
 									Home
 								</LinkComponent>
 							</div>
@@ -82,7 +80,7 @@ const NavbarComponent: React.FC<Props> = () => {
 										<Menu.Item>
 											{({ active }) => (
 												<LinkComponent
-													href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_PROFILE}`}
+													to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_PROFILE}`}
 													className={classNames('block px-4 py-2 rounded-md text-md', {
 														'bg-gray-300 text-gray-700': active,
 														'text-gray-900': !active
@@ -95,7 +93,7 @@ const NavbarComponent: React.FC<Props> = () => {
 										<Menu.Item>
 											{({ active }) => (
 												<LinkComponent
-													href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
+													to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
 													className={classNames('block px-4 py-2 rounded-md text-md', {
 														'bg-gray-300 text-gray-700': active,
 														'text-gray-900': !active

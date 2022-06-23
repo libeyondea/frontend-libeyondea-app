@@ -17,9 +17,7 @@ import authService from 'src/services/authService';
 import { SignInFormik } from 'src/types/auth';
 import { LocationState } from 'src/types/router';
 
-type Props = {};
-
-const SignInCompoment: React.FC<Props> = () => {
+const SignInCompoment = () => {
 	const navigate = useNavigate();
 	const location = useLocation() as LocationState;
 
@@ -45,7 +43,7 @@ const SignInCompoment: React.FC<Props> = () => {
 				setCookie(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
 					expires: values.remember_me ? config.AUTH_DATA.EXPIRED_TIME_REMEMBER_ME : config.AUTH_DATA.EXPIRED_TIME
 				});
-				toastify.success('Signed in successfully');
+				toastify.success('Signed in successfully.');
 				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, {
 					state: {
 						from: location?.state?.from
@@ -54,7 +52,7 @@ const SignInCompoment: React.FC<Props> = () => {
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.data.errors);
+					formikHelpers.setErrors(validationError.response?.data?.errors);
 				})
 			)
 			.finally(() => {
@@ -103,7 +101,7 @@ const SignInCompoment: React.FC<Props> = () => {
 								Remember me
 							</FormComponent.Checkbox>
 							<div className="text-sm">
-								<LinkComponent href="/" className="font-medium text-purple-600">
+								<LinkComponent to="/" className="font-medium text-purple-600">
 									Forgot password?
 								</LinkComponent>
 							</div>
@@ -127,7 +125,7 @@ const SignInCompoment: React.FC<Props> = () => {
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<LinkComponent className="text-purple-600 ml-1" href={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_UP}`}>
+					<LinkComponent className="text-purple-600 ml-1" to={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_UP}`}>
 						Sign up
 					</LinkComponent>
 				</span>

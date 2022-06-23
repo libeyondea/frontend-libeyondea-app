@@ -26,9 +26,7 @@ import { selectUserCreate, selectUserList } from 'src/store/user/selectors';
 import { Image } from 'src/types/image';
 import { CreateUserFormik } from 'src/types/user';
 
-type Props = {};
-
-const NewListUserComponent: React.FC<Props> = () => {
+const NewListUserComponent = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
@@ -133,7 +131,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 					})
 					.catch(
 						errorHandler(undefined, (validationError) => {
-							formikHelpers.setErrors(validationError.data.errors);
+							formikHelpers.setErrors(validationError.response?.data?.errors);
 						})
 					)
 					.finally(() => {
@@ -142,7 +140,7 @@ const NewListUserComponent: React.FC<Props> = () => {
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.data.errors);
+					formikHelpers.setErrors(validationError.response?.data?.errors);
 				})
 			)
 			.finally(() => {});

@@ -6,9 +6,9 @@ type Props = {
 	error?: string;
 	touched?: boolean;
 	children: React.ReactNode;
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+} & React.ComponentPropsWithoutRef<'input'>;
 
-const CheckboxFormComponent: React.FC<Props> = ({ className, name, error, touched = false, children, ...props }) => {
+const CheckboxFormComponent = ({ className, name, error, touched = false, children, ...props }: Props) => {
 	return (
 		<div className={classNames('flex-row', className)}>
 			<div className="flex items-center">

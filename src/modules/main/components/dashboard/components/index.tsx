@@ -3,9 +3,7 @@ import { Fragment } from 'react';
 import BreadcrumbComponent from 'src/components/Breadcrumb/components';
 import CardComponent from 'src/components/Card/components';
 
-type Props = {};
-
-const DashboardComponent: React.FC<Props> = () => {
+const DashboardComponent = () => {
 	return (
 		<Fragment>
 			<BreadcrumbComponent className="mb-4">Dashboard</BreadcrumbComponent>

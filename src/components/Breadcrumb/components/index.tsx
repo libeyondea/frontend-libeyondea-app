@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const BreadcrumbComponent: React.FC<Props> = ({ className, children }) => {
+const BreadcrumbComponent = ({ className, children }: Props) => {
 	return (
 		<div className={classNames('flex', className)}>
 			<h3 className="text-2xl font-bold">{children}</h3>

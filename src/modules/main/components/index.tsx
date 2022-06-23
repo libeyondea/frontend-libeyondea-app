@@ -9,12 +9,9 @@ import useAppSelector from 'src/hooks/useAppSelector';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
-type Props = {};
-
-const MainComponent: React.FC<Props> = () => {
+const MainComponent = () => {
 	const appSidebar = useAppSelector(selectAppSidebar);
 	const authCurrent = useAppSelector(selectAuthCurrent);
-	console.log('MainComponent');
 
 	return (
 		<Fragment>

@@ -7,9 +7,7 @@ import RootRouter from './router';
 import store from 'src/store';
 import 'src/styles/index.scss';
 
-type Props = {};
-
-const Root: React.FC<Props> = () => {
+const Root = () => {
 	return (
 		<Provider store={store}>
 			<Router>

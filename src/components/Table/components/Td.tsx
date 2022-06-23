@@ -3,9 +3,9 @@ import classNames from 'classnames';
 type Props = {
 	className?: string;
 	children: React.ReactNode;
-} & React.DetailedHTMLProps<React.TdHTMLAttributes<HTMLTableCellElement>, HTMLTableCellElement>;
+} & React.ComponentPropsWithoutRef<'td'>;
 
-const TdTableComponent: React.FC<Props> = ({ className, children, ...props }) => {
+const TdTableComponent = ({ className, children, ...props }: Props) => {
 	return (
 		<td {...props} className={classNames('p-3 text-sm text-gray-500', className)}>
 			{children}

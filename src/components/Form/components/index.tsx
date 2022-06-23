@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { FormikConfig, FormikHelpers, FormikProps, FormikValues, useFormik } from 'formik';
 
 import CheckboxFormComponent from './Checkbox';
@@ -22,7 +21,7 @@ const FormComponent = <Values extends FormikValues = FormikValues>({
 	onSubmit,
 	children,
 	...props
-}: FormComponentProps<Values>): JSX.Element => {
+}: FormComponentProps<Values>) => {
 	const formik: FormikProps<Values> = useFormik<Values>({
 		...props,
 		initialValues: initialValues,
@@ -31,7 +30,7 @@ const FormComponent = <Values extends FormikValues = FormikValues>({
 	});
 
 	return (
-		<form className={classNames('', className)} onSubmit={formik.handleSubmit}>
+		<form className={className} onSubmit={formik.handleSubmit}>
 			{children(formik)}
 		</form>
 	);

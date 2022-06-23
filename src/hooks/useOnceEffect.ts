@@ -1,6 +1,6 @@
-import { EffectCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const useOnceEffect = (effect: EffectCallback): void => {
+const useOnceEffect = (effect: React.EffectCallback): void => {
 	const destroyFunc = useRef<void | any>();
 	const calledOnce = useRef(false);
 	const renderAfterCalled = useRef(false);

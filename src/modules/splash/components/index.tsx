@@ -16,14 +16,11 @@ import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src
 import { selectIsAuth } from 'src/store/auth/selectors';
 import { LocationState } from 'src/types/router';
 
-type Props = {};
-
-const SplashComponent: React.FC<Props> = () => {
+const SplashComponent = () => {
 	const navigate = useNavigate();
 	const location = useLocation() as LocationState;
 	const dispatch = useAppDispatch();
 	const isAuth = useAppSelector(selectIsAuth);
-	console.log('SplashComponent');
 
 	useOnceEffect(() => {
 		dispatch(appInitializedRequestAction(true));
@@ -57,7 +54,7 @@ const SplashComponent: React.FC<Props> = () => {
 					}
 				})
 				.catch(
-					errorHandler(() =>
+					errorHandler(undefined, undefined, () =>
 						navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
 							replace: true,
 							state: {

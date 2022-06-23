@@ -3,9 +3,9 @@ import classNames from 'classnames';
 type Props = {
 	className?: string;
 	children: React.ReactNode;
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>;
+} & React.ComponentPropsWithoutRef<'tr'>;
 
-const TrTableComponent: React.FC<Props> = ({ className, children, ...props }) => {
+const TrTableComponent = ({ className, children, ...props }: Props) => {
 	return (
 		<tr {...props} className={classNames('', className)}>
 			{children}

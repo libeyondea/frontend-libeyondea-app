@@ -4,11 +4,10 @@ type Props = {
 	className?: string;
 	styleType?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
 	children: React.ReactNode;
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+};
 
-const BadgeComponent: React.FC<Props> = ({ className, styleType = 'primary', children, ...props }) => (
+const BadgeComponent = ({ className, styleType = 'primary', children }: Props) => (
 	<div
-		{...props}
 		className={classNames(
 			'px-2 py-1 inline-flex items-center justify-centers text-sm leading-none font-semibold rounded-full',
 			{

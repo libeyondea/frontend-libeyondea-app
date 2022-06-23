@@ -13,9 +13,7 @@ import toastify from 'src/helpers/toastify';
 import authService from 'src/services/authService';
 import { SignUpFormik } from 'src/types/auth';
 
-type Props = {};
-
-const SignUpComponent: React.FC<Props> = () => {
+const SignUpComponent = () => {
 	const navigate = useNavigate();
 
 	const initialValues: SignUpFormik = {
@@ -64,7 +62,7 @@ const SignUpComponent: React.FC<Props> = () => {
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.data.errors);
+					formikHelpers.setErrors(validationError.response?.data?.errors);
 				})
 			)
 			.finally(() => {
@@ -156,15 +154,15 @@ const SignUpComponent: React.FC<Props> = () => {
 								{...props.getFieldProps('terms')}
 							>
 								By signing up, you agree to our{' '}
-								<LinkComponent className="text-purple-600 font-medium" href="/">
+								<LinkComponent className="text-purple-600 font-medium" to="/">
 									Terms
 								</LinkComponent>{' '}
 								,{' '}
-								<LinkComponent className="text-purple-600 font-medium" href="/">
+								<LinkComponent className="text-purple-600 font-medium" to="/">
 									Data Policy
 								</LinkComponent>{' '}
 								and{' '}
-								<LinkComponent className="text-purple-600 font-medium" href="/">
+								<LinkComponent className="text-purple-600 font-medium" to="/">
 									Cookies Policy
 								</LinkComponent>
 								.
@@ -189,7 +187,7 @@ const SignUpComponent: React.FC<Props> = () => {
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<LinkComponent className="text-purple-600 ml-1" href={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`}>
+					<LinkComponent className="text-purple-600 ml-1" to={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`}>
 						Sign in
 					</LinkComponent>
 				</span>

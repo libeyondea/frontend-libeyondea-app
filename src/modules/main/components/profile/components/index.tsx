@@ -24,9 +24,7 @@ import { selectProfileShow, selectProfileUpdate } from 'src/store/profile/select
 import { Image } from 'src/types/image';
 import { UpdateProfileFormik } from 'src/types/profile';
 
-type Props = {};
-
-const ProfileComponent: React.FC<Props> = () => {
+const ProfileComponent = () => {
 	const dispatch = useAppDispatch();
 	const profileShow = useAppSelector(selectProfileShow);
 	const profileUpdate = useAppSelector(selectProfileUpdate);
@@ -98,7 +96,7 @@ const ProfileComponent: React.FC<Props> = () => {
 					})
 					.catch(
 						errorHandler(undefined, (validationError) => {
-							formikHelpers.setErrors(validationError.data.errors);
+							formikHelpers.setErrors(validationError.response?.data?.errors);
 						})
 					)
 					.finally(() => {
@@ -107,7 +105,7 @@ const ProfileComponent: React.FC<Props> = () => {
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.data.errors);
+					formikHelpers.setErrors(validationError.response?.data?.errors);
 				})
 			)
 			.finally(() => {});

@@ -8,13 +8,12 @@ type Props = {
 	horizontal?: boolean;
 	error?: string;
 	touched?: boolean;
-} & React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
+} & React.ComponentPropsWithoutRef<'select'>;
 
-const SelectFormComponent: React.FC<Props> = ({ className, name, label, options, horizontal = false, error, touched = false, ...props }) => {
+const SelectFormComponent = ({ className, name, label, options, horizontal = false, error, touched = false, ...props }: Props) => {
 	return (
 		<div
 			className={classNames(
-				'',
 				{
 					'flex items-center': horizontal
 				},

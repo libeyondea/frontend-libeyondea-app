@@ -22,9 +22,7 @@ import {
 import { selectSettingShow, selectSettingUpdate } from 'src/store/setting/selectors';
 import { UpdateSettingFormik } from 'src/types/setting';
 
-type Props = {};
-
-const SettingComponent: React.FC<Props> = () => {
+const SettingComponent = () => {
 	const dispatch = useAppDispatch();
 	const settingShow = useAppSelector(selectSettingShow);
 	const settingUpdate = useAppSelector(selectSettingUpdate);
@@ -56,7 +54,7 @@ const SettingComponent: React.FC<Props> = () => {
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.data.errors);
+					formikHelpers.setErrors(validationError.response?.data?.errors);
 				})
 			)
 			.finally(() => {

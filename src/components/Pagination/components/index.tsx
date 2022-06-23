@@ -1,9 +1,14 @@
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { MdMoreHoriz } from 'react-icons/md';
 
 import FormComponent from 'src/components/Form/components';
+import {
+	AngleDoubleLeftIconComponent,
+	AngleDoubleRightIconComponent,
+	AngleLeftIconComponent,
+	AngleRightIconComponent,
+	EllipsisHorizontalIconComponent
+} from 'src/components/Icon/components';
 import { getPageNumbers, getTotalPages } from 'src/helpers/pagination';
 
 type Props = {
@@ -16,7 +21,7 @@ type Props = {
 	onChangeLimit: (limit: number) => void;
 };
 
-const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, limits = [10, 20, 50, 100], onChangePage, onChangeLimit }) => {
+const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 50, 100], onChangePage, onChangeLimit }: Props) => {
 	const totalPages = getTotalPages(total, limit);
 	const pageNumbers = getPageNumbers(page, limit, total);
 
@@ -63,7 +68,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								onClick={(event) => _onChangePage(event, 1)}
 							>
 								<span className="sr-only">First</span>
-								<FaAngleDoubleLeft className="h-4 w-4" />
+								<AngleDoubleLeftIconComponent className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -71,7 +76,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								onClick={(event) => _onChangePage(event, page === 1 ? 1 : page - 1)}
 							>
 								<span className="sr-only">Previous</span>
-								<FaAngleLeft className="h-4 w-4" />
+								<AngleLeftIconComponent className="h-4 w-4" />
 							</button>
 						</Fragment>
 					) : (
@@ -82,7 +87,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								disabled
 							>
 								<span className="sr-only">No first</span>
-								<FaAngleDoubleLeft className="h-4 w-4" />
+								<AngleDoubleLeftIconComponent className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -90,7 +95,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								disabled
 							>
 								<span className="sr-only">No previous</span>
-								<FaAngleLeft className="h-4 w-4" />
+								<AngleLeftIconComponent className="h-4 w-4" />
 							</button>
 						</Fragment>
 					)}
@@ -100,7 +105,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-base font-medium text-gray-400"
 								key={`${pageNumber}${i}`}
 							>
-								<MdMoreHoriz />
+								<EllipsisHorizontalIconComponent className="h-4 w-4" />
 							</span>
 						) : pageNumber === page ? (
 							<button
@@ -130,7 +135,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								onClick={(event) => _onChangePage(event, page + 1)}
 							>
 								<span className="sr-only">Next</span>
-								<FaAngleRight className="h-4 w-4" />
+								<AngleRightIconComponent className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -138,7 +143,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								onClick={(event) => _onChangePage(event, totalPages)}
 							>
 								<span className="sr-only">Last</span>
-								<FaAngleDoubleRight className="h-4 w-4" />
+								<AngleDoubleRightIconComponent className="h-4 w-4" />
 							</button>
 						</Fragment>
 					) : (
@@ -149,7 +154,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								disabled
 							>
 								<span className="sr-only">No next</span>
-								<FaAngleRight className="h-4 w-4" />
+								<AngleRightIconComponent className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -157,7 +162,7 @@ const PaginationComponent: React.FC<Props> = ({ className, page, limit, total, l
 								disabled
 							>
 								<span className="sr-only">No last</span>
-								<FaAngleDoubleRight className="h-4 w-4" />
+								<AngleDoubleRightIconComponent className="h-4 w-4" />
 							</button>
 						</Fragment>
 					)}

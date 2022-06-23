@@ -6,7 +6,7 @@ type Props = {
 	className?: string;
 };
 
-const TableLoadingComponent: React.FC<Props> = ({ className }) => {
+const TableLoadingComponent = ({ className }: Props) => {
 	return (
 		<TableComponent className={classNames('animate-pulse', className)}>
 			<TableComponent.Thead>

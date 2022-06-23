@@ -7,13 +7,12 @@ type Props = {
 	horizontal?: boolean;
 	error?: string;
 	touched?: boolean;
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+} & React.ComponentPropsWithoutRef<'input'>;
 
-const ToggleFormComponent: React.FC<Props> = ({ className, name, label, horizontal = false, error, touched = false, ...props }) => {
+const ToggleFormComponent = ({ className, name, label, horizontal = false, error, touched = false, ...props }: Props) => {
 	return (
 		<div
 			className={classNames(
-				'',
 				{
 					'flex items-center': horizontal
 				},

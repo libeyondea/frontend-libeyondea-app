@@ -1,5 +1,4 @@
 import { Fragment, useCallback, useState } from 'react';
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 
 import FilterListUserComponent from './filter';
 import ListUserRouter from './router';
@@ -7,6 +6,7 @@ import BadgeComponent from 'src/components/Badge/components';
 import BlockUIComponent from 'src/components/BlockUI/components';
 import BreadcrumbComponent from 'src/components/Breadcrumb/components';
 import CardComponent from 'src/components/Card/components';
+import { EditIconComponent, TrashIconComponent } from 'src/components/Icon/components';
 import LinkComponent from 'src/components/Link/components';
 import ModalComponent from 'src/components/Modal/components';
 import PaginationComponent from 'src/components/Pagination/components';
@@ -32,9 +32,7 @@ import {
 } from 'src/store/user/actions';
 import { selectUserDelete, selectUserList } from 'src/store/user/selectors';
 
-type Props = {};
-
-const ListUserComponent: React.FC<Props> = () => {
+const ListUserComponent = () => {
 	const [id, setId] = useState<number | null>(null);
 	const [showModal, setShowModal] = useState(false);
 	const dispatch = useAppDispatch();
@@ -152,10 +150,10 @@ const ListUserComponent: React.FC<Props> = () => {
 													<TableComponent.Td>
 														<div className="flex items-center">
 															<LinkComponent
-																href={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}
+																to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}
 																className="text-indigo-600 hover:text-indigo-900 mr-2"
 															>
-																<FaRegEdit className="h-5 w-5" />
+																<EditIconComponent className="h-5 w-5" />
 															</LinkComponent>
 															<button
 																type="button"
@@ -165,7 +163,7 @@ const ListUserComponent: React.FC<Props> = () => {
 																	setShowModal(true);
 																}}
 															>
-																<FaRegTrashAlt className="h-5 w-5" />
+																<TrashIconComponent className="h-5 w-5" />
 															</button>
 														</div>
 													</TableComponent.Td>
