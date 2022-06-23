@@ -4,13 +4,13 @@ import ImageComponent from 'src/components/Image/components';
 import config from 'src/config';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
-import { getCookie } from 'src/helpers/cookies';
-import { errorHandler } from 'src/helpers/error';
+import { getCookie, removeCookie } from 'src/helpers/cookies';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import Logo from 'src/images/logo.png';
 import authService from 'src/services/authService';
+import store from 'src/store';
 import { appInitializedRequestAction } from 'src/store/app/actions';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
 import { selectIsAuth } from 'src/store/auth/selectors';
@@ -53,16 +53,17 @@ const SplashComponent = () => {
 						});
 					}
 				})
-				.catch(
-					errorHandler(undefined, undefined, () =>
-						navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
-							replace: true,
-							state: {
-								from: location.state?.from
-							}
-						})
-					)
-				);
+				.catch(() => {
+					removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
+					store.dispatch(authCurrentDataRequestAction(null));
+					store.dispatch(authCurrentTokenRequestAction(null));
+					navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
+						replace: true,
+						state: {
+							from: location.state?.from
+						}
+					});
+				});
 		} else {
 			dispatch(authCurrentDataRequestAction(null));
 			dispatch(authCurrentTokenRequestAction(null));

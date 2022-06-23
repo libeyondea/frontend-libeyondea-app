@@ -1,31 +1,43 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import React from 'react';
+
+import CardComponent from 'src/components/Card/components';
 
 type Props = {
-	children?: ReactNode;
+	children?: React.ReactNode;
 };
 
 interface State {
 	hasError: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
-	public state: State = {
+class ErrorBoundary extends React.Component<Props, State> {
+	state: State = {
 		hasError: false
 	};
 
-	public static getDerivedStateFromError(_: Error): State {
+	static getDerivedStateFromError(_: Error): State {
 		return {
 			hasError: true
 		};
 	}
 
-	public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+	componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
 		console.error('Uncaught error:', error, errorInfo);
 	}
 
-	public render() {
+	render() {
 		if (this.state.hasError) {
-			return <h1>Sorry.. there was an error</h1>;
+			return (
+				<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto">
+					<div className="min-h-full flex flex-col py-8 sm:p-16">
+						<CardComponent className="m-auto flex flex-col w-full max-w-md sm:p-8">
+							<h6 className="text-2xl font-bold text-center text-gray-800 md:text-3xl">
+								<span className="text-red-500">Oops!</span> There was an error
+							</h6>
+						</CardComponent>
+					</div>
+				</div>
+			);
 		}
 
 		return this.props.children;
