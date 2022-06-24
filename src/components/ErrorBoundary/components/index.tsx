@@ -3,21 +3,21 @@ import React from 'react';
 import CardComponent from 'src/components/Card/components';
 
 type Props = {
-	children?: React.ReactNode;
+	children: React.ReactNode;
 };
 
 interface State {
-	hasError: boolean;
+	error: Error | null;
 }
 
 class ErrorBoundary extends React.Component<Props, State> {
 	state: State = {
-		hasError: false
+		error: null
 	};
 
-	static getDerivedStateFromError(_: Error): State {
+	static getDerivedStateFromError(error: Error): State {
 		return {
-			hasError: true
+			error: error
 		};
 	}
 
@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 	}
 
 	render() {
-		if (this.state.hasError) {
+		if (this.state.error) {
 			return (
 				<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto">
 					<div className="min-h-full flex flex-col py-8 sm:p-16">

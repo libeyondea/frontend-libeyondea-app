@@ -26,11 +26,11 @@ const RootRouter = () => {
 			path: `/${routeConstant.ROUTE_NAME_AUTH}/*`,
 			element: (
 				<Suspense fallback={null}>
-					<AccessControl>
-						<ErrorBoundary>
+					<ErrorBoundary>
+						<AccessControl>
 							<AuthComponent />
-						</ErrorBoundary>
-					</AccessControl>
+						</AccessControl>
+					</ErrorBoundary>
 				</Suspense>
 			)
 		},

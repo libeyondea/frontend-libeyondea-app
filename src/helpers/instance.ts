@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import config from 'src/config';
 import store from 'src/store';
@@ -13,23 +13,23 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-	(config: AxiosRequestConfig) => {
+	(config) => {
 		const token = store.getState().authState.current.token;
 		if (config.headers && !config.headers.Authorization && token) {
 			config.headers.Authorization = `Bearer ${token}`;
 		}
 		return config;
 	},
-	(error: Error) => {
+	(error) => {
 		return Promise.reject(error);
 	}
 );
 
 instance.interceptors.response.use(
-	(response: AxiosResponse) => {
+	(response) => {
 		return response;
 	},
-	(error: AxiosError) => {
+	(error) => {
 		return Promise.reject(error);
 	}
 );

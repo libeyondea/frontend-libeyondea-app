@@ -33,7 +33,7 @@ const NavbarComponent = () => {
 		removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
 		dispatch(authCurrentDataRequestAction(null));
 		dispatch(authCurrentTokenRequestAction(null));
-		toastify.success('Signed out successfully');
+		toastify.success('Signed out successfully.');
 	};
 
 	return (

@@ -58,10 +58,7 @@ const SplashComponent = () => {
 					store.dispatch(authCurrentDataRequestAction(null));
 					store.dispatch(authCurrentTokenRequestAction(null));
 					navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
-						replace: true,
-						state: {
-							from: location.state?.from
-						}
+						replace: true
 					});
 				});
 		} else {
@@ -73,10 +70,7 @@ const SplashComponent = () => {
 				});
 			} else {
 				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
-					replace: true,
-					state: {
-						from: location.state?.from
-					}
+					replace: true
 				});
 			}
 		}

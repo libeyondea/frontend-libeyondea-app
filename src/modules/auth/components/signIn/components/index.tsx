@@ -1,6 +1,6 @@
 import { FormikHelpers } from 'formik';
 import { Fragment } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import ButtonComponent from 'src/components/Button/components';
@@ -15,11 +15,9 @@ import { errorHandler } from 'src/helpers/error';
 import toastify from 'src/helpers/toastify';
 import authService from 'src/services/authService';
 import { SignInFormik } from 'src/types/auth';
-import { LocationState } from 'src/types/router';
 
 const SignInCompoment = () => {
 	const navigate = useNavigate();
-	const location = useLocation() as LocationState;
 
 	const initialValues: SignInFormik = {
 		user_name: '',
@@ -44,11 +42,7 @@ const SignInCompoment = () => {
 					expires: values.remember_me ? config.AUTH_DATA.EXPIRED_TIME_REMEMBER_ME : config.AUTH_DATA.EXPIRED_TIME
 				});
 				toastify.success('Signed in successfully.');
-				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`, {
-					state: {
-						from: location?.state?.from
-					}
-				});
+				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`);
 			})
 			.catch(
 				errorHandler(undefined, (validationError) => {

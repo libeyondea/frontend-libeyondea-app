@@ -8,19 +8,18 @@ import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src
 import { ResponseError } from 'src/types/response';
 
 export const errorHandler = (
-	callbackAxiosError?: (err: AxiosError<ResponseError | undefined>) => void,
-	callbackValidationError?: (err: AxiosError<ResponseError | undefined>) => void,
+	callbackAxiosError?: (err: AxiosError<ResponseError>) => void,
+	callbackValidationError?: (err: AxiosError<ResponseError>) => void,
 	callbackStockError?: (err: Error) => void
 ) => {
-	return (error: Error | AxiosError<ResponseError | undefined>) => {
+	return (error: Error | AxiosError<ResponseError>) => {
 		if (axios.isAxiosError(error)) {
 			toastify.error(error.response?.data?.message || error.message);
-			const status = error.response?.status || null;
-			if (status === 401) {
+			if (error.response?.status === 401) {
 				removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
 				store.dispatch(authCurrentDataRequestAction(null));
 				store.dispatch(authCurrentTokenRequestAction(null));
-			} else if (status === 400) {
+			} else if (error.response?.status === 400) {
 				callbackValidationError && callbackValidationError(error);
 			} else {
 				callbackAxiosError && callbackAxiosError(error);
