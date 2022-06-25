@@ -13,7 +13,7 @@ import PaginationComponent from 'src/components/Pagination/components';
 import TableComponent from 'src/components/Table/components';
 import TableLoadingComponent from 'src/components/TableLoading/components';
 import * as routeConstant from 'src/constants/route';
-import { errorHandler } from 'src/helpers/error';
+import errorHandler from 'src/helpers/errorHandler';
 import time from 'src/helpers/time';
 import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';

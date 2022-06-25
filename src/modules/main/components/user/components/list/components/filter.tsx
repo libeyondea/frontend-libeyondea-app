@@ -1,15 +1,17 @@
-import { useState } from 'react';
-
 import FormComponent from 'src/components/Form/components';
 import * as filterConstant from 'src/constants/filter';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useDebouncedCallback from 'src/hooks/useDebouncedCallback';
-import { userListFilterQRequestAction, userListFilterSortByRequestAction, userListFilterSortDirectionRequestAction } from 'src/store/user/actions';
+import {
+	userListFilterQRequestAction,
+	userListFilterQTempRequestAction,
+	userListFilterSortByRequestAction,
+	userListFilterSortDirectionRequestAction
+} from 'src/store/user/actions';
 import { selectUserList } from 'src/store/user/selectors';
 
 const FilterListUserComponent = () => {
-	const [q, setQ] = useState('');
 	const dispatch = useAppDispatch();
 	const userList = useAppSelector(selectUserList);
 
@@ -24,7 +26,7 @@ const FilterListUserComponent = () => {
 	};
 
 	const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setQ(event.target.value);
+		dispatch(userListFilterQTempRequestAction(event.target.value));
 		userListFilterQDebouncedCallback(event.target.value);
 	};
 
@@ -99,7 +101,7 @@ const FilterListUserComponent = () => {
 					type="text"
 					placeholder="Enter keyword"
 					onChange={onChangeSearch}
-					value={q}
+					value={userList.filter.q_temp}
 					name="q"
 					id="q"
 				/>

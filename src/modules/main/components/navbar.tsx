@@ -7,7 +7,7 @@ import ImageComponent from 'src/components/Image/components';
 import LinkComponent from 'src/components/Link/components';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
-import { removeCookie } from 'src/helpers/cookies';
+import cookies from 'src/helpers/cookies';
 import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
@@ -30,7 +30,7 @@ const NavbarComponent = () => {
 				.catch(() => {})
 				.finally(() => {});
 		}
-		removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
+		cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
 		dispatch(authCurrentDataRequestAction(null));
 		dispatch(authCurrentTokenRequestAction(null));
 		toastify.success('Signed out successfully.');

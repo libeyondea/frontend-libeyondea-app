@@ -1,13 +1,15 @@
 import cookie, { CookieAttributes } from 'js-cookie';
 
-export const setCookie = (key: string, value: string, options?: CookieAttributes): void => {
-	cookie.set(key, value, options);
+const cookies = {
+	set: (key: string, value: string, options?: CookieAttributes): void => {
+		cookie.set(key, value, options);
+	},
+	get: (key: string): string | undefined => {
+		return cookie.get(key);
+	},
+	remove: (key: string, options?: CookieAttributes): void => {
+		cookie.remove(key, options);
+	}
 };
 
-export const removeCookie = (key: string, options?: CookieAttributes): void => {
-	cookie.remove(key, options);
-};
-
-export const getCookie = (key: string): string | undefined => {
-	return cookie.get(key);
-};
+export default cookies;

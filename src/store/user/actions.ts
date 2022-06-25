@@ -59,6 +59,14 @@ export const userListFilterQSuccessAction = createAction(actionTypes.USER_LIST_F
 	payload: payload
 }));
 
+export const userListFilterQTempRequestAction = createAction(actionTypes.USER_LIST_FILTER_Q_TEMP_REQUEST, (payload: string) => ({
+	payload: payload
+}));
+
+export const userListFilterQTempSuccessAction = createAction(actionTypes.USER_LIST_FILTER_Q_TEMP_SUCCESS, (payload: string) => ({
+	payload: payload
+}));
+
 export const userListLoadingRequestAction = createAction(actionTypes.USER_LIST_LOADING_REQUEST, (payload: boolean) => ({
 	payload: payload
 }));

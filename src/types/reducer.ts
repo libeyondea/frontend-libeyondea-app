@@ -1,9 +1,9 @@
-export interface ResponseDataReducer<T> {
+export type ResponseDataReducer<T> = {
 	data: T;
 	loading: boolean;
-}
+};
 
-export interface ResponseDataWithPaginationAndFilterReducer<T> extends ResponseDataReducer<T> {
+export type ResponseDataWithPaginationAndFilterReducer<T> = {
 	pagination: {
 		page: number;
 		limit: number;
@@ -11,7 +11,8 @@ export interface ResponseDataWithPaginationAndFilterReducer<T> extends ResponseD
 	};
 	filter: {
 		q: string;
+		q_temp: string;
 		sort_direction: string;
 		sort_by: string;
 	};
-}
+} & ResponseDataReducer<T>;

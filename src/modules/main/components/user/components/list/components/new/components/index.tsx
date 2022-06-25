@@ -8,7 +8,7 @@ import CardComponent from 'src/components/Card/components';
 import FormComponent from 'src/components/Form/components';
 import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
-import { errorHandler } from 'src/helpers/error';
+import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';

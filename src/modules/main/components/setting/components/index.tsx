@@ -7,7 +7,7 @@ import ButtonComponent from 'src/components/Button/components';
 import CardComponent from 'src/components/Card/components';
 import FormComponent from 'src/components/Form/components';
 import LoadingComponent from 'src/components/Loading/components';
-import { errorHandler } from 'src/helpers/error';
+import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';

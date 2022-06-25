@@ -4,7 +4,7 @@ import ImageComponent from 'src/components/Image/components';
 import config from 'src/config';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
-import { getCookie, removeCookie } from 'src/helpers/cookies';
+import cookies from 'src/helpers/cookies';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
@@ -24,7 +24,7 @@ const SplashComponent = () => {
 
 	useOnceEffect(() => {
 		dispatch(appInitializedRequestAction(true));
-		const token = getCookie(cookiesConstant.COOKIES_KEY_TOKEN);
+		const token = cookies.get(cookiesConstant.COOKIES_KEY_TOKEN);
 		const initialUrl = location.state?.from?.pathname;
 
 		if (isAuth) {
@@ -54,7 +54,7 @@ const SplashComponent = () => {
 					}
 				})
 				.catch(() => {
-					removeCookie(cookiesConstant.COOKIES_KEY_TOKEN);
+					cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
 					store.dispatch(authCurrentDataRequestAction(null));
 					store.dispatch(authCurrentTokenRequestAction(null));
 					navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {

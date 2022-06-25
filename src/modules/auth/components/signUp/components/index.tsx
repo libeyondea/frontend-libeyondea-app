@@ -8,7 +8,7 @@ import CardComponent from 'src/components/Card/components';
 import FormComponent from 'src/components/Form/components';
 import LinkComponent from 'src/components/Link/components';
 import * as routeConstant from 'src/constants/route';
-import { errorHandler } from 'src/helpers/error';
+import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
 import authService from 'src/services/authService';
 import { SignUpFormik } from 'src/types/auth';

@@ -7,6 +7,7 @@ import {
 	userDeleteLoadingSuccessAction,
 	userListDataSuccessAction,
 	userListFilterQSuccessAction,
+	userListFilterQTempSuccessAction,
 	userListFilterSortBySuccessAction,
 	userListFilterSortDirectionSuccessAction,
 	userListLoadingSuccessAction,
@@ -41,6 +42,7 @@ const initialState: UserState = {
 		},
 		filter: {
 			q: '',
+			q_temp: '',
 			sort_direction: filterConstant.FILTER_DEFAULT_SORT_DIRECTION,
 			sort_by: filterConstant.FILTER_DEFAULT_SORT_BY
 		},
@@ -133,6 +135,16 @@ const userReducer = createReducer(initialState, (builder) => {
 			filter: {
 				...state.list.filter,
 				q: action.payload
+			}
+		}
+	}));
+	builder.addCase(userListFilterQTempSuccessAction, (state, action) => ({
+		...state,
+		list: {
+			...state.list,
+			filter: {
+				...state.list.filter,
+				q_temp: action.payload
 			}
 		}
 	}));

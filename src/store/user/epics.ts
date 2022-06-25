@@ -15,6 +15,8 @@ import {
 	userListDataSuccessAction,
 	userListFilterQRequestAction,
 	userListFilterQSuccessAction,
+	userListFilterQTempRequestAction,
+	userListFilterQTempSuccessAction,
 	userListFilterSortByRequestAction,
 	userListFilterSortBySuccessAction,
 	userListFilterSortDirectionRequestAction,
@@ -59,6 +61,12 @@ export const userListFilterQEpic = (action$: Observable<Action>): Observable<Act
 	action$.pipe(
 		filter(userListFilterQRequestAction.match),
 		map((action) => userListFilterQSuccessAction(action.payload))
+	);
+
+export const userListFilterQTempEpic = (action$: Observable<Action>): Observable<Action> =>
+	action$.pipe(
+		filter(userListFilterQTempRequestAction.match),
+		map((action) => userListFilterQTempSuccessAction(action.payload))
 	);
 
 export const userListLoadingEpic = (action$: Observable<Action>): Observable<Action> =>

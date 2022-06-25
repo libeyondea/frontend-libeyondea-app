@@ -10,8 +10,8 @@ import LinkComponent from 'src/components/Link/components';
 import config from 'src/config';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
-import { setCookie } from 'src/helpers/cookies';
-import { errorHandler } from 'src/helpers/error';
+import cookies from 'src/helpers/cookies';
+import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
 import authService from 'src/services/authService';
 import { SignInFormik } from 'src/types/auth';
@@ -38,7 +38,7 @@ const SignInCompoment = () => {
 		authService
 			.signIn(payload)
 			.then((response) => {
-				setCookie(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
+				cookies.set(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
 					expires: values.remember_me ? config.AUTH_DATA.EXPIRED_TIME_REMEMBER_ME : config.AUTH_DATA.EXPIRED_TIME
 				});
 				toastify.success('Signed in successfully.');

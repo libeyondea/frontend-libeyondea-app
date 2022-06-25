@@ -1,14 +1,14 @@
-export interface ResponseData<T> {
+export type ResponseData<T> = {
 	data: T;
-}
+};
 
-export interface ResponseDataPagination<T> extends ResponseData<T> {
+export type ResponseDataPagination<T> = {
 	pagination: {
 		total: number;
 	};
-}
+} & ResponseData<T>;
 
-export interface ResponseError {
+export type ResponseError = {
 	message: string;
 	errors?: any;
-}
+};

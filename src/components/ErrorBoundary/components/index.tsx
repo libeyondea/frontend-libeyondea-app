@@ -6,9 +6,9 @@ type Props = {
 	children: React.ReactNode;
 };
 
-interface State {
+type State = {
 	error: Error | null;
-}
+};
 
 class ErrorBoundary extends React.Component<Props, State> {
 	state: State = {

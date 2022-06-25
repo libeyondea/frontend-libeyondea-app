@@ -33,7 +33,9 @@ const http = {
 			url: url,
 			params: params,
 			headers: {
-				...(token && { Authorization: `Bearer ${token}` })
+				...(token && {
+					Authorization: `Bearer ${token}`
+				})
 			}
 		});
 	},
@@ -45,7 +47,9 @@ const http = {
 			params: params,
 			data: data,
 			headers: {
-				...(token && { Authorization: `Bearer ${token}` })
+				...(token && {
+					Authorization: `Bearer ${token}`
+				})
 			}
 		});
 	},
@@ -57,7 +61,9 @@ const http = {
 			params: params,
 			data: data,
 			headers: {
-				...(token && { Authorization: `Bearer ${token}` })
+				...(token && {
+					Authorization: `Bearer ${token}`
+				})
 			}
 		});
 	},
@@ -68,7 +74,9 @@ const http = {
 			url: url,
 			params: params,
 			headers: {
-				...(token && { Authorization: `Bearer ${token}` })
+				...(token && {
+					Authorization: `Bearer ${token}`
+				})
 			}
 		});
 	},
@@ -92,7 +100,9 @@ const http = {
 			data: formData,
 			headers: {
 				'Content-Type': 'multipart/form-data',
-				...(token && { Authorization: `Bearer ${token}` })
+				...(token && {
+					Authorization: `Bearer ${token}`
+				})
 			}
 		});
 	}
