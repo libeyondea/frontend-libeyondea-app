@@ -53,7 +53,7 @@ const ListUserComponent = () => {
 		userService
 			.delete(id)
 			.then((response) => {
-				toastify.success('User deleted successfully');
+				toastify.success('User deleted successfully.');
 				dispatch(userDeleteDataRequestAction(response.data.data));
 				userListDataCallback();
 			})

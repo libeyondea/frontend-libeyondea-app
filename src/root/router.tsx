@@ -6,9 +6,9 @@ import AccessControl from './accessControl';
 import ErrorBoundary from 'src/components/ErrorBoundary/components';
 import * as routeConstant from 'src/constants/route';
 
+const SplashComponent = lazy(() => import('src/modules/splash/components'));
 const AuthComponent = lazy(() => import('src/modules/auth/components'));
 const MainComponent = lazy(() => import('src/modules/main/components'));
-const SplashComponent = lazy(() => import('src/modules/splash/components'));
 
 const RootRouter = () => {
 	const routes: RouteObject[] = [

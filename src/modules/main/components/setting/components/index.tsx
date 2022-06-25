@@ -47,7 +47,7 @@ const SettingComponent = () => {
 			.update(payload)
 			.then((response) => {
 				dispatch(settingUpdateDataRequestAction(response.data.data));
-				toastify.success('Setting updated successfully');
+				toastify.success('Setting updated successfully.');
 				setTimeout(() => {
 					window.location.reload();
 				}, 666);

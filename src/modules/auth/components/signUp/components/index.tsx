@@ -57,7 +57,7 @@ const SignUpComponent = () => {
 		authService
 			.signUp(payload)
 			.then((response) => {
-				toastify.success('Signed up successfully');
+				toastify.success('Signed up successfully.');
 				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`);
 			})
 			.catch(

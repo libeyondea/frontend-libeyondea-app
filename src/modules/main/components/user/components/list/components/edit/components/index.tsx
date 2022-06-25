@@ -112,7 +112,7 @@ const EditListUserComponent = () => {
 				userService
 					.update(Number(params.userId), payload)
 					.then((response) => {
-						toastify.success('User updated successfully');
+						toastify.success('User updated successfully.');
 						dispatch(userUpdateDataRequestAction(response.data.data));
 						dispatch(userListLoadingRequestAction(true));
 						const payload = {

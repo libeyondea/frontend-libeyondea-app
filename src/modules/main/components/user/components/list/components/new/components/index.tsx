@@ -108,7 +108,7 @@ const NewListUserComponent = () => {
 				userService
 					.create(payload)
 					.then((response) => {
-						toastify.success('User created successfully');
+						toastify.success('User created successfully.');
 						dispatch(userCreateDataRequestAction(response.data.data));
 						dispatch(userListLoadingRequestAction(true));
 						const payload = {

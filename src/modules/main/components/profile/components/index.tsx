@@ -92,7 +92,7 @@ const ProfileComponent = () => {
 					.update(payload)
 					.then((response) => {
 						dispatch(profileUpdateDataRequestAction(response.data.data));
-						toastify.success('Profile updated successfully');
+						toastify.success('Profile updated successfully.');
 					})
 					.catch(
 						errorHandler(undefined, (validationError) => {
