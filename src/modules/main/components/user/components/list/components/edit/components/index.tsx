@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import ButtonComponent from 'src/components/Button/components';
 import CardComponent from 'src/components/Card/components';
 import FormComponent from 'src/components/Form/components';
-import LoadingComponent from 'src/components/Loading/components';
+import { SpinLoadingComponent } from 'src/components/Loading/components';
 import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
 import errorHandler from 'src/helpers/errorHandler';
@@ -182,7 +182,7 @@ const EditListUserComponent = () => {
 					onClickClose={() => navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`)}
 				>
 					{userShow.loading ? (
-						<LoadingComponent />
+						<SpinLoadingComponent />
 					) : !userShow.data.id ? (
 						<div className="flex justify-center">Not found.</div>
 					) : (

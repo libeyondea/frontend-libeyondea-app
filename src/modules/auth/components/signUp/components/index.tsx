@@ -71,7 +71,7 @@ const SignUpComponent = () => {
 	};
 
 	return (
-		<CardComponent className="m-auto flex flex-col w-full max-w-md sm:p-8">
+		<CardComponent className="m-auto max-w-md sm:p-8">
 			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign up your Account</div>
 			<FormComponent<SignUpFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(props) => (

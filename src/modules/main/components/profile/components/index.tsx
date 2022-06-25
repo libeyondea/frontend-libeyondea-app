@@ -6,7 +6,7 @@ import BreadcrumbComponent from 'src/components/Breadcrumb/components';
 import ButtonComponent from 'src/components/Button/components';
 import CardComponent from 'src/components/Card/components';
 import FormComponent from 'src/components/Form/components';
-import LoadingComponent from 'src/components/Loading/components';
+import { SpinLoadingComponent } from 'src/components/Loading/components';
 import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
@@ -131,7 +131,7 @@ const ProfileComponent = () => {
 				<div className="col-span-1 w-full">
 					<CardComponent title="Profile">
 						{profileShow.loading ? (
-							<LoadingComponent />
+							<SpinLoadingComponent />
 						) : !profileShow.data.id ? (
 							<div className="flex justify-center">Not found.</div>
 						) : (
