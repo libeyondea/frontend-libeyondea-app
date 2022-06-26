@@ -8,7 +8,7 @@ type Props = {
 const BreadcrumbComponent = ({ className, children }: Props) => {
 	return (
 		<div className={classNames('flex', className)}>
-			<h3 className="text-2xl font-bold">{children}</h3>
+			<h1 className="text-2xl font-bold">{children}</h1>
 		</div>
 	);
 };
