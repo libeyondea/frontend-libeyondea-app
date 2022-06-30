@@ -14,8 +14,8 @@ const config = {
 			SIGN_OUT: '/auth/signout',
 			ME: '/auth/me',
 			PROFILE: '/profile',
-			USER: '/users',
 			SETTING: '/settings',
+			USER: '/users',
 			UPLOAD_IMAGE: '/images/upload'
 		}
 	},
