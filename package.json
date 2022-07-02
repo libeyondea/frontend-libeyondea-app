@@ -4,10 +4,10 @@
 	"private": true,
 	"dependencies": {
 		"@headlessui/react": "^1.6.5",
-		"@reduxjs/toolkit": "^1.8.2",
+		"@reduxjs/toolkit": "^1.8.3",
 		"@tailwindcss/forms": "^0.5.2",
 		"@types/js-cookie": "^3.0.2",
-		"@types/node": "^16.11.41",
+		"@types/node": "^16.11.42",
 		"@types/react": "^18.0.14",
 		"@types/react-dom": "^18.0.5",
 		"@types/react-router-dom": "^5.3.3",
