@@ -25,7 +25,7 @@ const FooterComponent = () => {
 					<ImageComponent className="rounded-full h-8 w-8 mr-2" src={Logo} alt={config.APP_NAME} />
 					<small className="text-gray-500 font-bold">
 						Copyright &copy; {new Date().getFullYear()}
-						<LinkComponent target="_blank" rel="noopener noreferrer" to="https://libeyondea.com" className="text-indigo-800 ml-1">
+						<LinkComponent to="/" className="text-indigo-800 ml-1">
 							{config.APP_NAME}
 						</LinkComponent>
 					</small>
