@@ -45,8 +45,10 @@ const SignInCompoment = () => {
 				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`);
 			})
 			.catch(
-				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.response?.data?.errors);
+				errorHandler((error) => {
+					if (error.type === 'validation-error') {
+						formikHelpers.setErrors(error.error.response?.data?.errors);
+					}
 				})
 			)
 			.finally(() => {

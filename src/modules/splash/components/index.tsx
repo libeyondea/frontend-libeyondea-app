@@ -5,6 +5,7 @@ import config from 'src/config';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
 import cookies from 'src/helpers/cookies';
+import errorHandler from 'src/helpers/errorHandler';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
@@ -53,14 +54,16 @@ const SplashComponent = () => {
 						});
 					}
 				})
-				.catch(() => {
-					cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
-					store.dispatch(authCurrentDataRequestAction(null));
-					store.dispatch(authCurrentTokenRequestAction(null));
-					navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
-						replace: true
-					});
-				});
+				.catch(
+					errorHandler(() => {
+						cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
+						store.dispatch(authCurrentDataRequestAction(null));
+						store.dispatch(authCurrentTokenRequestAction(null));
+						navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
+							replace: true
+						});
+					})
+				);
 		} else {
 			dispatch(authCurrentDataRequestAction(null));
 			dispatch(authCurrentTokenRequestAction(null));

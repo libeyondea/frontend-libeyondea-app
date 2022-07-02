@@ -61,8 +61,10 @@ const SignUpComponent = () => {
 				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`);
 			})
 			.catch(
-				errorHandler(undefined, (validationError) => {
-					formikHelpers.setErrors(validationError.response?.data?.errors);
+				errorHandler((error) => {
+					if (error.type === 'validation-error') {
+						formikHelpers.setErrors(error.error.response?.data?.errors);
+					}
 				})
 			)
 			.finally(() => {
