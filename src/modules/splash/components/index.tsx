@@ -11,7 +11,6 @@ import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import Logo from 'src/images/logo.png';
 import authService from 'src/services/authService';
-import store from 'src/store';
 import { appInitializedRequestAction } from 'src/store/app/actions';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
 import { selectIsAuth } from 'src/store/auth/selectors';
@@ -55,13 +54,12 @@ const SplashComponent = () => {
 					}
 				})
 				.catch(
-					errorHandler(() => {
-						cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
-						store.dispatch(authCurrentDataRequestAction(null));
-						store.dispatch(authCurrentTokenRequestAction(null));
-						navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
-							replace: true
-						});
+					errorHandler((error) => {
+						if (error.type === 'unauthorized-error') {
+							navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`, {
+								replace: true
+							});
+						}
 					})
 				);
 		} else {

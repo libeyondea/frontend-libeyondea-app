@@ -20,6 +20,14 @@ const MainRouter = () => {
 			)
 		},
 		{
+			path: `${routeConstant.ROUTE_NAME_MAIN_PROFILE}`,
+			element: (
+				<Suspense fallback={null}>
+					<ProfileComponent />
+				</Suspense>
+			)
+		},
+		{
 			path: `${routeConstant.ROUTE_NAME_MAIN_SETTING}`,
 			element: (
 				<Suspense fallback={null}>
@@ -32,14 +40,6 @@ const MainRouter = () => {
 			element: (
 				<Suspense fallback={null}>
 					<UserComponent />
-				</Suspense>
-			)
-		},
-		{
-			path: `${routeConstant.ROUTE_NAME_MAIN_PROFILE}`,
-			element: (
-				<Suspense fallback={null}>
-					<ProfileComponent />
 				</Suspense>
 			)
 		},

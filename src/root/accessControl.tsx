@@ -24,7 +24,7 @@ const AccessControl = ({ children }: Props) => {
 		return <Navigate to={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`} />;
 	} else if (
 		location.pathname.indexOf(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`) > -1 &&
-		authCurrent.data?.role !== userConstant.USER_ROLE_OWNER
+		![userConstant.USER_ROLE_OWNER].includes(authCurrent.data?.role || '')
 	) {
 		return <Navigate to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`} />;
 	}
