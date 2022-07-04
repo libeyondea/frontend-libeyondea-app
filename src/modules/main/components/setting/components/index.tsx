@@ -85,7 +85,7 @@ const SettingComponent = () => {
 					<CardComponent title="Settings">
 						{settingShow.loading ? (
 							<SpinLoadingComponent />
-						) : !settingShow.data.id ? (
+						) : !Object.keys(settingShow.data).length ? (
 							<div className="flex justify-center">Not found.</div>
 						) : (
 							<FormComponent<UpdateSettingFormik>

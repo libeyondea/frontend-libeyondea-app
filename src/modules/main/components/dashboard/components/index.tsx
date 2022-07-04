@@ -36,6 +36,8 @@ const DashboardComponent = () => {
 					<CardComponent>
 						{dashboardShow.loading ? (
 							<SpinLoadingComponent />
+						) : !Object.keys(dashboardShow.data).length ? (
+							<div className="flex justify-center">Not found.</div>
 						) : (
 							<Fragment>
 								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>
@@ -48,6 +50,8 @@ const DashboardComponent = () => {
 					<CardComponent>
 						{dashboardShow.loading ? (
 							<SpinLoadingComponent />
+						) : !Object.keys(dashboardShow.data).length ? (
+							<div className="flex justify-center">Not found.</div>
 						) : (
 							<Fragment>
 								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>
@@ -60,6 +64,8 @@ const DashboardComponent = () => {
 					<CardComponent>
 						{dashboardShow.loading ? (
 							<SpinLoadingComponent />
+						) : !Object.keys(dashboardShow.data).length ? (
+							<div className="flex justify-center">Not found.</div>
 						) : (
 							<Fragment>
 								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>
@@ -72,6 +78,8 @@ const DashboardComponent = () => {
 					<CardComponent>
 						{dashboardShow.loading ? (
 							<SpinLoadingComponent />
+						) : !Object.keys(dashboardShow.data).length ? (
+							<div className="flex justify-center">Not found.</div>
 						) : (
 							<Fragment>
 								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>

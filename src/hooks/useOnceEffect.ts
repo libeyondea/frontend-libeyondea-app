@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 const useOnceEffect = (effect: React.EffectCallback): void => {
-	const destroyFunc = useRef<void | any>();
+	const destroyFunc = useRef<void | (() => void)>();
 	const calledOnce = useRef(false);
 	const renderAfterCalled = useRef(false);
 

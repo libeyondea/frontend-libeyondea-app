@@ -93,6 +93,9 @@ const ProfileComponent = () => {
 					.then((response) => {
 						dispatch(profileUpdateDataRequestAction(response.data.data));
 						toastify.success('Profile updated successfully.');
+						setTimeout(() => {
+							window.location.reload();
+						}, 666);
 					})
 					.catch(
 						errorHandler((error) => {
@@ -136,7 +139,7 @@ const ProfileComponent = () => {
 					<CardComponent title="Profile">
 						{profileShow.loading ? (
 							<SpinLoadingComponent />
-						) : !profileShow.data.id ? (
+						) : !Object.keys(profileShow.data).length ? (
 							<div className="flex justify-center">Not found.</div>
 						) : (
 							<FormComponent<UpdateProfileFormik>

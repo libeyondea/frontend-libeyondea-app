@@ -60,7 +60,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 			</div>
 			<div className="flex items-center justify-center">
 				<nav className="relative inline-flex flex-wrap rounded-md -space-x-px" aria-label="Pagination">
-					{page !== 1 ? (
+					{page > 1 ? (
 						<Fragment>
 							<button
 								type="button"
@@ -127,7 +127,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 							</button>
 						)
 					)}
-					{page !== totalPages ? (
+					{page < totalPages ? (
 						<Fragment>
 							<button
 								type="button"

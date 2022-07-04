@@ -108,8 +108,8 @@ const NewListUserComponent = () => {
 				userService
 					.create(payload)
 					.then((response) => {
-						toastify.success('User created successfully.');
 						dispatch(userCreateDataRequestAction(response.data.data));
+						toastify.success('User created successfully.');
 						dispatch(userListLoadingRequestAction(true));
 						const payload = {
 							page: userList.pagination.page,

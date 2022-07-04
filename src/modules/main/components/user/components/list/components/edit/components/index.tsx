@@ -112,8 +112,8 @@ const EditListUserComponent = () => {
 				userService
 					.update(Number(params.userId), payload)
 					.then((response) => {
-						toastify.success('User updated successfully.');
 						dispatch(userUpdateDataRequestAction(response.data.data));
+						toastify.success('User updated successfully.');
 						dispatch(userListLoadingRequestAction(true));
 						const payload = {
 							page: userList.pagination.page,
@@ -187,7 +187,7 @@ const EditListUserComponent = () => {
 				>
 					{userShow.loading ? (
 						<SpinLoadingComponent />
-					) : !userShow.data.id ? (
+					) : !Object.keys(userShow.data).length ? (
 						<div className="flex justify-center">Not found.</div>
 					) : (
 						<FormComponent<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
