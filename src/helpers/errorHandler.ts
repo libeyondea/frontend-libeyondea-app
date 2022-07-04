@@ -9,7 +9,7 @@ import { ResponseError } from 'src/types/response';
 
 type IErrorBase = {
 	error: Error | AxiosError<ResponseError>;
-	type: 'unauthorized-error' | 'validation-error' | 'axios-error' | 'stock-error';
+	type: 'unauthorized-error' | 'forbidden-error' | 'notfound-error' | 'validation-error' | 'server-error' | 'stock-error';
 };
 
 type IUnauthorizedError = {
@@ -17,14 +17,24 @@ type IUnauthorizedError = {
 	type: 'unauthorized-error';
 } & IErrorBase;
 
+type IForbiddenError = {
+	error: AxiosError<ResponseError>;
+	type: 'forbidden-error';
+} & IErrorBase;
+
+type INotFoundError = {
+	error: AxiosError<ResponseError>;
+	type: 'notfound-error';
+} & IErrorBase;
+
 type IValidationError = {
 	error: AxiosError<ResponseError>;
 	type: 'validation-error';
 } & IErrorBase;
 
-type IAxiosError = {
+type IServerError = {
 	error: AxiosError<ResponseError>;
-	type: 'axios-error';
+	type: 'server-error';
 } & IErrorBase;
 
 type IStockError = {
@@ -32,31 +42,47 @@ type IStockError = {
 	type: 'stock-error';
 } & IErrorBase;
 
-const errorHandler = (callback?: (err: IUnauthorizedError | IValidationError | IAxiosError | IStockError) => void) => {
+const errorHandler = (callback?: (err: IUnauthorizedError | IForbiddenError | INotFoundError | IValidationError | IServerError | IStockError) => void) => {
 	return (error: Error | AxiosError<ResponseError>) => {
 		if (axios.isAxiosError(error)) {
-			toastify.error(error.response?.data?.message || error.message);
-			if (error.response?.status === 401) {
-				cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
-				store.dispatch(authCurrentDataRequestAction(null));
-				store.dispatch(authCurrentTokenRequestAction(null));
-				callback &&
-					callback({
-						error: error,
-						type: 'unauthorized-error'
-					});
-			} else if (error.response?.status === 400) {
-				callback &&
-					callback({
-						error: error,
-						type: 'validation-error'
-					});
+			if (error.code === AxiosError.ERR_BAD_REQUEST) {
+				toastify.error(error.response?.data.message);
+				if (error.response?.status === 401) {
+					cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
+					store.dispatch(authCurrentDataRequestAction(null));
+					store.dispatch(authCurrentTokenRequestAction(null));
+					callback &&
+						callback({
+							error: error,
+							type: 'unauthorized-error'
+						});
+				} else if (error.response?.status === 403) {
+					callback &&
+						callback({
+							error: error,
+							type: 'forbidden-error'
+						});
+				} else if (error.response?.status === 404) {
+					callback &&
+						callback({
+							error: error,
+							type: 'notfound-error'
+						});
+				} else if (error.response?.status === 400) {
+					callback &&
+						callback({
+							error: error,
+							type: 'validation-error'
+						});
+				} else {
+					callback &&
+						callback({
+							error: error,
+							type: 'server-error'
+						});
+				}
 			} else {
-				callback &&
-					callback({
-						error: error,
-						type: 'axios-error'
-					});
+				toastify.error(error.message);
 			}
 		} else {
 			toastify.error(error.message);
