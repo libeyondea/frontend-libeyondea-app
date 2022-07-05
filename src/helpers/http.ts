@@ -5,15 +5,21 @@ import instance from './instance';
 type GetProps = {
 	baseURL?: string;
 	url: string;
-	params?: any;
+	params?: {
+		[key: string]: any;
+	};
 	token?: string;
 };
 
 type PostProps = {
 	baseURL?: string;
 	url: string;
-	params?: any;
-	data?: any;
+	params?: {
+		[key: string]: any;
+	};
+	data?: {
+		[key: string]: any;
+	};
 	token?: string;
 };
 
@@ -22,7 +28,9 @@ type PutProps = PostProps;
 type DeleteProps = GetProps;
 
 type UploadProps = {
-	files?: any;
+	files?: {
+		[key: string]: any;
+	};
 } & PostProps;
 
 const http = {
