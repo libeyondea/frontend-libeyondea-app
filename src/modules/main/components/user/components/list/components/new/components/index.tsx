@@ -72,9 +72,9 @@ const NewListUserComponent = () => {
 	});
 
 	const onSubmit = (values: CreateUserFormik, formikHelpers: FormikHelpers<CreateUserFormik>) => {
-		new Promise<Image | null>((resolve, reject) => {
+		new Promise<{ image: Image | null }>((resolve, reject) => {
 			if (!values.image) {
-				return resolve(null);
+				return resolve({ image: null });
 			}
 			setImageUpload({ loading: true });
 			imageService
@@ -82,7 +82,9 @@ const NewListUserComponent = () => {
 					image: values.image
 				})
 				.then((response) => {
-					return resolve(response.data.data);
+					return resolve({
+						image: response.data.data
+					});
 				})
 				.catch((error) => {
 					return reject(error);
@@ -101,8 +103,8 @@ const NewListUserComponent = () => {
 					password: values.password,
 					role: values.role,
 					actived: values.actived,
-					...(result && {
-						avatar: result.image_name
+					...(result.image && {
+						avatar: result.image.name
 					})
 				};
 				userService

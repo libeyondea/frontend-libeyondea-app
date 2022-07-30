@@ -55,9 +55,9 @@ const ProfileComponent = () => {
 	});
 
 	const onSubmit = (values: UpdateProfileFormik, formikHelpers: FormikHelpers<UpdateProfileFormik>) => {
-		new Promise<Image | null>((resolve, reject) => {
+		new Promise<{ image: Image | null }>((resolve, reject) => {
 			if (!values.image) {
-				return resolve(null);
+				return resolve({ image: null });
 			}
 			setImageUpload({ loading: true });
 			imageService
@@ -65,7 +65,9 @@ const ProfileComponent = () => {
 					image: values.image
 				})
 				.then((response) => {
-					return resolve(response.data.data);
+					return resolve({
+						image: response.data.data
+					});
 				})
 				.catch((error) => {
 					return reject(error);
@@ -84,8 +86,8 @@ const ProfileComponent = () => {
 					...(values.password && {
 						password: values.password
 					}),
-					...(result && {
-						avatar: result.image_name
+					...(result.image && {
+						avatar: result.image.name
 					})
 				};
 				profileService
