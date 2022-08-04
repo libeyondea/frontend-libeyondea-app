@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import RootRouter from './router';
 import store from 'src/store';
-import 'src/styles/index.scss';
+import 'src/styles/global.scss';
 
 const Root = () => {
 	return (

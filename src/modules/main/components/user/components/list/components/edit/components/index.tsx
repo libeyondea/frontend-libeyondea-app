@@ -16,8 +16,8 @@ import useAppSelector from 'src/hooks/useAppSelector';
 import useLockedScroll from 'src/hooks/useLockedScroll';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import useUpdateEffect from 'src/hooks/useUpdateEffect';
-import imageService from 'src/services/imageService';
-import userService from 'src/services/userService';
+import imageService from 'src/services/image';
+import userService from 'src/services/user';
 import {
 	userListDataRequestAction,
 	userListLoadingRequestAction,

@@ -12,8 +12,8 @@ import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
-import imageService from 'src/services/imageService';
-import profileService from 'src/services/profileService';
+import imageService from 'src/services/image';
+import profileService from 'src/services/profile';
 import {
 	profileShowDataRequestAction,
 	profileShowLoadingRequestAction,

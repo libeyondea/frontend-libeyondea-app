@@ -7,7 +7,7 @@ import errorHandler from 'src/helpers/errorHandler';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
-import dashboardService from 'src/services/dashboardService';
+import dashboardService from 'src/services/dashboard';
 import { dashboardShowDataRequestAction, dashboardShowLoadingRequestAction } from 'src/store/dashboard/actions';
 import { selectDashboardShow } from 'src/store/dashboard/selectors';
 

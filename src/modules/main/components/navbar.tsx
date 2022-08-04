@@ -11,7 +11,7 @@ import cookies from 'src/helpers/cookies';
 import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
-import authService from 'src/services/authService';
+import authService from 'src/services/auth';
 import { appSidebarRequestAction } from 'src/store/app/actions';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';

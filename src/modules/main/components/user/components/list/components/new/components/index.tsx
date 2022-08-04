@@ -13,8 +13,8 @@ import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useLockedScroll from 'src/hooks/useLockedScroll';
-import imageService from 'src/services/imageService';
-import userService from 'src/services/userService';
+import imageService from 'src/services/image';
+import userService from 'src/services/user';
 import {
 	userCreateDataRequestAction,
 	userCreateLoadingRequestAction,

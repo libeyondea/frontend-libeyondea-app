@@ -10,7 +10,7 @@ import LinkComponent from 'src/components/Link/components';
 import * as routeConstant from 'src/constants/route';
 import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
-import authService from 'src/services/authService';
+import authService from 'src/services/auth';
 import { SignUpFormik } from 'src/types/auth';
 
 const SignUpComponent = () => {

@@ -12,7 +12,7 @@ import toastify from 'src/helpers/toastify';
 import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
-import settingService from 'src/services/settingService';
+import settingService from 'src/services/setting';
 import {
 	settingShowDataRequestAction,
 	settingShowLoadingRequestAction,

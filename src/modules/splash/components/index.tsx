@@ -10,7 +10,7 @@ import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import Logo from 'src/images/logo.png';
-import authService from 'src/services/authService';
+import authService from 'src/services/auth';
 import { appInitializedRequestAction } from 'src/store/app/actions';
 import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
 import { selectIsAuth } from 'src/store/auth/selectors';

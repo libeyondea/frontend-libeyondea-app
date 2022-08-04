@@ -20,7 +20,7 @@ import useAppDispatch from 'src/hooks/useAppDispatch';
 import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import useUpdateEffect from 'src/hooks/useUpdateEffect';
-import userService from 'src/services/userService';
+import userService from 'src/services/user';
 import {
 	userDeleteDataRequestAction,
 	userDeleteLoadingRequestAction,

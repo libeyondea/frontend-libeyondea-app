@@ -13,7 +13,7 @@ import * as routeConstant from 'src/constants/route';
 import cookies from 'src/helpers/cookies';
 import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
-import authService from 'src/services/authService';
+import authService from 'src/services/auth';
 import { SignInFormik } from 'src/types/auth';
 
 const SignInCompoment = () => {
