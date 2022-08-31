@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 import cookies from './cookies';
 import toastify from './toastify';
@@ -44,7 +44,7 @@ type IStockError = {
 
 const errorHandler = (callback?: (err: IUnauthorizedError | IForbiddenError | INotFoundError | IValidationError | IServerError | IStockError) => void) => {
 	return (error: Error | AxiosError<ResponseError>) => {
-		if (axios.isAxiosError(error)) {
+		if (error instanceof AxiosError<ResponseError>) {
 			if (error.code === AxiosError.ERR_BAD_REQUEST) {
 				toastify.error(error.response?.data.message);
 				if (error.response?.status === 401) {
