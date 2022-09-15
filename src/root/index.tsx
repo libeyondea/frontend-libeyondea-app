@@ -1,19 +1,17 @@
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-import RootRouter from './router';
+import rootRouter from './router';
 import store from 'src/store';
 import 'src/styles/global.scss';
 
 const Root = () => {
 	return (
 		<Provider store={store}>
-			<Router>
-				<RootRouter />
-				<ToastContainer />
-			</Router>
+			<RouterProvider router={rootRouter} />
+			<ToastContainer />
 		</Provider>
 	);
 };
