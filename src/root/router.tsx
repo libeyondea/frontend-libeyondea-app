@@ -1,47 +1,42 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import AccessControl from './accessControl';
 import ErrorBoundary from 'src/components/ErrorBoundary/components';
+import Loadable from 'src/components/Loadable/components';
 import * as routeConstant from 'src/constants/route';
 
-const SplashComponent = lazy(() => import('src/modules/splash/components'));
-const AuthComponent = lazy(() => import('src/modules/auth/components'));
-const MainComponent = lazy(() => import('src/modules/main/components'));
+const SplashComponent = Loadable(lazy(() => import('src/modules/splash/components')));
+const AuthComponent = Loadable(lazy(() => import('src/modules/auth/components')));
+const MainComponent = Loadable(lazy(() => import('src/modules/main/components')));
 
 const rootRouter = createBrowserRouter([
 	{
 		path: `${routeConstant.ROUTE_NAME_SPLASH}`,
 		element: (
-			<Suspense fallback={null}>
-				<ErrorBoundary>
-					<SplashComponent />
-				</ErrorBoundary>
-			</Suspense>
+			<ErrorBoundary>
+				<SplashComponent />
+			</ErrorBoundary>
 		)
 	},
 	{
 		path: `/${routeConstant.ROUTE_NAME_AUTH}/*`,
 		element: (
-			<Suspense fallback={null}>
-				<ErrorBoundary>
-					<AccessControl>
-						<AuthComponent />
-					</AccessControl>
-				</ErrorBoundary>
-			</Suspense>
+			<ErrorBoundary>
+				<AccessControl>
+					<AuthComponent />
+				</AccessControl>
+			</ErrorBoundary>
 		)
 	},
 	{
 		path: `/${routeConstant.ROUTE_NAME_MAIN}/*`,
 		element: (
-			<Suspense fallback={null}>
-				<ErrorBoundary>
-					<AccessControl>
-						<MainComponent />
-					</AccessControl>
-				</ErrorBoundary>
-			</Suspense>
+			<ErrorBoundary>
+				<AccessControl>
+					<MainComponent />
+				</AccessControl>
+			</ErrorBoundary>
 		)
 	},
 	{

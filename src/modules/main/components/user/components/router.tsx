@@ -1,19 +1,22 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 
+import Loadable from 'src/components/Loadable/components';
+import RoleRoute from 'src/components/RoleRoute/components';
 import * as routeConstant from 'src/constants/route';
+import * as userConstant from 'src/constants/user';
 
-const ListUserComponent = lazy(() => import('./list/components'));
+const ListUserComponent = Loadable(lazy(() => import('./list/components')));
 
 const UserRouter = () => {
 	const routes: RouteObject[] = [
 		{
 			path: '/*',
 			element: (
-				<Suspense fallback={null}>
+				<RoleRoute roles={[...userConstant.USER_ROLE_ALL]}>
 					<ListUserComponent />
-				</Suspense>
+				</RoleRoute>
 			)
 		},
 		{

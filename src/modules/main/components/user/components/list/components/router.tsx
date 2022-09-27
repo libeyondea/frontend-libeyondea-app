@@ -1,11 +1,14 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 
+import Loadable from 'src/components/Loadable/components';
+import RoleRoute from 'src/components/RoleRoute/components';
 import * as routeConstant from 'src/constants/route';
+import * as userConstant from 'src/constants/user';
 
-const EditListUserComponent = lazy(() => import('./edit/components'));
-const NewListUserComponent = lazy(() => import('./new/components'));
+const EditListUserComponent = Loadable(lazy(() => import('./edit/components')));
+const NewListUserComponent = Loadable(lazy(() => import('./new/components')));
 
 const ListUserRouter = () => {
 	const routes: RouteObject[] = [
@@ -16,17 +19,17 @@ const ListUserRouter = () => {
 		{
 			path: `${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`,
 			element: (
-				<Suspense fallback={null}>
+				<RoleRoute roles={[...userConstant.USER_ROLE_ALL]}>
 					<NewListUserComponent />
-				</Suspense>
+				</RoleRoute>
 			)
 		},
 		{
 			path: `:userId/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`,
 			element: (
-				<Suspense fallback={null}>
+				<RoleRoute roles={[...userConstant.USER_ROLE_ALL]}>
 					<EditListUserComponent />
-				</Suspense>
+				</RoleRoute>
 			)
 		},
 		{
