@@ -1,46 +1,49 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 
+import Loadable from 'src/components/Loadable/components';
+import RoleRoute from 'src/components/RoleRoute/components';
 import * as routeConstant from 'src/constants/route';
+import * as userConstant from 'src/constants/user';
 
-const DashboardComponent = lazy(() => import('./dashboard/components'));
-const SettingComponent = lazy(() => import('./setting/components'));
-const UserComponent = lazy(() => import('./user/components'));
-const ProfileComponent = lazy(() => import('./profile/components'));
+const DashboardComponent = Loadable(lazy(() => import('./dashboard/components')));
+const SettingComponent = Loadable(lazy(() => import('./setting/components')));
+const UserComponent = Loadable(lazy(() => import('./user/components')));
+const ProfileComponent = Loadable(lazy(() => import('./profile/components')));
 
 const MainRouter = () => {
 	const routes: RouteObject[] = [
 		{
 			path: `${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`,
 			element: (
-				<Suspense fallback={null}>
+				<RoleRoute roles={[...userConstant.USER_ROLE_ALL]}>
 					<DashboardComponent />
-				</Suspense>
+				</RoleRoute>
 			)
 		},
 		{
 			path: `${routeConstant.ROUTE_NAME_MAIN_PROFILE}`,
 			element: (
-				<Suspense fallback={null}>
+				<RoleRoute roles={[...userConstant.USER_ROLE_ALL]}>
 					<ProfileComponent />
-				</Suspense>
+				</RoleRoute>
 			)
 		},
 		{
 			path: `${routeConstant.ROUTE_NAME_MAIN_SETTING}`,
 			element: (
-				<Suspense fallback={null}>
+				<RoleRoute roles={[...userConstant.USER_ROLE_ALL]}>
 					<SettingComponent />
-				</Suspense>
+				</RoleRoute>
 			)
 		},
 		{
 			path: `${routeConstant.ROUTE_NAME_MAIN_USER}/*`,
 			element: (
-				<Suspense fallback={null}>
+				<RoleRoute roles={[userConstant.USER_ROLE_OWNER]}>
 					<UserComponent />
-				</Suspense>
+				</RoleRoute>
 			)
 		},
 		{
