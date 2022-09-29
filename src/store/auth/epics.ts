@@ -2,16 +2,16 @@ import { Action } from '@reduxjs/toolkit';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { authCurrentDataRequestAction, authCurrentDataSuccessAction, authCurrentTokenRequestAction, authCurrentTokenSuccessAction } from './actions';
+import { authCurrentDataTokenRequestAction, authCurrentDataTokenSuccessAction, authCurrentDataUserRequestAction, authCurrentDataUserSuccessAction } from './actions';
 
-export const authCurrentDataEpic = (action$: Observable<Action>): Observable<Action> =>
+export const authCurrentDataUserEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(authCurrentDataRequestAction.match),
-		map((action) => authCurrentDataSuccessAction(action.payload))
+		filter(authCurrentDataUserRequestAction.match),
+		map((action) => authCurrentDataUserSuccessAction(action.payload))
 	);
 
-export const authCurrentTokenEpic = (action$: Observable<Action>): Observable<Action> =>
+export const authCurrentDataTokenEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(authCurrentTokenRequestAction.match),
-		map((action) => authCurrentTokenSuccessAction(action.payload))
+		filter(authCurrentDataTokenRequestAction.match),
+		map((action) => authCurrentDataTokenSuccessAction(action.payload))
 	);

@@ -12,18 +12,23 @@ import useOnceEffect from 'src/hooks/useOnceEffect';
 import Logo from 'src/images/logo.png';
 import authService from 'src/services/auth';
 import { appInitializedRequestAction } from 'src/store/app/actions';
-import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
+import { selectAppInitialized } from 'src/store/app/selectors';
+import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
 import { selectIsAuth } from 'src/store/auth/selectors';
 import { LocationState } from 'src/types/router';
 
-const SplashComponent = () => {
+type Props = {
+	children: JSX.Element;
+};
+
+const SplashComponent = ({ children }: Props) => {
 	const navigate = useNavigate();
 	const location = useLocation() as LocationState;
 	const dispatch = useAppDispatch();
 	const isAuth = useAppSelector(selectIsAuth);
+	const appInitialized = useAppSelector(selectAppInitialized);
 
 	useOnceEffect(() => {
-		dispatch(appInitializedRequestAction(true));
 		const token = cookies.get(cookiesConstant.COOKIES_KEY_TOKEN);
 		const initialUrl = location.state?.from?.pathname;
 
@@ -41,9 +46,10 @@ const SplashComponent = () => {
 			authService
 				.me(token)
 				.then((response) => {
-					dispatch(authCurrentDataRequestAction(response.data.data));
-					dispatch(authCurrentTokenRequestAction(token));
-					if (initialUrl) {
+					dispatch(authCurrentDataUserRequestAction(response.data.data));
+					dispatch(authCurrentDataTokenRequestAction(token));
+					dispatch(appInitializedRequestAction(true));
+					/* if (initialUrl) {
 						navigate(initialUrl, {
 							replace: true
 						});
@@ -51,7 +57,7 @@ const SplashComponent = () => {
 						navigate(`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`, {
 							replace: true
 						});
-					}
+					} */
 				})
 				.catch(
 					errorHandler((error) => {
@@ -63,8 +69,8 @@ const SplashComponent = () => {
 					})
 				);
 		} else {
-			dispatch(authCurrentDataRequestAction(null));
-			dispatch(authCurrentTokenRequestAction(null));
+			dispatch(authCurrentDataUserRequestAction(null));
+			dispatch(authCurrentDataTokenRequestAction(null));
 			if (initialUrl) {
 				navigate(initialUrl, {
 					replace: true
@@ -77,11 +83,15 @@ const SplashComponent = () => {
 		}
 	});
 
-	return (
-		<div className="flex h-screen">
-			<ImageComponent className="m-auto animate-spin rounded-full h-32 w-32" src={Logo} alt={config.APP_NAME} />
-		</div>
-	);
+	if (!appInitialized) {
+		return (
+			<div className="flex h-screen">
+				<ImageComponent className="m-auto animate-spin rounded-full h-32 w-32" src={Logo} alt={config.APP_NAME} />
+			</div>
+		);
+	}
+
+	return children;
 };
 
 export default SplashComponent;

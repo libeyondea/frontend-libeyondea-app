@@ -12,9 +12,9 @@ type Props = {
 const RoleRoute = ({ children, roles = [] }: Props) => {
 	const authCurrent = useAppSelector(selectAuthCurrent);
 
-	const canAccess = roles.includes(authCurrent.data?.role || '');
+	const canAccess = roles.includes(authCurrent.data.user?.role || '');
 
-	return canAccess ? children : <Navigate to={routeConstant.ROUTE_NAME_SPLASH} />;
+	return canAccess ? children : <Navigate to={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`} />;
 };
 
 export default RoleRoute;

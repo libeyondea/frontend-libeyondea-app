@@ -40,6 +40,7 @@ export interface Me {
 	};
 }
 
-export interface Token {
+export interface MeToken {
+	user: Me;
 	token: string;
 }

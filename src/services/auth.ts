@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import config from 'src/config';
 import http from 'src/helpers/http';
-import { Me, SignIn, SignUp, Token } from 'src/types/auth';
+import { Me, MeToken, SignIn, SignUp } from 'src/types/auth';
 import { ResponseData } from 'src/types/response';
 
 const authService = {
@@ -12,8 +12,8 @@ const authService = {
 			token: token
 		});
 	},
-	signIn: (data: SignIn): Promise<AxiosResponse<ResponseData<Token>>> => {
-		return http.post<ResponseData<Token>>({
+	signIn: (data: SignIn): Promise<AxiosResponse<ResponseData<MeToken>>> => {
+		return http.post<ResponseData<MeToken>>({
 			url: config.API.END_POINT.SIGN_IN,
 			data: data
 		});

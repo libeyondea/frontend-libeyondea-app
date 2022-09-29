@@ -14,7 +14,7 @@ import useAppSelector from 'src/hooks/useAppSelector';
 import authService from 'src/services/auth';
 import { appSidebarRequestAction } from 'src/store/app/actions';
 import { selectAppSidebar } from 'src/store/app/selectors';
-import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
+import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 const NavbarComponent = () => {
@@ -23,16 +23,16 @@ const NavbarComponent = () => {
 	const authCurrent = useAppSelector(selectAuthCurrent);
 
 	const onClickSignOut = () => {
-		if (authCurrent.token) {
+		if (authCurrent.data.token) {
 			authService
-				.signOut(authCurrent.token)
+				.signOut(authCurrent.data.token)
 				.then(() => {})
 				.catch(() => {})
 				.finally(() => {});
 		}
 		cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
-		dispatch(authCurrentDataRequestAction(null));
-		dispatch(authCurrentTokenRequestAction(null));
+		dispatch(authCurrentDataUserRequestAction(null));
+		dispatch(authCurrentDataTokenRequestAction(null));
 		toastify.success('Signed out successfully.');
 	};
 
@@ -41,7 +41,7 @@ const NavbarComponent = () => {
 			className={classNames(
 				'bg-white shadow-lg z-20 inset-x-0 top-0 transition-all ease-in-out duration-500',
 				appSidebar ? 'lg:ml-64' : 'ml-0',
-				authCurrent.data?.setting.fixed_navbar ? 'fixed' : 'static'
+				authCurrent.data.user?.setting.fixed_navbar ? 'fixed' : 'static'
 			)}
 		>
 			<div className="xl:container mx-auto px-4">
@@ -65,7 +65,7 @@ const NavbarComponent = () => {
 						<div className="flex items-center">
 							<Menu as="div" className="relative inline-block">
 								<Menu.Button className="flex items-center justify-center w-full rounded-md px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none">
-									<ImageComponent className="rounded-full h-8 w-8" src={authCurrent.data?.avatar_url} alt={authCurrent.data?.user_name} />
+									<ImageComponent className="rounded-full h-8 w-8" src={authCurrent.data.user?.avatar_url} alt={authCurrent.data.user?.user_name} />
 								</Menu.Button>
 								<Transition
 									as={Fragment}

@@ -74,7 +74,7 @@ const SidebarComponent = () => {
 										<span className="ml-4">Dashboard</span>
 									</NavLinkComponent>
 								</li>
-								{[userConstant.USER_ROLE_OWNER].includes(authCurrent.data?.role || '') && (
+								{[userConstant.USER_ROLE_OWNER].includes(authCurrent.data.user?.role || '') && (
 									<Disclosure
 										as="li"
 										defaultOpen={[

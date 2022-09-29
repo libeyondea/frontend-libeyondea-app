@@ -4,7 +4,7 @@ import cookies from './cookies';
 import toastify from './toastify';
 import * as cookiesConstant from 'src/constants/cookies';
 import store from 'src/store';
-import { authCurrentDataRequestAction, authCurrentTokenRequestAction } from 'src/store/auth/actions';
+import { authCurrentDataUserRequestAction, authCurrentDataTokenRequestAction } from 'src/store/auth/actions';
 import { ResponseError } from 'src/types/response';
 
 type IErrorBase = {
@@ -49,8 +49,8 @@ const errorHandler = (callback?: (err: IUnauthorizedError | IForbiddenError | IN
 				toastify.error(error.response?.data.message);
 				if (error.response?.status === 401) {
 					cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
-					store.dispatch(authCurrentDataRequestAction(null));
-					store.dispatch(authCurrentTokenRequestAction(null));
+					store.dispatch(authCurrentDataUserRequestAction(null));
+					store.dispatch(authCurrentDataTokenRequestAction(null));
 					callback &&
 						callback({
 							error: error,

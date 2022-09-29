@@ -4,7 +4,6 @@ import type { RouteObject } from 'react-router-dom';
 
 import Loadable from 'src/components/Loadable/components';
 import RoleRoute from 'src/components/RoleRoute/components';
-import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
 
 const ListUserComponent = Loadable(lazy(() => import('./list/components')));
@@ -21,7 +20,7 @@ const UserRouter = () => {
 		},
 		{
 			path: '*',
-			element: <Navigate to={`${routeConstant.ROUTE_NAME_SPLASH}`} />
+			element: <Navigate to="/" />
 		}
 	];
 

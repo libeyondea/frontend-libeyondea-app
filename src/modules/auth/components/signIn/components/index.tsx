@@ -1,6 +1,5 @@
 import { FormikHelpers } from 'formik';
 import { Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import ButtonComponent from 'src/components/Button/components';
@@ -13,11 +12,13 @@ import * as routeConstant from 'src/constants/route';
 import cookies from 'src/helpers/cookies';
 import errorHandler from 'src/helpers/errorHandler';
 import toastify from 'src/helpers/toastify';
+import useAppDispatch from 'src/hooks/useAppDispatch';
 import authService from 'src/services/auth';
+import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
 import { SignInFormik } from 'src/types/auth';
 
 const SignInCompoment = () => {
-	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const initialValues: SignInFormik = {
 		user_name: '',
@@ -41,8 +42,9 @@ const SignInCompoment = () => {
 				cookies.set(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
 					expires: values.remember_me ? config.AUTH_DATA.EXPIRED_TIME_REMEMBER_ME : config.AUTH_DATA.EXPIRED_TIME
 				});
+				dispatch(authCurrentDataUserRequestAction(response.data.data.user));
+				dispatch(authCurrentDataTokenRequestAction(response.data.data.token));
 				toastify.success('Signed in successfully.');
-				navigate(`${routeConstant.ROUTE_NAME_SPLASH}`);
 			})
 			.catch(
 				errorHandler((error) => {

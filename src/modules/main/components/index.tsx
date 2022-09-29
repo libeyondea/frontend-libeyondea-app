@@ -21,8 +21,8 @@ const MainComponent = () => {
 				className={classNames(
 					'transition-all ease-in-out duration-500',
 					appSidebar ? 'lg:ml-64' : 'ml-0',
-					authCurrent.data?.setting.fixed_navbar ? 'mt-14' : 'mt-0',
-					authCurrent.data?.setting.fixed_footer ? 'mb-16' : 'mb-0'
+					authCurrent.data.user?.setting.fixed_navbar ? 'mt-14' : 'mt-0',
+					authCurrent.data.user?.setting.fixed_footer ? 'mb-16' : 'mb-0'
 				)}
 			>
 				<div className="xl:container mx-auto px-0 sm:px-4 py-4">
