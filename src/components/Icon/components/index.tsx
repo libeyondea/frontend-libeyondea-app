@@ -1,35 +1,35 @@
-import AngleDoubleLeftIconComponent from './AngleDoubleLeft';
-import AngleDoubleRightIconComponent from './AngleDoubleRight';
-import AngleLeftIconComponent from './AngleLeft';
-import AngleRightIconComponent from './AngleRight';
-import BarsIconComponent from './Bars';
-import ChevronLeftIconComponent from './ChevronLeft';
-import CogIconComponent from './Cog';
-import EditIconComponent from './Edit';
-import EllipsisHorizontalIconComponent from './EllipsisHorizontal';
-import ListIconComponent from './List';
-import PlusCircleIconComponent from './PlusCircle';
-import SyncIconComponent from './Sync';
-import TachometerIconComponent from './Tachometer';
-import TimesIconComponent from './Times';
-import TrashIconComponent from './Trash';
-import UserIconComponent from './Users';
+import AngleDoubleLeftIcon from './AngleDoubleLeft';
+import AngleDoubleRightIcon from './AngleDoubleRight';
+import AngleLeftIcon from './AngleLeft';
+import AngleRightIcon from './AngleRight';
+import BarsIcon from './Bars';
+import ChevronLeftIcon from './ChevronLeft';
+import CogIcon from './Cog';
+import EditIcon from './Edit';
+import EllipsisHorizontalIcon from './EllipsisHorizontal';
+import ListIcon from './List';
+import PlusCircleIcon from './PlusCircle';
+import SyncIcon from './Sync';
+import TachometerIcon from './Tachometer';
+import TimesIcon from './Times';
+import TrashIcon from './Trash';
+import UserIcon from './Users';
 
 export {
-	TachometerIconComponent,
-	UserIconComponent,
-	ListIconComponent,
-	PlusCircleIconComponent,
-	ChevronLeftIconComponent,
-	EllipsisHorizontalIconComponent,
-	CogIconComponent,
-	TimesIconComponent,
-	BarsIconComponent,
-	SyncIconComponent,
-	TrashIconComponent,
-	EditIconComponent,
-	AngleDoubleLeftIconComponent,
-	AngleDoubleRightIconComponent,
-	AngleLeftIconComponent,
-	AngleRightIconComponent
+	TachometerIcon,
+	UserIcon,
+	ListIcon,
+	PlusCircleIcon,
+	ChevronLeftIcon,
+	EllipsisHorizontalIcon,
+	CogIcon,
+	TimesIcon,
+	BarsIcon,
+	SyncIcon,
+	TrashIcon,
+	EditIcon,
+	AngleDoubleLeftIcon,
+	AngleDoubleRightIcon,
+	AngleLeftIcon,
+	AngleRightIcon
 };

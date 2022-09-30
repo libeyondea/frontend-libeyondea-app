@@ -9,7 +9,7 @@ type Props = {
 	touched?: boolean;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const ToggleFormComponent = ({ className, name, label, horizontal = false, error, touched = false, ...props }: Props) => {
+const ToggleForm = ({ className, name, label, horizontal = false, error, touched = false, ...props }: Props) => {
 	return (
 		<div
 			className={classNames(
@@ -35,4 +35,4 @@ const ToggleFormComponent = ({ className, name, label, horizontal = false, error
 	);
 };
 
-export default ToggleFormComponent;
+export default ToggleForm;

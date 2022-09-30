@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const TrashIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const TrashIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const TrashIconComponent = ({ className, size = '1em', ...props }: Props) => {
 	);
 };
 
-export default TrashIconComponent;
+export default TrashIcon;

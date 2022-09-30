@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const UserIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const UserIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const UserIconComponent = ({ className, size = '1em', ...props }: Props) => {
 	);
 };
 
-export default UserIconComponent;
+export default UserIcon;

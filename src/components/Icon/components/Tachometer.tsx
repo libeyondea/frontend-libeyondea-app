@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const TachometerIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const TachometerIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const TachometerIconComponent = ({ className, size = '1em', ...props }: Props) =
 	);
 };
 
-export default TachometerIconComponent;
+export default TachometerIcon;

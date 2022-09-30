@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const EllipsisHorizontalIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const EllipsisHorizontalIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const EllipsisHorizontalIconComponent = ({ className, size = '1em', ...props }: 
 	);
 };
 
-export default EllipsisHorizontalIconComponent;
+export default EllipsisHorizontalIcon;

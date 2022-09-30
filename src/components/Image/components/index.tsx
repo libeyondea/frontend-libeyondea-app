@@ -6,8 +6,8 @@ type Props = {
 	alt?: string;
 } & React.ComponentPropsWithoutRef<'img'>;
 
-const ImageComponent = ({ className, src, alt, ...props }: Props) => {
+const Image = ({ className, src, alt, ...props }: Props) => {
 	return <img {...props} className={classNames('', className)} src={src} alt={alt} />;
 };
 
-export default ImageComponent;
+export default Image;

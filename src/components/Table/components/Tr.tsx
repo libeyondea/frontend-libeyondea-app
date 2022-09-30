@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'tr'>;
 
-const TrTableComponent = ({ className, children, ...props }: Props) => {
+const TrTable = ({ className, children, ...props }: Props) => {
 	return (
 		<tr {...props} className={classNames('', className)}>
 			{children}
@@ -13,4 +13,4 @@ const TrTableComponent = ({ className, children, ...props }: Props) => {
 	);
 };
 
-export default TrTableComponent;
+export default TrTable;

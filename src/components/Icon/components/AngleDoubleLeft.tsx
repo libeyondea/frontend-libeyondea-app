@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const AngleDoubleLeftIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const AngleDoubleLeftIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const AngleDoubleLeftIconComponent = ({ className, size = '1em', ...props }: Pro
 	);
 };
 
-export default AngleDoubleLeftIconComponent;
+export default AngleDoubleLeftIcon;

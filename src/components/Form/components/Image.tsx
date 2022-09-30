@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import ButtonComponent from 'src/components/Button/components';
-import ImageComponent from 'src/components/Image/components';
+import Button from 'src/components/Button/components';
+import Image from 'src/components/Image/components';
 
 type Props = {
 	className?: string;
@@ -17,7 +17,7 @@ type Props = {
 	canDelete?: boolean;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const ImageFormComponent = ({
+const ImageForm = ({
 	className,
 	onChangeFile,
 	onBlurFile,
@@ -68,10 +68,10 @@ const ImageFormComponent = ({
 				<div className="flex items-start">
 					{previewImg && (
 						<span className="mr-4 inline-block h-20 w-20 rounded-full overflow-hidden">
-							<ImageComponent className="h-full w-full" src={previewImg} alt="Image" />
+							<Image className="h-full w-full" src={previewImg} alt="Image" />
 						</span>
 					)}
-					<ButtonComponent className="relative" styleType="secondary">
+					<Button className="relative" styleType="secondary">
 						<input
 							{...props}
 							type="file"
@@ -83,11 +83,11 @@ const ImageFormComponent = ({
 							className="absolute w-full inset-0 opacity-0"
 						/>
 						Change
-					</ButtonComponent>
+					</Button>
 					{previewImg && canDelete && (
-						<ButtonComponent className="ml-4" styleType="danger" onClick={_onRemoveFile}>
+						<Button className="ml-4" styleType="danger" onClick={_onRemoveFile}>
 							Remove
-						</ButtonComponent>
+						</Button>
 					)}
 				</div>
 			</div>
@@ -96,4 +96,4 @@ const ImageFormComponent = ({
 	);
 };
 
-export default ImageFormComponent;
+export default ImageForm;

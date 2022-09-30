@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Link, To } from 'react-router-dom';
+import { Link as ReactLink, To } from 'react-router-dom';
 import type { LinkProps } from 'react-router-dom';
 
 type Props = {
@@ -8,10 +8,10 @@ type Props = {
 	children: React.ReactNode;
 } & LinkProps;
 
-const LinkComponent = ({ className, to, children, ...props }: Props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
-	<Link {...props} className={className} to={to} ref={ref}>
+const Link = ({ className, to, children, ...props }: Props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
+	<ReactLink {...props} className={className} to={to} ref={ref}>
 		{children}
-	</Link>
+	</ReactLink>
 );
 
-export default forwardRef(LinkComponent);
+export default forwardRef(Link);

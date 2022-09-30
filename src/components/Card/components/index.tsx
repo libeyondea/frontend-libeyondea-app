@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { forwardRef } from 'react';
 
-import { TimesIconComponent } from 'src/components/Icon/components';
+import { TimesIcon } from 'src/components/Icon/components';
 
 type Props = {
 	className?: string;
@@ -10,7 +10,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const CardComponent = ({ className, title, onClickClose, children }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+const Card = ({ className, title, onClickClose, children }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
 	return (
 		<div className={classNames('shadow-lg rounded-md p-4 bg-white w-full', className)} ref={ref}>
 			{title && (
@@ -19,7 +19,7 @@ const CardComponent = ({ className, title, onClickClose, children }: Props, ref:
 					{onClickClose && (
 						<div className="ml-auto -mt-1">
 							<button type="button" onClick={onClickClose} className="flex items-center text-gray-600 bg-white hover:bg-gray-300 p-1 rounded-md">
-								<TimesIconComponent className="w-6 h-6" />
+								<TimesIcon className="w-6 h-6" />
 							</button>
 						</div>
 					)}
@@ -30,4 +30,4 @@ const CardComponent = ({ className, title, onClickClose, children }: Props, ref:
 	);
 };
 
-export default forwardRef(CardComponent);
+export default forwardRef(Card);

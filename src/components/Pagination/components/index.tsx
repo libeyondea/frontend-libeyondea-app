@@ -1,14 +1,8 @@
 import classNames from 'classnames';
 import { Fragment } from 'react';
 
-import FormComponent from 'src/components/Form/components';
-import {
-	AngleDoubleLeftIconComponent,
-	AngleDoubleRightIconComponent,
-	AngleLeftIconComponent,
-	AngleRightIconComponent,
-	EllipsisHorizontalIconComponent
-} from 'src/components/Icon/components';
+import Form from 'src/components/Form/components';
+import { AngleDoubleLeftIcon, AngleDoubleRightIcon, AngleLeftIcon, AngleRightIcon, EllipsisHorizontalIcon } from 'src/components/Icon/components';
 import { getPageNumbers, getTotalPages } from 'src/helpers/pagination';
 
 type Props = {
@@ -21,7 +15,7 @@ type Props = {
 	onChangeLimit: (limit: number) => void;
 };
 
-const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 50, 100], onChangePage, onChangeLimit }: Props) => {
+const Pagination = ({ className, page, limit, total, limits = [10, 20, 50, 100], onChangePage, onChangeLimit }: Props) => {
 	const totalPages = getTotalPages(total, limit);
 	const pageNumbers = getPageNumbers(page, limit, total);
 
@@ -44,7 +38,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 				</p>
 				<span className="mx-2"> | </span>
 				<span className="text-gray-600 flex-none">
-					<FormComponent.Select
+					<Form.Select
 						id="limits"
 						name="limits"
 						label="Limits"
@@ -68,7 +62,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								onClick={(event) => _onChangePage(event, 1)}
 							>
 								<span className="sr-only">First</span>
-								<AngleDoubleLeftIconComponent className="h-4 w-4" />
+								<AngleDoubleLeftIcon className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -76,7 +70,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								onClick={(event) => _onChangePage(event, page === 1 ? 1 : page - 1)}
 							>
 								<span className="sr-only">Previous</span>
-								<AngleLeftIconComponent className="h-4 w-4" />
+								<AngleLeftIcon className="h-4 w-4" />
 							</button>
 						</Fragment>
 					) : (
@@ -87,7 +81,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								disabled
 							>
 								<span className="sr-only">No first</span>
-								<AngleDoubleLeftIconComponent className="h-4 w-4" />
+								<AngleDoubleLeftIcon className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -95,7 +89,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								disabled
 							>
 								<span className="sr-only">No previous</span>
-								<AngleLeftIconComponent className="h-4 w-4" />
+								<AngleLeftIcon className="h-4 w-4" />
 							</button>
 						</Fragment>
 					)}
@@ -105,7 +99,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-base font-medium text-gray-400"
 								key={`${pageNumber}${i}`}
 							>
-								<EllipsisHorizontalIconComponent className="h-4 w-4" />
+								<EllipsisHorizontalIcon className="h-4 w-4" />
 							</span>
 						) : pageNumber === page ? (
 							<button
@@ -135,7 +129,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								onClick={(event) => _onChangePage(event, page + 1)}
 							>
 								<span className="sr-only">Next</span>
-								<AngleRightIconComponent className="h-4 w-4" />
+								<AngleRightIcon className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -143,7 +137,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								onClick={(event) => _onChangePage(event, totalPages)}
 							>
 								<span className="sr-only">Last</span>
-								<AngleDoubleRightIconComponent className="h-4 w-4" />
+								<AngleDoubleRightIcon className="h-4 w-4" />
 							</button>
 						</Fragment>
 					) : (
@@ -154,7 +148,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								disabled
 							>
 								<span className="sr-only">No next</span>
-								<AngleRightIconComponent className="h-4 w-4" />
+								<AngleRightIcon className="h-4 w-4" />
 							</button>
 							<button
 								type="button"
@@ -162,7 +156,7 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 								disabled
 							>
 								<span className="sr-only">No last</span>
-								<AngleDoubleRightIconComponent className="h-4 w-4" />
+								<AngleDoubleRightIcon className="h-4 w-4" />
 							</button>
 						</Fragment>
 					)}
@@ -172,4 +166,4 @@ const PaginationComponent = ({ className, page, limit, total, limits = [10, 20, 
 	);
 };
 
-export default PaginationComponent;
+export default Pagination;

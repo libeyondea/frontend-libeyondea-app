@@ -6,7 +6,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const BadgeComponent = ({ className, styleType = 'primary', children }: Props) => (
+const Badge = ({ className, styleType = 'primary', children }: Props) => (
 	<div
 		className={classNames(
 			'px-2 py-1 inline-flex items-center justify-centers text-sm leading-none font-semibold rounded-full',
@@ -27,4 +27,4 @@ const BadgeComponent = ({ className, styleType = 'primary', children }: Props) =
 	</div>
 );
 
-export default BadgeComponent;
+export default Badge;

@@ -9,7 +9,7 @@ type Props = {
 	touched?: boolean;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const InputFormComponent = ({ className, name, label, horizontal = false, error, touched = false, ...props }: Props) => {
+const InputForm = ({ className, name, label, horizontal = false, error, touched = false, ...props }: Props) => {
 	return (
 		<div
 			className={classNames(
@@ -41,4 +41,4 @@ const InputFormComponent = ({ className, name, label, horizontal = false, error,
 	);
 };
 
-export default InputFormComponent;
+export default InputForm;

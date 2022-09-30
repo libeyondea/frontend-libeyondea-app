@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const BreadcrumbComponent = ({ className, children }: Props) => {
+const Breadcrumb = ({ className, children }: Props) => {
 	return (
 		<div className={classNames('flex', className)}>
 			<h1 className="text-2xl font-bold">{children}</h1>
@@ -13,4 +13,4 @@ const BreadcrumbComponent = ({ className, children }: Props) => {
 	);
 };
 
-export default BreadcrumbComponent;
+export default Breadcrumb;

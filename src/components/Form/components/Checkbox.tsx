@@ -8,7 +8,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const CheckboxFormComponent = ({ className, name, error, touched = false, children, ...props }: Props) => {
+const CheckboxForm = ({ className, name, error, touched = false, children, ...props }: Props) => {
 	return (
 		<div className={classNames('flex-row', className)}>
 			<div className="flex items-center">
@@ -22,4 +22,4 @@ const CheckboxFormComponent = ({ className, name, error, touched = false, childr
 	);
 };
 
-export default CheckboxFormComponent;
+export default CheckboxForm;

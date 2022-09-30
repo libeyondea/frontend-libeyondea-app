@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'td'>;
 
-const TdTableComponent = ({ className, children, ...props }: Props) => {
+const TdTable = ({ className, children, ...props }: Props) => {
 	return (
 		<td {...props} className={classNames('p-3 text-sm text-gray-500', className)}>
 			{children}
@@ -13,4 +13,4 @@ const TdTableComponent = ({ className, children, ...props }: Props) => {
 	);
 };
 
-export default TdTableComponent;
+export default TdTable;

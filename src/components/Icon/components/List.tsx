@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const ListIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const ListIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const ListIconComponent = ({ className, size = '1em', ...props }: Props) => {
 	);
 };
 
-export default ListIconComponent;
+export default ListIcon;

@@ -1,17 +1,17 @@
 import classNames from 'classnames';
 
-import TbodyTableComponent from './Tbody';
-import TdTableComponent from './Td';
-import ThTableComponent from './Th';
-import TheadTableComponent from './Thead';
-import TrTableComponent from './Tr';
+import TbodyTable from './Tbody';
+import TdTable from './Td';
+import ThTable from './Th';
+import TheadTable from './Thead';
+import TrTable from './Tr';
 
 type Props = {
 	className?: string;
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'table'>;
 
-const TableComponent = ({ className, children, ...props }: Props) => {
+const Table = ({ className, children, ...props }: Props) => {
 	return (
 		<div className="flex flex-col">
 			<div className="overflow-x-auto">
@@ -27,10 +27,10 @@ const TableComponent = ({ className, children, ...props }: Props) => {
 	);
 };
 
-export default Object.assign(TableComponent, {
-	Thead: TheadTableComponent,
-	Tr: TrTableComponent,
-	Th: ThTableComponent,
-	Tbody: TbodyTableComponent,
-	Td: TdTableComponent
+export default Object.assign(Table, {
+	Thead: TheadTable,
+	Tr: TrTable,
+	Th: ThTable,
+	Tbody: TbodyTable,
+	Td: TdTable
 });

@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const ChevronLeftIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const ChevronLeftIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const ChevronLeftIconComponent = ({ className, size = '1em', ...props }: Props) 
 	);
 };
 
-export default ChevronLeftIconComponent;
+export default ChevronLeftIcon;

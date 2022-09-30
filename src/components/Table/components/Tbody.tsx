@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'tbody'>;
 
-const TbodyTableComponent = ({ className, children, ...props }: Props) => {
+const TbodyTable = ({ className, children, ...props }: Props) => {
 	return (
 		<tbody {...props} className={classNames('bg-white divide-y divide-gray-200', className)}>
 			{children}
@@ -13,4 +13,4 @@ const TbodyTableComponent = ({ className, children, ...props }: Props) => {
 	);
 };
 
-export default TbodyTableComponent;
+export default TbodyTable;

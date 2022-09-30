@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { SyncIconComponent } from 'src/components/Icon/components';
+import { SyncIcon } from 'src/components/Icon/components';
 
 type Props = {
 	className?: string;
@@ -11,7 +11,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'button'>;
 
-const ButtonComponent = ({ className, type = 'button', loading = false, disabled = false, styleType = 'primary', children, ...props }: Props) => (
+const Button = ({ className, type = 'button', loading = false, disabled = false, styleType = 'primary', children, ...props }: Props) => (
 	<button
 		{...props}
 		type={type}
@@ -32,9 +32,9 @@ const ButtonComponent = ({ className, type = 'button', loading = false, disabled
 		)}
 		disabled={disabled}
 	>
-		{loading && <SyncIconComponent className="animate-spin h-4 w-4 mr-2" />}
+		{loading && <SyncIcon className="animate-spin h-4 w-4 mr-2" />}
 		<span>{children}</span>
 	</button>
 );
 
-export default ButtonComponent;
+export default Button;

@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const SyncIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const SyncIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const SyncIconComponent = ({ className, size = '1em', ...props }: Props) => {
 	);
 };
 
-export default SyncIconComponent;
+export default SyncIcon;

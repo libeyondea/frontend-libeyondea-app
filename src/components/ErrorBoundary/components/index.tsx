@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ButtonComponent from 'src/components/Button/components';
-import CardComponent from 'src/components/Card/components';
+import Button from 'src/components/Button/components';
+import Card from 'src/components/Card/components';
 
 type Props = {
 	children: React.ReactNode;
@@ -37,14 +37,14 @@ class ErrorBoundary extends React.Component<Props, State> {
 			return (
 				<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto">
 					<div className="min-h-full flex flex-col py-8 sm:p-16">
-						<CardComponent className="m-auto max-w-md sm:p-8">
+						<Card className="m-auto max-w-md sm:p-8">
 							<h6 className=" font-bold text-center">
 								<span className="text-red-500 text-base">An error occurred. Please try again later.</span>
 							</h6>
 							<div className="flex justify-center mt-4">
-								<ButtonComponent onClick={() => this.onClickReset()}>Try again</ButtonComponent>
+								<Button onClick={() => this.onClickReset()}>Try again</Button>
 							</div>
-						</CardComponent>
+						</Card>
 					</div>
 				</div>
 			);

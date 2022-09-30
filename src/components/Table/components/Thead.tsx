@@ -5,7 +5,7 @@ type Props = {
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'thead'>;
 
-const TheadTableComponent = ({ className, children, ...props }: Props) => {
+const TheadTable = ({ className, children, ...props }: Props) => {
 	return (
 		<thead {...props} className={classNames('bg-gray-50', className)}>
 			{children}
@@ -13,4 +13,4 @@ const TheadTableComponent = ({ className, children, ...props }: Props) => {
 	);
 };
 
-export default TheadTableComponent;
+export default TheadTable;

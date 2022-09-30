@@ -1,50 +1,50 @@
 import classNames from 'classnames';
 
-import TableComponent from 'src/components/Table/components';
+import Table from 'src/components/Table/components';
 
 type Props = {
 	className?: string;
 };
 
-const TableLoadingComponent = ({ className }: Props) => {
+const TableLoading = ({ className }: Props) => {
 	return (
-		<TableComponent className={classNames('animate-pulse', className)}>
-			<TableComponent.Thead>
-				<TableComponent.Tr>
-					<TableComponent.Th>
+		<Table className={classNames('animate-pulse', className)}>
+			<Table.Thead>
+				<Table.Tr>
+					<Table.Th>
 						<div className="h-6 bg-slate-200 rounded-md" />
-					</TableComponent.Th>
-				</TableComponent.Tr>
-			</TableComponent.Thead>
-			<TableComponent.Tbody>
-				<TableComponent.Tr>
-					<TableComponent.Td>
+					</Table.Th>
+				</Table.Tr>
+			</Table.Thead>
+			<Table.Tbody>
+				<Table.Tr>
+					<Table.Td>
 						<div className="h-6 bg-slate-200 rounded-md" />
-					</TableComponent.Td>
-				</TableComponent.Tr>
-				<TableComponent.Tr>
-					<TableComponent.Td>
+					</Table.Td>
+				</Table.Tr>
+				<Table.Tr>
+					<Table.Td>
 						<div className="h-6 bg-slate-200 rounded-md" />
-					</TableComponent.Td>
-				</TableComponent.Tr>
-				<TableComponent.Tr>
-					<TableComponent.Td>
+					</Table.Td>
+				</Table.Tr>
+				<Table.Tr>
+					<Table.Td>
 						<div className="h-6 bg-slate-200 rounded-md" />
-					</TableComponent.Td>
-				</TableComponent.Tr>
-				<TableComponent.Tr>
-					<TableComponent.Td>
+					</Table.Td>
+				</Table.Tr>
+				<Table.Tr>
+					<Table.Td>
 						<div className="h-6 bg-slate-200 rounded-md" />
-					</TableComponent.Td>
-				</TableComponent.Tr>
-				<TableComponent.Tr>
-					<TableComponent.Td>
+					</Table.Td>
+				</Table.Tr>
+				<Table.Tr>
+					<Table.Td>
 						<div className="h-6 bg-slate-200 rounded-md" />
-					</TableComponent.Td>
-				</TableComponent.Tr>
-			</TableComponent.Tbody>
-		</TableComponent>
+					</Table.Td>
+				</Table.Tr>
+			</Table.Tbody>
+		</Table>
 	);
 };
 
-export default TableLoadingComponent;
+export default TableLoading;

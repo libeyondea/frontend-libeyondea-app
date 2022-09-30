@@ -10,7 +10,7 @@ type Props = {
 	touched?: boolean;
 } & React.ComponentPropsWithoutRef<'select'>;
 
-const SelectFormComponent = ({ className, name, label, options, horizontal = false, error, touched = false, ...props }: Props) => {
+const SelectForm = ({ className, name, label, options, horizontal = false, error, touched = false, ...props }: Props) => {
 	return (
 		<div
 			className={classNames(
@@ -48,4 +48,4 @@ const SelectFormComponent = ({ className, name, label, options, horizontal = fal
 	);
 };
 
-export default SelectFormComponent;
+export default SelectForm;

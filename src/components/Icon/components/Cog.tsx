@@ -3,7 +3,7 @@ type Props = {
 	size?: number | string;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
-const CogIconComponent = ({ className, size = '1em', ...props }: Props) => {
+const CogIcon = ({ className, size = '1em', ...props }: Props) => {
 	return (
 		<svg
 			{...props}
@@ -21,4 +21,4 @@ const CogIconComponent = ({ className, size = '1em', ...props }: Props) => {
 	);
 };
 
-export default CogIconComponent;
+export default CogIcon;
