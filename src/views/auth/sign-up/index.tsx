@@ -3,15 +3,15 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import Button from 'src/components/Button/components';
-import Card from 'src/components/Card/components';
-import Form from 'src/components/Form/components';
-import Link from 'src/components/Link/components';
+import Button from 'src/components/Button';
+import Card from 'src/components/Card';
+import Form from 'src/components/Form';
+import Link from 'src/components/Link';
 import * as routeConstant from 'src/constants/route';
-import errorHandler from 'src/helpers/errorHandler';
-import toastify from 'src/helpers/toastify';
-import authService from 'src/services/auth';
+import authService from 'src/services/authService';
 import { SignUpFormik } from 'src/types/auth';
+import errorHandler from 'src/utils/errorHandler';
+import toastify from 'src/utils/toastify';
 
 const SignUpPage = () => {
 	const navigate = useNavigate();

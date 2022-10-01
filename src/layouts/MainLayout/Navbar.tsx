@@ -2,25 +2,24 @@ import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import { Fragment } from 'react';
 
-import { BarsIcon } from 'src/components/Icon/components';
-import Image from 'src/components/Image/components';
-import Link from 'src/components/Link/components';
+import { BarsIcon } from 'src/components/Icon';
+import Image from 'src/components/Image';
+import Link from 'src/components/Link';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
-import cookies from 'src/helpers/cookies';
-import toastify from 'src/helpers/toastify';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
-import authService from 'src/services/auth';
+import authService from 'src/services/authService';
+import { useDispatch, useSelector } from 'src/store';
 import { appSidebarRequestAction } from 'src/store/app/actions';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
+import cookies from 'src/utils/cookies';
+import toastify from 'src/utils/toastify';
 
 const Navbar = () => {
-	const dispatch = useAppDispatch();
-	const appSidebar = useAppSelector(selectAppSidebar);
-	const authCurrent = useAppSelector(selectAuthCurrent);
+	const dispatch = useDispatch();
+	const appSidebar = useSelector(selectAppSidebar);
+	const authCurrent = useSelector(selectAuthCurrent);
 
 	const onClickSignOut = () => {
 		if (authCurrent.data.token) {

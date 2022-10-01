@@ -1,21 +1,22 @@
 import { lazy } from 'react';
+import { RouteObject } from 'react-router-dom';
 
-import AccessControl from 'src/components/AccessControl/components';
-import ErrorBoundary from 'src/components/ErrorBoundary/components';
-import Loadable from 'src/components/Loadable/components';
+import GuestGuard from './guard/GuestGuard';
+import ErrorBoundary from 'src/components/ErrorBoundary';
+import Loadable from 'src/components/Loadable';
 import * as routeConstant from 'src/constants/route';
 
 const AuthLayout = Loadable(lazy(() => import('src/layouts/AuthLayout')));
 const SignInPage = Loadable(lazy(() => import('src/views/auth/sign-in')));
 const SignUpPage = Loadable(lazy(() => import('src/views/auth/sign-up')));
 
-const AuthRoutes = {
-	path: `${routeConstant.ROUTE_NAME_AUTH}`,
+const AuthRoutes: RouteObject = {
+	path: '',
 	element: (
 		<ErrorBoundary>
-			<AccessControl>
+			<GuestGuard>
 				<AuthLayout />
-			</AccessControl>
+			</GuestGuard>
 		</ErrorBoundary>
 	),
 	children: [

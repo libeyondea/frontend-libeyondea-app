@@ -1,16 +1,16 @@
 import classNames from 'classnames';
 
-import Image from 'src/components/Image/components';
-import Link from 'src/components/Link/components';
+import Logo from 'src/assets/images/logo.png';
+import Image from 'src/components/Image';
+import Link from 'src/components/Link';
 import config from 'src/config';
-import useAppSelector from 'src/hooks/useAppSelector';
-import Logo from 'src/images/logo.png';
+import { useSelector } from 'src/store';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 const Footer = () => {
-	const authCurrent = useAppSelector(selectAuthCurrent);
-	const appSidebar = useAppSelector(selectAppSidebar);
+	const authCurrent = useSelector(selectAuthCurrent);
+	const appSidebar = useSelector(selectAppSidebar);
 
 	return (
 		<footer

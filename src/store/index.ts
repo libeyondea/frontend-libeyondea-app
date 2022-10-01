@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch as useAppDispatch, useSelector as useAppSelector } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import { createEpicMiddleware } from 'redux-observable';
 
@@ -29,5 +30,9 @@ epicMiddleware.run(rootEpic);
 export type AppDispatch = typeof store.dispatch;
 
 export type RootState = ReturnType<typeof store.getState>;
+
+export const useDispatch = () => useAppDispatch<AppDispatch>();
+
+export const useSelector: TypedUseSelectorHook<RootState> = useAppSelector;
 
 export default store;

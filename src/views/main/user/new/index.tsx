@@ -2,17 +2,14 @@ import { FormikHelpers } from 'formik';
 import { Fragment, useState } from 'react';
 import * as Yup from 'yup';
 
-import Breadcrumb from 'src/components/Breadcrumb/components';
-import Button from 'src/components/Button/components';
-import Card from 'src/components/Card/components';
-import Form from 'src/components/Form/components';
+import Breadcrumb from 'src/components/Breadcrumb';
+import Button from 'src/components/Button';
+import Card from 'src/components/Card';
+import Form from 'src/components/Form';
 import * as userConstant from 'src/constants/user';
-import errorHandler from 'src/helpers/errorHandler';
-import toastify from 'src/helpers/toastify';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
-import imageService from 'src/services/image';
-import userService from 'src/services/user';
+import imageService from 'src/services/imageService';
+import userService from 'src/services/userService';
+import { useDispatch, useSelector } from 'src/store';
 import {
 	userCreateDataRequestAction,
 	userCreateLoadingRequestAction,
@@ -23,11 +20,13 @@ import {
 import { selectUserCreate, selectUserList } from 'src/store/user/selectors';
 import { Image } from 'src/types/image';
 import { CreateUserFormik } from 'src/types/user';
+import errorHandler from 'src/utils/errorHandler';
+import toastify from 'src/utils/toastify';
 
 const NewUserPage = () => {
-	const dispatch = useAppDispatch();
-	const userList = useAppSelector(selectUserList);
-	const userCreate = useAppSelector(selectUserCreate);
+	const dispatch = useDispatch();
+	const userList = useSelector(selectUserList);
+	const userCreate = useSelector(selectUserCreate);
 	const [imageUpload, setImageUpload] = useState({ loading: false });
 
 	const initialValues: CreateUserFormik = {

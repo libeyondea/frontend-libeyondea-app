@@ -5,13 +5,13 @@ import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import useAppSelector from 'src/hooks/useAppSelector';
+import { useSelector } from 'src/store';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 const MainLayout = () => {
-	const appSidebar = useAppSelector(selectAppSidebar);
-	const authCurrent = useAppSelector(selectAuthCurrent);
+	const appSidebar = useSelector(selectAppSidebar);
+	const authCurrent = useSelector(selectAuthCurrent);
 
 	return (
 		<Fragment>

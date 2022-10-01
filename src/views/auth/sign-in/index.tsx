@@ -2,23 +2,23 @@ import { FormikHelpers } from 'formik';
 import { Fragment } from 'react';
 import * as Yup from 'yup';
 
-import Button from 'src/components/Button/components';
-import Card from 'src/components/Card/components';
-import Form from 'src/components/Form/components';
-import Link from 'src/components/Link/components';
+import Button from 'src/components/Button';
+import Card from 'src/components/Card';
+import Form from 'src/components/Form';
+import Link from 'src/components/Link';
 import config from 'src/config';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
-import cookies from 'src/helpers/cookies';
-import errorHandler from 'src/helpers/errorHandler';
-import toastify from 'src/helpers/toastify';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import authService from 'src/services/auth';
+import authService from 'src/services/authService';
+import { useDispatch } from 'src/store';
 import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
 import { SignInFormik } from 'src/types/auth';
+import cookies from 'src/utils/cookies';
+import errorHandler from 'src/utils/errorHandler';
+import toastify from 'src/utils/toastify';
 
 const SignInPage = () => {
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 
 	const initialValues: SignInFormik = {
 		user_name: '',

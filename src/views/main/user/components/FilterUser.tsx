@@ -1,8 +1,7 @@
-import Form from 'src/components/Form/components';
+import Form from 'src/components/Form';
 import * as filterConstant from 'src/constants/filter';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
 import useDebouncedCallback from 'src/hooks/useDebouncedCallback';
+import { useDispatch, useSelector } from 'src/store';
 import {
 	userListFilterQRequestAction,
 	userListFilterQTempRequestAction,
@@ -12,8 +11,8 @@ import {
 import { selectUserList } from 'src/store/user/selectors';
 
 const FilterUser = () => {
-	const dispatch = useAppDispatch();
-	const userList = useAppSelector(selectUserList);
+	const dispatch = useDispatch();
+	const userList = useSelector(selectUserList);
 
 	const userListFilterQDebouncedCallback = useDebouncedCallback((nextValue: string) => dispatch(userListFilterQRequestAction(nextValue)));
 

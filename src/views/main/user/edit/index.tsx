@@ -4,20 +4,17 @@ import { Fragment, useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import Breadcrumb from 'src/components/Breadcrumb/components';
-import Button from 'src/components/Button/components';
-import Card from 'src/components/Card/components';
-import Form from 'src/components/Form/components';
-import { SpinLoading } from 'src/components/Loading/components';
+import Breadcrumb from 'src/components/Breadcrumb';
+import Button from 'src/components/Button';
+import Card from 'src/components/Card';
+import Form from 'src/components/Form';
+import { SpinLoading } from 'src/components/Loading';
 import * as userConstant from 'src/constants/user';
-import errorHandler from 'src/helpers/errorHandler';
-import toastify from 'src/helpers/toastify';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import useUpdateEffect from 'src/hooks/useUpdateEffect';
-import imageService from 'src/services/image';
-import userService from 'src/services/user';
+import imageService from 'src/services/imageService';
+import userService from 'src/services/userService';
+import { useDispatch, useSelector } from 'src/store';
 import {
 	userListDataRequestAction,
 	userListLoadingRequestAction,
@@ -30,13 +27,15 @@ import {
 import { selectUserList, selectUserShow, selectUserUpdate } from 'src/store/user/selectors';
 import { Image } from 'src/types/image';
 import { UpdateUserFormik } from 'src/types/user';
+import errorHandler from 'src/utils/errorHandler';
+import toastify from 'src/utils/toastify';
 
 const EditUserPage = () => {
 	const params = useParams();
-	const dispatch = useAppDispatch();
-	const userList = useAppSelector(selectUserList);
-	const userShow = useAppSelector(selectUserShow);
-	const userUpdate = useAppSelector(selectUserUpdate);
+	const dispatch = useDispatch();
+	const userList = useSelector(selectUserList);
+	const userShow = useSelector(selectUserShow);
+	const userUpdate = useSelector(selectUserUpdate);
 	const [imageUpload, setImageUpload] = useState({ loading: false });
 
 	const initialValues: UpdateUserFormik = {

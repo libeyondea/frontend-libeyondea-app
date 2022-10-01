@@ -2,25 +2,21 @@ import _ from 'lodash';
 import { Fragment, useCallback, useState } from 'react';
 
 import FilterUser from './components/FilterUser';
-import Badge from 'src/components/Badge/components';
-import BlockUI from 'src/components/BlockUI/components';
-import Breadcrumb from 'src/components/Breadcrumb/components';
-import Card from 'src/components/Card/components';
-import { EditIcon, TrashIcon } from 'src/components/Icon/components';
-import Link from 'src/components/Link/components';
-import { TableLoading } from 'src/components/Loading/components';
-import Modal from 'src/components/Modal/components';
-import Pagination from 'src/components/Pagination/components';
-import Table from 'src/components/Table/components';
+import Badge from 'src/components/Badge';
+import BlockUI from 'src/components/BlockUI';
+import Breadcrumb from 'src/components/Breadcrumb';
+import Card from 'src/components/Card';
+import { EditIcon, TrashIcon } from 'src/components/Icon';
+import Link from 'src/components/Link';
+import { TableLoading } from 'src/components/Loading';
+import Modal from 'src/components/Modal';
+import Pagination from 'src/components/Pagination';
+import Table from 'src/components/Table';
 import * as routeConstant from 'src/constants/route';
-import errorHandler from 'src/helpers/errorHandler';
-import time from 'src/helpers/time';
-import toastify from 'src/helpers/toastify';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import useUpdateEffect from 'src/hooks/useUpdateEffect';
-import userService from 'src/services/user';
+import userService from 'src/services/userService';
+import { useDispatch, useSelector } from 'src/store';
 import {
 	userDeleteDataRequestAction,
 	userDeleteLoadingRequestAction,
@@ -31,13 +27,16 @@ import {
 	userListPaginationTotalRequestAction
 } from 'src/store/user/actions';
 import { selectUserDelete, selectUserList } from 'src/store/user/selectors';
+import errorHandler from 'src/utils/errorHandler';
+import time from 'src/utils/time';
+import toastify from 'src/utils/toastify';
 
 const UserPage = () => {
 	const [id, setId] = useState<number | null>(null);
 	const [showModal, setShowModal] = useState(false);
-	const dispatch = useAppDispatch();
-	const userList = useAppSelector(selectUserList);
-	const userDelete = useAppSelector(selectUserDelete);
+	const dispatch = useDispatch();
+	const userList = useSelector(selectUserList);
+	const userDelete = useSelector(selectUserDelete);
 
 	const onChangePage = (page: number) => {
 		dispatch(userListPaginationPageRequestAction(page));

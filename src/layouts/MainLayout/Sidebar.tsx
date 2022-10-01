@@ -3,25 +3,24 @@ import classNames from 'classnames';
 import { Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { ChevronLeftIcon, CogIcon, EllipsisHorizontalIcon, ListIcon, PlusCircleIcon, TachometerIcon, TimesIcon, UserIcon } from 'src/components/Icon/components';
-import Image from 'src/components/Image/components';
-import Link from 'src/components/Link/components';
-import NavLink from 'src/components/NavLink/components';
+import Logo from 'src/assets/images/logo.png';
+import { ChevronLeftIcon, CogIcon, EllipsisHorizontalIcon, ListIcon, PlusCircleIcon, TachometerIcon, TimesIcon, UserIcon } from 'src/components/Icon';
+import Image from 'src/components/Image';
+import Link from 'src/components/Link';
+import NavLink from 'src/components/NavLink';
 import config from 'src/config';
 import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
-import Logo from 'src/images/logo.png';
+import { useDispatch, useSelector } from 'src/store';
 import { appSidebarRequestAction } from 'src/store/app/actions';
 import { selectAppSidebar } from 'src/store/app/selectors';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 const Sidebar = () => {
 	const location = useLocation();
-	const dispatch = useAppDispatch();
-	const appSidebar = useAppSelector(selectAppSidebar);
-	const authCurrent = useAppSelector(selectAuthCurrent);
+	const dispatch = useDispatch();
+	const appSidebar = useSelector(selectAppSidebar);
+	const authCurrent = useSelector(selectAuthCurrent);
 
 	return (
 		<div className="flex">

@@ -1,19 +1,18 @@
 import { Fragment } from 'react';
 
-import Breadcrumb from 'src/components/Breadcrumb/components';
-import Card from 'src/components/Card/components';
-import { SpinLoading } from 'src/components/Loading/components';
-import errorHandler from 'src/helpers/errorHandler';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
+import Breadcrumb from 'src/components/Breadcrumb';
+import Card from 'src/components/Card';
+import { SpinLoading } from 'src/components/Loading';
 import useOnceEffect from 'src/hooks/useOnceEffect';
-import dashboardService from 'src/services/dashboard';
+import dashboardService from 'src/services/dashboardService';
+import { useDispatch, useSelector } from 'src/store';
 import { dashboardShowDataRequestAction, dashboardShowLoadingRequestAction } from 'src/store/dashboard/actions';
 import { selectDashboardShow } from 'src/store/dashboard/selectors';
+import errorHandler from 'src/utils/errorHandler';
 
 const DashboardPage = () => {
-	const dispatch = useAppDispatch();
-	const dashboardShow = useAppSelector(selectDashboardShow);
+	const dispatch = useDispatch();
+	const dashboardShow = useSelector(selectDashboardShow);
 
 	useOnceEffect(() => {
 		dispatch(dashboardShowLoadingRequestAction(true));

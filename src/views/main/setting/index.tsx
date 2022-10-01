@@ -2,17 +2,14 @@ import { FormikHelpers } from 'formik';
 import { Fragment } from 'react';
 import * as Yup from 'yup';
 
-import Breadcrumb from 'src/components/Breadcrumb/components';
-import Button from 'src/components/Button/components';
-import Card from 'src/components/Card/components';
-import Form from 'src/components/Form/components';
-import { SpinLoading } from 'src/components/Loading/components';
-import errorHandler from 'src/helpers/errorHandler';
-import toastify from 'src/helpers/toastify';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
+import Breadcrumb from 'src/components/Breadcrumb';
+import Button from 'src/components/Button';
+import Card from 'src/components/Card';
+import Form from 'src/components/Form';
+import { SpinLoading } from 'src/components/Loading';
 import useOnceEffect from 'src/hooks/useOnceEffect';
-import settingService from 'src/services/setting';
+import settingService from 'src/services/settingService';
+import { useDispatch, useSelector } from 'src/store';
 import {
 	settingShowDataRequestAction,
 	settingShowLoadingRequestAction,
@@ -21,11 +18,13 @@ import {
 } from 'src/store/setting/actions';
 import { selectSettingShow, selectSettingUpdate } from 'src/store/setting/selectors';
 import { UpdateSettingFormik } from 'src/types/setting';
+import errorHandler from 'src/utils/errorHandler';
+import toastify from 'src/utils/toastify';
 
 const SettingPage = () => {
-	const dispatch = useAppDispatch();
-	const settingShow = useAppSelector(selectSettingShow);
-	const settingUpdate = useAppSelector(selectSettingUpdate);
+	const dispatch = useDispatch();
+	const settingShow = useSelector(selectSettingShow);
+	const settingUpdate = useSelector(selectSettingUpdate);
 
 	const initialValues: UpdateSettingFormik = {
 		fixed_navbar: settingShow.data.fixed_navbar,

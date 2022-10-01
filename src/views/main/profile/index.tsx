@@ -2,18 +2,15 @@ import { FormikHelpers } from 'formik';
 import { Fragment, useState } from 'react';
 import * as Yup from 'yup';
 
-import Breadcrumb from 'src/components/Breadcrumb/components';
-import Button from 'src/components/Button/components';
-import Card from 'src/components/Card/components';
-import Form from 'src/components/Form/components';
-import { SpinLoading } from 'src/components/Loading/components';
-import errorHandler from 'src/helpers/errorHandler';
-import toastify from 'src/helpers/toastify';
-import useAppDispatch from 'src/hooks/useAppDispatch';
-import useAppSelector from 'src/hooks/useAppSelector';
+import Breadcrumb from 'src/components/Breadcrumb';
+import Button from 'src/components/Button';
+import Card from 'src/components/Card';
+import Form from 'src/components/Form';
+import { SpinLoading } from 'src/components/Loading';
 import useOnceEffect from 'src/hooks/useOnceEffect';
-import imageService from 'src/services/image';
-import profileService from 'src/services/profile';
+import imageService from 'src/services/imageService';
+import profileService from 'src/services/profileService';
+import { useDispatch, useSelector } from 'src/store';
 import {
 	profileShowDataRequestAction,
 	profileShowLoadingRequestAction,
@@ -23,11 +20,13 @@ import {
 import { selectProfileShow, selectProfileUpdate } from 'src/store/profile/selectors';
 import { Image } from 'src/types/image';
 import { UpdateProfileFormik } from 'src/types/profile';
+import errorHandler from 'src/utils/errorHandler';
+import toastify from 'src/utils/toastify';
 
 const ProfilePage = () => {
-	const dispatch = useAppDispatch();
-	const profileShow = useAppSelector(selectProfileShow);
-	const profileUpdate = useAppSelector(selectProfileUpdate);
+	const dispatch = useDispatch();
+	const profileShow = useSelector(selectProfileShow);
+	const profileUpdate = useSelector(selectProfileUpdate);
 	const [imageUpload, setImageUpload] = useState({ loading: false });
 
 	const initialValues: UpdateProfileFormik = {
