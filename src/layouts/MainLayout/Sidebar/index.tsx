@@ -55,7 +55,7 @@ const Sidebar = () => {
 							<ul className="space-y-3">
 								<li>
 									<NavLink
-										to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`}
+										to={`/${routeConstant.ROUTE_NAME_DASHBOARD}`}
 										className="inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline"
 										classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
 										classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"
@@ -68,8 +68,8 @@ const Sidebar = () => {
 									<Disclosure
 										as="li"
 										defaultOpen={[
-											`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`,
-											`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`
+											`/${routeConstant.ROUTE_NAME_USER}`,
+											`/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`
 										].includes(location.pathname)}
 									>
 										{({ open }) => (
@@ -78,8 +78,8 @@ const Sidebar = () => {
 													className={classNames(
 														'inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
 														[
-															`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`,
-															`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`
+															`/${routeConstant.ROUTE_NAME_USER}`,
+															`/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`
 														].includes(location.pathname)
 															? 'bg-gray-900 text-white'
 															: 'text-gray-400'
@@ -105,7 +105,7 @@ const Sidebar = () => {
 													<Disclosure.Panel static as="ul" className="space-y-4 mt-4">
 														<li>
 															<NavLink
-																to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}`}
+																to={`/${routeConstant.ROUTE_NAME_USER}`}
 																className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
 																classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
 																classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"
@@ -116,7 +116,7 @@ const Sidebar = () => {
 														</li>
 														<li>
 															<NavLink
-																to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`}
+																to={`/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`}
 																className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
 																classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
 																classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"
@@ -131,18 +131,13 @@ const Sidebar = () => {
 										)}
 									</Disclosure>
 								)}
-								<Disclosure
-									as="li"
-									defaultOpen={[`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`].includes(location.pathname)}
-								>
+								<Disclosure as="li" defaultOpen={[`/${routeConstant.ROUTE_NAME_SETTING}`].includes(location.pathname)}>
 									{({ open }) => (
 										<Fragment>
 											<Disclosure.Button
 												className={classNames(
 													'inline-flex items-center w-full px-4 py-2 text-base rounded-lg focus:shadow-outline hover:bg-gray-900 hover:text-white',
-													[`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`].includes(location.pathname)
-														? 'bg-gray-900 text-white'
-														: 'text-gray-400'
+													[`/${routeConstant.ROUTE_NAME_SETTING}`].includes(location.pathname) ? 'bg-gray-900 text-white' : 'text-gray-400'
 												)}
 											>
 												<EllipsisHorizontalIcon className="w-6 h-6" />
@@ -165,7 +160,7 @@ const Sidebar = () => {
 												<Disclosure.Panel static as="ul" className="space-y-4 mt-4">
 													<li>
 														<NavLink
-															to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_SETTING}`}
+															to={`/${routeConstant.ROUTE_NAME_SETTING}`}
 															className="inline-flex items-center w-full pl-8 pr-4 py-2 text-base rounded-lg focus:shadow-outline"
 															classNameActive="bg-gray-500 hover:bg-gray-500 font-bold text-white"
 															classNameNotActive="hover:bg-gray-900 hover:text-white text-gray-400"

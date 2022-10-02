@@ -30,14 +30,14 @@ const Pagination = ({ className, page, limit, total, limits = [10, 20, 50, 100],
 	};
 
 	return (
-		<div className={classNames('mt-4 flex flex-col md:flex-row md:items-center md:justify-between', className)}>
-			<div className="flex items-center justify-center flex-none mb-4 md:mb-0 mr-0 md:mr-4 text-base text-gray-600">
+		<div className={classNames('overflow-x-auto mt-4 flex items-center justify-start md:justify-end', className)}>
+			<div className="flex-none flex items-center mr-4 text-base text-gray-600">
 				<p>
-					Showing <span className="font-medium">{limit * page - limit + 1}</span> to <span className="font-medium">{limit * page}</span> of{' '}
-					<span className="font-medium">{total}</span> entries
+					<span className="font-medium">{limit * page - limit + 1}</span> &#8211; <span className="font-medium">{limit * page}</span> of{' '}
+					<span className="font-medium">{total}</span>
 				</p>
 				<span className="mx-2"> | </span>
-				<span className="text-gray-600 flex-none">
+				<span className="text-gray-600">
 					<Form.Select
 						id="limits"
 						name="limits"
@@ -52,7 +52,7 @@ const Pagination = ({ className, page, limit, total, limits = [10, 20, 50, 100],
 					/>
 				</span>
 			</div>
-			<div className="flex items-center justify-center">
+			<div className="flex-none flex items-center">
 				<nav className="relative inline-flex flex-wrap rounded-md -space-x-px" aria-label="Pagination">
 					{page > 1 ? (
 						<Fragment>
@@ -93,7 +93,7 @@ const Pagination = ({ className, page, limit, total, limits = [10, 20, 50, 100],
 							</button>
 						</Fragment>
 					)}
-					{pageNumbers.map((pageNumber, i) =>
+					{/* {pageNumbers.map((pageNumber, i) =>
 						!pageNumber ? (
 							<span
 								className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-base font-medium text-gray-400"
@@ -120,7 +120,7 @@ const Pagination = ({ className, page, limit, total, limits = [10, 20, 50, 100],
 								{pageNumber}
 							</button>
 						)
-					)}
+					)} */}
 					{page < totalPages ? (
 						<Fragment>
 							<button

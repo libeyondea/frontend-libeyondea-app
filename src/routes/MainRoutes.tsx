@@ -36,7 +36,7 @@ const MainRoutes: RouteObject = {
 			)
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_MAIN_PROFILE}`,
+			path: `${routeConstant.ROUTE_NAME_PROFILE}`,
 			element: (
 				<RoleBased roles={[...userConstant.USER_ROLE_ALL]}>
 					<ProfilePage />
@@ -44,7 +44,7 @@ const MainRoutes: RouteObject = {
 			)
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_MAIN_DASHBOARD}`,
+			path: `${routeConstant.ROUTE_NAME_DASHBOARD}`,
 			element: (
 				<RoleBased roles={[...userConstant.USER_ROLE_ALL]}>
 					<DashboardPage />
@@ -52,7 +52,7 @@ const MainRoutes: RouteObject = {
 			)
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_MAIN_USER}`,
+			path: `${routeConstant.ROUTE_NAME_USER}`,
 			element: (
 				<RoleBased roles={[userConstant.USER_ROLE_OWNER]}>
 					<UserPage />
@@ -60,7 +60,7 @@ const MainRoutes: RouteObject = {
 			)
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_MAIN_USER_NEW}`,
+			path: `${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`,
 			element: (
 				<RoleBased roles={[userConstant.USER_ROLE_OWNER]}>
 					<NewUserPage />
@@ -68,7 +68,7 @@ const MainRoutes: RouteObject = {
 			)
 		},
 		{
-			path: `:userId/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`,
+			path: `${routeConstant.ROUTE_NAME_USER}/:userId/${routeConstant.ROUTE_NAME_USER_EDIT}`,
 			element: (
 				<RoleBased roles={[userConstant.USER_ROLE_OWNER]}>
 					<EditUserPage />
@@ -76,7 +76,7 @@ const MainRoutes: RouteObject = {
 			)
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_MAIN_SETTING}`,
+			path: `${routeConstant.ROUTE_NAME_SETTING}`,
 			element: (
 				<RoleBased roles={[...userConstant.USER_ROLE_ALL]}>
 					<SettingPage />

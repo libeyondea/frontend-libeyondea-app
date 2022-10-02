@@ -21,11 +21,11 @@ const AuthRoutes: RouteObject = {
 	),
 	children: [
 		{
-			path: `${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`,
+			path: `${routeConstant.ROUTE_NAME_SIGN_IN}`,
 			element: <SignInPage />
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_AUTH_SIGN_UP}`,
+			path: `${routeConstant.ROUTE_NAME_SIGN_UP}`,
 			element: <SignUpPage />
 		}
 	]

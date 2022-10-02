@@ -149,7 +149,7 @@ const UserPage = () => {
 													<Table.Td>
 														<div className="flex items-center">
 															<Link
-																to={`/${routeConstant.ROUTE_NAME_MAIN}/${routeConstant.ROUTE_NAME_MAIN_USER}/${user.id}/${routeConstant.ROUTE_NAME_MAIN_USER_EDIT}`}
+																to={`/${routeConstant.ROUTE_NAME_USER}/${user.id}/${routeConstant.ROUTE_NAME_USER_EDIT}`}
 																className="text-indigo-600 hover:text-indigo-900 mr-2"
 															>
 																<EditIcon className="h-5 w-5" />

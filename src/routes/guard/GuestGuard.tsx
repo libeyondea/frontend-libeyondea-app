@@ -12,7 +12,7 @@ const GuestGuard = ({ children }: Props) => {
 	const isAuth = useSelector(selectIsAuth);
 
 	if (isAuth) {
-		return <Navigate to={routeConstant.ROUTE_NAME_MAIN_DASHBOARD} replace />;
+		return <Navigate to={`/${routeConstant.ROUTE_NAME_DASHBOARD}`} replace />;
 	}
 
 	return children;

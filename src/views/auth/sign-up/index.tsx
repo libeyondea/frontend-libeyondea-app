@@ -58,7 +58,7 @@ const SignUpPage = () => {
 			.signUp(payload)
 			.then((response) => {
 				toastify.success('Signed up successfully.');
-				navigate(`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`);
+				navigate(`/${routeConstant.ROUTE_NAME_SIGN_IN}`);
 			})
 			.catch(
 				errorHandler((error) => {
@@ -189,7 +189,7 @@ const SignUpPage = () => {
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<Link className="text-purple-600 ml-1" to={`/${routeConstant.ROUTE_NAME_AUTH}/${routeConstant.ROUTE_NAME_AUTH_SIGN_IN}`}>
+					<Link className="text-purple-600 ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_IN}`}>
 						Sign in
 					</Link>
 				</span>

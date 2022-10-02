@@ -12,7 +12,7 @@ const AuthGuard = ({ children }: Props) => {
 	const isAuth = useSelector(selectIsAuth);
 
 	if (!isAuth) {
-		return <Navigate to={routeConstant.ROUTE_NAME_AUTH_SIGN_IN} replace />;
+		return <Navigate to={`/${routeConstant.ROUTE_NAME_SIGN_IN}`} replace />;
 	}
 
 	return children;
