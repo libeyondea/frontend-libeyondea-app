@@ -1,29 +1,22 @@
 import { FormikHelpers } from 'formik';
 import _ from 'lodash';
-import { Fragment, useCallback, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
 import Form from 'src/components/Form';
 import { SpinLoading } from 'src/components/Loading';
+import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import useUpdateEffect from 'src/hooks/useUpdateEffect';
 import imageService from 'src/services/imageService';
 import userService from 'src/services/userService';
 import { useDispatch, useSelector } from 'src/store';
-import {
-	userListDataRequestAction,
-	userListLoadingRequestAction,
-	userListPaginationTotalRequestAction,
-	userShowDataRequestAction,
-	userShowLoadingRequestAction,
-	userUpdateDataRequestAction,
-	userUpdateLoadingRequestAction
-} from 'src/store/user/actions';
-import { selectUserList, selectUserShow, selectUserUpdate } from 'src/store/user/selectors';
+import { userShowDataRequestAction, userShowLoadingRequestAction, userUpdateDataRequestAction, userUpdateLoadingRequestAction } from 'src/store/user/actions';
+import { selectUserShow, selectUserUpdate } from 'src/store/user/selectors';
 import { Image } from 'src/types/image';
 import { UpdateUserFormik } from 'src/types/user';
 import errorHandler from 'src/utils/errorHandler';
@@ -31,8 +24,8 @@ import toastify from 'src/utils/toastify';
 
 const EditUserPage = () => {
 	const params = useParams();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const userList = useSelector(selectUserList);
 	const userShow = useSelector(selectUserShow);
 	const userUpdate = useSelector(selectUserUpdate);
 	const [imageUpload, setImageUpload] = useState({ loading: false });
@@ -110,7 +103,8 @@ const EditUserPage = () => {
 					.then((response) => {
 						dispatch(userUpdateDataRequestAction(response.data.data));
 						toastify.success('User updated successfully.');
-						dispatch(userListLoadingRequestAction(true));
+						navigate(`/${routeConstant.ROUTE_NAME_USER}`);
+						/* dispatch(userListLoadingRequestAction(true));
 						const payload = {
 							page: userList.pagination.page,
 							page_size: userList.pagination.page_size,
@@ -127,7 +121,7 @@ const EditUserPage = () => {
 							.catch(errorHandler())
 							.finally(() => {
 								dispatch(userListLoadingRequestAction(false));
-							});
+							}); */
 					})
 					.catch(
 						errorHandler((error) => {
@@ -172,113 +166,111 @@ const EditUserPage = () => {
 	}, [userShowDataCallback]);
 
 	return (
-		<Fragment>
-			<div className="grid grid-cols-1 gap-4">
-				<div className="col-span-1">
-					<Card title="Edit user">
-						{userShow.loading ? (
-							<SpinLoading />
-						) : _.isEmpty(userShow.data) ? (
-							<div className="flex justify-center">Not found.</div>
-						) : (
-							<Form<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
-								{(props) => (
-									<div className="grid grid-cols-12 gap-4">
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Input
-												label="First name"
-												error={Boolean(props.errors.first_name && props.touched.first_name)}
-												helperText={props.errors.first_name}
-												{...props.getFieldProps('first_name')}
-											/>
-										</div>
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Input
-												label="Last name"
-												error={Boolean(props.errors.last_name && props.touched.last_name)}
-												helperText={props.errors.last_name}
-												{...props.getFieldProps('last_name')}
-											/>
-										</div>
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Input
-												label="User name"
-												error={Boolean(props.errors.user_name && props.touched.user_name)}
-												helperText={props.errors.user_name}
-												autoComplete="username"
-												{...props.getFieldProps('user_name')}
-											/>
-										</div>
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Input
-												label="Email"
-												error={Boolean(props.errors.email && props.touched.email)}
-												helperText={props.errors.email}
-												{...props.getFieldProps('email')}
-											/>
-										</div>
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Input
-												type="password"
-												label="Password"
-												error={Boolean(props.errors.password && props.touched.password)}
-												helperText={props.errors.password}
-												autoComplete="new-password"
-												{...props.getFieldProps('password')}
-											/>
-										</div>
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Input
-												type="password"
-												label="Password confirmation"
-												error={Boolean(props.errors.password_confirmation && props.touched.password_confirmation)}
-												helperText={props.errors.password_confirmation}
-												autoComplete="new-password"
-												{...props.getFieldProps('password_confirmation')}
-											/>
-										</div>
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Select
-												label="Role"
-												options={[...userConstant.USER_ROLE_ALL]}
-												error={Boolean(props.errors.role && props.touched.role)}
-												helperText={props.errors.role}
-												{...props.getFieldProps('role')}
-											/>
-										</div>
-										<div className="col-span-12 md:col-span-6 lg:col-span-4">
-											<Form.Toggle
-												label="Actived"
-												checked={props.values.actived}
-												error={Boolean(props.errors.actived && props.touched.actived)}
-												helperText={props.errors.actived}
-												{...props.getFieldProps('actived')}
-											/>
-										</div>
-										<div className="col-span-12">
-											<Form.Image
-												label="Avatar"
-												imgUrl={userShow.data.avatar_url}
-												error={Boolean(props.errors.image && props.touched.image)}
-												helperText={props.errors.image}
-												onChangeFile={props.setFieldValue}
-												onBlurFile={props.setFieldTouched}
-												{...props.getFieldProps('image')}
-											/>
-										</div>
-										<div className="col-span-12 flex flex-row-reverse">
-											<Button type="submit" loading={imageUpload.loading || userUpdate.loading}>
-												{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Update'}
-											</Button>
-										</div>
+		<div className="grid grid-cols-1 gap-4">
+			<div className="col-span-1">
+				<Card title="Edit user">
+					{userShow.loading ? (
+						<SpinLoading />
+					) : _.isEmpty(userShow.data) ? (
+						<div className="flex justify-center">Not found.</div>
+					) : (
+						<Form<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
+							{(props) => (
+								<div className="grid grid-cols-12 gap-4">
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Input
+											label="First name"
+											error={Boolean(props.errors.first_name && props.touched.first_name)}
+											helperText={props.errors.first_name}
+											{...props.getFieldProps('first_name')}
+										/>
 									</div>
-								)}
-							</Form>
-						)}
-					</Card>
-				</div>
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Input
+											label="Last name"
+											error={Boolean(props.errors.last_name && props.touched.last_name)}
+											helperText={props.errors.last_name}
+											{...props.getFieldProps('last_name')}
+										/>
+									</div>
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Input
+											label="User name"
+											error={Boolean(props.errors.user_name && props.touched.user_name)}
+											helperText={props.errors.user_name}
+											autoComplete="username"
+											{...props.getFieldProps('user_name')}
+										/>
+									</div>
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Input
+											label="Email"
+											error={Boolean(props.errors.email && props.touched.email)}
+											helperText={props.errors.email}
+											{...props.getFieldProps('email')}
+										/>
+									</div>
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Input
+											type="password"
+											label="Password"
+											error={Boolean(props.errors.password && props.touched.password)}
+											helperText={props.errors.password}
+											autoComplete="new-password"
+											{...props.getFieldProps('password')}
+										/>
+									</div>
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Input
+											type="password"
+											label="Password confirmation"
+											error={Boolean(props.errors.password_confirmation && props.touched.password_confirmation)}
+											helperText={props.errors.password_confirmation}
+											autoComplete="new-password"
+											{...props.getFieldProps('password_confirmation')}
+										/>
+									</div>
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Select
+											label="Role"
+											options={[...userConstant.USER_ROLE_ALL]}
+											error={Boolean(props.errors.role && props.touched.role)}
+											helperText={props.errors.role}
+											{...props.getFieldProps('role')}
+										/>
+									</div>
+									<div className="col-span-12 md:col-span-6 lg:col-span-4">
+										<Form.Toggle
+											label="Actived"
+											checked={props.values.actived}
+											error={Boolean(props.errors.actived && props.touched.actived)}
+											helperText={props.errors.actived}
+											{...props.getFieldProps('actived')}
+										/>
+									</div>
+									<div className="col-span-12">
+										<Form.Image
+											label="Avatar"
+											imgUrl={userShow.data.avatar_url}
+											error={Boolean(props.errors.image && props.touched.image)}
+											helperText={props.errors.image}
+											onChangeFile={props.setFieldValue}
+											onBlurFile={props.setFieldTouched}
+											{...props.getFieldProps('image')}
+										/>
+									</div>
+									<div className="col-span-12 flex flex-row-reverse">
+										<Button type="submit" loading={imageUpload.loading || userUpdate.loading}>
+											{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Update'}
+										</Button>
+									</div>
+								</div>
+							)}
+						</Form>
+					)}
+				</Card>
 			</div>
-		</Fragment>
+		</div>
 	);
 };
 

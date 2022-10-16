@@ -6,20 +6,20 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import './assets/styles/global.scss';
 import Routes from './routes';
-import AccessControl from './routes/AccessControl';
+import AuthControl from './routes/guard/AuthControl';
 import store from './store';
 
 const App = () => {
 	return (
 		<Provider store={store}>
-			<AccessControl>
-				<Fragment>
-					<BrowserRouter>
+			<BrowserRouter>
+				<AuthControl>
+					<Fragment>
 						<Routes />
-					</BrowserRouter>
-					<ToastContainer />
-				</Fragment>
-			</AccessControl>
+						<ToastContainer />
+					</Fragment>
+				</AuthControl>
+			</BrowserRouter>
 		</Provider>
 	);
 };

@@ -4,7 +4,7 @@ import cookies from './cookies';
 import toastify from './toastify';
 import * as cookiesConstant from 'src/constants/cookies';
 import store from 'src/store';
-import { authCurrentDataUserRequestAction, authCurrentDataTokenRequestAction } from 'src/store/auth/actions';
+import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
 import { ResponseError } from 'src/types/response';
 
 type IErrorBase = {

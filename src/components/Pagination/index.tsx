@@ -51,7 +51,12 @@ const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePa
 					<button type="button" className="btn btn-sm btn-outline" onClick={(event) => _onChangePage(event, 1)} disabled={page <= 1 || disabled}>
 						<AngleDoubleLeftIcon className="h-4 w-4" />
 					</button>
-					<button type="button" className="btn btn-sm btn-outline" onClick={(event) => _onChangePage(event, page - 1)} disabled={page <= 1 || disabled}>
+					<button
+						type="button"
+						className="btn btn-sm btn-outline"
+						onClick={(event) => _onChangePage(event, page - 1)}
+						disabled={page <= 1 || disabled}
+					>
 						<AngleLeftIcon className="h-4 w-4" />
 					</button>
 					<button

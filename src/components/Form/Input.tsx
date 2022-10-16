@@ -27,7 +27,7 @@ const InputForm = ({ className, type = 'text', name, label, error = false, helpe
 				name={name}
 				placeholder={label}
 				className={classNames(
-					'input input-bordered w-full',
+					'input input-bordered input-primary w-full',
 					{
 						'input-lg': sizeType === 'lg',
 						'input-md': sizeType === 'md',

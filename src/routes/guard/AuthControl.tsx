@@ -15,7 +15,7 @@ type Props = {
 	children: JSX.Element;
 };
 
-const AccessControl = ({ children }: Props) => {
+const AuthControl = ({ children }: Props) => {
 	const dispatch = useDispatch();
 	const appInitialized = useSelector(selectAppInitialized);
 
@@ -57,4 +57,4 @@ const AccessControl = ({ children }: Props) => {
 	return children;
 };
 
-export default AccessControl;
+export default AuthControl;

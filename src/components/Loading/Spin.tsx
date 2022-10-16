@@ -9,7 +9,7 @@ type Props = {
 const SpinLoading = ({ className }: Props) => {
 	return (
 		<div className={classNames('flex justify-center', className)}>
-			<SyncIcon className="animate-spin w-8 h-8 text-base-300" />
+			<SyncIcon className="animate-spin w-8 h-8 text-base-content" />
 		</div>
 	);
 };

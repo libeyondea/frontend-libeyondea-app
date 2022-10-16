@@ -3,6 +3,7 @@ const config = {
 	LOGGER: {
 		REDUX: false
 	},
+	DEFAULT_THEME: 'light',
 	API: {
 		URL: {
 			BASE_URL: process.env.REACT_APP_BASE_URL,

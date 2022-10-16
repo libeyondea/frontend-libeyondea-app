@@ -27,7 +27,7 @@ const SelectForm = ({ className, name, label, options, error = false, helperText
 				id={id}
 				name={name}
 				className={classNames(
-					'select select-bordered w-full',
+					'select select-bordered select-primary w-full',
 					{
 						'select-lg': sizeType === 'lg',
 						'select-md': sizeType === 'md',
@@ -35,7 +35,7 @@ const SelectForm = ({ className, name, label, options, error = false, helperText
 						'select-xs': sizeType === 'xs'
 					},
 					{
-						'input-error': error
+						'select-error': error
 					}
 				)}
 			>

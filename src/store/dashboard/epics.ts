@@ -2,7 +2,12 @@ import { Action } from '@reduxjs/toolkit';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { dashboardShowDataRequestAction, dashboardShowDataSuccessAction, dashboardShowLoadingRequestAction, dashboardShowLoadingSuccessAction } from './actions';
+import {
+	dashboardShowDataRequestAction,
+	dashboardShowDataSuccessAction,
+	dashboardShowLoadingRequestAction,
+	dashboardShowLoadingSuccessAction
+} from './actions';
 
 export const dashboardShowDataEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(

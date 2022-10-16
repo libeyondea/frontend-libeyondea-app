@@ -24,7 +24,7 @@ const ToggleForm = ({ className, name, label, error = false, helperText, sizeTyp
 				{...props}
 				id={id}
 				name={name}
-				className={classNames('toggle', {
+				className={classNames('toggle toggle-primary', {
 					'toggle-lg': sizeType === 'lg',
 					'toggle-md': sizeType === 'md',
 					'toggle-sm': sizeType === 'sm',

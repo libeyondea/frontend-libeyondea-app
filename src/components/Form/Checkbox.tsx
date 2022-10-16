@@ -20,7 +20,7 @@ const CheckboxForm = ({ className, name, error = false, helperText, sizeType = '
 					{...props}
 					id={id}
 					name={name}
-					className={classNames('checkbox', {
+					className={classNames('checkbox checkbox-primary', {
 						'checkbox-lg': sizeType === 'lg',
 						'checkbox-md': sizeType === 'md',
 						'checkbox-sm': sizeType === 'sm',
