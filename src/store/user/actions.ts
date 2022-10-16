@@ -19,11 +19,11 @@ export const userListPaginationPageSuccessAction = createAction(actionTypes.USER
 	payload: payload
 }));
 
-export const userListPaginationLimitRequestAction = createAction(actionTypes.USER_LIST_PAGINATION_LIMIT_REQUEST, (payload: number) => ({
+export const userListPaginationPageSizeRequestAction = createAction(actionTypes.USER_LIST_PAGINATION_PAGE_SIZE_REQUEST, (payload: number) => ({
 	payload: payload
 }));
 
-export const userListPaginationLimitSuccessAction = createAction(actionTypes.USER_LIST_PAGINATION_LIMIT_SUCCESS, (payload: number) => ({
+export const userListPaginationPageSizeSuccessAction = createAction(actionTypes.USER_LIST_PAGINATION_PAGE_SIZE_SUCCESS, (payload: number) => ({
 	payload: payload
 }));
 
@@ -51,19 +51,19 @@ export const userListFilterSortBySuccessAction = createAction(actionTypes.USER_L
 	payload: payload
 }));
 
-export const userListFilterQRequestAction = createAction(actionTypes.USER_LIST_FILTER_Q_REQUEST, (payload: string) => ({
+export const userListFilterKeywordRequestAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_REQUEST, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterQSuccessAction = createAction(actionTypes.USER_LIST_FILTER_Q_SUCCESS, (payload: string) => ({
+export const userListFilterKeywordSuccessAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_SUCCESS, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterQTempRequestAction = createAction(actionTypes.USER_LIST_FILTER_Q_TEMP_REQUEST, (payload: string) => ({
+export const userListFilterKeywordTempRequestAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_TEMP_REQUEST, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterQTempSuccessAction = createAction(actionTypes.USER_LIST_FILTER_Q_TEMP_SUCCESS, (payload: string) => ({
+export const userListFilterKeywordTempSuccessAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_TEMP_SUCCESS, (payload: string) => ({
 	payload: payload
 }));
 

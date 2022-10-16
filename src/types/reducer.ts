@@ -6,12 +6,12 @@ export type ResponseDataReducer<T> = {
 export type ResponseDataWithPaginationAndFilterReducer<T> = {
 	pagination: {
 		page: number;
-		limit: number;
+		page_size: number;
 		total: number;
 	};
 	filter: {
-		q: string;
-		q_temp: string;
+		keyword: string;
+		keyword_temp: string;
 		sort_direction: string;
 		sort_by: string;
 	};

@@ -1,35 +1,45 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { authCurrentDataSuccessAction, authCurrentTokenSuccessAction } from './actions';
+import { authCurrentDataTokenSuccessAction, authCurrentDataUserSuccessAction } from './actions';
 import { Me } from 'src/types/auth';
 
 type AuthState = {
 	current: {
-		data: Me | null;
-		token: string | null;
+		data: {
+			user: Me | null;
+			token: string | null;
+		};
 	};
 };
 
 const initialState: AuthState = {
 	current: {
-		data: null,
-		token: null
+		data: {
+			user: null,
+			token: null
+		}
 	}
 };
 
 const authReducer = createReducer(initialState, (builder) => {
-	builder.addCase(authCurrentDataSuccessAction, (state, action) => ({
+	builder.addCase(authCurrentDataUserSuccessAction, (state, action) => ({
 		...state,
 		current: {
 			...state.current,
-			data: action.payload
+			data: {
+				...state.current.data,
+				user: action.payload
+			}
 		}
 	}));
-	builder.addCase(authCurrentTokenSuccessAction, (state, action) => ({
+	builder.addCase(authCurrentDataTokenSuccessAction, (state, action) => ({
 		...state,
 		current: {
 			...state.current,
-			token: action.payload
+			data: {
+				...state.current.data,
+				token: action.payload
+			}
 		}
 	}));
 });

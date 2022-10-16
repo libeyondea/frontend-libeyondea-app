@@ -3,10 +3,11 @@ const config = {
 	LOGGER: {
 		REDUX: false
 	},
+	DEFAULT_THEME: 'light',
 	API: {
 		URL: {
-			ROOT_URL: process.env.REACT_APP_ROOT_URL,
-			API_URL: process.env.REACT_APP_API_URL
+			BASE_URL: process.env.REACT_APP_BASE_URL,
+			BASE_API_URL: process.env.REACT_APP_BASE_API_URL
 		},
 		END_POINT: {
 			SIGN_IN: '/auth/signin',
@@ -15,8 +16,8 @@ const config = {
 			ME: '/auth/me',
 			PROFILE: '/profile',
 			DASHBOARD: '/dashboard',
-			SETTING: '/settings',
 			USER: '/users',
+			SETTING: '/settings',
 			UPLOAD_IMAGE: '/images/upload'
 		}
 	},

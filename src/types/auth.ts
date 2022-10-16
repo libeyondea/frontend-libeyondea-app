@@ -33,13 +33,13 @@ export interface Me {
 	updated_at: string | null;
 	setting: {
 		id: number;
-		fixed_navbar: boolean;
-		fixed_footer: boolean;
+		theme: string;
 		created_at: string | null;
 		updated_at: string | null;
 	};
 }
 
-export interface Token {
+export interface MeToken {
+	user: Me;
 	token: string;
 }
