@@ -13,19 +13,19 @@ import {
 	userDeleteLoadingSuccessAction,
 	userListDataRequestAction,
 	userListDataSuccessAction,
-	userListFilterQRequestAction,
-	userListFilterQSuccessAction,
-	userListFilterQTempRequestAction,
-	userListFilterQTempSuccessAction,
+	userListFilterKeywordRequestAction,
+	userListFilterKeywordSuccessAction,
+	userListFilterKeywordTempRequestAction,
+	userListFilterKeywordTempSuccessAction,
 	userListFilterSortByRequestAction,
 	userListFilterSortBySuccessAction,
 	userListFilterSortDirectionRequestAction,
 	userListFilterSortDirectionSuccessAction,
 	userListLoadingRequestAction,
 	userListLoadingSuccessAction,
-	userListPaginationLimitRequestAction,
-	userListPaginationLimitSuccessAction,
 	userListPaginationPageRequestAction,
+	userListPaginationPageSizeRequestAction,
+	userListPaginationPageSizeSuccessAction,
 	userListPaginationPageSuccessAction,
 	userListPaginationTotalRequestAction,
 	userListPaginationTotalSuccessAction,
@@ -57,16 +57,16 @@ export const userListFilterSortByEpic = (action$: Observable<Action>): Observabl
 		map((action) => userListFilterSortBySuccessAction(action.payload))
 	);
 
-export const userListFilterQEpic = (action$: Observable<Action>): Observable<Action> =>
+export const userListFilterKeywordEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(userListFilterQRequestAction.match),
-		map((action) => userListFilterQSuccessAction(action.payload))
+		filter(userListFilterKeywordRequestAction.match),
+		map((action) => userListFilterKeywordSuccessAction(action.payload))
 	);
 
-export const userListFilterQTempEpic = (action$: Observable<Action>): Observable<Action> =>
+export const userListFilterKeywordTempEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(userListFilterQTempRequestAction.match),
-		map((action) => userListFilterQTempSuccessAction(action.payload))
+		filter(userListFilterKeywordTempRequestAction.match),
+		map((action) => userListFilterKeywordTempSuccessAction(action.payload))
 	);
 
 export const userListLoadingEpic = (action$: Observable<Action>): Observable<Action> =>
@@ -81,10 +81,10 @@ export const userListPaginationPageEpic = (action$: Observable<Action>): Observa
 		map((action) => userListPaginationPageSuccessAction(action.payload))
 	);
 
-export const userListPaginationLimitEpic = (action$: Observable<Action>): Observable<Action> =>
+export const userListPaginationPageSizeEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(userListPaginationLimitRequestAction.match),
-		map((action) => userListPaginationLimitSuccessAction(action.payload))
+		filter(userListPaginationPageSizeRequestAction.match),
+		map((action) => userListPaginationPageSizeSuccessAction(action.payload))
 	);
 
 export const userListPaginationTotalEpic = (action$: Observable<Action>): Observable<Action> =>

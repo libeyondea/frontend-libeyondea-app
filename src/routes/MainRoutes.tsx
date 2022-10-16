@@ -1,13 +1,12 @@
 import { lazy } from 'react';
-import { RouteObject } from 'react-router-dom';
 
 import DefaultPath from './DefaultPath';
 import AuthGuard from './guard/AuthGuard';
-import RoleBased from './rbac/RoleBased';
 import ErrorBoundary from 'src/components/ErrorBoundary';
 import Loadable from 'src/components/Loadable';
 import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
+import { RouteObjectWithRole } from 'src/types/router';
 
 const MainLayout = Loadable(lazy(() => import('src/layouts/MainLayout')));
 const ProfilePage = Loadable(lazy(() => import('src/views/main/profile')));
@@ -17,8 +16,8 @@ const NewUserPage = Loadable(lazy(() => import('src/views/main/user/new')));
 const EditUserPage = Loadable(lazy(() => import('src/views/main/user/edit')));
 const SettingPage = Loadable(lazy(() => import('src/views/main/setting')));
 
-const MainRoutes: RouteObject = {
-	path: '',
+const MainRoutes: RouteObjectWithRole = {
+	path: '/',
 	element: (
 		<ErrorBoundary>
 			<AuthGuard>
@@ -28,60 +27,39 @@ const MainRoutes: RouteObject = {
 	),
 	children: [
 		{
-			path: '',
-			element: (
-				<RoleBased roles={[...userConstant.USER_ROLE_ALL]}>
-					<DefaultPath />
-				</RoleBased>
-			)
+			path: '/',
+			element: <DefaultPath />,
+			roles: [...userConstant.USER_ROLE_ALL]
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_PROFILE}`,
-			element: (
-				<RoleBased roles={[...userConstant.USER_ROLE_ALL]}>
-					<ProfilePage />
-				</RoleBased>
-			)
+			path: `/${routeConstant.ROUTE_NAME_DASHBOARD}`,
+			element: <DashboardPage />,
+			roles: [...userConstant.USER_ROLE_ALL]
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_DASHBOARD}`,
-			element: (
-				<RoleBased roles={[...userConstant.USER_ROLE_ALL]}>
-					<DashboardPage />
-				</RoleBased>
-			)
+			path: `/${routeConstant.ROUTE_NAME_USER}`,
+			element: <UserPage />,
+			roles: [userConstant.USER_ROLE_OWNER]
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_USER}`,
-			element: (
-				<RoleBased roles={[userConstant.USER_ROLE_OWNER]}>
-					<UserPage />
-				</RoleBased>
-			)
+			path: `/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`,
+			element: <NewUserPage />,
+			roles: [userConstant.USER_ROLE_OWNER]
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`,
-			element: (
-				<RoleBased roles={[userConstant.USER_ROLE_OWNER]}>
-					<NewUserPage />
-				</RoleBased>
-			)
+			path: `/${routeConstant.ROUTE_NAME_USER}/:userId/${routeConstant.ROUTE_NAME_USER_EDIT}`,
+			element: <EditUserPage />,
+			roles: [userConstant.USER_ROLE_OWNER]
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_USER}/:userId/${routeConstant.ROUTE_NAME_USER_EDIT}`,
-			element: (
-				<RoleBased roles={[userConstant.USER_ROLE_OWNER]}>
-					<EditUserPage />
-				</RoleBased>
-			)
+			path: `/${routeConstant.ROUTE_NAME_PROFILE}`,
+			element: <ProfilePage />,
+			roles: [...userConstant.USER_ROLE_ALL]
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_SETTING}`,
-			element: (
-				<RoleBased roles={[...userConstant.USER_ROLE_ALL]}>
-					<SettingPage />
-				</RoleBased>
-			)
+			path: `/${routeConstant.ROUTE_NAME_SETTING}`,
+			element: <SettingPage />,
+			roles: [...userConstant.USER_ROLE_ALL]
 		}
 	]
 };

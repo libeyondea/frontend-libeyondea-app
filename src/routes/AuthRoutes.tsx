@@ -11,7 +11,7 @@ const SignInPage = Loadable(lazy(() => import('src/views/auth/sign-in')));
 const SignUpPage = Loadable(lazy(() => import('src/views/auth/sign-up')));
 
 const AuthRoutes: RouteObject = {
-	path: '',
+	path: '/',
 	element: (
 		<ErrorBoundary>
 			<GuestGuard>
@@ -21,11 +21,11 @@ const AuthRoutes: RouteObject = {
 	),
 	children: [
 		{
-			path: `${routeConstant.ROUTE_NAME_SIGN_IN}`,
+			path: `/${routeConstant.ROUTE_NAME_SIGN_IN}`,
 			element: <SignInPage />
 		},
 		{
-			path: `${routeConstant.ROUTE_NAME_SIGN_UP}`,
+			path: `/${routeConstant.ROUTE_NAME_SIGN_UP}`,
 			element: <SignUpPage />
 		}
 	]

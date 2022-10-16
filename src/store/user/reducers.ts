@@ -6,12 +6,12 @@ import {
 	userDeleteDataSuccessAction,
 	userDeleteLoadingSuccessAction,
 	userListDataSuccessAction,
-	userListFilterQSuccessAction,
-	userListFilterQTempSuccessAction,
+	userListFilterKeywordSuccessAction,
+	userListFilterKeywordTempSuccessAction,
 	userListFilterSortBySuccessAction,
 	userListFilterSortDirectionSuccessAction,
 	userListLoadingSuccessAction,
-	userListPaginationLimitSuccessAction,
+	userListPaginationPageSizeSuccessAction,
 	userListPaginationPageSuccessAction,
 	userListPaginationTotalSuccessAction,
 	userShowDataSuccessAction,
@@ -37,12 +37,12 @@ const initialState: UserState = {
 		data: [],
 		pagination: {
 			page: paginationConstant.PAGINATION_DEFAULT_PAGE,
-			limit: paginationConstant.PAGINATION_DEFAULT_LIMIT,
+			page_size: paginationConstant.PAGINATION_DEFAULT_PAGE_SIZE,
 			total: 0
 		},
 		filter: {
-			q: '',
-			q_temp: '',
+			keyword: '',
+			keyword_temp: '',
 			sort_direction: filterConstant.FILTER_DEFAULT_SORT_DIRECTION,
 			sort_by: filterConstant.FILTER_DEFAULT_SORT_BY
 		},
@@ -84,13 +84,13 @@ const userReducer = createReducer(initialState, (builder) => {
 			}
 		}
 	}));
-	builder.addCase(userListPaginationLimitSuccessAction, (state, action) => ({
+	builder.addCase(userListPaginationPageSizeSuccessAction, (state, action) => ({
 		...state,
 		list: {
 			...state.list,
 			pagination: {
 				...state.list.pagination,
-				limit: action.payload
+				page_size: action.payload
 			}
 		}
 	}));
@@ -124,7 +124,7 @@ const userReducer = createReducer(initialState, (builder) => {
 			}
 		}
 	}));
-	builder.addCase(userListFilterQSuccessAction, (state, action) => ({
+	builder.addCase(userListFilterKeywordSuccessAction, (state, action) => ({
 		...state,
 		list: {
 			...state.list,
@@ -134,17 +134,17 @@ const userReducer = createReducer(initialState, (builder) => {
 			},
 			filter: {
 				...state.list.filter,
-				q: action.payload
+				keyword: action.payload
 			}
 		}
 	}));
-	builder.addCase(userListFilterQTempSuccessAction, (state, action) => ({
+	builder.addCase(userListFilterKeywordTempSuccessAction, (state, action) => ({
 		...state,
 		list: {
 			...state.list,
 			filter: {
 				...state.list.filter,
-				q_temp: action.payload
+				keyword_temp: action.payload
 			}
 		}
 	}));

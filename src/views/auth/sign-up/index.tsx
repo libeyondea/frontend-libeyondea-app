@@ -1,5 +1,4 @@
 import { FormikHelpers } from 'formik';
-import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -74,85 +73,68 @@ const SignUpPage = () => {
 
 	return (
 		<Card className="m-auto max-w-md sm:p-8">
-			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign up your Account</div>
+			<div className="text-xl sm:text-2xl text-center mb-8">Sign up your account</div>
 			<Form<SignUpFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(props) => (
-					<Fragment>
-						<div className="flex flex-col mb-4">
+					<div className="grid grid-cols-1 gap-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="first_name"
-								type="text"
 								label="First name"
-								placeholder="Enter first name"
-								error={props.errors.first_name}
-								touched={props.touched.first_name}
+								error={Boolean(props.errors.first_name && props.touched.first_name)}
+								helperText={props.errors.first_name}
 								{...props.getFieldProps('first_name')}
 							/>
 						</div>
-						<div className="flex flex-col mb-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="last_name"
-								type="text"
 								label="Last name"
-								placeholder="Enter last name"
-								error={props.errors.last_name}
-								touched={props.touched.last_name}
+								error={Boolean(props.errors.last_name && props.touched.last_name)}
+								helperText={props.errors.last_name}
 								{...props.getFieldProps('last_name')}
 							/>
 						</div>
-						<div className="flex flex-col mb-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="user_name"
-								type="text"
 								label="User name"
-								placeholder="Enter user name"
-								error={props.errors.user_name}
-								touched={props.touched.user_name}
+								error={Boolean(props.errors.user_name && props.touched.user_name)}
+								helperText={props.errors.user_name}
 								autoComplete="username"
 								{...props.getFieldProps('user_name')}
 							/>
 						</div>
-						<div className="flex flex-col mb-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="email"
-								type="text"
 								label="Email"
-								placeholder="Enter email"
-								error={props.errors.email}
-								touched={props.touched.email}
+								error={Boolean(props.errors.email && props.touched.email)}
+								helperText={props.errors.email}
 								{...props.getFieldProps('email')}
 							/>
 						</div>
-						<div className="flex flex-col mb-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="password"
 								type="password"
 								label="Password"
-								placeholder="Enter password"
-								error={props.errors.password}
-								touched={props.touched.password}
+								error={Boolean(props.errors.password && props.touched.password)}
+								helperText={props.errors.password}
 								autoComplete="new-password"
 								{...props.getFieldProps('password')}
 							/>
 						</div>
-						<div className="flex flex-col mb-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="password_confirmation"
 								type="password"
 								label="Password confirmation"
-								placeholder="Enter password confirmation"
-								error={props.errors.password_confirmation}
-								touched={props.touched.password_confirmation}
+								error={Boolean(props.errors.password_confirmation && props.touched.password_confirmation)}
+								helperText={props.errors.password_confirmation}
 								autoComplete="new-password"
 								{...props.getFieldProps('password_confirmation')}
 							/>
 						</div>
-						<div className="flex items-center mb-6">
+						<div className="col-span-1">
 							<Form.Checkbox
-								id="terms"
 								checked={props.values.terms}
-								error={props.errors.terms}
-								touched={props.touched.terms}
+								error={Boolean(props.errors.terms && props.touched.terms)}
+								helperText={props.errors.terms}
 								{...props.getFieldProps('terms')}
 							>
 								By signing up, you agree to our{' '}
@@ -170,26 +152,19 @@ const SignUpPage = () => {
 								.
 							</Form.Checkbox>
 						</div>
-						<div className="flex w-full">
+						<div className="col-span-1">
 							<Button className="w-full" type="submit" loading={props.isSubmitting} disabled={props.isSubmitting}>
 								{props.isSubmitting ? 'Signing up' : 'Sign up'}
 							</Button>
 						</div>
-					</Fragment>
+					</div>
 				)}
 			</Form>
-			<div className="relative my-6">
-				<div className="absolute inset-0 flex items-center">
-					<div className="w-full border-t border-gray-400" />
-				</div>
-				<div className="relative flex justify-center text-sm">
-					<span className="px-2 text-neutral-700 bg-white leading-none"> Or continue with </span>
-				</div>
-			</div>
+			<div className="divider my-6">Or continue with</div>
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<Link className="text-purple-600 ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_IN}`}>
+					<Link className="link link-primary link-hover ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_IN}`}>
 						Sign in
 					</Link>
 				</span>

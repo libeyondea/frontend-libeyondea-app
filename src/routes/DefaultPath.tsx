@@ -1,9 +1,18 @@
+import _ from 'lodash';
 import { Navigate } from 'react-router-dom';
 
-import * as routeConstant from 'src/constants/route';
+import MainRoutes from './MainRoutes';
+import { useSelector } from 'src/store';
+import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 const DefaultPath = () => {
-	return <Navigate to={`${routeConstant.ROUTE_NAME_DASHBOARD}`} replace />;
+	const authCurrent = useSelector(selectAuthCurrent);
+
+	const mainRoutesChildrenWithRole = _.filter(MainRoutes.children, (c) => _.includes(c.roles, authCurrent.data.user?.role));
+
+	const path = _.nth(mainRoutesChildrenWithRole, 1)?.path || '/';
+
+	return <Navigate to={path} replace />;
 };
 
 export default DefaultPath;

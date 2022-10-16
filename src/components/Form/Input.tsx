@@ -1,42 +1,50 @@
 import classNames from 'classnames';
+import { useId } from 'react';
 
 type Props = {
 	className?: string;
 	name: string;
+	type?: 'text' | 'password';
 	label?: string;
-	horizontal?: boolean;
-	error?: string;
-	touched?: boolean;
+	error?: boolean;
+	helperText?: string;
+	sizeType?: 'lg' | 'md' | 'sm' | 'xs';
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const InputForm = ({ className, name, label, horizontal = false, error, touched = false, ...props }: Props) => {
+const InputForm = ({ className, type = 'text', name, label, error = false, helperText, sizeType = 'md', ...props }: Props) => {
+	const id = useId();
+
 	return (
-		<div
-			className={classNames(
-				{
-					'flex items-center': horizontal
-				},
-				className
-			)}
-		>
+		<div className={classNames('form-control w-full', className)}>
 			{label && (
-				<label htmlFor={name} className={classNames('inline-block font-medium text-gray-600', horizontal ? 'mr-1' : 'mb-1')}>
-					{label}
+				<label className="label p-0 mb-2">
+					<span className="label-text">{label}</span>
 				</label>
 			)}
-			<div className="relative">
-				<input
-					{...props}
-					name={name}
-					className={classNames(
-						'py-[7px] rounded-md border-gray-300 w-full text-gray-700 placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent',
-						{
-							'focus:ring-red-600 border-red-600': error && touched
-						}
-					)}
-				/>
-			</div>
-			{error && touched && <div className="text-red-700 mt-1 text-sm">{error}</div>}
+			<input
+				{...props}
+				id={id}
+				name={name}
+				placeholder={label}
+				className={classNames(
+					'input input-bordered w-full',
+					{
+						'input-lg': sizeType === 'lg',
+						'input-md': sizeType === 'md',
+						'input-sm': sizeType === 'sm',
+						'input-xs': sizeType === 'xs'
+					},
+					{
+						'input-error': error
+					}
+				)}
+				type={type}
+			/>
+			{error && (
+				<label className="label p-0 mt-2">
+					<span className="label-text-alt text-error">{helperText}</span>
+				</label>
+			)}
 		</div>
 	);
 };

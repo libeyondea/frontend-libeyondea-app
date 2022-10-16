@@ -2,23 +2,31 @@ import classNames from 'classnames';
 
 type Props = {
 	className?: string;
-	styleType?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
+	colorType?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'danger' | 'ghost' | 'dark';
+	sizeType?: 'lg' | 'md' | 'sm' | 'xs';
 	children: React.ReactNode;
 };
 
-const Badge = ({ className, styleType = 'primary', children }: Props) => (
+const Badge = ({ className, colorType = 'primary', sizeType = 'md', children }: Props) => (
 	<div
 		className={classNames(
-			'px-2 py-1 inline-flex items-center justify-centers text-sm leading-none font-semibold rounded-full',
+			'badge',
 			{
-				'bg-purple-600 text-white': styleType === 'primary',
-				'bg-gray-600 text-white': styleType === 'secondary',
-				'bg-green-600 text-white': styleType === 'success',
-				'bg-red-600 text-white': styleType === 'danger',
-				'bg-yellow-600 text-gray-900': styleType === 'warning',
-				'bg-cyan-600 text-gray-900': styleType === 'info',
-				'bg-gray-900 text-white': styleType === 'dark',
-				'bg-gray-100 text-gray-900': styleType === 'light'
+				'badge-primary': colorType === 'primary',
+				'badge-secondary': colorType === 'secondary',
+				'badge-accent': colorType === 'accent',
+				'badge-info': colorType === 'info',
+				'badge-success': colorType === 'success',
+				'badge-warning': colorType === 'warning',
+				'badge-error': colorType === 'danger',
+				'badge-ghost': colorType === 'ghost',
+				'': colorType === 'dark'
+			},
+			{
+				'badge-lg': sizeType === 'lg',
+				'badge-md': sizeType === 'md',
+				'badge-sm': sizeType === 'sm',
+				'badge-xs': sizeType === 'xs'
 			},
 			className
 		)}

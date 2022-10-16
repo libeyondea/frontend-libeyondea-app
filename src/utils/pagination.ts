@@ -47,5 +47,3 @@ export const getPageNumbers = (page: number, limit: number, total: number, pageN
 
 	return pageNumbers;
 };
-
-export const getTotalPages = (total: number, limit: number): number => Math.ceil(total / limit);

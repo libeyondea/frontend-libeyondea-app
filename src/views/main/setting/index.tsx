@@ -1,12 +1,11 @@
 import { FormikHelpers } from 'formik';
-import { Fragment } from 'react';
 import * as Yup from 'yup';
 
-import Breadcrumb from 'src/components/Breadcrumb';
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
 import Form from 'src/components/Form';
 import { SpinLoading } from 'src/components/Loading';
+import * as settingConstant from 'src/constants/setting';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import settingService from 'src/services/settingService';
 import { useDispatch, useSelector } from 'src/store';
@@ -27,20 +26,19 @@ const SettingPage = () => {
 	const settingUpdate = useSelector(selectSettingUpdate);
 
 	const initialValues: UpdateSettingFormik = {
-		fixed_navbar: settingShow.data.fixed_navbar,
-		fixed_footer: settingShow.data.fixed_footer
+		theme: settingShow.data.theme || settingConstant.SETTING_THEME_LIGHT
 	};
 
 	const validationSchema = Yup.object({
-		fixed_navbar: Yup.boolean(),
-		fixed_footer: Yup.boolean()
+		theme: Yup.string()
+			.required('The theme is required.')
+			.oneOf([...settingConstant.SETTING_THEME_ALL], 'The theme invalid.')
 	});
 
 	const onSubmit = (values: UpdateSettingFormik, formikHelpers: FormikHelpers<UpdateSettingFormik>) => {
 		dispatch(settingUpdateLoadingRequestAction(true));
 		const payload = {
-			fixed_navbar: values.fixed_navbar,
-			fixed_footer: values.fixed_footer
+			theme: values.theme
 		};
 		settingService
 			.update(payload)
@@ -77,50 +75,36 @@ const SettingPage = () => {
 	});
 
 	return (
-		<Fragment>
-			<Breadcrumb className="mb-4">Settings</Breadcrumb>
-			<div className="grid grid-cols-1 gap-4">
-				<div className="col-span-1 w-full">
-					<Card title="Settings">
-						{settingShow.loading ? (
-							<SpinLoading />
-						) : (
-							<Form<UpdateSettingFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
-								{(props) => (
-									<div className="grid grid-cols-2 gap-4">
-										<div className="col-span-2 md:col-span-1">
-											<Form.Toggle
-												id="fixed_navbar"
-												label="Fixed navbar"
-												checked={props.values.fixed_navbar}
-												error={props.errors.fixed_navbar}
-												touched={props.touched.fixed_navbar}
-												{...props.getFieldProps('fixed_navbar')}
-											/>
-										</div>
-										<div className="col-span-2 md:col-span-1">
-											<Form.Toggle
-												id="fixed_footer"
-												label="Fixed footer"
-												checked={props.values.fixed_footer}
-												error={props.errors.fixed_footer}
-												touched={props.touched.fixed_footer}
-												{...props.getFieldProps('fixed_footer')}
-											/>
-										</div>
-										<div className="col-span-2 flex flex-row-reverse">
-											<Button type="submit" loading={settingUpdate.loading} disabled={settingUpdate.loading}>
-												{settingUpdate.loading ? 'Updating' : 'Update'}
-											</Button>
-										</div>
+		<div className="grid grid-cols-1 gap-4">
+			<div className="col-span-1">
+				<Card title="Settings">
+					{settingShow.loading ? (
+						<SpinLoading />
+					) : (
+						<Form<UpdateSettingFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
+							{(props) => (
+								<div className="grid grid-cols-2 gap-4">
+									<div className="col-span-2 md:col-span-1">
+										<Form.Select
+											label="Theme"
+											options={[...settingConstant.SETTING_THEME_ALL]}
+											error={Boolean(props.errors.theme && props.touched.theme)}
+											helperText={props.errors.theme}
+											{...props.getFieldProps('theme')}
+										/>
 									</div>
-								)}
-							</Form>
-						)}
-					</Card>
-				</div>
+									<div className="col-span-2 flex flex-row-reverse">
+										<Button type="submit" loading={settingUpdate.loading} disabled={settingUpdate.loading}>
+											{settingUpdate.loading ? 'Updating' : 'Update'}
+										</Button>
+									</div>
+								</div>
+							)}
+						</Form>
+					)}
+				</Card>
 			</div>
-		</Fragment>
+		</div>
 	);
 };
 

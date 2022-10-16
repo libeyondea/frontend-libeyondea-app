@@ -13,10 +13,10 @@ type Props = {
 	show: boolean;
 	setShow: React.Dispatch<React.SetStateAction<boolean>>;
 	onClick?: () => void;
-	styleType?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
+	colorType?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
 };
 
-const Modal = ({ className, title, content, show, setShow, onClick, styleType = 'success' }: Props) => {
+const Modal = ({ className, title, content, show, setShow, onClick, colorType = 'success' }: Props) => {
 	const outsideRef = useRef(null);
 
 	useOnClickOutside(outsideRef, () => {
@@ -28,12 +28,11 @@ const Modal = ({ className, title, content, show, setShow, onClick, styleType = 
 	return show ? (
 		<div className="h-full w-full fixed overflow-x-hidden overflow-y-auto z-50 top-0 left-0">
 			<div className="min-h-full flex items-center py-8 sm:px-16 bg-gray-900/50 z-40 justify-center">
-				<Card ref={outsideRef} className={classNames('sm:max-w-lg z-50', className)} title={title} onClickClose={() => setShow(false)}>
+				<Card ref={outsideRef} className={classNames('sm:max-w-lg z-50', className)} title={title}>
 					{content && <p className="text-sm text-gray-500 text-center mb-4">{content}</p>}
 					<div className="sm:flex sm:flex-row-reverse">
 						<Button
 							className="w-full sm:w-auto sm:ml-4"
-							styleType={styleType}
 							onClick={() => {
 								onClick && onClick();
 								setShow(false);
@@ -41,7 +40,7 @@ const Modal = ({ className, title, content, show, setShow, onClick, styleType = 
 						>
 							OK
 						</Button>
-						<Button className="w-full sm:w-auto mt-4 sm:mt-0" styleType="light" onClick={() => setShow(false)}>
+						<Button className="w-full sm:w-auto mt-4 sm:mt-0" onClick={() => setShow(false)}>
 							Cancel
 						</Button>
 					</div>

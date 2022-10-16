@@ -1,6 +1,3 @@
-import { Fragment } from 'react';
-
-import Breadcrumb from 'src/components/Breadcrumb';
 import Card from 'src/components/Card';
 import { SpinLoading } from 'src/components/Loading';
 import useOnceEffect from 'src/hooks/useOnceEffect';
@@ -28,59 +25,13 @@ const DashboardPage = () => {
 	});
 
 	return (
-		<Fragment>
-			<Breadcrumb className="mb-4">Dashboard</Breadcrumb>
-			<div className="grid grid-cols-12 gap-4">
-				<div className="col-span-12 sm:col-span-6 md:col-span-3">
-					<Card>
-						{dashboardShow.loading ? (
-							<SpinLoading />
-						) : (
-							<Fragment>
-								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>
-								<p>Total user</p>
-							</Fragment>
-						)}
-					</Card>
-				</div>
-				<div className="col-span-12 sm:col-span-6 md:col-span-3">
-					<Card>
-						{dashboardShow.loading ? (
-							<SpinLoading />
-						) : (
-							<Fragment>
-								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>
-								<p>Total user</p>
-							</Fragment>
-						)}
-					</Card>
-				</div>
-				<div className="col-span-12 sm:col-span-6 md:col-span-3">
-					<Card>
-						{dashboardShow.loading ? (
-							<SpinLoading />
-						) : (
-							<Fragment>
-								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>
-								<p>Total user</p>
-							</Fragment>
-						)}
-					</Card>
-				</div>
-				<div className="col-span-12 sm:col-span-6 md:col-span-3">
-					<Card>
-						{dashboardShow.loading ? (
-							<SpinLoading />
-						) : (
-							<Fragment>
-								<h3 className="text-2xl font-bold">{dashboardShow.data.user.total}</h3>
-								<p>Total user</p>
-							</Fragment>
-						)}
-					</Card>
-				</div>
+		<div className="grid grid-cols-12 gap-4">
+			<div className="col-span-12 sm:col-span-6 md:col-span-3">
+				<Card title="Total User">
+					{dashboardShow.loading ? <SpinLoading /> : <span className="text-2xl font-bold">{dashboardShow.data.user.total}</span>}
+				</Card>
 			</div>
-		</Fragment>
+		</div>
 	);
 };
 

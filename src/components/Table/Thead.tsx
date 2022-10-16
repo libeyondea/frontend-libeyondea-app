@@ -7,7 +7,7 @@ type Props = {
 
 const TheadTable = ({ className, children, ...props }: Props) => {
 	return (
-		<thead {...props} className={classNames('bg-gray-50', className)}>
+		<thead {...props} className={classNames('', className)}>
 			{children}
 		</thead>
 	);

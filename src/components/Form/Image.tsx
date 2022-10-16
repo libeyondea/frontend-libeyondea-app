@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 import Button from 'src/components/Button';
 import Image from 'src/components/Image';
@@ -10,26 +10,14 @@ type Props = {
 	onBlurFile: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
 	name: string;
 	label?: string;
-	horizontal?: boolean;
-	error?: string;
-	touched?: boolean;
 	imgUrl?: string;
+	error?: boolean;
+	helperText?: string;
 	canDelete?: boolean;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const ImageForm = ({
-	className,
-	onChangeFile,
-	onBlurFile,
-	name,
-	label,
-	horizontal = false,
-	error,
-	touched = false,
-	imgUrl = '',
-	canDelete = false,
-	...props
-}: Props) => {
+const ImageForm = ({ className, onChangeFile, onBlurFile, name, label, imgUrl = '', error = false, helperText, canDelete = false, ...props }: Props) => {
+	const id = useId();
 	const [previewImg, setPreviewImg] = useState(imgUrl);
 
 	const _onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,47 +39,43 @@ const ImageForm = ({
 	};
 
 	return (
-		<div
-			className={classNames(
-				{
-					'flex items-center': horizontal
-				},
-				className
-			)}
-		>
+		<div className={classNames('form-control w-full', className)}>
 			{label && (
-				<label htmlFor={name} className={classNames('inline-block font-medium text-gray-600', horizontal ? 'mr-1' : 'mb-1')}>
-					{label}
+				<label className="label p-0 mb-2">
+					<span className="label-text">{label}</span>
 				</label>
 			)}
-			<div className="relative">
-				<div className="flex items-start">
-					{previewImg && (
-						<span className="mr-4 inline-block h-20 w-20 rounded-full overflow-hidden">
-							<Image className="h-full w-full" src={previewImg} alt="Image" />
-						</span>
-					)}
-					<Button className="relative" styleType="secondary">
-						<input
-							{...props}
-							type="file"
-							name={name}
-							value=""
-							onChange={_onChangeFile}
-							onBlur={_onBlurFile}
-							accept=".png, .jpg, .jpeg .gif"
-							className="absolute w-full inset-0 opacity-0"
-						/>
-						Change
+			<div className="flex items-start">
+				{previewImg && (
+					<span className="mr-4 inline-block h-20 w-20 rounded-full overflow-hidden">
+						<Image className="h-full w-full" src={previewImg} alt="Image" />
+					</span>
+				)}
+				<Button className="relative" colorType="secondary">
+					<input
+						{...props}
+						id={id}
+						name={name}
+						value=""
+						onChange={_onChangeFile}
+						onBlur={_onBlurFile}
+						accept=".png, .jpg, .jpeg .gif"
+						className="absolute w-full inset-0 opacity-0"
+						type="file"
+					/>
+					Change
+				</Button>
+				{previewImg && canDelete && (
+					<Button className="ml-4" colorType="danger" onClick={_onRemoveFile}>
+						Remove
 					</Button>
-					{previewImg && canDelete && (
-						<Button className="ml-4" styleType="danger" onClick={_onRemoveFile}>
-							Remove
-						</Button>
-					)}
-				</div>
+				)}
 			</div>
-			{error && touched && <div className="text-red-700 mt-1 text-sm">{error}</div>}
+			{error && (
+				<label className="label p-0 mt-2">
+					<span className="label-text-alt text-error">{helperText}</span>
+				</label>
+			)}
 		</div>
 	);
 };

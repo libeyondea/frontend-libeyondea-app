@@ -39,7 +39,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 					<div className="min-h-full flex flex-col py-8 sm:p-16">
 						<Card className="m-auto max-w-md sm:p-8">
 							<h6 className=" font-bold text-center">
-								<span className="text-red-500 text-base">An error occurred. Please try again later.</span>
+								<span className="text-error text-base">An error occurred. Please try again later.</span>
 							</h6>
 							<div className="flex justify-center mt-4">
 								<Button onClick={() => this.onClickReset()}>Try again</Button>

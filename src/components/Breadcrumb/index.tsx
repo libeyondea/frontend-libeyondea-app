@@ -1,14 +1,28 @@
 import classNames from 'classnames';
+import { To } from 'react-router-dom';
+
+import Link from '../Link';
 
 type Props = {
 	className?: string;
-	children: React.ReactNode;
+	items: Array<{
+		title: string;
+		to: To;
+	}>;
 };
 
-const Breadcrumb = ({ className, children }: Props) => {
+const Breadcrumb = ({ className, items }: Props) => {
 	return (
-		<div className={classNames('flex', className)}>
-			<h1 className="text-2xl font-bold">{children}</h1>
+		<div className={classNames('text-sm breadcrumbs', className)}>
+			<ul>
+				{items.map((item) => (
+					<li>
+						<Link to={item.to} className="link link-hover">
+							{item.title}
+						</Link>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 };

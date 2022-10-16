@@ -7,7 +7,7 @@ type Props = {
 
 const ThTable = ({ className, children, ...props }: Props) => {
 	return (
-		<th {...props} className={classNames('p-3 text-left text-sm font-medium text-gray-500 tracking-wider whitespace-nowrap', className)}>
+		<th {...props} className={classNames('', className)}>
 			{children}
 		</th>
 	);

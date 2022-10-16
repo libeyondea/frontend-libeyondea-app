@@ -13,10 +13,10 @@ export interface User {
 
 export interface ListUser {
 	page: number;
-	limit: number;
+	page_size: number;
 	sort_direction: string;
 	sort_by: string;
-	q: string;
+	keyword: string;
 }
 
 export interface CreateUser {

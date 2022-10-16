@@ -1,7 +1,3 @@
-import { Menu, Transition } from '@headlessui/react';
-import classNames from 'classnames';
-import { Fragment } from 'react';
-
 import { BarsIcon } from 'src/components/Icon';
 import Image from 'src/components/Image';
 import Link from 'src/components/Link';
@@ -9,8 +5,6 @@ import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
 import authService from 'src/services/authService';
 import { useDispatch, useSelector } from 'src/store';
-import { appSidebarRequestAction } from 'src/store/app/actions';
-import { selectAppSidebar } from 'src/store/app/selectors';
 import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 import cookies from 'src/utils/cookies';
@@ -18,7 +12,6 @@ import toastify from 'src/utils/toastify';
 
 const Navbar = () => {
 	const dispatch = useDispatch();
-	const appSidebar = useSelector(selectAppSidebar);
 	const authCurrent = useSelector(selectAuthCurrent);
 
 	const onClickSignOut = () => {
@@ -36,91 +29,32 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav
-			className={classNames(
-				'bg-white shadow-lg z-20 inset-x-0 top-0 transition-all ease-in-out duration-500',
-				appSidebar ? 'lg:ml-64' : 'ml-0',
-				authCurrent.data.user?.setting.fixed_navbar ? 'fixed' : 'static'
-			)}
-		>
-			<div className="xl:container mx-auto px-4">
-				<div className="flex items-center py-2">
-					<div className="flex items-center mr-auto">
-						<button
-							className="text-gray-800 inline-flex items-center justify-center rounded-md focus:outline-none"
-							onClick={() => dispatch(appSidebarRequestAction(!appSidebar))}
-						>
-							<BarsIcon className="h-6 w-6" />
-						</button>
-						<div className="block">
-							<div className="ml-4 flex items-baseline space-x-4">
-								<Link className="text-gray-800 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" to="/">
-									Home
-								</Link>
-							</div>
+		<nav className="navbar bg-base-100 w-full shadow-md sticky top-0 z-30 h-16 bg-opacity-90 backdrop-blur text-base-content">
+			<div className="flex-1">
+				<label htmlFor="my-drawer" className="btn btn-square btn-ghost lg:hidden">
+					<BarsIcon className="inline-block w-5 h-5 stroke-current" />
+				</label>
+			</div>
+			<div className="flex-none">
+				<div className="dropdown dropdown-end">
+					<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+						<div className="w-9 rounded-full">
+							<Image src={authCurrent.data.user?.avatar_url} alt={authCurrent.data.user?.user_name} />
 						</div>
-					</div>
-					<div className="block">
-						<div className="flex items-center">
-							<Menu as="div" className="relative inline-block">
-								<Menu.Button className="flex items-center justify-center w-full rounded-md px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none">
-									<Image className="rounded-full h-8 w-8" src={authCurrent.data.user?.avatar_url} alt={authCurrent.data.user?.user_name} />
-								</Menu.Button>
-								<Transition
-									as={Fragment}
-									enter="transition ease-out duration-100"
-									enterFrom="transform opacity-0 scale-95"
-									enterTo="transform opacity-100 scale-100"
-									leave="transition ease-in duration-75"
-									leaveFrom="transform opacity-100 scale-100"
-									leaveTo="transform opacity-0 scale-95"
-								>
-									<Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-										<Menu.Item>
-											{({ active }) => (
-												<Link
-													to={`/${routeConstant.ROUTE_NAME_PROFILE}`}
-													className={classNames('block px-4 py-2 rounded-md text-md', {
-														'bg-gray-300 text-gray-700': active,
-														'text-gray-900': !active
-													})}
-												>
-													<span>Profile</span>
-												</Link>
-											)}
-										</Menu.Item>
-										<Menu.Item>
-											{({ active }) => (
-												<Link
-													to={`/${routeConstant.ROUTE_NAME_SETTING}`}
-													className={classNames('block px-4 py-2 rounded-md text-md', {
-														'bg-gray-300 text-gray-700': active,
-														'text-gray-900': !active
-													})}
-												>
-													<span>Settings</span>
-												</Link>
-											)}
-										</Menu.Item>
-										<Menu.Item>
-											{({ active }) => (
-												<button
-													type="button"
-													className={classNames('block px-4 py-2 rounded-md text-left text-md w-full', {
-														'bg-gray-300 text-gray-700': active,
-														'text-gray-900': !active
-													})}
-													onClick={onClickSignOut}
-												>
-													<span>Sign out</span>
-												</button>
-											)}
-										</Menu.Item>
-									</Menu.Items>
-								</Transition>
-							</Menu>
-						</div>
-					</div>
+					</label>
+					<ul tabIndex={0} className="menu menu-compact dropdown-content mt-4 p-2 shadow bg-base-100 rounded-box w-52">
+						<li>
+							<Link to={`/${routeConstant.ROUTE_NAME_PROFILE}`}>Profile</Link>
+						</li>
+						<li>
+							<Link to={`/${routeConstant.ROUTE_NAME_SETTING}`}>Settings</Link>
+						</li>
+						<li>
+							<button type="button" onClick={onClickSignOut}>
+								Sign out
+							</button>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</nav>

@@ -1,5 +1,4 @@
 import { FormikHelpers } from 'formik';
-import { Fragment } from 'react';
 import * as Yup from 'yup';
 
 import Button from 'src/components/Button';
@@ -60,70 +59,59 @@ const SignInPage = () => {
 
 	return (
 		<Card className="m-auto max-w-md sm:p-8">
-			<div className="text-xl font-light text-gray-600 sm:text-2xl text-center mb-8">Sign in to your account</div>
+			<div className="text-xl sm:text-2xl text-center mb-8">Sign in to your account</div>
 			<Form<SignInFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(props) => (
-					<Fragment>
-						<div className="flex flex-col mb-4">
+					<div className="grid grid-cols-1 gap-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="user_name"
-								type="text"
 								label="User name"
-								placeholder="Enter user name"
-								error={props.errors.user_name}
-								touched={props.touched.user_name}
+								error={Boolean(props.errors.user_name && props.touched.user_name)}
+								helperText={props.errors.user_name}
 								autoComplete="username"
 								{...props.getFieldProps('user_name')}
 							/>
 						</div>
-						<div className="flex flex-col mb-4">
+						<div className="col-span-1">
 							<Form.Input
-								id="password"
 								type="password"
 								label="Password"
-								placeholder="Enter password"
-								error={props.errors.password}
-								touched={props.touched.password}
+								error={Boolean(props.errors.password && props.touched.password)}
+								helperText={props.errors.password}
 								autoComplete="current-password"
 								{...props.getFieldProps('password')}
 							/>
 						</div>
-						<div className="flex items-center justify-between mb-6">
-							<Form.Checkbox
-								id="remember_me"
-								checked={props.values.remember_me}
-								error={props.errors.remember_me}
-								touched={props.touched.remember_me}
-								{...props.getFieldProps('remember_me')}
-							>
-								Remember me
-							</Form.Checkbox>
-							<div className="text-sm">
-								<Link to="/" className="font-medium text-purple-600">
-									Forgot password?
-								</Link>
+						<div className="col-span-1">
+							<div className="flex items-center justify-between">
+								<Form.Checkbox
+									checked={props.values.remember_me}
+									error={Boolean(props.errors.remember_me && props.touched.remember_me)}
+									helperText={props.errors.remember_me}
+									{...props.getFieldProps('remember_me')}
+								>
+									Remember me
+								</Form.Checkbox>
+								<div className="text-sm">
+									<Link to="/" className="link link-primary link-hover">
+										Forgot password?
+									</Link>
+								</div>
 							</div>
 						</div>
-						<div className="flex w-full">
+						<div className="col-span-1">
 							<Button className="w-full" type="submit" loading={props.isSubmitting} disabled={props.isSubmitting}>
 								{props.isSubmitting ? 'Signing in' : 'Sign in'}
 							</Button>
 						</div>
-					</Fragment>
+					</div>
 				)}
 			</Form>
-			<div className="relative my-6">
-				<div className="absolute inset-0 flex items-center">
-					<div className="w-full border-t border-gray-400" />
-				</div>
-				<div className="relative flex justify-center text-sm">
-					<span className="px-2 text-neutral-700 bg-white leading-none">Or continue with</span>
-				</div>
-			</div>
+			<div className="divider my-6">Or continue with</div>
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<Link className="text-purple-600 ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_UP}`}>
+					<Link className="link link-primary link-hover ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_UP}`}>
 						Sign up
 					</Link>
 				</span>

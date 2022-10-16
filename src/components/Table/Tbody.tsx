@@ -7,7 +7,7 @@ type Props = {
 
 const TbodyTable = ({ className, children, ...props }: Props) => {
 	return (
-		<tbody {...props} className={classNames('bg-white divide-y divide-gray-200', className)}>
+		<tbody {...props} className={classNames('', className)}>
 			{children}
 		</tbody>
 	);

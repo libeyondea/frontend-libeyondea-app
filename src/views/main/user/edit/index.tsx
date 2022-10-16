@@ -4,7 +4,6 @@ import { Fragment, useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import Breadcrumb from 'src/components/Breadcrumb';
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
 import Form from 'src/components/Form';
@@ -64,10 +63,7 @@ const EditUserPage = () => {
 		}),
 		role: Yup.string()
 			.required('The role is required.')
-			.oneOf(
-				[userConstant.USER_ROLE_OWNER, userConstant.USER_ROLE_ADMIN, userConstant.USER_ROLE_MODERATOR, userConstant.USER_ROLE_MEMBER],
-				'The role invalid.'
-			),
+			.oneOf([...userConstant.USER_ROLE_ALL], 'The role invalid.'),
 		actived: Yup.boolean()
 	});
 
@@ -117,8 +113,8 @@ const EditUserPage = () => {
 						dispatch(userListLoadingRequestAction(true));
 						const payload = {
 							page: userList.pagination.page,
-							limit: userList.pagination.limit,
-							q: userList.filter.q,
+							page_size: userList.pagination.page_size,
+							keyword: userList.filter.keyword,
 							sort_by: userList.filter.sort_by,
 							sort_direction: userList.filter.sort_direction
 						};
@@ -177,9 +173,8 @@ const EditUserPage = () => {
 
 	return (
 		<Fragment>
-			<Breadcrumb className="mb-4">Edit user</Breadcrumb>
 			<div className="grid grid-cols-1 gap-4">
-				<div className="col-span-1 w-full">
+				<div className="col-span-1">
 					<Card title="Edit user">
 						{userShow.loading ? (
 							<SpinLoading />
@@ -191,128 +186,88 @@ const EditUserPage = () => {
 									<div className="grid grid-cols-12 gap-4">
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Input
-												id="first_name"
-												type="text"
 												label="First name"
-												placeholder="Enter first name"
-												error={props.errors.first_name}
-												touched={props.touched.first_name}
+												error={Boolean(props.errors.first_name && props.touched.first_name)}
+												helperText={props.errors.first_name}
 												{...props.getFieldProps('first_name')}
 											/>
 										</div>
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Input
-												id="last_name"
-												type="text"
 												label="Last name"
-												placeholder="Enter last name"
-												error={props.errors.last_name}
-												touched={props.touched.last_name}
+												error={Boolean(props.errors.last_name && props.touched.last_name)}
+												helperText={props.errors.last_name}
 												{...props.getFieldProps('last_name')}
 											/>
 										</div>
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Input
-												id="user_name"
-												type="text"
 												label="User name"
-												placeholder="Enter user name"
-												error={props.errors.user_name}
-												touched={props.touched.user_name}
+												error={Boolean(props.errors.user_name && props.touched.user_name)}
+												helperText={props.errors.user_name}
 												autoComplete="username"
 												{...props.getFieldProps('user_name')}
 											/>
 										</div>
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Input
-												id="email"
-												type="text"
 												label="Email"
-												placeholder="Enter email"
-												error={props.errors.email}
-												touched={props.touched.email}
+												error={Boolean(props.errors.email && props.touched.email)}
+												helperText={props.errors.email}
 												{...props.getFieldProps('email')}
 											/>
 										</div>
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Input
-												id="password"
 												type="password"
 												label="Password"
-												placeholder="Enter password"
-												error={props.errors.password}
-												touched={props.touched.password}
+												error={Boolean(props.errors.password && props.touched.password)}
+												helperText={props.errors.password}
 												autoComplete="new-password"
 												{...props.getFieldProps('password')}
 											/>
 										</div>
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Input
-												id="password_confirmation"
 												type="password"
 												label="Password confirmation"
-												placeholder="Enter password confirmation"
-												error={props.errors.password_confirmation}
-												touched={props.touched.password_confirmation}
+												error={Boolean(props.errors.password_confirmation && props.touched.password_confirmation)}
+												helperText={props.errors.password_confirmation}
 												autoComplete="new-password"
 												{...props.getFieldProps('password_confirmation')}
 											/>
 										</div>
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Select
-												id="role"
 												label="Role"
-												options={[
-													{
-														value: userConstant.USER_ROLE_MEMBER,
-														label: 'Member'
-													},
-													{
-														value: userConstant.USER_ROLE_MODERATOR,
-														label: 'Moderator'
-													},
-													{
-														value: userConstant.USER_ROLE_ADMIN,
-														label: 'Admin'
-													},
-													{
-														value: userConstant.USER_ROLE_OWNER,
-														label: 'Owner'
-													}
-												]}
-												error={props.errors.role}
-												touched={props.touched.role}
+												options={[...userConstant.USER_ROLE_ALL]}
+												error={Boolean(props.errors.role && props.touched.role)}
+												helperText={props.errors.role}
 												{...props.getFieldProps('role')}
 											/>
 										</div>
 										<div className="col-span-12 md:col-span-6 lg:col-span-4">
 											<Form.Toggle
-												id="actived"
 												label="Actived"
 												checked={props.values.actived}
-												error={props.errors.actived}
-												touched={props.touched.actived}
+												error={Boolean(props.errors.actived && props.touched.actived)}
+												helperText={props.errors.actived}
 												{...props.getFieldProps('actived')}
 											/>
 										</div>
 										<div className="col-span-12">
 											<Form.Image
-												id="image"
 												label="Avatar"
-												error={props.errors.image}
-												touched={props.touched.image}
+												imgUrl={userShow.data.avatar_url}
+												error={Boolean(props.errors.image && props.touched.image)}
+												helperText={props.errors.image}
 												onChangeFile={props.setFieldValue}
 												onBlurFile={props.setFieldTouched}
-												imgUrl={userShow.data.avatar_url}
 												{...props.getFieldProps('image')}
 											/>
 										</div>
 										<div className="col-span-12 flex flex-row-reverse">
-											<Button
-												type="submit"
-												loading={imageUpload.loading || userUpdate.loading}
-												disabled={imageUpload.loading || userUpdate.loading}
-											>
+											<Button type="submit" loading={imageUpload.loading || userUpdate.loading}>
 												{imageUpload.loading ? 'Uploading' : userUpdate.loading ? 'Updating' : 'Update'}
 											</Button>
 										</div>

@@ -1,23 +1,40 @@
 import classNames from 'classnames';
+import { useId } from 'react';
 
 type Props = {
 	className?: string;
 	name: string;
-	error?: string;
-	touched?: boolean;
+	error?: boolean;
+	helperText?: string;
+	sizeType?: 'lg' | 'md' | 'sm' | 'xs';
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const CheckboxForm = ({ className, name, error, touched = false, children, ...props }: Props) => {
+const CheckboxForm = ({ className, name, error = false, helperText, sizeType = 'md', children, ...props }: Props) => {
+	const id = useId();
+
 	return (
-		<div className={classNames('flex-row', className)}>
-			<div className="flex items-center">
-				<input {...props} name={name} type="checkbox" className="text-purple-500 border-gray-300 rounded checked:bg-purple-500 focus:ring-purple-600" />
-				<label htmlFor={name} className="ml-2 block text-sm text-gray-900">
-					{children}
+		<div className={classNames('form-control', className)}>
+			<label className="label p-0">
+				<input
+					{...props}
+					id={id}
+					name={name}
+					className={classNames('checkbox', {
+						'checkbox-lg': sizeType === 'lg',
+						'checkbox-md': sizeType === 'md',
+						'checkbox-sm': sizeType === 'sm',
+						'checkbox-xs': sizeType === 'xs'
+					})}
+					type="checkbox"
+				/>
+				<span className="label-text ml-2">{children}</span>
+			</label>
+			{error && (
+				<label className="label">
+					<span className="label-text-alt text-error">{helperText}</span>
 				</label>
-			</div>
-			{error && touched && <div className="text-red-700 mt-1 text-sm">{error}</div>}
+			)}
 		</div>
 	);
 };
