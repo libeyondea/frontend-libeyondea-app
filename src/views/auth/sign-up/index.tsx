@@ -72,8 +72,7 @@ const SignUpPage = () => {
 	};
 
 	return (
-		<Card className="m-auto max-w-md sm:p-8">
-			<div className="text-xl sm:text-2xl text-center mb-8">Sign up your account</div>
+		<Card className="m-auto max-w-md sm:py-4 sm:px-8" subTitle="Sign up your account">
 			<Form<SignUpFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(props) => (
 					<div className="grid grid-cols-1 gap-4">
@@ -138,16 +137,8 @@ const SignUpPage = () => {
 								{...props.getFieldProps('terms')}
 							>
 								By signing up, you agree to our{' '}
-								<Link className="text-purple-600 font-medium" to="/">
+								<Link className="link link-primary link-hover font-medium" to="/">
 									Terms
-								</Link>{' '}
-								,{' '}
-								<Link className="text-purple-600 font-medium" to="/">
-									Data Policy
-								</Link>{' '}
-								and{' '}
-								<Link className="text-purple-600 font-medium" to="/">
-									Cookies Policy
 								</Link>
 								.
 							</Form.Checkbox>

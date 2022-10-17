@@ -104,24 +104,6 @@ const EditUserPage = () => {
 						dispatch(userUpdateDataRequestAction(response.data.data));
 						toastify.success('User updated successfully.');
 						navigate(`/${routeConstant.ROUTE_NAME_USER}`);
-						/* dispatch(userListLoadingRequestAction(true));
-						const payload = {
-							page: userList.pagination.page,
-							page_size: userList.pagination.page_size,
-							keyword: userList.filter.keyword,
-							sort_by: userList.filter.sort_by,
-							sort_direction: userList.filter.sort_direction
-						};
-						userService
-							.list(payload)
-							.then((response) => {
-								dispatch(userListDataRequestAction(response.data.data));
-								dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
-							})
-							.catch(errorHandler())
-							.finally(() => {
-								dispatch(userListLoadingRequestAction(false));
-							}); */
 					})
 					.catch(
 						errorHandler((error) => {

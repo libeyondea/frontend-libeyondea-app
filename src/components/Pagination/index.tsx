@@ -48,12 +48,17 @@ const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePa
 			</div>
 			<div className="flex-none flex items-center">
 				<nav className="btn-group">
-					<button type="button" className="btn btn-sm btn-outline" onClick={(event) => _onChangePage(event, 1)} disabled={page <= 1 || disabled}>
+					<button
+						type="button"
+						className="btn btn-sm btn-primary btn-outline"
+						onClick={(event) => _onChangePage(event, 1)}
+						disabled={page <= 1 || disabled}
+					>
 						<AngleDoubleLeftIcon className="h-4 w-4" />
 					</button>
 					<button
 						type="button"
-						className="btn btn-sm btn-outline"
+						className="btn btn-sm btn-primary btn-outline"
 						onClick={(event) => _onChangePage(event, page - 1)}
 						disabled={page <= 1 || disabled}
 					>
@@ -61,7 +66,7 @@ const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePa
 					</button>
 					<button
 						type="button"
-						className="btn btn-sm btn-outline"
+						className="btn btn-sm btn-primary btn-outline"
 						onClick={(event) => _onChangePage(event, page + 1)}
 						disabled={page >= totalPages || disabled}
 					>
@@ -69,7 +74,7 @@ const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePa
 					</button>
 					<button
 						type="button"
-						className="btn btn-sm btn-outline"
+						className="btn btn-sm btn-primary btn-outline"
 						onClick={(event) => _onChangePage(event, totalPages)}
 						disabled={page >= totalPages || disabled}
 					>
