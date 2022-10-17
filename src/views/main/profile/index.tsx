@@ -133,7 +133,7 @@ const ProfilePage = () => {
 
 	return (
 		<div className="grid grid-cols-1 gap-4">
-			<div className="col-span-1 w-full">
+			<div className="col-span-1">
 				<Card title="Profile">
 					{profileShow.loading ? (
 						<SpinLoading />

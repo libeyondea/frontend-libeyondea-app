@@ -8,6 +8,6 @@
 	}
 
 	main {
-		min-height: calc(100vh - calc(theme('spacing.14') + theme('spacing.16')));
+		min-height: calc(100vh - calc(theme('spacing.16') + theme('spacing.12') + theme('spacing.1')));
 	}
 }
