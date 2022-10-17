@@ -3,7 +3,7 @@ export type ResponseDataReducer<T> = {
 	loading: boolean;
 };
 
-export type ResponseDataWithPaginationAndFilterReducer<T> = {
+export type ResponseDataPaginationFilterReducer<T> = {
 	pagination: {
 		page: number;
 		page_size: number;

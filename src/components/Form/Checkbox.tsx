@@ -15,7 +15,7 @@ const CheckboxForm = ({ className, name, error = false, helperText, sizeType = '
 
 	return (
 		<div className={classNames('form-control', className)}>
-			<label className="label p-0">
+			<label className="label justify-start p-0">
 				<input
 					{...props}
 					id={id}
