@@ -3,7 +3,7 @@ import axios from 'axios';
 import config from 'src/config';
 import store from 'src/store';
 
-const instance = axios.create({
+const axiosService = axios.create({
 	baseURL: config.API.URL.BASE_API_URL,
 	headers: {
 		Accept: 'application/json',
@@ -12,7 +12,7 @@ const instance = axios.create({
 	timeout: config.REQUEST.TIMEOUT
 });
 
-instance.interceptors.request.use(
+axiosService.interceptors.request.use(
 	(config) => {
 		const token = store.getState().authState.current.data.token;
 		if (config.headers && !config.headers.Authorization && token) {
@@ -25,7 +25,7 @@ instance.interceptors.request.use(
 	}
 );
 
-instance.interceptors.response.use(
+axiosService.interceptors.response.use(
 	(response) => {
 		return response;
 	},
@@ -34,4 +34,4 @@ instance.interceptors.response.use(
 	}
 );
 
-export default instance;
+export default axiosService;

@@ -17,7 +17,6 @@ import userService from 'src/services/userService';
 import { useDispatch, useSelector } from 'src/store';
 import { userShowDataRequestAction, userShowLoadingRequestAction, userUpdateDataRequestAction, userUpdateLoadingRequestAction } from 'src/store/user/actions';
 import { selectUserShow, selectUserUpdate } from 'src/store/user/selectors';
-import { Image } from 'src/types/image';
 import { UpdateUserFormik } from 'src/types/user';
 import errorHandler from 'src/utils/errorHandler';
 import toastify from 'src/utils/toastify';
@@ -39,6 +38,7 @@ const EditUserPage = () => {
 		password_confirmation: '',
 		role: userShow.data.role || userConstant.USER_ROLE_MEMBER,
 		actived: userShow.data.actived || false,
+		avatar: null,
 		image: null
 	};
 
@@ -61,9 +61,9 @@ const EditUserPage = () => {
 	});
 
 	const onSubmit = (values: UpdateUserFormik, formikHelpers: FormikHelpers<UpdateUserFormik>) => {
-		new Promise<{ image: Image | null }>((resolve, reject) => {
+		new Promise((resolve, reject) => {
 			if (!values.image) {
-				return resolve({ image: null });
+				return resolve(null);
 			}
 			setImageUpload({ loading: true });
 			imageService
@@ -71,9 +71,8 @@ const EditUserPage = () => {
 					image: values.image
 				})
 				.then((response) => {
-					return resolve({
-						image: response.data.data
-					});
+					values.avatar = response.data.data.name;
+					return resolve(null);
 				})
 				.catch((error) => {
 					return reject(error);
@@ -94,8 +93,8 @@ const EditUserPage = () => {
 					...(values.password && {
 						password: values.password
 					}),
-					...(result.image && {
-						avatar: result.image.name
+					...(values.avatar && {
+						avatar: values.avatar
 					})
 				};
 				userService

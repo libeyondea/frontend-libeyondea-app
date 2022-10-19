@@ -25,20 +25,44 @@ export interface CreateUser {
 	user_name: string;
 	email: string;
 	password: string;
-	avatar?: string | null;
 	role: string;
 	actived: boolean;
+	avatar?: string | null;
 }
 
-export interface CreateUserFormik extends Omit<CreateUser, 'avatar'> {
+export interface CreateUserFormik {
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	email: string;
+	password: string;
 	password_confirmation: string;
+	role: string;
+	actived: boolean;
+	avatar?: string | null;
 	image: File | null;
 }
 
-export interface UpdateUser extends Omit<CreateUser, 'password'> {
+export interface UpdateUser {
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	email: string;
 	password?: string;
+	role: string;
+	actived: boolean;
+	avatar?: string | null;
 }
 
-export interface UpdateUserFormik extends Omit<CreateUserFormik, 'password'> {
+export interface UpdateUserFormik {
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	email: string;
 	password?: string;
+	password_confirmation: string;
+	role: string;
+	actived: boolean;
+	avatar?: string | null;
+	image: File | null;
 }

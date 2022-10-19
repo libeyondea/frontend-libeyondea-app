@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import instance from './instance';
+import axiosService from './axios';
 
 type GetProps = {
 	baseURL?: string;
@@ -27,7 +27,7 @@ type UploadProps = {
 
 const http = {
 	get: <T>({ baseURL, url, params, token }: GetProps): Promise<AxiosResponse<T>> => {
-		return instance.request<T>({
+		return axiosService.request<T>({
 			baseURL: baseURL,
 			method: 'GET',
 			url: url,
@@ -40,7 +40,7 @@ const http = {
 		});
 	},
 	post: <T>({ baseURL, url, params, data, token }: PostProps): Promise<AxiosResponse<T>> => {
-		return instance.request<T>({
+		return axiosService.request<T>({
 			baseURL: baseURL,
 			method: 'POST',
 			url: url,
@@ -54,7 +54,7 @@ const http = {
 		});
 	},
 	put: <T>({ baseURL, url, params, data, token }: PutProps): Promise<AxiosResponse<T>> => {
-		return instance.request<T>({
+		return axiosService.request<T>({
 			baseURL: baseURL,
 			method: 'PUT',
 			url: url,
@@ -68,7 +68,7 @@ const http = {
 		});
 	},
 	delete: <T>({ baseURL, url, params, token }: DeleteProps): Promise<AxiosResponse<T>> => {
-		return instance.request<T>({
+		return axiosService.request<T>({
 			baseURL: baseURL,
 			method: 'DELETE',
 			url: url,
@@ -92,7 +92,7 @@ const http = {
 				formData.append(field, files[field], files[field].name);
 			}
 		}
-		return instance.request<T>({
+		return axiosService.request<T>({
 			baseURL: baseURL,
 			method: 'POST',
 			url: url,

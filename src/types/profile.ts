@@ -20,7 +20,13 @@ export interface UpdateProfile {
 	avatar?: string | null;
 }
 
-export interface UpdateProfileFormik extends Omit<UpdateProfile, 'avatar'> {
+export interface UpdateProfileFormik {
+	first_name: string;
+	last_name: string;
+	user_name: string;
+	email: string;
+	password?: string;
 	password_confirmation: string;
+	avatar?: string | null;
 	image: File | null;
 }
