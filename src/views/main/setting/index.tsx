@@ -1,6 +1,8 @@
 import { FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
+
+
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
 import Form from 'src/components/Form';
@@ -9,16 +11,13 @@ import * as settingConstant from 'src/constants/setting';
 import useOnceEffect from 'src/hooks/useOnceEffect';
 import settingService from 'src/services/settingService';
 import { useDispatch, useSelector } from 'src/store';
-import {
-	settingShowDataRequestAction,
-	settingShowLoadingRequestAction,
-	settingUpdateDataRequestAction,
-	settingUpdateLoadingRequestAction
-} from 'src/store/setting/actions';
+import { settingShowDataRequestAction, settingShowLoadingRequestAction, settingUpdateDataRequestAction, settingUpdateLoadingRequestAction } from 'src/store/setting/actions';
 import { selectSettingShow, selectSettingUpdate } from 'src/store/setting/selectors';
 import { UpdateSettingFormik } from 'src/types/setting';
 import errorHandler from 'src/utils/errorHandler';
 import toastify from 'src/utils/toastify';
+import _ from 'lodash';
+
 
 const SettingPage = () => {
 	const dispatch = useDispatch();
@@ -45,9 +44,9 @@ const SettingPage = () => {
 			.then((response) => {
 				dispatch(settingUpdateDataRequestAction(response.data.data));
 				toastify.success('Setting updated successfully.');
-				setTimeout(() => {
+				_.delay(() => {
 					window.location.reload();
-				}, 666);
+				}, 600);
 			})
 			.catch(
 				errorHandler((error) => {

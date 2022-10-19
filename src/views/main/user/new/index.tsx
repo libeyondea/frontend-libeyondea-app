@@ -13,7 +13,6 @@ import userService from 'src/services/userService';
 import { useDispatch, useSelector } from 'src/store';
 import { userCreateDataRequestAction, userCreateLoadingRequestAction } from 'src/store/user/actions';
 import { selectUserCreate } from 'src/store/user/selectors';
-import { Image } from 'src/types/image';
 import { CreateUserFormik } from 'src/types/user';
 import errorHandler from 'src/utils/errorHandler';
 import toastify from 'src/utils/toastify';
@@ -33,6 +32,7 @@ const NewUserPage = () => {
 		password_confirmation: '',
 		role: userConstant.USER_ROLE_MEMBER,
 		actived: false,
+		avatar: null,
 		image: null
 	};
 
@@ -60,9 +60,9 @@ const NewUserPage = () => {
 	});
 
 	const onSubmit = (values: CreateUserFormik, formikHelpers: FormikHelpers<CreateUserFormik>) => {
-		new Promise<{ image: Image | null }>((resolve, reject) => {
+		new Promise((resolve, reject) => {
 			if (!values.image) {
-				return resolve({ image: null });
+				return resolve(null);
 			}
 			setImageUpload({ loading: true });
 			imageService
@@ -70,9 +70,8 @@ const NewUserPage = () => {
 					image: values.image
 				})
 				.then((response) => {
-					return resolve({
-						image: response.data.data
-					});
+					values.avatar = response.data.data.name;
+					return resolve(null);
 				})
 				.catch((error) => {
 					return reject(error);
@@ -91,8 +90,8 @@ const NewUserPage = () => {
 					password: values.password,
 					role: values.role,
 					actived: values.actived,
-					...(result.image && {
-						avatar: result.image.name
+					...(values.avatar && {
+						avatar: values.avatar
 					})
 				};
 				userService

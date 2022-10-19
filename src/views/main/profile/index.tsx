@@ -1,4 +1,5 @@
 import { FormikHelpers } from 'formik';
+import _ from 'lodash';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
@@ -17,7 +18,6 @@ import {
 	profileUpdateLoadingRequestAction
 } from 'src/store/profile/actions';
 import { selectProfileShow, selectProfileUpdate } from 'src/store/profile/selectors';
-import { Image } from 'src/types/image';
 import { UpdateProfileFormik } from 'src/types/profile';
 import errorHandler from 'src/utils/errorHandler';
 import toastify from 'src/utils/toastify';
@@ -35,6 +35,7 @@ const ProfilePage = () => {
 		user_name: profileShow.data.user_name || '',
 		password: '',
 		password_confirmation: '',
+		avatar: null,
 		image: null
 	};
 
@@ -53,9 +54,9 @@ const ProfilePage = () => {
 	});
 
 	const onSubmit = (values: UpdateProfileFormik, formikHelpers: FormikHelpers<UpdateProfileFormik>) => {
-		new Promise<{ image: Image | null }>((resolve, reject) => {
+		new Promise((resolve, reject) => {
 			if (!values.image) {
-				return resolve({ image: null });
+				return resolve(null);
 			}
 			setImageUpload({ loading: true });
 			imageService
@@ -63,9 +64,8 @@ const ProfilePage = () => {
 					image: values.image
 				})
 				.then((response) => {
-					return resolve({
-						image: response.data.data
-					});
+					values.avatar = response.data.data.name;
+					return resolve(null);
 				})
 				.catch((error) => {
 					return reject(error);
@@ -84,8 +84,8 @@ const ProfilePage = () => {
 					...(values.password && {
 						password: values.password
 					}),
-					...(result.image && {
-						avatar: result.image.name
+					...(values.avatar && {
+						avatar: values.avatar
 					})
 				};
 				profileService
@@ -93,9 +93,9 @@ const ProfilePage = () => {
 					.then((response) => {
 						dispatch(profileUpdateDataRequestAction(response.data.data));
 						toastify.success('Profile updated successfully.');
-						setTimeout(() => {
+						_.delay(() => {
 							window.location.reload();
-						}, 666);
+						}, 600);
 					})
 					.catch(
 						errorHandler((error) => {
