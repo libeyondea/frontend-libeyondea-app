@@ -1,12 +1,14 @@
+import _ from 'lodash';
+import { useMemo } from 'react';
+
 import Form from 'src/components/Form';
-import * as filterConstant from 'src/constants/filter';
-import useDebouncedCallback from 'src/hooks/useDebouncedCallback';
+import * as sortConstant from 'src/constants/sort';
 import { useDispatch, useSelector } from 'src/store';
 import {
-	userListFilterKeywordRequestAction,
-	userListFilterKeywordTempRequestAction,
-	userListFilterSortByRequestAction,
-	userListFilterSortDirectionRequestAction
+	userListSearchRequestAction,
+	userListSearchTempRequestAction,
+	userListSortByRequestAction,
+	userListSortDirectionRequestAction
 } from 'src/store/user/actions';
 import { selectUserList } from 'src/store/user/selectors';
 
@@ -14,23 +16,23 @@ type Props = {
 	disabled?: boolean;
 };
 
-const FilterUser = ({ disabled = false }: Props) => {
+const SortSearchUser = ({ disabled = false }: Props) => {
 	const dispatch = useDispatch();
 	const userList = useSelector(selectUserList);
 
-	const userListFilterKeywordDebouncedCallback = useDebouncedCallback((nextValue: string) => dispatch(userListFilterKeywordRequestAction(nextValue)));
+	const onChangeSearchDebounce = useMemo(() => _.debounce((value) => dispatch(userListSearchRequestAction(value)), 600), [dispatch]);
 
 	const onChangeSortBy = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		dispatch(userListFilterSortByRequestAction(event.target.value));
+		dispatch(userListSortByRequestAction(event.target.value));
 	};
 
 	const onChangeSortDirection = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		dispatch(userListFilterSortDirectionRequestAction(event.target.value));
+		dispatch(userListSortDirectionRequestAction(event.target.value));
 	};
 
 	const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(userListFilterKeywordTempRequestAction(event.target.value));
-		userListFilterKeywordDebouncedCallback(event.target.value);
+		dispatch(userListSearchTempRequestAction(event.target.value));
+		onChangeSearchDebounce(event.target.value);
 	};
 
 	return (
@@ -39,7 +41,7 @@ const FilterUser = ({ disabled = false }: Props) => {
 				<Form.Select
 					name="sort_by"
 					label="Sort by"
-					value={userList.filter.sort_by}
+					value={userList.sort_by}
 					options={['first_name', 'last_name', 'user_name', 'email', 'actived', 'role', 'updated_at', 'created_at']}
 					onChange={onChangeSortBy}
 					className="mr-0 sm:mr-4 mb-4 sm:mb-0 sm:w-36 min-w-full sm:min-w-0"
@@ -48,8 +50,8 @@ const FilterUser = ({ disabled = false }: Props) => {
 				<Form.Select
 					name="sort_direction"
 					label="Sort direction"
-					value={userList.filter.sort_direction}
-					options={[filterConstant.FILTER_SORT_DIRECTION_ASC, filterConstant.FILTER_SORT_DIRECTION_DESC]}
+					value={userList.sort_direction}
+					options={[sortConstant.SORT_DIRECTION_ASC, sortConstant.SORT_DIRECTION_DESC]}
 					onChange={onChangeSortDirection}
 					className="sm:w-36 min-w-full sm:min-w-0"
 					disabled={disabled}
@@ -57,9 +59,9 @@ const FilterUser = ({ disabled = false }: Props) => {
 			</div>
 			<div className="flex sm:items-center flex-col sm:flex-row">
 				<Form.Input
-					name="keyword"
+					name="search"
 					label="Search"
-					value={userList.filter.keyword_temp}
+					value={userList.search_temp}
 					onChange={onChangeSearch}
 					className="min-w-full sm:w-72 sm:min-w-0"
 					disabled={disabled}
@@ -69,4 +71,4 @@ const FilterUser = ({ disabled = false }: Props) => {
 	);
 };
 
-export default FilterUser;
+export default SortSearchUser;

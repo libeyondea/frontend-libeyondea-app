@@ -6,6 +6,9 @@ const time = {
 	},
 	format: (value: moment.MomentInput) => {
 		return moment(value).format('YYYY-MM-DD HH:mm:ss');
+	},
+	yearNow: () => {
+		return moment().format('YYYY');
 	}
 };
 

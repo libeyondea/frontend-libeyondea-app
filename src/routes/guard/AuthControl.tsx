@@ -20,7 +20,7 @@ const AuthControl = ({ children }: Props) => {
 	const appInitialized = useSelector(selectAppInitialized);
 
 	useOnceEffect(() => {
-		const token = cookies.get(cookiesConstant.COOKIES_KEY_TOKEN);
+		const token = cookies.get(cookiesConstant.COOKIES_AUTH_TOKEN);
 
 		if (token) {
 			authService

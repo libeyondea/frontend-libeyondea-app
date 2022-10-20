@@ -14,9 +14,9 @@ export interface User {
 export interface ListUser {
 	page: number;
 	page_size: number;
-	sort_direction: string;
 	sort_by: string;
-	keyword: string;
+	sort_direction: string;
+	search: string;
 }
 
 export interface CreateUser {

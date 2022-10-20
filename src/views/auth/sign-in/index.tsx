@@ -38,8 +38,8 @@ const SignInPage = () => {
 		authService
 			.signIn(payload)
 			.then((response) => {
-				cookies.set(cookiesConstant.COOKIES_KEY_TOKEN, response.data.data.token, {
-					expires: values.remember_me ? config.AUTH_DATA.EXPIRED_TIME_REMEMBER_ME : config.AUTH_DATA.EXPIRED_TIME
+				cookies.set(cookiesConstant.COOKIES_AUTH_TOKEN, response.data.data.token, {
+					expires: values.remember_me ? config.AUTH.EXPIRED_TIME_REMEMBER_ME : config.AUTH.EXPIRED_TIME
 				});
 				dispatch(authCurrentDataUserRequestAction(response.data.data.user));
 				dispatch(authCurrentDataTokenRequestAction(response.data.data.token));

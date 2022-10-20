@@ -22,7 +22,7 @@ const Navbar = () => {
 				.catch(() => {})
 				.finally(() => {});
 		}
-		cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
+		cookies.remove(cookiesConstant.COOKIES_AUTH_TOKEN);
 		dispatch(authCurrentDataUserRequestAction(null));
 		dispatch(authCurrentDataTokenRequestAction(null));
 		toastify.success('Signed out successfully.');

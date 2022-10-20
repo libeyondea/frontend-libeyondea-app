@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { useCallback } from 'react';
 
-import FilterUser from './components/FilterUser';
+import SortSearchUser from './components/SortSearchUser';
 import Badge from 'src/components/Badge';
 import Card from 'src/components/Card';
 import { EditIcon, TrashIcon } from 'src/components/Icon';
@@ -65,9 +65,9 @@ const UserPage = () => {
 		const payload = {
 			page: userList.pagination.page,
 			page_size: userList.pagination.page_size,
-			keyword: userList.filter.keyword,
-			sort_by: userList.filter.sort_by,
-			sort_direction: userList.filter.sort_direction
+			sort_by: userList.sort_by,
+			sort_direction: userList.sort_direction,
+			search: userList.search
 		};
 		userService
 			.list(payload)
@@ -79,7 +79,7 @@ const UserPage = () => {
 			.finally(() => {
 				dispatch(userListLoadingRequestAction(false));
 			});
-	}, [dispatch, userList.filter.keyword, userList.filter.sort_by, userList.filter.sort_direction, userList.pagination.page_size, userList.pagination.page]);
+	}, [dispatch, userList.search, userList.sort_by, userList.sort_direction, userList.pagination.page_size, userList.pagination.page]);
 
 	useOnceEffect(() => {
 		userListDataCallback();
@@ -93,7 +93,7 @@ const UserPage = () => {
 		<div className="grid grid-cols-1 gap-4">
 			<div className="col-span-1">
 				<Card title="List users">
-					<FilterUser disabled={userDelete.loading} />
+					<SortSearchUser disabled={userDelete.loading} />
 					{userList.loading ? (
 						<TableLoading />
 					) : (

@@ -6,26 +6,26 @@ import {
 	userDeleteDataSuccessAction,
 	userDeleteLoadingSuccessAction,
 	userListDataSuccessAction,
-	userListFilterKeywordSuccessAction,
-	userListFilterKeywordTempSuccessAction,
-	userListFilterSortBySuccessAction,
-	userListFilterSortDirectionSuccessAction,
 	userListLoadingSuccessAction,
 	userListPaginationPageSizeSuccessAction,
 	userListPaginationPageSuccessAction,
 	userListPaginationTotalSuccessAction,
+	userListSearchSuccessAction,
+	userListSearchTempSuccessAction,
+	userListSortBySuccessAction,
+	userListSortDirectionSuccessAction,
 	userShowDataSuccessAction,
 	userShowLoadingSuccessAction,
 	userUpdateDataSuccessAction,
 	userUpdateLoadingSuccessAction
 } from './actions';
-import * as filterConstant from 'src/constants/filter';
 import * as paginationConstant from 'src/constants/pagination';
-import { ResponseDataPaginationFilterReducer, ResponseDataReducer } from 'src/types/reducer';
+import * as sortConstant from 'src/constants/sort';
+import { ResponseDataPaginationSearchSortReducer, ResponseDataReducer } from 'src/types/reducer';
 import { User } from 'src/types/user';
 
 type UserState = {
-	list: ResponseDataPaginationFilterReducer<User[]>;
+	list: ResponseDataPaginationSearchSortReducer<User[]>;
 	show: ResponseDataReducer<User>;
 	create: ResponseDataReducer<User>;
 	update: ResponseDataReducer<User>;
@@ -36,16 +36,14 @@ const initialState: UserState = {
 	list: {
 		data: [],
 		pagination: {
-			page: paginationConstant.PAGINATION_DEFAULT_PAGE,
-			page_size: paginationConstant.PAGINATION_DEFAULT_PAGE_SIZE,
+			page: paginationConstant.PAGINATION_PAGE,
+			page_size: paginationConstant.PAGINATION_PAGE_SIZE,
 			total: 0
 		},
-		filter: {
-			keyword: '',
-			keyword_temp: '',
-			sort_direction: filterConstant.FILTER_DEFAULT_SORT_DIRECTION,
-			sort_by: filterConstant.FILTER_DEFAULT_SORT_BY
-		},
+		sort_by: sortConstant.SORT_BY,
+		sort_direction: sortConstant.SORT_DIRECTION,
+		search: '',
+		search_temp: '',
 		loading: true
 	},
 	show: {
@@ -104,27 +102,21 @@ const userReducer = createReducer(initialState, (builder) => {
 			}
 		}
 	}));
-	builder.addCase(userListFilterSortBySuccessAction, (state, action) => ({
+	builder.addCase(userListSortBySuccessAction, (state, action) => ({
 		...state,
 		list: {
 			...state.list,
-			filter: {
-				...state.list.filter,
-				sort_by: action.payload
-			}
+			sort_by: action.payload
 		}
 	}));
-	builder.addCase(userListFilterSortDirectionSuccessAction, (state, action) => ({
+	builder.addCase(userListSortDirectionSuccessAction, (state, action) => ({
 		...state,
 		list: {
 			...state.list,
-			filter: {
-				...state.list.filter,
-				sort_direction: action.payload
-			}
+			sort_direction: action.payload
 		}
 	}));
-	builder.addCase(userListFilterKeywordSuccessAction, (state, action) => ({
+	builder.addCase(userListSearchSuccessAction, (state, action) => ({
 		...state,
 		list: {
 			...state.list,
@@ -132,20 +124,14 @@ const userReducer = createReducer(initialState, (builder) => {
 				...state.list.pagination,
 				page: 1
 			},
-			filter: {
-				...state.list.filter,
-				keyword: action.payload
-			}
+			search: action.payload
 		}
 	}));
-	builder.addCase(userListFilterKeywordTempSuccessAction, (state, action) => ({
+	builder.addCase(userListSearchTempSuccessAction, (state, action) => ({
 		...state,
 		list: {
 			...state.list,
-			filter: {
-				...state.list.filter,
-				keyword_temp: action.payload
-			}
+			search_temp: action.payload
 		}
 	}));
 	builder.addCase(userListLoadingSuccessAction, (state, action) => ({
