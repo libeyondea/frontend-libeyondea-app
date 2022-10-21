@@ -39,7 +39,7 @@ const Navbar = () => {
 				<div className="dropdown dropdown-end">
 					<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
 						<div className="w-9 rounded-full">
-							<Image src={authCurrent.data.user?.avatar_url} alt={authCurrent.data.user?.user_name} />
+							<Image src={authCurrent.data.user?.avatar} alt={authCurrent.data.user?.user_name} />
 						</div>
 					</label>
 					<ul tabIndex={0} className="menu menu-compact dropdown-content mt-4 p-2 shadow bg-base-100 rounded-box w-52">

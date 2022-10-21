@@ -232,7 +232,7 @@ const EditUserPage = () => {
 									<div className="col-span-12">
 										<Form.Image
 											label="Avatar"
-											imgUrl={userShow.data.avatar_url}
+											imgUrl={userShow.data.avatar}
 											error={Boolean(props.errors.image && props.touched.image)}
 											helperText={props.errors.image}
 											onChangeFile={props.setFieldValue}

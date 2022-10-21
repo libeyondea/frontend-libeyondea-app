@@ -3,12 +3,13 @@ export interface User {
 	first_name: string;
 	last_name: string;
 	user_name: string;
-	avatar_url: string;
+	avatar: string;
 	email: string;
 	role: string;
 	actived: boolean;
 	created_at: string | null;
 	updated_at: string | null;
+	action: boolean;
 }
 
 export interface ListUser {

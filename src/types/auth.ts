@@ -25,7 +25,7 @@ export interface Me {
 	first_name: string;
 	last_name: string;
 	user_name: string;
-	avatar_url: string;
+	avatar: string;
 	email: string;
 	role: string;
 	actived: boolean;
