@@ -28,7 +28,7 @@ export interface Me {
 	avatar: string;
 	email: string;
 	role: string;
-	actived: boolean;
+	status: boolean;
 	created_at: string | null;
 	updated_at: string | null;
 	setting: {

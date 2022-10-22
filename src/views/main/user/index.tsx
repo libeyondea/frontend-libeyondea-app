@@ -113,7 +113,7 @@ const UserPage = () => {
 			<div className="col-span-1">
 				<Card title="List users">
 					<Table<User>
-						columns={['avatar', 'first_name', 'last_name', 'user_name', 'email', 'role', 'actived', 'updated_at', 'created_at']}
+						columns={['avatar', 'first_name', 'last_name', 'user_name', 'email', 'role', 'status', 'updated_at', 'created_at']}
 						data={userList.data}
 						loading={userList.loading}
 						disabled={userDelete.loading}
@@ -123,7 +123,7 @@ const UserPage = () => {
 						}}
 						sortSearch={{
 							sortBy: userList.sort_by,
-							sortByOptions: ['first_name', 'last_name', 'user_name', 'email', 'role', 'actived', 'updated_at', 'created_at'],
+							sortByOptions: ['first_name', 'last_name', 'user_name', 'email', 'role', 'status', 'updated_at', 'created_at'],
 							sortDirection: userList.sort_direction,
 							searchTemp: userList.search_temp,
 							onChangeSortBy: onChangeSortBy,
@@ -145,12 +145,12 @@ const UserPage = () => {
 										<Image className="h-10 w-10 rounded-full" src={value} alt={row.user_name} />
 									</div>
 								</div>
-							) : key === 'actived' ? (
-								<Badge colorType={value ? 'success' : 'danger'}>{_.capitalize(_.toString(value))}</Badge>
+							) : key === 'status' ? (
+								<Badge colorType={value ? 'success' : 'danger'}>{value ? 'Active' : 'Deactive'}</Badge>
 							) : key === 'role' ? (
 								_.capitalize(_.toString(value))
 							) : (
-								value
+								_.toString(value)
 							);
 						}}
 					/>

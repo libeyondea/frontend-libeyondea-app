@@ -31,7 +31,7 @@ const NewUserPage = () => {
 		password: '',
 		password_confirmation: '',
 		role: userConstant.USER_ROLE_MEMBER,
-		actived: false,
+		status: false,
 		avatar: null,
 		image: null
 	};
@@ -56,7 +56,7 @@ const NewUserPage = () => {
 		role: Yup.string()
 			.required('The role is required.')
 			.oneOf([...userConstant.USER_ROLE_ALL], 'The role invalid.'),
-		actived: Yup.boolean()
+		status: Yup.boolean()
 	});
 
 	const onSubmit = (values: CreateUserFormik, formikHelpers: FormikHelpers<CreateUserFormik>) => {
@@ -89,7 +89,7 @@ const NewUserPage = () => {
 					user_name: values.user_name,
 					password: values.password,
 					role: values.role,
-					actived: values.actived,
+					status: values.status,
 					...(values.avatar && {
 						avatar: values.avatar
 					})
@@ -193,11 +193,11 @@ const NewUserPage = () => {
 								</div>
 								<div className="col-span-12 md:col-span-6 lg:col-span-4">
 									<Form.Toggle
-										label="Actived"
-										checked={props.values.actived}
-										error={Boolean(props.errors.actived && props.touched.actived)}
-										helperText={props.errors.actived}
-										{...props.getFieldProps('actived')}
+										label="Status"
+										checked={props.values.status}
+										error={Boolean(props.errors.status && props.touched.status)}
+										helperText={props.errors.status}
+										{...props.getFieldProps('status')}
 									/>
 								</div>
 								<div className="col-span-12">

@@ -60,7 +60,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 					onChangeSortDirection={sortSearch.onChangeSortDirection}
 					onChangeSearch={sortSearch.onChangeSearch}
 					onChangeSearchTemp={sortSearch.onChangeSearchTemp}
-					disabled={disabled}
+					disabled={disabled || loading}
 				/>
 			)}
 			<div className="overflow-x-auto w-full">
@@ -152,7 +152,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 					total={pagination.total}
 					onChangePage={pagination.onChangePage}
 					onChangePageSize={pagination.onChangePageSize}
-					disabled={disabled}
+					disabled={disabled || loading}
 				/>
 			)}
 		</>
