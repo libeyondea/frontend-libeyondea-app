@@ -34,7 +34,7 @@ const MainRoutes: RouteObjectWithRole = {
 		{
 			path: `/${routeConstant.ROUTE_NAME_DASHBOARD}`,
 			element: <DashboardPage />,
-			roles: [...userConstant.USER_ROLE_ALL]
+			roles: [userConstant.USER_ROLE_OWNER]
 		},
 		{
 			path: `/${routeConstant.ROUTE_NAME_USER}`,

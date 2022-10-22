@@ -25,14 +25,16 @@ const Sidebar = () => {
 				</Link>
 			</div>
 			<div className="h-4"></div>
-			<ul className="menu p-0 px-4">
-				<li>
-					<NavLink to={`/${routeConstant.ROUTE_NAME_DASHBOARD}`} classNameActive="active">
-						<TachometerIcon className="w-6 h-6" />
-						Dashboard
-					</NavLink>
-				</li>
-			</ul>
+			{_.includes([userConstant.USER_ROLE_OWNER], authCurrent.data.user?.role) && (
+				<ul className="menu p-0 px-4">
+					<li>
+						<NavLink to={`/${routeConstant.ROUTE_NAME_DASHBOARD}`} classNameActive="active">
+							<TachometerIcon className="w-6 h-6" />
+							Dashboard
+						</NavLink>
+					</li>
+				</ul>
+			)}
 			{_.includes([userConstant.USER_ROLE_OWNER], authCurrent.data.user?.role) && (
 				<ul className="menu flex flex-col p-0 px-4">
 					<li></li>
