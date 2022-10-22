@@ -9,22 +9,20 @@ type Props = {
 	page: number;
 	pageSize: number;
 	total: number;
+	disabled?: boolean;
 	onChangePage: (page: number) => void;
 	onChangePageSize: (pageSize: number) => void;
-	disabled?: boolean;
 };
 
-const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePageSize, disabled = false }: Props) => {
+const Pagination = ({ className, page, pageSize, total, disabled = false, onChangePage, onChangePageSize }: Props) => {
 	const totalPages = _.ceil(total / pageSize);
 
-	const _onChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => {
-		event.preventDefault();
+	const _onChangePage = (page: number) => {
 		onChangePage(page);
 	};
 
 	const _onChangePageSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		event.preventDefault();
-		onChangePageSize(parseInt(event.target.value));
+		onChangePageSize(Number(event.target.value));
 	};
 
 	return (
@@ -48,18 +46,13 @@ const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePa
 			</div>
 			<div className="flex-none flex items-center">
 				<nav className="btn-group">
-					<button
-						type="button"
-						className="btn btn-sm btn-primary btn-outline"
-						onClick={(event) => _onChangePage(event, 1)}
-						disabled={page <= 1 || disabled}
-					>
+					<button type="button" className="btn btn-sm btn-primary btn-outline" onClick={() => _onChangePage(1)} disabled={page <= 1 || disabled}>
 						<AngleDoubleLeftIcon className="h-4 w-4" />
 					</button>
 					<button
 						type="button"
 						className="btn btn-sm btn-primary btn-outline"
-						onClick={(event) => _onChangePage(event, page - 1)}
+						onClick={() => _onChangePage(page - 1)}
 						disabled={page <= 1 || disabled}
 					>
 						<AngleLeftIcon className="h-4 w-4" />
@@ -67,7 +60,7 @@ const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePa
 					<button
 						type="button"
 						className="btn btn-sm btn-primary btn-outline"
-						onClick={(event) => _onChangePage(event, page + 1)}
+						onClick={() => _onChangePage(page + 1)}
 						disabled={page >= totalPages || disabled}
 					>
 						<AngleRightIcon className="h-4 w-4" />
@@ -75,7 +68,7 @@ const Pagination = ({ className, page, pageSize, total, onChangePage, onChangePa
 					<button
 						type="button"
 						className="btn btn-sm btn-primary btn-outline"
-						onClick={(event) => _onChangePage(event, totalPages)}
+						onClick={() => _onChangePage(totalPages)}
 						disabled={page >= totalPages || disabled}
 					>
 						<AngleDoubleRightIcon className="h-4 w-4" />

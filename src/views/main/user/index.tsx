@@ -1,14 +1,10 @@
 import _ from 'lodash';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import FilterUser from './components/FilterUser';
 import Badge from 'src/components/Badge';
 import Card from 'src/components/Card';
-import { EditIcon, TrashIcon } from 'src/components/Icon';
 import Image from 'src/components/Image';
-import Link from 'src/components/Link';
-import { TableLoading } from 'src/components/Loading';
-import Pagination from 'src/components/Pagination';
 import Table from 'src/components/Table';
 import * as routeConstant from 'src/constants/route';
 import useOnceEffect from 'src/hooks/useOnceEffect';
@@ -22,17 +18,36 @@ import {
 	userListLoadingRequestAction,
 	userListPaginationPageRequestAction,
 	userListPaginationPageSizeRequestAction,
-	userListPaginationTotalRequestAction
+	userListPaginationTotalRequestAction,
+	userListSearchRequestAction,
+	userListSearchTempRequestAction,
+	userListSortByRequestAction,
+	userListSortDirectionRequestAction
 } from 'src/store/user/actions';
 import { selectUserDelete, selectUserList } from 'src/store/user/selectors';
+import { User } from 'src/types/user';
 import errorHandler from 'src/utils/errorHandler';
-import time from 'src/utils/time';
 import toastify from 'src/utils/toastify';
 
 const UserPage = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const userList = useSelector(selectUserList);
 	const userDelete = useSelector(selectUserDelete);
+
+	const onChangeSortBy = (sortBy: string) => {
+		dispatch(userListSortByRequestAction(sortBy));
+	};
+
+	const onChangeSortDirection = (sortDirection: string) => {
+		dispatch(userListSortDirectionRequestAction(sortDirection));
+	};
+
+	const onChangeSearch = useMemo(() => _.debounce((search: string) => dispatch(userListSearchRequestAction(search)), 600), [dispatch]);
+
+	const onChangeSearchTemp = (searchTemp: string) => {
+		dispatch(userListSearchTempRequestAction(searchTemp));
+	};
 
 	const onChangePage = (page: number) => {
 		dispatch(userListPaginationPageRequestAction(page));
@@ -41,6 +56,10 @@ const UserPage = () => {
 	const onChangePageSize = (pageSize: number) => {
 		dispatch(userListPaginationPageRequestAction(1));
 		dispatch(userListPaginationPageSizeRequestAction(pageSize));
+	};
+
+	const onClickEdit = (id: number) => {
+		navigate(`/${routeConstant.ROUTE_NAME_USER}/${id}/${routeConstant.ROUTE_NAME_USER_EDIT}`);
 	};
 
 	const onClickDelete = (id: number) => {
@@ -65,9 +84,9 @@ const UserPage = () => {
 		const payload = {
 			page: userList.pagination.page,
 			page_size: userList.pagination.page_size,
-			keyword: userList.filter.keyword,
-			sort_by: userList.filter.sort_by,
-			sort_direction: userList.filter.sort_direction
+			sort_by: userList.sort_by,
+			sort_direction: userList.sort_direction,
+			search: userList.search
 		};
 		userService
 			.list(payload)
@@ -79,7 +98,7 @@ const UserPage = () => {
 			.finally(() => {
 				dispatch(userListLoadingRequestAction(false));
 			});
-	}, [dispatch, userList.filter.keyword, userList.filter.sort_by, userList.filter.sort_direction, userList.pagination.page_size, userList.pagination.page]);
+	}, [dispatch, userList.search, userList.sort_by, userList.sort_direction, userList.pagination.page_size, userList.pagination.page]);
 
 	useOnceEffect(() => {
 		userListDataCallback();
@@ -93,87 +112,47 @@ const UserPage = () => {
 		<div className="grid grid-cols-1 gap-4">
 			<div className="col-span-1">
 				<Card title="List users">
-					<FilterUser disabled={userDelete.loading} />
-					{userList.loading ? (
-						<TableLoading />
-					) : (
-						<Table>
-							<Table.Thead>
-								<Table.Tr>
-									<Table.Th>User</Table.Th>
-									<Table.Th>Actived</Table.Th>
-									<Table.Th>Role</Table.Th>
-									<Table.Th>Updated at</Table.Th>
-									<Table.Th>Created at</Table.Th>
-									<Table.Th>
-										<span className="sr-only">Action</span>
-									</Table.Th>
-								</Table.Tr>
-							</Table.Thead>
-							<Table.Tbody>
-								{_.isEmpty(userList.data) ? (
-									<Table.Tr>
-										<Table.Td className="text-center" colSpan={6}>
-											No data.
-										</Table.Td>
-									</Table.Tr>
-								) : (
-									userList.data.map((user) => (
-										<Table.Tr key={user.id}>
-											<Table.Td>
-												<div className="flex items-center space-x-3">
-													<div className="avatar">
-														<div className="mask mask-squircle w-12 h-12">
-															<Image className="h-10 w-10 rounded-full" src={user.avatar_url} alt={user.user_name} />
-														</div>
-													</div>
-													<div>
-														<div className="font-bold">
-															{user.first_name} {user.last_name} ({user.user_name})
-														</div>
-														<div className="text-sm opacity-50">{user.email}</div>
-													</div>
-												</div>
-											</Table.Td>
-											<Table.Td>
-												<Badge className="capitalize" colorType={user.actived ? 'success' : 'danger'}>
-													{user.actived.toString()}
-												</Badge>
-											</Table.Td>
-											<Table.Td className="capitalize">{user.role}</Table.Td>
-											<Table.Td>{time.ago(user.updated_at)}</Table.Td>
-											<Table.Td>{time.format(user.created_at)}</Table.Td>
-											<Table.Td>
-												<div className="flex items-center">
-													<Link
-														to={`/${routeConstant.ROUTE_NAME_USER}/${user.id}/${routeConstant.ROUTE_NAME_USER_EDIT}`}
-														className="text-info hover:text-info-content mr-2"
-													>
-														<EditIcon className="h-5 w-5" />
-													</Link>
-													<button
-														type="button"
-														className="text-error hover:text-error-content"
-														onClick={() => onClickDelete(user.id)}
-														disabled={userDelete.loading}
-													>
-														<TrashIcon className="h-5 w-5" />
-													</button>
-												</div>
-											</Table.Td>
-										</Table.Tr>
-									))
-								)}
-							</Table.Tbody>
-						</Table>
-					)}
-					<Pagination
-						page={userList.pagination.page}
-						pageSize={userList.pagination.page_size}
-						total={userList.pagination.total}
-						onChangePage={onChangePage}
-						onChangePageSize={onChangePageSize}
+					<Table<User>
+						columns={['avatar', 'first_name', 'last_name', 'user_name', 'email', 'role', 'status', 'updated_at', 'created_at']}
+						data={userList.data}
+						loading={userList.loading}
 						disabled={userDelete.loading}
+						action={{
+							onClickEdit: onClickEdit,
+							onClickDelete: onClickDelete
+						}}
+						sortSearch={{
+							sortBy: userList.sort_by,
+							sortByOptions: ['first_name', 'last_name', 'user_name', 'email', 'role', 'status', 'updated_at', 'created_at'],
+							sortDirection: userList.sort_direction,
+							searchTemp: userList.search_temp,
+							onChangeSortBy: onChangeSortBy,
+							onChangeSortDirection: onChangeSortDirection,
+							onChangeSearch: onChangeSearch,
+							onChangeSearchTemp: onChangeSearchTemp
+						}}
+						pagination={{
+							page: userList.pagination.page,
+							pageSize: userList.pagination.page_size,
+							total: userList.pagination.total,
+							onChangePage: onChangePage,
+							onChangePageSize: onChangePageSize
+						}}
+						columnCell={(key, value, row) => {
+							return key === 'avatar' ? (
+								<div className="avatar">
+									<div className="mask mask-squircle w-12 h-12">
+										<Image className="h-10 w-10 rounded-full" src={value} alt={row.user_name} />
+									</div>
+								</div>
+							) : key === 'status' ? (
+								<Badge colorType={value ? 'success' : 'danger'}>{value ? 'Active' : 'Deactive'}</Badge>
+							) : key === 'role' ? (
+								_.capitalize(_.toString(value))
+							) : (
+								_.toString(value)
+							);
+						}}
 					/>
 				</Card>
 			</div>

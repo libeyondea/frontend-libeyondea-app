@@ -41,7 +41,7 @@ const SelectForm = ({ className, name, label, options, error = false, helperText
 			>
 				{options.map((option, index) => (
 					<option value={option} key={index}>
-						{_.startCase(_.camelCase(option.toString()))}
+						{_.startCase(_.camelCase(_.toString(option)))}
 					</option>
 				))}
 			</select>

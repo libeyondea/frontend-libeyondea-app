@@ -4,7 +4,7 @@ import config from 'src/config';
 import store from 'src/store';
 
 const axiosService = axios.create({
-	baseURL: config.API.URL.BASE_API_URL,
+	baseURL: config.URL.BASE_API_URL,
 	headers: {
 		Accept: 'application/json',
 		'Content-Type': 'application/json'

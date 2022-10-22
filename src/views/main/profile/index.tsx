@@ -201,7 +201,7 @@ const ProfilePage = () => {
 											helperText={props.errors.image}
 											onChangeFile={props.setFieldValue}
 											onBlurFile={props.setFieldTouched}
-											imgUrl={profileShow.data.avatar_url}
+											imgUrl={profileShow.data.avatar}
 											{...props.getFieldProps('image')}
 										/>
 									</div>

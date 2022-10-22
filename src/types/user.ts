@@ -3,10 +3,10 @@ export interface User {
 	first_name: string;
 	last_name: string;
 	user_name: string;
-	avatar_url: string;
+	avatar: string;
 	email: string;
 	role: string;
-	actived: boolean;
+	status: boolean;
 	created_at: string | null;
 	updated_at: string | null;
 }
@@ -14,9 +14,9 @@ export interface User {
 export interface ListUser {
 	page: number;
 	page_size: number;
-	sort_direction: string;
 	sort_by: string;
-	keyword: string;
+	sort_direction: string;
+	search: string;
 }
 
 export interface CreateUser {
@@ -26,7 +26,7 @@ export interface CreateUser {
 	email: string;
 	password: string;
 	role: string;
-	actived: boolean;
+	status: boolean;
 	avatar?: string | null;
 }
 
@@ -38,7 +38,7 @@ export interface CreateUserFormik {
 	password: string;
 	password_confirmation: string;
 	role: string;
-	actived: boolean;
+	status: boolean;
 	avatar?: string | null;
 	image: File | null;
 }
@@ -50,7 +50,7 @@ export interface UpdateUser {
 	email: string;
 	password?: string;
 	role: string;
-	actived: boolean;
+	status: boolean;
 	avatar?: string | null;
 }
 
@@ -62,7 +62,7 @@ export interface UpdateUserFormik {
 	password?: string;
 	password_confirmation: string;
 	role: string;
-	actived: boolean;
+	status: boolean;
 	avatar?: string | null;
 	image: File | null;
 }

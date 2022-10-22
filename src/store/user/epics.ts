@@ -13,14 +13,6 @@ import {
 	userDeleteLoadingSuccessAction,
 	userListDataRequestAction,
 	userListDataSuccessAction,
-	userListFilterKeywordRequestAction,
-	userListFilterKeywordSuccessAction,
-	userListFilterKeywordTempRequestAction,
-	userListFilterKeywordTempSuccessAction,
-	userListFilterSortByRequestAction,
-	userListFilterSortBySuccessAction,
-	userListFilterSortDirectionRequestAction,
-	userListFilterSortDirectionSuccessAction,
 	userListLoadingRequestAction,
 	userListLoadingSuccessAction,
 	userListPaginationPageRequestAction,
@@ -29,6 +21,14 @@ import {
 	userListPaginationPageSuccessAction,
 	userListPaginationTotalRequestAction,
 	userListPaginationTotalSuccessAction,
+	userListSearchRequestAction,
+	userListSearchSuccessAction,
+	userListSearchTempRequestAction,
+	userListSearchTempSuccessAction,
+	userListSortByRequestAction,
+	userListSortBySuccessAction,
+	userListSortDirectionRequestAction,
+	userListSortDirectionSuccessAction,
 	userShowDataRequestAction,
 	userShowDataSuccessAction,
 	userShowLoadingRequestAction,
@@ -45,28 +45,28 @@ export const userListDataEpic = (action$: Observable<Action>): Observable<Action
 		map((action) => userListDataSuccessAction(action.payload))
 	);
 
-export const userListFilterSortDirectionEpic = (action$: Observable<Action>): Observable<Action> =>
+export const userListSortDirectionEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(userListFilterSortDirectionRequestAction.match),
-		map((action) => userListFilterSortDirectionSuccessAction(action.payload))
+		filter(userListSortDirectionRequestAction.match),
+		map((action) => userListSortDirectionSuccessAction(action.payload))
 	);
 
-export const userListFilterSortByEpic = (action$: Observable<Action>): Observable<Action> =>
+export const userListSortByEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(userListFilterSortByRequestAction.match),
-		map((action) => userListFilterSortBySuccessAction(action.payload))
+		filter(userListSortByRequestAction.match),
+		map((action) => userListSortBySuccessAction(action.payload))
 	);
 
-export const userListFilterKeywordEpic = (action$: Observable<Action>): Observable<Action> =>
+export const userListSearchEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(userListFilterKeywordRequestAction.match),
-		map((action) => userListFilterKeywordSuccessAction(action.payload))
+		filter(userListSearchRequestAction.match),
+		map((action) => userListSearchSuccessAction(action.payload))
 	);
 
-export const userListFilterKeywordTempEpic = (action$: Observable<Action>): Observable<Action> =>
+export const userListSearchTempEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
-		filter(userListFilterKeywordTempRequestAction.match),
-		map((action) => userListFilterKeywordTempSuccessAction(action.payload))
+		filter(userListSearchTempRequestAction.match),
+		map((action) => userListSearchTempSuccessAction(action.payload))
 	);
 
 export const userListLoadingEpic = (action$: Observable<Action>): Observable<Action> =>

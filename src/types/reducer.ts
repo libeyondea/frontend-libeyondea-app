@@ -3,16 +3,14 @@ export type ResponseDataReducer<T> = {
 	loading: boolean;
 };
 
-export type ResponseDataPaginationFilterReducer<T> = {
+export type ResponseDataPaginationSearchSortReducer<T> = {
 	pagination: {
 		page: number;
 		page_size: number;
 		total: number;
 	};
-	filter: {
-		keyword: string;
-		keyword_temp: string;
-		sort_direction: string;
-		sort_by: string;
-	};
+	search: string;
+	search_temp: string;
+	sort_by: string;
+	sort_direction: string;
 } & ResponseDataReducer<T>;

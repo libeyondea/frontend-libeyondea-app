@@ -35,35 +35,35 @@ export const userListPaginationTotalSuccessAction = createAction(actionTypes.USE
 	payload: payload
 }));
 
-export const userListFilterSortDirectionRequestAction = createAction(actionTypes.USER_LIST_FILTER_SORT_DIRECTION_REQUEST, (payload: string) => ({
+export const userListSortDirectionRequestAction = createAction(actionTypes.USER_LIST_SORT_DIRECTION_REQUEST, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterSortDirectionSuccessAction = createAction(actionTypes.USER_LIST_FILTER_SORT_DIRECTION_SUCCESS, (payload: string) => ({
+export const userListSortDirectionSuccessAction = createAction(actionTypes.USER_LIST_SORT_DIRECTION_SUCCESS, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterSortByRequestAction = createAction(actionTypes.USER_LIST_FILTER_SORT_BY_REQUEST, (payload: string) => ({
+export const userListSortByRequestAction = createAction(actionTypes.USER_LIST_SORT_BY_REQUEST, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterSortBySuccessAction = createAction(actionTypes.USER_LIST_FILTER_SORT_BY_SUCCESS, (payload: string) => ({
+export const userListSortBySuccessAction = createAction(actionTypes.USER_LIST_SORT_BY_SUCCESS, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterKeywordRequestAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_REQUEST, (payload: string) => ({
+export const userListSearchRequestAction = createAction(actionTypes.USER_LIST_SEARCH_REQUEST, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterKeywordSuccessAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_SUCCESS, (payload: string) => ({
+export const userListSearchSuccessAction = createAction(actionTypes.USER_LIST_SEARCH_SUCCESS, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterKeywordTempRequestAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_TEMP_REQUEST, (payload: string) => ({
+export const userListSearchTempRequestAction = createAction(actionTypes.USER_LIST_SEARCH_TEMP_REQUEST, (payload: string) => ({
 	payload: payload
 }));
 
-export const userListFilterKeywordTempSuccessAction = createAction(actionTypes.USER_LIST_FILTER_KEYWORD_TEMP_SUCCESS, (payload: string) => ({
+export const userListSearchTempSuccessAction = createAction(actionTypes.USER_LIST_SEARCH_TEMP_SUCCESS, (payload: string) => ({
 	payload: payload
 }));
 

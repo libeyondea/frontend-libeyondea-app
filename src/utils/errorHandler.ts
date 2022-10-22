@@ -48,7 +48,7 @@ const errorHandler = (callback?: (err: IUnauthorizedError | IForbiddenError | IN
 			if (error.code === AxiosError.ERR_BAD_REQUEST) {
 				toastify.error(error.response?.data.message);
 				if (error.response?.status === 401) {
-					cookies.remove(cookiesConstant.COOKIES_KEY_TOKEN);
+					cookies.remove(cookiesConstant.COOKIES_AUTH_TOKEN);
 					store.dispatch(authCurrentDataUserRequestAction(null));
 					store.dispatch(authCurrentDataTokenRequestAction(null));
 					callback &&
