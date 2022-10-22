@@ -9,7 +9,6 @@ export interface User {
 	actived: boolean;
 	created_at: string | null;
 	updated_at: string | null;
-	action: boolean;
 }
 
 export interface ListUser {
