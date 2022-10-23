@@ -72,7 +72,7 @@ const SignUpPage = () => {
 	};
 
 	return (
-		<Card className="m-auto max-w-md sm:py-4 sm:px-8" subTitle="Sign up your account">
+		<Card className="sm:py-4 sm:px-8" subTitle="Sign up your account">
 			<Form<SignUpFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(props) => (
 					<div className="grid grid-cols-1 gap-4">

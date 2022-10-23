@@ -37,7 +37,6 @@ const Sidebar = () => {
 			)}
 			{_.includes([userConstant.USER_ROLE_OWNER], authCurrent.data.user?.role) && (
 				<ul className="menu flex flex-col p-0 px-4">
-					<li></li>
 					<li className="menu-title">
 						<span>Users</span>
 					</li>
@@ -56,7 +55,6 @@ const Sidebar = () => {
 				</ul>
 			)}
 			<ul className="menu p-0 px-4">
-				<li></li>
 				<li className="menu-title">
 					<span>More</span>
 				</li>

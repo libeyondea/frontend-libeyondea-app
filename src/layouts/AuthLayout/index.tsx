@@ -6,8 +6,8 @@ const AuthLayout = () => {
 	useChangeTheme();
 
 	return (
-		<div className="bg-base-200 h-full w-full fixed overflow-x-hidden overflow-y-auto">
-			<div className="min-h-full flex flex-col py-8 sm:p-16">
+		<div className="center-screen">
+			<div className="center-screen-content">
 				<Outlet />
 			</div>
 		</div>

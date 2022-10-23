@@ -11,3 +11,25 @@
 		min-height: calc(100vh - calc(theme('spacing.16') + theme('spacing.12') + theme('spacing.1')));
 	}
 }
+
+@layer components {
+	.center-screen {
+		@apply bg-base-200;
+		@apply h-full;
+		@apply w-full;
+		@apply fixed;
+		@apply overflow-x-hidden;
+		@apply overflow-y-auto;
+		.center-screen-content {
+			@apply min-h-full;
+			@apply flex;
+			@apply flex-col;
+			@apply py-8;
+			@apply sm:p-16;
+			& > * {
+				@apply m-auto;
+				@apply max-w-md;
+			}
+		}
+	}
+}
