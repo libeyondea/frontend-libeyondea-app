@@ -26,7 +26,7 @@ const DashboardPage = () => {
 	return (
 		<div className="grid grid-cols-12 gap-4">
 			<div className="col-span-12 sm:col-span-6 md:col-span-3">
-				<Stat title="Total User" value={dashboardShow.data.user?.total} />
+				<Stat title="Total User" value={dashboardShow.data.user?.total} loading={dashboardShow.loading} />
 			</div>
 		</div>
 	);
