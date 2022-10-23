@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import _ from 'lodash';
+import { Fragment } from 'react';
 
 import { EditIcon, TrashIcon } from '../Icon';
 import Pagination from './Pagination';
@@ -49,7 +50,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 	...props
 }: Props<T>) => {
 	return (
-		<>
+		<Fragment>
 			{sortSearch && (
 				<SortSearch
 					sortBy={sortSearch.sortBy}
@@ -155,7 +156,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 					disabled={disabled || loading}
 				/>
 			)}
-		</>
+		</Fragment>
 	);
 };
 
