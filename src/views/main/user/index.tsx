@@ -59,7 +59,7 @@ const UserPage = () => {
 	};
 
 	const onClickEdit = (id: number) => {
-		navigate(`/${routeConstant.ROUTE_NAME_USER}/${id}/${routeConstant.ROUTE_NAME_USER_EDIT}`);
+		navigate(`/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_EDIT}?id=${id}`);
 	};
 
 	const onClickDelete = (id: number) => {

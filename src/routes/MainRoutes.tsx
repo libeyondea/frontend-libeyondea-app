@@ -47,7 +47,7 @@ const MainRoutes: RouteObjectWithRole = {
 			roles: [userConstant.USER_ROLE_OWNER]
 		},
 		{
-			path: `/${routeConstant.ROUTE_NAME_USER}/:userId/${routeConstant.ROUTE_NAME_USER_EDIT}`,
+			path: `/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_EDIT}`,
 			element: <EditUserPage />,
 			roles: [userConstant.USER_ROLE_OWNER]
 		},

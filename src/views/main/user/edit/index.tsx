@@ -1,7 +1,7 @@
 import { FormikHelpers } from 'formik';
 import _ from 'lodash';
 import { useCallback, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import Button from 'src/components/Button';
@@ -22,7 +22,8 @@ import errorHandler from 'src/utils/errorHandler';
 import toastify from 'src/utils/toastify';
 
 const EditUserPage = () => {
-	const params = useParams();
+	const [searchParams] = useSearchParams();
+	const userId = searchParams.get('id');
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userShow = useSelector(selectUserShow);
@@ -98,7 +99,7 @@ const EditUserPage = () => {
 					})
 				};
 				userService
-					.update(Number(params.userId), payload)
+					.update(Number(userId), payload)
 					.then((response) => {
 						dispatch(userUpdateDataRequestAction(response.data.data));
 						toastify.success('User updated successfully.');
@@ -128,7 +129,7 @@ const EditUserPage = () => {
 	const userShowDataCallback = useCallback(() => {
 		dispatch(userShowLoadingRequestAction(true));
 		userService
-			.show(Number(params.userId))
+			.show(Number(userId))
 			.then((response) => {
 				dispatch(userShowDataRequestAction(response.data.data));
 			})
@@ -136,7 +137,7 @@ const EditUserPage = () => {
 			.finally(() => {
 				dispatch(userShowLoadingRequestAction(false));
 			});
-	}, [dispatch, params.userId]);
+	}, [dispatch, userId]);
 
 	useOnceEffect(() => {
 		userShowDataCallback();
