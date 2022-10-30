@@ -1,11 +1,9 @@
-import classNames from 'classnames';
 import _ from 'lodash';
 
 import Form from 'src/components/Form';
 import { AngleDoubleLeftIcon, AngleDoubleRightIcon, AngleLeftIcon, AngleRightIcon } from 'src/components/Icon';
 
 type Props = {
-	className?: string;
 	page: number;
 	pageSize: number;
 	total: number;
@@ -14,7 +12,7 @@ type Props = {
 	onChangePageSize: (pageSize: number) => void;
 };
 
-const Pagination = ({ className, page, pageSize, total, disabled = false, onChangePage, onChangePageSize }: Props) => {
+const Pagination = ({ page, pageSize, total, disabled = false, onChangePage, onChangePageSize }: Props) => {
 	const totalPages = _.ceil(total / pageSize);
 
 	const _onChangePage = (page: number) => {
@@ -26,7 +24,7 @@ const Pagination = ({ className, page, pageSize, total, disabled = false, onChan
 	};
 
 	return (
-		<div className={classNames('overflow-x-auto mt-4 flex items-center justify-start md:justify-end', className)}>
+		<div className="overflow-x-auto mt-4 flex items-center justify-start md:justify-end">
 			<div className="flex-none flex items-center mr-4">
 				<span>
 					<Form.Select
