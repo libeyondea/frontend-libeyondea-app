@@ -9,6 +9,6 @@ export type DataPaginationResponse<T> = {
 } & DataResponse<T>;
 
 export type ErrorResponse = {
-	message?: string;
+	message: string;
 	errors?: any;
 };
