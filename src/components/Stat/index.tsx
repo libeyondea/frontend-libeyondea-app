@@ -20,7 +20,7 @@ const Stat = ({ className, title, value, description, figure, loading }: Props, 
 					<SpinLoading />
 				) : (
 					<Fragment>
-						<div className="stat-figure text-primary">{figure}</div>
+						{figure && <div className="stat-figure text-primary">{figure}</div>}
 						<div className="stat-title">{title}</div>
 						<div className="stat-value text-primary">{value}</div>
 						{description && <div className="stat-desc">{description}</div>}

@@ -139,10 +139,10 @@ const UserPage = () => {
 										<Image className="h-10 w-10 rounded-full" src={_.toString(value)} alt={_.toString(row.user_name)} />
 									</div>
 								</div>
-							) : key === 'status' ? (
-								<Badge colorType={Boolean(value) ? 'success' : 'danger'}>{Boolean(value) ? 'Active' : 'Deactive'}</Badge>
 							) : key === 'role' ? (
 								_.capitalize(_.toString(value))
+							) : key === 'status' ? (
+								<Badge colorType={Boolean(value) ? 'success' : 'danger'}>{Boolean(value) ? 'Active' : 'Deactive'}</Badge>
 							) : (
 								_.toString(value)
 							);

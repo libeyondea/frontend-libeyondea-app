@@ -1,4 +1,5 @@
 import { FormikConfig, FormikHelpers, FormikProps, FormikValues, useFormik } from 'formik';
+import _ from 'lodash';
 
 import CheckboxForm from './Checkbox';
 import ImageForm from './Image';
@@ -36,7 +37,7 @@ const Form = <Values extends FormikValues = FormikValues>({
 	);
 };
 
-export default Object.assign(Form, {
+export default _.assign(Form, {
 	Input: InputForm,
 	Select: SelectForm,
 	Checkbox: CheckboxForm,
