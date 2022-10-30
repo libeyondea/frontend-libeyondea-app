@@ -21,15 +21,15 @@ import {
 } from './actions';
 import * as paginationConstant from 'src/constants/pagination';
 import * as sortConstant from 'src/constants/sort';
-import { ResponseDataPaginationSearchSortReducer, ResponseDataReducer } from 'src/types/reducer';
+import { DataPaginationSearchSortReducer, DataReducer } from 'src/types/reducer';
 import { User } from 'src/types/user';
 
 type UserState = {
-	list: ResponseDataPaginationSearchSortReducer<User[]>;
-	show: ResponseDataReducer<User>;
-	create: ResponseDataReducer<User>;
-	update: ResponseDataReducer<User>;
-	delete: ResponseDataReducer<User>;
+	list: DataPaginationSearchSortReducer<User[]>;
+	show: DataReducer<User>;
+	create: DataReducer<User>;
+	update: DataReducer<User>;
+	delete: DataReducer<User>;
 };
 
 const initialState: UserState = {

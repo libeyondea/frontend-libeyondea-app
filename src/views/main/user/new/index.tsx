@@ -80,7 +80,7 @@ const NewUserPage = () => {
 					setImageUpload({ loading: false });
 				});
 		})
-			.then((result) => {
+			.then(() => {
 				dispatch(userCreateLoadingRequestAction(true));
 				const payload = {
 					first_name: values.first_name,

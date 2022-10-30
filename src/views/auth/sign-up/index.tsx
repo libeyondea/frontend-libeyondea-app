@@ -55,7 +55,7 @@ const SignUpPage = () => {
 		};
 		authService
 			.signUp(payload)
-			.then((response) => {
+			.then(() => {
 				toastify.success('Signed up successfully.');
 				navigate(`/${routeConstant.ROUTE_NAME_SIGN_IN}`);
 			})

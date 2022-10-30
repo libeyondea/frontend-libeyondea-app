@@ -1,13 +1,13 @@
 import { FormikHelpers } from 'formik';
 import _ from 'lodash';
 import { useState } from 'react';
+import { useEffectOnce } from 'react-use';
 import * as Yup from 'yup';
 
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
 import Form from 'src/components/Form';
 import { SpinLoading } from 'src/components/Loading';
-import useOnceEffect from 'src/hooks/useOnceEffect';
 import imageService from 'src/services/imageService';
 import profileService from 'src/services/profileService';
 import { useDispatch, useSelector } from 'src/store';
@@ -74,7 +74,7 @@ const ProfilePage = () => {
 					setImageUpload({ loading: false });
 				});
 		})
-			.then((result) => {
+			.then(() => {
 				dispatch(profileUpdateLoadingRequestAction(true));
 				const payload = {
 					first_name: values.first_name,
@@ -118,7 +118,7 @@ const ProfilePage = () => {
 			.finally(() => {});
 	};
 
-	useOnceEffect(() => {
+	useEffectOnce(() => {
 		dispatch(profileShowLoadingRequestAction(true));
 		profileService
 			.show()

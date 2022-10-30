@@ -2,11 +2,11 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { dashboardShowDataSuccessAction, dashboardShowLoadingSuccessAction } from './actions';
 import { Dashboard } from 'src/types/dashboard';
-import { ResponseDataReducer } from 'src/types/reducer';
+import { DataReducer } from 'src/types/reducer';
 
 type DashboardState = {
-	show: ResponseDataReducer<Dashboard>;
-	update: ResponseDataReducer<Dashboard>;
+	show: DataReducer<Dashboard>;
+	update: DataReducer<Dashboard>;
 };
 
 const initialState: DashboardState = {

@@ -1,17 +1,17 @@
 import { AxiosResponse } from 'axios';
 
-import { ResponseData } from 'src/types/response';
+import { DataResponse } from 'src/types/response';
 import { Setting, UpdateSetting } from 'src/types/setting';
 import http from 'src/utils/http';
 
 const settingService = {
-	show: (): Promise<AxiosResponse<ResponseData<Setting>>> => {
-		return http.get<ResponseData<Setting>>({
+	show: (): Promise<AxiosResponse<DataResponse<Setting>>> => {
+		return http.get<DataResponse<Setting>>({
 			url: '/settings'
 		});
 	},
-	update: (data: UpdateSetting): Promise<AxiosResponse<ResponseData<Setting>>> => {
-		return http.put<ResponseData<Setting>>({
+	update: (data: UpdateSetting): Promise<AxiosResponse<DataResponse<Setting>>> => {
+		return http.put<DataResponse<Setting>>({
 			url: '/settings',
 			data: data
 		});

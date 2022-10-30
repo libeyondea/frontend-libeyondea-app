@@ -2,11 +2,11 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { profileShowDataSuccessAction, profileShowLoadingSuccessAction, profileUpdateDataSuccessAction, profileUpdateLoadingSuccessAction } from './actions';
 import { Profile } from 'src/types/profile';
-import { ResponseDataReducer } from 'src/types/reducer';
+import { DataReducer } from 'src/types/reducer';
 
 type ProfileState = {
-	show: ResponseDataReducer<Profile>;
-	update: ResponseDataReducer<Profile>;
+	show: DataReducer<Profile>;
+	update: DataReducer<Profile>;
 };
 
 const initialState: ProfileState = {

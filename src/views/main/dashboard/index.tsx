@@ -1,5 +1,6 @@
+import { useEffectOnce } from 'react-use';
+
 import Stat from 'src/components/Stat';
-import useOnceEffect from 'src/hooks/useOnceEffect';
 import dashboardService from 'src/services/dashboardService';
 import { useDispatch, useSelector } from 'src/store';
 import { dashboardShowDataRequestAction, dashboardShowLoadingRequestAction } from 'src/store/dashboard/actions';
@@ -10,7 +11,7 @@ const DashboardPage = () => {
 	const dispatch = useDispatch();
 	const dashboardShow = useSelector(selectDashboardShow);
 
-	useOnceEffect(() => {
+	useEffectOnce(() => {
 		dispatch(dashboardShowLoadingRequestAction(true));
 		dashboardService
 			.show()

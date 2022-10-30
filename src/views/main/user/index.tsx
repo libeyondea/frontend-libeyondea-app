@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Badge from 'src/components/Badge';
@@ -7,8 +7,6 @@ import Card from 'src/components/Card';
 import Image from 'src/components/Image';
 import Table from 'src/components/Table';
 import * as routeConstant from 'src/constants/route';
-import useOnceEffect from 'src/hooks/useOnceEffect';
-import useUpdateEffect from 'src/hooks/useUpdateEffect';
 import userService from 'src/services/userService';
 import { useDispatch, useSelector } from 'src/store';
 import {
@@ -35,6 +33,15 @@ const UserPage = () => {
 	const userList = useSelector(selectUserList);
 	const userDelete = useSelector(selectUserDelete);
 
+	const onChangePage = (page: number) => {
+		dispatch(userListPaginationPageRequestAction(page));
+	};
+
+	const onChangePageSize = (pageSize: number) => {
+		dispatch(userListPaginationPageRequestAction(1));
+		dispatch(userListPaginationPageSizeRequestAction(pageSize));
+	};
+
 	const onChangeSortBy = (sortBy: string) => {
 		dispatch(userListSortByRequestAction(sortBy));
 	};
@@ -49,17 +56,8 @@ const UserPage = () => {
 		dispatch(userListSearchTempRequestAction(searchTemp));
 	};
 
-	const onChangePage = (page: number) => {
-		dispatch(userListPaginationPageRequestAction(page));
-	};
-
-	const onChangePageSize = (pageSize: number) => {
-		dispatch(userListPaginationPageRequestAction(1));
-		dispatch(userListPaginationPageSizeRequestAction(pageSize));
-	};
-
 	const onClickEdit = (id: number) => {
-		navigate(`/${routeConstant.ROUTE_NAME_USER}/${id}/${routeConstant.ROUTE_NAME_USER_EDIT}`);
+		navigate(`/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_EDIT}?id=${id}`);
 	};
 
 	const onClickDelete = (id: number) => {
@@ -70,7 +68,7 @@ const UserPage = () => {
 				.then((response) => {
 					toastify.success('User deleted successfully.');
 					dispatch(userDeleteDataRequestAction(response.data.data));
-					userListDataCallback();
+					userListCallback();
 				})
 				.catch(errorHandler())
 				.finally(() => {
@@ -79,7 +77,7 @@ const UserPage = () => {
 		}
 	};
 
-	const userListDataCallback = useCallback(() => {
+	const userListCallback = useCallback(() => {
 		dispatch(userListLoadingRequestAction(true));
 		const payload = {
 			page: userList.pagination.page,
@@ -98,15 +96,11 @@ const UserPage = () => {
 			.finally(() => {
 				dispatch(userListLoadingRequestAction(false));
 			});
-	}, [dispatch, userList.search, userList.sort_by, userList.sort_direction, userList.pagination.page_size, userList.pagination.page]);
+	}, [dispatch, userList.pagination.page, userList.pagination.page_size, userList.sort_by, userList.sort_direction, userList.search]);
 
-	useOnceEffect(() => {
-		userListDataCallback();
-	});
-
-	useUpdateEffect(() => {
-		userListDataCallback();
-	}, [userListDataCallback]);
+	useEffect(() => {
+		userListCallback();
+	}, [userListCallback]);
 
 	return (
 		<div className="grid grid-cols-1 gap-4">
@@ -142,11 +136,11 @@ const UserPage = () => {
 							return key === 'avatar' ? (
 								<div className="avatar">
 									<div className="mask mask-squircle w-12 h-12">
-										<Image className="h-10 w-10 rounded-full" src={value} alt={row.user_name} />
+										<Image className="h-10 w-10 rounded-full" src={_.toString(value)} alt={_.toString(row.user_name)} />
 									</div>
 								</div>
 							) : key === 'status' ? (
-								<Badge colorType={value ? 'success' : 'danger'}>{value ? 'Active' : 'Deactive'}</Badge>
+								<Badge colorType={Boolean(value) ? 'success' : 'danger'}>{Boolean(value) ? 'Active' : 'Deactive'}</Badge>
 							) : key === 'role' ? (
 								_.capitalize(_.toString(value))
 							) : (

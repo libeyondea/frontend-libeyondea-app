@@ -1,23 +1,25 @@
 import { FormikHelpers } from 'formik';
+import _ from 'lodash';
+import { useEffectOnce } from 'react-use';
 import * as Yup from 'yup';
-
-
 
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
 import Form from 'src/components/Form';
 import { SpinLoading } from 'src/components/Loading';
 import * as settingConstant from 'src/constants/setting';
-import useOnceEffect from 'src/hooks/useOnceEffect';
 import settingService from 'src/services/settingService';
 import { useDispatch, useSelector } from 'src/store';
-import { settingShowDataRequestAction, settingShowLoadingRequestAction, settingUpdateDataRequestAction, settingUpdateLoadingRequestAction } from 'src/store/setting/actions';
+import {
+	settingShowDataRequestAction,
+	settingShowLoadingRequestAction,
+	settingUpdateDataRequestAction,
+	settingUpdateLoadingRequestAction
+} from 'src/store/setting/actions';
 import { selectSettingShow, selectSettingUpdate } from 'src/store/setting/selectors';
 import { UpdateSettingFormik } from 'src/types/setting';
 import errorHandler from 'src/utils/errorHandler';
 import toastify from 'src/utils/toastify';
-import _ from 'lodash';
-
 
 const SettingPage = () => {
 	const dispatch = useDispatch();
@@ -60,7 +62,7 @@ const SettingPage = () => {
 			});
 	};
 
-	useOnceEffect(() => {
+	useEffectOnce(() => {
 		dispatch(settingShowLoadingRequestAction(true));
 		settingService
 			.show()

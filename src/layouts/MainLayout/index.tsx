@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
+import Breadcrumb from './Breadcrumb';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
@@ -19,6 +20,7 @@ const MainLayout = () => {
 				<Navbar />
 				<main className="px-0 sm:px-4 py-4">
 					<div className="xl:container">
+						<Breadcrumb />
 						<Outlet />
 					</div>
 				</main>

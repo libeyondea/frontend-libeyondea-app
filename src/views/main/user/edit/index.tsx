@@ -1,17 +1,16 @@
 import { FormikHelpers } from 'formik';
 import _ from 'lodash';
-import { useCallback, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
+import Empty from 'src/components/Empty';
 import Form from 'src/components/Form';
 import { SpinLoading } from 'src/components/Loading';
 import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
-import useOnceEffect from 'src/hooks/useOnceEffect';
-import useUpdateEffect from 'src/hooks/useUpdateEffect';
 import imageService from 'src/services/imageService';
 import userService from 'src/services/userService';
 import { useDispatch, useSelector } from 'src/store';
@@ -22,7 +21,8 @@ import errorHandler from 'src/utils/errorHandler';
 import toastify from 'src/utils/toastify';
 
 const EditUserPage = () => {
-	const params = useParams();
+	const [searchParams] = useSearchParams();
+	const userId = searchParams.get('id');
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userShow = useSelector(selectUserShow);
@@ -81,7 +81,7 @@ const EditUserPage = () => {
 					setImageUpload({ loading: false });
 				});
 		})
-			.then((result) => {
+			.then(() => {
 				dispatch(userUpdateLoadingRequestAction(true));
 				const payload = {
 					first_name: values.first_name,
@@ -98,7 +98,7 @@ const EditUserPage = () => {
 					})
 				};
 				userService
-					.update(Number(params.userId), payload)
+					.update(Number(userId), payload)
 					.then((response) => {
 						dispatch(userUpdateDataRequestAction(response.data.data));
 						toastify.success('User updated successfully.');
@@ -121,14 +121,13 @@ const EditUserPage = () => {
 						formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
-			)
-			.finally(() => {});
+			);
 	};
 
-	const userShowDataCallback = useCallback(() => {
+	const userShowCallback = useCallback(() => {
 		dispatch(userShowLoadingRequestAction(true));
 		userService
-			.show(Number(params.userId))
+			.show(Number(userId))
 			.then((response) => {
 				dispatch(userShowDataRequestAction(response.data.data));
 			})
@@ -136,15 +135,11 @@ const EditUserPage = () => {
 			.finally(() => {
 				dispatch(userShowLoadingRequestAction(false));
 			});
-	}, [dispatch, params.userId]);
+	}, [dispatch, userId]);
 
-	useOnceEffect(() => {
-		userShowDataCallback();
-	});
-
-	useUpdateEffect(() => {
-		userShowDataCallback();
-	}, [userShowDataCallback]);
+	useEffect(() => {
+		userShowCallback();
+	}, [userShowCallback]);
 
 	return (
 		<div className="grid grid-cols-1 gap-4">
@@ -153,7 +148,7 @@ const EditUserPage = () => {
 					{userShow.loading ? (
 						<SpinLoading />
 					) : _.isEmpty(userShow.data) ? (
-						<div className="flex justify-center">Not found.</div>
+						<Empty />
 					) : (
 						<Form<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
 							{(props) => (

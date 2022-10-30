@@ -1,13 +1,13 @@
 import moment from 'moment';
 
 const time = {
-	ago: (value: moment.MomentInput) => {
+	ago: (value: moment.MomentInput): string => {
 		return moment(value).fromNow();
 	},
-	format: (value: moment.MomentInput) => {
+	format: (value: moment.MomentInput): string => {
 		return moment(value).format('YYYY-MM-DD HH:mm:ss');
 	},
-	yearNow: () => {
+	yearNow: (): string => {
 		return moment().format('YYYY');
 	}
 };
