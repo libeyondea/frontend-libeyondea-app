@@ -1,12 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { settingShowDataSuccessAction, settingShowLoadingSuccessAction, settingUpdateDataSuccessAction, settingUpdateLoadingSuccessAction } from './actions';
-import { ResponseDataReducer } from 'src/types/reducer';
+import { DataReducer } from 'src/types/reducer';
 import { Setting } from 'src/types/setting';
 
 type SettingState = {
-	show: ResponseDataReducer<Setting>;
-	update: ResponseDataReducer<Setting>;
+	show: DataReducer<Setting>;
+	update: DataReducer<Setting>;
 };
 
 const initialState: SettingState = {

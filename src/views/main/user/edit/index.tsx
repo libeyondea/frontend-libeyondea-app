@@ -1,17 +1,16 @@
 import { FormikHelpers } from 'formik';
 import _ from 'lodash';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import Button from 'src/components/Button';
 import Card from 'src/components/Card';
+import Empty from 'src/components/Empty';
 import Form from 'src/components/Form';
 import { SpinLoading } from 'src/components/Loading';
 import * as routeConstant from 'src/constants/route';
 import * as userConstant from 'src/constants/user';
-import useOnceEffect from 'src/hooks/useOnceEffect';
-import useUpdateEffect from 'src/hooks/useUpdateEffect';
 import imageService from 'src/services/imageService';
 import userService from 'src/services/userService';
 import { useDispatch, useSelector } from 'src/store';
@@ -82,7 +81,7 @@ const EditUserPage = () => {
 					setImageUpload({ loading: false });
 				});
 		})
-			.then((result) => {
+			.then(() => {
 				dispatch(userUpdateLoadingRequestAction(true));
 				const payload = {
 					first_name: values.first_name,
@@ -122,11 +121,10 @@ const EditUserPage = () => {
 						formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
-			)
-			.finally(() => {});
+			);
 	};
 
-	const userShowDataCallback = useCallback(() => {
+	const userShowCallback = useCallback(() => {
 		dispatch(userShowLoadingRequestAction(true));
 		userService
 			.show(Number(userId))
@@ -139,13 +137,9 @@ const EditUserPage = () => {
 			});
 	}, [dispatch, userId]);
 
-	useOnceEffect(() => {
-		userShowDataCallback();
-	});
-
-	useUpdateEffect(() => {
-		userShowDataCallback();
-	}, [userShowDataCallback]);
+	useEffect(() => {
+		userShowCallback();
+	}, [userShowCallback]);
 
 	return (
 		<div className="grid grid-cols-1 gap-4">
@@ -154,7 +148,7 @@ const EditUserPage = () => {
 					{userShow.loading ? (
 						<SpinLoading />
 					) : _.isEmpty(userShow.data) ? (
-						<div className="flex justify-center">Not found.</div>
+						<Empty />
 					) : (
 						<Form<UpdateUserFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
 							{(props) => (

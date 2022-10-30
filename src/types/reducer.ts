@@ -1,9 +1,9 @@
-export type ResponseDataReducer<T> = {
+export type DataReducer<T> = {
 	data: T;
 	loading: boolean;
 };
 
-export type ResponseDataPaginationSearchSortReducer<T> = {
+export type DataPaginationSearchSortReducer<T> = {
 	pagination: {
 		page: number;
 		page_size: number;
@@ -13,4 +13,4 @@ export type ResponseDataPaginationSearchSortReducer<T> = {
 	search_temp: string;
 	sort_by: string;
 	sort_direction: string;
-} & ResponseDataReducer<T>;
+} & DataReducer<T>;

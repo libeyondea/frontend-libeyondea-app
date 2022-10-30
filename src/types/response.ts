@@ -1,14 +1,14 @@
-export type ResponseData<T> = {
+export type DataResponse<T> = {
 	data: T;
 };
 
-export type ResponseDataPagination<T> = {
+export type DataPaginationResponse<T> = {
 	pagination: {
 		total: number;
 	};
-} & ResponseData<T>;
+} & DataResponse<T>;
 
-export type ResponseError = {
-	message: string;
+export type ErrorResponse = {
+	message?: string;
 	errors?: any;
 };

@@ -1,8 +1,9 @@
+import { useEffectOnce } from 'react-use';
+
 import Logo from 'src/assets/images/logo.png';
 import Image from 'src/components/Image';
 import config from 'src/config';
 import * as cookiesConstant from 'src/constants/cookies';
-import useOnceEffect from 'src/hooks/useOnceEffect';
 import authService from 'src/services/authService';
 import { useDispatch, useSelector } from 'src/store';
 import { appInitializedRequestAction } from 'src/store/app/actions';
@@ -15,11 +16,11 @@ type Props = {
 	children: JSX.Element;
 };
 
-const AuthControl = ({ children }: Props) => {
+const AccessControl = ({ children }: Props) => {
 	const dispatch = useDispatch();
 	const appInitialized = useSelector(selectAppInitialized);
 
-	useOnceEffect(() => {
+	useEffectOnce(() => {
 		const token = cookies.get(cookiesConstant.COOKIES_AUTH_TOKEN);
 
 		if (token) {
@@ -57,4 +58,4 @@ const AuthControl = ({ children }: Props) => {
 	return children;
 };
 
-export default AuthControl;
+export default AccessControl;

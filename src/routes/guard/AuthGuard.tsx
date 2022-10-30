@@ -4,7 +4,7 @@ import * as routeConstant from 'src/constants/route';
 import { useSelector } from 'src/store';
 import { selectIsAuth } from 'src/store/auth/selectors';
 
-export type Props = {
+type Props = {
 	children: JSX.Element;
 };
 

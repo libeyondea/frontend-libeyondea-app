@@ -1,39 +1,39 @@
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import cookies from './cookies';
 import toastify from './toastify';
 import * as cookiesConstant from 'src/constants/cookies';
 import store from 'src/store';
 import { authCurrentDataTokenRequestAction, authCurrentDataUserRequestAction } from 'src/store/auth/actions';
-import { ResponseError } from 'src/types/response';
+import { ErrorResponse } from 'src/types/response';
 
 type IErrorBase = {
-	error: Error | AxiosError<ResponseError>;
+	error: Error | AxiosError<ErrorResponse>;
 	type: 'unauthorized-error' | 'forbidden-error' | 'notfound-error' | 'validation-error' | 'server-error' | 'stock-error';
 };
 
 type IUnauthorizedError = {
-	error: AxiosError<ResponseError>;
+	error: AxiosError<ErrorResponse>;
 	type: 'unauthorized-error';
 } & IErrorBase;
 
 type IForbiddenError = {
-	error: AxiosError<ResponseError>;
+	error: AxiosError<ErrorResponse>;
 	type: 'forbidden-error';
 } & IErrorBase;
 
 type INotFoundError = {
-	error: AxiosError<ResponseError>;
+	error: AxiosError<ErrorResponse>;
 	type: 'notfound-error';
 } & IErrorBase;
 
 type IValidationError = {
-	error: AxiosError<ResponseError>;
+	error: AxiosError<ErrorResponse>;
 	type: 'validation-error';
 } & IErrorBase;
 
 type IServerError = {
-	error: AxiosError<ResponseError>;
+	error: AxiosError<ErrorResponse>;
 	type: 'server-error';
 } & IErrorBase;
 
@@ -43,8 +43,8 @@ type IStockError = {
 } & IErrorBase;
 
 const errorHandler = (callback?: (err: IUnauthorizedError | IForbiddenError | INotFoundError | IValidationError | IServerError | IStockError) => void) => {
-	return (error: Error | AxiosError<ResponseError>) => {
-		if (error instanceof AxiosError<ResponseError>) {
+	return (error: Error | AxiosError<ErrorResponse>) => {
+		if (axios.isAxiosError<ErrorResponse>(error)) {
 			if (error.code === AxiosError.ERR_BAD_REQUEST) {
 				toastify.error(error.response?.data.message);
 				if (error.response?.status === 401) {
