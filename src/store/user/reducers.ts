@@ -5,6 +5,7 @@ import {
 	userCreateLoadingSuccessAction,
 	userDeleteDataSuccessAction,
 	userDeleteLoadingSuccessAction,
+	userListColumnSuccessAction,
 	userListDataSuccessAction,
 	userListLoadingSuccessAction,
 	userListPaginationPageSizeSuccessAction,
@@ -21,11 +22,11 @@ import {
 } from './actions';
 import * as paginationConstant from 'src/constants/pagination';
 import * as sortConstant from 'src/constants/sort';
-import { DataPaginationSearchSortReducer, DataReducer } from 'src/types/reducer';
+import { DataReducer, DataWithListReducer } from 'src/types/reducer';
 import { User } from 'src/types/user';
 
 type UserState = {
-	list: DataPaginationSearchSortReducer<User[]>;
+	list: DataWithListReducer<User[]>;
 	show: DataReducer<User>;
 	create: DataReducer<User>;
 	update: DataReducer<User>;
@@ -35,6 +36,7 @@ type UserState = {
 const initialState: UserState = {
 	list: {
 		data: [],
+		columns: [],
 		pagination: {
 			page: paginationConstant.PAGINATION_PAGE,
 			page_size: paginationConstant.PAGINATION_PAGE_SIZE,
@@ -70,6 +72,13 @@ const userReducer = createReducer(initialState, (builder) => {
 		list: {
 			...state.list,
 			data: action.payload
+		}
+	}));
+	builder.addCase(userListColumnSuccessAction, (state, action) => ({
+		...state,
+		list: {
+			...state.list,
+			columns: action.payload
 		}
 	}));
 	builder.addCase(userListPaginationPageSuccessAction, (state, action) => ({

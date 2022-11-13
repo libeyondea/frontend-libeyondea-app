@@ -1,12 +1,12 @@
 import { AxiosResponse } from 'axios';
 
-import { DataPaginationResponse, DataResponse } from 'src/types/response';
-import { CreateUser, ListUser, UpdateUser, User } from 'src/types/user';
+import { DataResponse, DataWithListResponse } from 'src/types/response';
+import { CreateUpdateUser, ParamUser, User } from 'src/types/user';
 import http from 'src/utils/http';
 
 const userService = {
-	list: (params?: ListUser): Promise<AxiosResponse<DataPaginationResponse<User[]>>> => {
-		return http.get<DataPaginationResponse<User[]>>({
+	list: (params?: ParamUser): Promise<AxiosResponse<DataWithListResponse<User[]>>> => {
+		return http.get<DataWithListResponse<User[]>>({
 			url: '/users',
 			params: params
 		});
@@ -16,13 +16,13 @@ const userService = {
 			url: `/users/${id}`
 		});
 	},
-	create: (data: CreateUser): Promise<AxiosResponse<DataResponse<User>>> => {
+	create: (data: CreateUpdateUser): Promise<AxiosResponse<DataResponse<User>>> => {
 		return http.post<DataResponse<User>>({
 			url: '/users',
 			data: data
 		});
 	},
-	update: (id: number, data: UpdateUser): Promise<AxiosResponse<DataResponse<User>>> => {
+	update: (id: number, data: CreateUpdateUser): Promise<AxiosResponse<DataResponse<User>>> => {
 		return http.put<DataResponse<User>>({
 			url: `/users/${id}`,
 			data: data

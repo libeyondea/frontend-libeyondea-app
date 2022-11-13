@@ -11,6 +11,14 @@ export const userListDataSuccessAction = createAction(actionTypes.USER_LIST_DATA
 	payload: payload
 }));
 
+export const userListColumnRequestAction = createAction(actionTypes.USER_LIST_COLUMN_REQUEST, (payload: string[]) => ({
+	payload: payload
+}));
+
+export const userListColumnSuccessAction = createAction(actionTypes.USER_LIST_COLUMN_SUCCESS, (payload: string[]) => ({
+	payload: payload
+}));
+
 export const userListPaginationPageRequestAction = createAction(actionTypes.USER_LIST_PAGINATION_PAGE_REQUEST, (payload: number) => ({
 	payload: payload
 }));

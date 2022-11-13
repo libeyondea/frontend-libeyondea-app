@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'src/store';
 import {
 	userDeleteDataRequestAction,
 	userDeleteLoadingRequestAction,
+	userListColumnRequestAction,
 	userListDataRequestAction,
 	userListLoadingRequestAction,
 	userListPaginationPageRequestAction,
@@ -90,6 +91,7 @@ const UserPage = () => {
 			.list(payload)
 			.then((response) => {
 				dispatch(userListDataRequestAction(response.data.data));
+				dispatch(userListColumnRequestAction(response.data.columns));
 				dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
 			})
 			.catch(errorHandler())
@@ -107,7 +109,8 @@ const UserPage = () => {
 			<div className="col-span-1">
 				<Card title="List users">
 					<Table<User>
-						columns={['avatar', 'first_name', 'last_name', 'user_name', 'email', 'role', 'status', 'updated_at', 'created_at']}
+						hiddenColumns={['id']}
+						columns={userList.columns}
 						data={userList.data}
 						loading={userList.loading}
 						disabled={userDelete.loading}
@@ -117,7 +120,7 @@ const UserPage = () => {
 						}}
 						sortSearch={{
 							sortBy: userList.sort_by,
-							sortByOptions: ['first_name', 'last_name', 'user_name', 'email', 'role', 'status', 'updated_at', 'created_at'],
+							sortByOptions: userList.columns,
 							sortDirection: userList.sort_direction,
 							searchTemp: userList.search_temp,
 							onChangeSortBy: onChangeSortBy,
