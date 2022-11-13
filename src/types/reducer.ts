@@ -3,7 +3,8 @@ export type DataReducer<T> = {
 	loading: boolean;
 };
 
-export type DataPaginationSearchSortReducer<T> = {
+export type DataWithListReducer<T> = {
+	columns: string[];
 	pagination: {
 		page: number;
 		page_size: number;

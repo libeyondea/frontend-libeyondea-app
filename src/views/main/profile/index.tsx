@@ -35,7 +35,7 @@ const ProfilePage = () => {
 		user_name: profileShow.data.user_name || '',
 		password: '',
 		password_confirmation: '',
-		avatar: null,
+		avatar: '',
 		image: null
 	};
 
@@ -211,7 +211,7 @@ const ProfilePage = () => {
 											loading={imageUpload.loading || profileUpdate.loading}
 											disabled={imageUpload.loading || profileUpdate.loading}
 										>
-											{imageUpload.loading ? 'Uploading' : profileUpdate.loading ? 'Updating' : 'Update'}
+											{imageUpload.loading || profileUpdate.loading ? 'Updating' : 'Update'}
 										</Button>
 									</div>
 								</div>

@@ -2,7 +2,8 @@ export type DataResponse<T> = {
 	data: T;
 };
 
-export type DataPaginationResponse<T> = {
+export type DataWithListResponse<T> = {
+	columns: string[];
 	pagination: {
 		total: number;
 	};

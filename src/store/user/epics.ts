@@ -11,6 +11,8 @@ import {
 	userDeleteDataSuccessAction,
 	userDeleteLoadingRequestAction,
 	userDeleteLoadingSuccessAction,
+	userListColumnRequestAction,
+	userListColumnSuccessAction,
 	userListDataRequestAction,
 	userListDataSuccessAction,
 	userListLoadingRequestAction,
@@ -43,6 +45,12 @@ export const userListDataEpic = (action$: Observable<Action>): Observable<Action
 	action$.pipe(
 		filter(userListDataRequestAction.match),
 		map((action) => userListDataSuccessAction(action.payload))
+	);
+
+export const userListColumnEpic = (action$: Observable<Action>): Observable<Action> =>
+	action$.pipe(
+		filter(userListColumnRequestAction.match),
+		map((action) => userListColumnSuccessAction(action.payload))
 	);
 
 export const userListSortDirectionEpic = (action$: Observable<Action>): Observable<Action> =>

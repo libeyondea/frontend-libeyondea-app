@@ -11,7 +11,7 @@ export interface User {
 	updated_at: string | null;
 }
 
-export interface ListUser {
+export interface ParamUser {
 	page: number;
 	page_size: number;
 	sort_by: string;
@@ -19,18 +19,17 @@ export interface ListUser {
 	search: string;
 }
 
-export interface CreateUser {
+export interface CreateUpdateUser {
 	first_name: string;
 	last_name: string;
 	user_name: string;
 	email: string;
-	password: string;
+	password?: string;
 	role: string;
 	status: boolean;
-	avatar?: string | null;
+	avatar?: string;
 }
-
-export interface CreateUserFormik {
+export interface CreateUpdateUserFormik {
 	first_name: string;
 	last_name: string;
 	user_name: string;
@@ -39,30 +38,6 @@ export interface CreateUserFormik {
 	password_confirmation: string;
 	role: string;
 	status: boolean;
-	avatar?: string | null;
-	image: File | null;
-}
-
-export interface UpdateUser {
-	first_name: string;
-	last_name: string;
-	user_name: string;
-	email: string;
-	password?: string;
-	role: string;
-	status: boolean;
-	avatar?: string | null;
-}
-
-export interface UpdateUserFormik {
-	first_name: string;
-	last_name: string;
-	user_name: string;
-	email: string;
-	password?: string;
-	password_confirmation: string;
-	role: string;
-	status: boolean;
-	avatar?: string | null;
+	avatar: string;
 	image: File | null;
 }

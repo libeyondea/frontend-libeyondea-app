@@ -1,7 +1,10 @@
+import _ from 'lodash';
+
 import Form from 'src/components/Form';
 import * as sortConstant from 'src/constants/sort';
 
 type Props = {
+	hiddenColumns?: string[];
 	sortBy: string;
 	sortByOptions: string[];
 	sortDirection: string;
@@ -14,6 +17,7 @@ type Props = {
 };
 
 const SortSearch = ({
+	hiddenColumns,
 	sortBy,
 	sortByOptions,
 	sortDirection,
@@ -44,7 +48,7 @@ const SortSearch = ({
 					name="sort_by"
 					label="Sort by"
 					value={sortBy}
-					options={sortByOptions}
+					options={_.filter(sortByOptions, (column) => !_.includes(hiddenColumns, column))}
 					onChange={_onChangeSortBy}
 					className="mr-0 sm:mr-4 mb-4 sm:mb-0 sm:w-36 min-w-full sm:min-w-0"
 					disabled={disabled}

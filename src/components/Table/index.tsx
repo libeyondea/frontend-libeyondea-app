@@ -9,6 +9,7 @@ import time from 'src/utils/time';
 
 type Props<T> = {
 	className?: string;
+	hiddenColumns?: string[];
 	columns: string[];
 	data: T[];
 	loading?: boolean;
@@ -39,6 +40,7 @@ type Props<T> = {
 
 const Table = <T extends Record<string, any> = Record<string, any>>({
 	className,
+	hiddenColumns,
 	columns,
 	data,
 	loading = false,
@@ -53,6 +55,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 		<Fragment>
 			{sortSearch && (
 				<SortSearch
+					hiddenColumns={hiddenColumns}
 					sortBy={sortSearch.sortBy}
 					sortByOptions={sortSearch.sortByOptions}
 					sortDirection={sortSearch.sortDirection}
@@ -86,9 +89,12 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 					<table {...props} className={classNames('table table-compact w-full', className)}>
 						<thead>
 							<tr>
-								{columns.map((column, index) => (
-									<th key={index}>{_.startCase(_.camelCase(_.toString(column)))}</th>
-								))}
+								{_.map(
+									_.filter(columns, (column) => !_.includes(hiddenColumns, column)),
+									(column, index) => (
+										<th key={index}>{_.startCase(_.camelCase(_.toString(column)))}</th>
+									)
+								)}
 								{action && (
 									<th>
 										<span className="sr-only">Action</span>
@@ -104,19 +110,22 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 									</td>
 								</tr>
 							) : (
-								data.map((data, index) => (
+								_.map(data, (data, index) => (
 									<tr key={index}>
-										{columns.map((column, index) => (
-											<td key={index}>
-												{column === 'updated_at'
-													? time.ago(data[column])
-													: column === 'created_at'
-													? time.format(data[column])
-													: columnCell
-													? columnCell(column, data[column], data)
-													: _.toString(data[column])}
-											</td>
-										))}
+										{_.map(
+											_.filter(columns, (column) => !_.includes(hiddenColumns, column)),
+											(column, index) => (
+												<td key={index}>
+													{column === 'updated_at'
+														? time.ago(data[column])
+														: column === 'created_at'
+														? time.format(data[column])
+														: columnCell
+														? columnCell(column, data[column], data)
+														: _.toString(data[column])}
+												</td>
+											)
+										)}
 										{action && (
 											<td key={index}>
 												<div className="flex items-center">
