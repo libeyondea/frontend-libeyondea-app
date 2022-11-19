@@ -1,6 +1,5 @@
 import { FormikHelpers } from 'formik';
 import _ from 'lodash';
-import { useState } from 'react';
 import { useEffectOnce } from 'react-use';
 import * as Yup from 'yup';
 
@@ -26,7 +25,6 @@ const ProfilePage = () => {
 	const dispatch = useDispatch();
 	const profileShow = useSelector(selectProfileShow);
 	const profileUpdate = useSelector(selectProfileUpdate);
-	const [imageUpload, setImageUpload] = useState({ loading: false });
 
 	const initialValues: UpdateProfileFormik = {
 		first_name: profileShow.data.first_name || '',
@@ -189,12 +187,8 @@ const ProfilePage = () => {
 										/>
 									</div>
 									<div className="col-span-12 flex flex-row-reverse">
-										<Button
-											type="submit"
-											loading={imageUpload.loading || profileUpdate.loading}
-											disabled={imageUpload.loading || profileUpdate.loading}
-										>
-											{imageUpload.loading || profileUpdate.loading ? 'Updating' : 'Update'}
+										<Button type="submit" loading={profileUpdate.loading} disabled={profileUpdate.loading}>
+											{profileUpdate.loading ? 'Updating' : 'Update'}
 										</Button>
 									</div>
 								</div>
