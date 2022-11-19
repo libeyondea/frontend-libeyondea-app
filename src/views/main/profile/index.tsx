@@ -55,10 +55,10 @@ const ProfilePage = () => {
 
 	const onSubmit = (values: UpdateProfileFormik, formikHelpers: FormikHelpers<UpdateProfileFormik>) => {
 		new Promise((resolve, reject) => {
+			dispatch(profileUpdateLoadingRequestAction(true));
 			if (!values.image) {
 				return resolve(null);
 			}
-			setImageUpload({ loading: true });
 			imageService
 				.upload({
 					image: values.image
@@ -70,43 +70,24 @@ const ProfilePage = () => {
 				.catch((error) => {
 					return reject(error);
 				})
-				.finally(() => {
-					setImageUpload({ loading: false });
-				});
+				.finally(() => {});
 		})
-			.then(() => {
-				dispatch(profileUpdateLoadingRequestAction(true));
-				const payload = {
+			.then(() =>
+				profileService.update({
 					first_name: values.first_name,
 					last_name: values.last_name,
 					email: values.email,
 					user_name: values.user_name,
-					...(values.password && {
-						password: values.password
-					}),
-					...(values.avatar && {
-						avatar: values.avatar
-					})
-				};
-				profileService
-					.update(payload)
-					.then((response) => {
-						dispatch(profileUpdateDataRequestAction(response.data.data));
-						toastify.success('Profile updated successfully.');
-						_.delay(() => {
-							window.location.reload();
-						}, 600);
-					})
-					.catch(
-						errorHandler((error) => {
-							if (error.type === 'validation-error') {
-								formikHelpers.setErrors(error.error.response?.data?.errors);
-							}
-						})
-					)
-					.finally(() => {
-						dispatch(profileUpdateLoadingRequestAction(false));
-					});
+					password: values.password,
+					avatar: values.avatar
+				})
+			)
+			.then((response) => {
+				dispatch(profileUpdateDataRequestAction(response.data.data));
+				toastify.success('Profile updated successfully.');
+				_.delay(() => {
+					window.location.reload();
+				}, 600);
 			})
 			.catch(
 				errorHandler((error) => {
@@ -115,7 +96,9 @@ const ProfilePage = () => {
 					}
 				})
 			)
-			.finally(() => {});
+			.finally(() => {
+				dispatch(profileUpdateLoadingRequestAction(false));
+			});
 	};
 
 	useEffectOnce(() => {

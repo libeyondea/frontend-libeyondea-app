@@ -52,13 +52,13 @@ const MainRoutes: RouteObjectWithRole = {
 			roles: [userConstant.USER_ROLE_OWNER]
 		},
 		{
-			path: `/${routeConstant.ROUTE_NAME_PROFILE}`,
-			element: <ProfilePage />,
+			path: `/${routeConstant.ROUTE_NAME_SETTING}`,
+			element: <SettingPage />,
 			roles: [...userConstant.USER_ROLE_ALL]
 		},
 		{
-			path: `/${routeConstant.ROUTE_NAME_SETTING}`,
-			element: <SettingPage />,
+			path: `/${routeConstant.ROUTE_NAME_PROFILE}`,
+			element: <ProfilePage />,
 			roles: [...userConstant.USER_ROLE_ALL]
 		}
 	]
