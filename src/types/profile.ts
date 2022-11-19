@@ -16,8 +16,8 @@ export interface UpdateProfile {
 	last_name: string;
 	user_name: string;
 	email: string;
-	password?: string;
-	avatar?: string;
+	password: string;
+	avatar: string;
 }
 
 export interface UpdateProfileFormik {

@@ -24,10 +24,10 @@ export interface CreateUpdateUser {
 	last_name: string;
 	user_name: string;
 	email: string;
-	password?: string;
+	password: string;
 	role: string;
 	status: boolean;
-	avatar?: string;
+	avatar: string;
 }
 export interface CreateUpdateUserFormik {
 	first_name: string;

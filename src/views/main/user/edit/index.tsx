@@ -52,12 +52,8 @@ const EditUserPage = () => {
 					user_name: values.user_name,
 					role: values.role,
 					status: values.status,
-					...(values.password && {
-						password: values.password
-					}),
-					...(values.avatar && {
-						avatar: values.avatar
-					})
+					password: values.password,
+					avatar: values.avatar
 				};
 				userService
 					.update(Number(userId), payload)
