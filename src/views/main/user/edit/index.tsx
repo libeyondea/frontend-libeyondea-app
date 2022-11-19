@@ -24,10 +24,10 @@ const EditUserPage = () => {
 
 	const onSubmit = (values: CreateUpdateUserFormik, formikHelpers: FormikHelpers<CreateUpdateUserFormik>) => {
 		new Promise((resolve, reject) => {
+			dispatch(userUpdateLoadingRequestAction(true));
 			if (!values.image) {
 				return resolve(null);
 			}
-			setImageUpload({ loading: true });
 			imageService
 				.upload({
 					image: values.image
@@ -43,9 +43,8 @@ const EditUserPage = () => {
 					setImageUpload({ loading: false });
 				});
 		})
-			.then(() => {
-				dispatch(userUpdateLoadingRequestAction(true));
-				const payload = {
+			.then(() =>
+				userService.update(Number(userId), {
 					first_name: values.first_name,
 					last_name: values.last_name,
 					email: values.email,
@@ -54,24 +53,12 @@ const EditUserPage = () => {
 					status: values.status,
 					password: values.password,
 					avatar: values.avatar
-				};
-				userService
-					.update(Number(userId), payload)
-					.then((response) => {
-						dispatch(userUpdateDataRequestAction(response.data.data));
-						toastify.success('User updated successfully.');
-						navigate(`/${routeConstant.ROUTE_NAME_USER}`);
-					})
-					.catch(
-						errorHandler((error) => {
-							if (error.type === 'validation-error') {
-								formikHelpers.setErrors(error.error.response?.data?.errors);
-							}
-						})
-					)
-					.finally(() => {
-						dispatch(userUpdateLoadingRequestAction(false));
-					});
+				})
+			)
+			.then((response) => {
+				dispatch(userUpdateDataRequestAction(response.data.data));
+				toastify.success('User updated successfully.');
+				navigate(`/${routeConstant.ROUTE_NAME_USER}`);
 			})
 			.catch(
 				errorHandler((error) => {
@@ -79,7 +66,10 @@ const EditUserPage = () => {
 						formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
-			);
+			)
+			.finally(() => {
+				dispatch(userUpdateLoadingRequestAction(false));
+			});
 	};
 
 	const userShowCallback = useCallback(() => {
