@@ -9,7 +9,7 @@ import { ErrorResponse } from 'src/types/response';
 
 type IErrorBase = {
 	error: Error | AxiosError<ErrorResponse>;
-	type: 'unauthorized-error' | 'forbidden-error' | 'notfound-error' | 'validation-error' | 'server-error' | 'stock-error';
+	type: 'unauthorized-error' | 'forbidden-error' | 'notfound-error' | 'validation-error' | 'server-error' | 'axios-error' | 'stock-error';
 };
 
 type IUnauthorizedError = {
@@ -37,12 +37,19 @@ type IServerError = {
 	type: 'server-error';
 } & IErrorBase;
 
+type IAxiosError = {
+	error: AxiosError<ErrorResponse>;
+	type: 'axios-error';
+} & IErrorBase;
+
 type IStockError = {
 	error: Error;
 	type: 'stock-error';
 } & IErrorBase;
 
-const errorHandler = (callback?: (err: IUnauthorizedError | IForbiddenError | INotFoundError | IValidationError | IServerError | IStockError) => void) => {
+const errorHandler = (
+	callback?: (err: IUnauthorizedError | IForbiddenError | INotFoundError | IValidationError | IServerError | IAxiosError | IStockError) => void
+) => {
 	return (error: Error | AxiosError<ErrorResponse>) => {
 		if (axios.isAxiosError<ErrorResponse>(error)) {
 			if (error.code === AxiosError.ERR_BAD_REQUEST) {
@@ -83,6 +90,11 @@ const errorHandler = (callback?: (err: IUnauthorizedError | IForbiddenError | IN
 				}
 			} else {
 				toastify.error(error.message);
+				callback &&
+					callback({
+						error: error,
+						type: 'axios-error'
+					});
 			}
 		} else {
 			toastify.error(error.message);

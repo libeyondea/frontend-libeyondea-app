@@ -24,9 +24,9 @@ const App = () => {
 				<AccessControl>
 					<BrowserRouter>
 						<Routes />
-						<ToastContainer />
 					</BrowserRouter>
 				</AccessControl>
+				<ToastContainer />
 			</QueryClientProvider>
 		</Provider>
 	);
