@@ -1,5 +1,4 @@
 import { FormikHelpers } from 'formik';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import UserForm from '../components/UserForm';
@@ -17,7 +16,6 @@ const NewUserPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userCreate = useSelector(selectUserCreate);
-	const [imageUpload, setImageUpload] = useState({ loading: false });
 
 	const onSubmit = (values: CreateUpdateUserFormik, formikHelpers: FormikHelpers<CreateUpdateUserFormik>) => {
 		new Promise((resolve, reject) => {
@@ -31,14 +29,12 @@ const NewUserPage = () => {
 				})
 				.then((response) => {
 					values.avatar = response.data.data.name;
-					return resolve(null);
+					return resolve(response);
 				})
 				.catch((error) => {
 					return reject(error);
 				})
-				.finally(() => {
-					setImageUpload({ loading: false });
-				});
+				.finally(() => {});
 		})
 			.then(() =>
 				userService.create({
@@ -72,7 +68,7 @@ const NewUserPage = () => {
 	return (
 		<div className="grid grid-cols-1 gap-4">
 			<div className="col-span-1">
-				<UserForm onSubmit={onSubmit} submitting={imageUpload.loading || userCreate.loading} />
+				<UserForm onSubmit={onSubmit} submitting={userCreate.loading} />
 			</div>
 		</div>
 	);

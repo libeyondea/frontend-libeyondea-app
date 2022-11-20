@@ -1,5 +1,5 @@
 import { FormikHelpers } from 'formik';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import UserForm from '../components/UserForm';
@@ -20,7 +20,6 @@ const EditUserPage = () => {
 	const dispatch = useDispatch();
 	const userShow = useSelector(selectUserShow);
 	const userUpdate = useSelector(selectUserUpdate);
-	const [imageUpload, setImageUpload] = useState({ loading: false });
 
 	const onSubmit = (values: CreateUpdateUserFormik, formikHelpers: FormikHelpers<CreateUpdateUserFormik>) => {
 		new Promise((resolve, reject) => {
@@ -39,9 +38,7 @@ const EditUserPage = () => {
 				.catch((error) => {
 					return reject(error);
 				})
-				.finally(() => {
-					setImageUpload({ loading: false });
-				});
+				.finally(() => {});
 		})
 			.then(() =>
 				userService.update(Number(userId), {
@@ -92,7 +89,7 @@ const EditUserPage = () => {
 	return (
 		<div className="grid grid-cols-1 gap-4">
 			<div className="col-span-1">
-				<UserForm initialData={userShow} onSubmit={onSubmit} submitting={imageUpload.loading || userUpdate.loading} isEdit />
+				<UserForm initialData={userShow} onSubmit={onSubmit} submitting={userUpdate.loading} isEdit />
 			</div>
 		</div>
 	);

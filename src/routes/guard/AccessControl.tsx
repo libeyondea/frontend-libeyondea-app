@@ -33,10 +33,9 @@ const AccessControl = ({ children }: Props) => {
 				})
 				.catch(
 					errorHandler((error) => {
-						if (error.type === 'unauthorized-error') {
-							dispatch(authCurrentDataUserRequestAction(null));
-							dispatch(authCurrentDataTokenRequestAction(null));
-						}
+						cookies.remove(cookiesConstant.COOKIES_AUTH_TOKEN);
+						dispatch(authCurrentDataUserRequestAction(null));
+						dispatch(authCurrentDataTokenRequestAction(null));
 						dispatch(appInitializedRequestAction(true));
 					})
 				);
