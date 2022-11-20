@@ -32,7 +32,7 @@ const AccessControl = ({ children }: Props) => {
 					dispatch(appInitializedRequestAction(true));
 				})
 				.catch(
-					errorHandler((error) => {
+					errorHandler(() => {
 						cookies.remove(cookiesConstant.COOKIES_AUTH_TOKEN);
 						dispatch(authCurrentDataUserRequestAction(null));
 						dispatch(authCurrentDataTokenRequestAction(null));

@@ -10,8 +10,13 @@ import { ErrorResponse } from 'src/types/response';
 
 type IErrorBase = {
 	error: Error | AxiosError<ErrorResponse>;
-	type: 'unauthorized-error' | 'forbidden-error' | 'notfound-error' | 'validation-error' | 'server-error' | 'axios-error' | 'stock-error';
+	type: 'validation-error' | 'unauthorized-error' | 'forbidden-error' | 'notfound-error' | 'server-error' | 'axios-error' | 'stock-error';
 };
+
+type IValidationError = {
+	error: AxiosError<ErrorResponse>;
+	type: 'validation-error';
+} & IErrorBase;
 
 type IUnauthorizedError = {
 	error: AxiosError<ErrorResponse>;
@@ -26,11 +31,6 @@ type IForbiddenError = {
 type INotFoundError = {
 	error: AxiosError<ErrorResponse>;
 	type: 'notfound-error';
-} & IErrorBase;
-
-type IValidationError = {
-	error: AxiosError<ErrorResponse>;
-	type: 'validation-error';
 } & IErrorBase;
 
 type IServerError = {
@@ -49,13 +49,19 @@ type IStockError = {
 } & IErrorBase;
 
 const errorHandler = (
-	callback?: (err: IUnauthorizedError | IForbiddenError | INotFoundError | IValidationError | IServerError | IAxiosError | IStockError) => void
+	callback?: (err: IValidationError | IUnauthorizedError | IForbiddenError | INotFoundError | IServerError | IAxiosError | IStockError) => void
 ) => {
 	return (error: Error | AxiosError<ErrorResponse>) => {
 		if (axios.isAxiosError<ErrorResponse>(error)) {
 			if (error.response && _.includes([AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE], error.code)) {
 				toastify.error(error.response.data.message || error.message);
-				if (error.response?.status === 401) {
+				if (error.response?.status === 400) {
+					callback &&
+						callback({
+							error: error,
+							type: 'validation-error'
+						});
+				} else if (error.response?.status === 401) {
 					cookies.remove(cookiesConstant.COOKIES_AUTH_TOKEN);
 					store.dispatch(authCurrentDataUserRequestAction(null));
 					store.dispatch(authCurrentDataTokenRequestAction(null));
@@ -75,12 +81,6 @@ const errorHandler = (
 						callback({
 							error: error,
 							type: 'notfound-error'
-						});
-				} else if (error.response?.status === 400) {
-					callback &&
-						callback({
-							error: error,
-							type: 'validation-error'
 						});
 				} else {
 					callback &&
