@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import _ from 'lodash';
 
 import cookies from './cookies';
 import toastify from './toastify';
@@ -52,8 +53,8 @@ const errorHandler = (
 ) => {
 	return (error: Error | AxiosError<ErrorResponse>) => {
 		if (axios.isAxiosError<ErrorResponse>(error)) {
-			if (error.code === AxiosError.ERR_BAD_REQUEST) {
-				toastify.error(error.response?.data.message);
+			if (error.response && _.includes([AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE], error.code)) {
+				toastify.error(error.response?.data.message || error.message);
 				if (error.response?.status === 401) {
 					cookies.remove(cookiesConstant.COOKIES_AUTH_TOKEN);
 					store.dispatch(authCurrentDataUserRequestAction(null));
