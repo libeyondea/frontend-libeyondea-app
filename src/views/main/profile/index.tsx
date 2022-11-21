@@ -180,9 +180,9 @@ const ProfilePage = () => {
 											label="Image"
 											error={Boolean(props.errors.image && props.touched.image)}
 											helperText={props.errors.image}
-											onChangeFile={props.setFieldValue}
-											onBlurFile={props.setFieldTouched}
-											imgUrl={profileShow.data.avatar}
+											onChangeImage={props.setFieldValue}
+											onBlurImage={props.setFieldTouched}
+											imageUrl={profileShow.data.avatar}
 											{...props.getFieldProps('image')}
 										/>
 									</div>

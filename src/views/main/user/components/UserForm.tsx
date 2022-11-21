@@ -134,11 +134,11 @@ const UserForm = ({ initialData, onSubmit, submitting = false, isEdit = false }:
 							<div className="col-span-12">
 								<Form.Image
 									label="Avatar"
-									imgUrl={isEdit ? initialData?.data.avatar : ''}
+									imageUrl={isEdit ? initialData?.data.avatar : ''}
 									error={Boolean(props.errors.image && props.touched.image)}
 									helperText={props.errors.image}
-									onChangeFile={props.setFieldValue}
-									onBlurFile={props.setFieldTouched}
+									onChangeImage={props.setFieldValue}
+									onBlurImage={props.setFieldTouched}
 									canDelete={!isEdit}
 									{...props.getFieldProps('image')}
 								/>
