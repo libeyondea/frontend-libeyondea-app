@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
-import useChangeTheme from 'src/hooks/useChangeTheme';
+import useTheme from 'src/hooks/useTheme';
 
 const AuthLayout = () => {
-	useChangeTheme();
+	useTheme();
 
 	return (
 		<div className="center-screen">

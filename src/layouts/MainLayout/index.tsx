@@ -4,14 +4,14 @@ import Breadcrumb from './Breadcrumb';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import useChangeTheme from 'src/hooks/useChangeTheme';
+import useTheme from 'src/hooks/useTheme';
 import { useSelector } from 'src/store';
 import { selectAuthCurrent } from 'src/store/auth/selectors';
 
 const MainLayout = () => {
 	const authCurrent = useSelector(selectAuthCurrent);
 
-	useChangeTheme(authCurrent.data.user?.setting.theme);
+	useTheme(authCurrent.data.user?.setting.theme);
 
 	return (
 		<div className="drawer drawer-mobile">

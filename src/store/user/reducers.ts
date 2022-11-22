@@ -169,13 +169,6 @@ const userReducer = createReducer(initialState, (builder) => {
 		create: {
 			...state.create,
 			data: action.payload
-		},
-		list: {
-			...state.list,
-			pagination: {
-				...state.list.pagination,
-				page: 1
-			}
 		}
 	}));
 	builder.addCase(userCreateLoadingSuccessAction, (state, action) => ({

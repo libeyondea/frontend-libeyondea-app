@@ -1,7 +1,8 @@
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect ';
+import { useIsomorphicLayoutEffect } from 'react-use';
+
 import config from 'src/config';
 
-const useChangeTheme = (theme: string = config.DEFAULT_THEME): void => {
+const useTheme = (theme: string = config.DEFAULT_THEME): void => {
 	useIsomorphicLayoutEffect(() => {
 		const documentElement = document.documentElement;
 
@@ -13,4 +14,4 @@ const useChangeTheme = (theme: string = config.DEFAULT_THEME): void => {
 	}, [theme]);
 };
 
-export default useChangeTheme;
+export default useTheme;
