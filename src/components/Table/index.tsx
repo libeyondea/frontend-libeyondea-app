@@ -67,7 +67,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 					disabled={disabled || loading}
 				/>
 			)}
-			<div className="overflow-x-auto w-full">
+			<div className="overflow-x-auto">
 				{loading ? (
 					<table className={classNames('table table-compact w-full animate-pulse', className)}>
 						<thead>
