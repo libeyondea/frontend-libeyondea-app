@@ -107,50 +107,55 @@ const UserPage = () => {
 	return (
 		<div className="grid grid-cols-1 gap-4">
 			<div className="col-span-1">
-				<Card title="List users">
-					<Table<User>
-						hiddenColumns={['id']}
-						columns={userList.columns}
-						data={userList.data}
-						loading={userList.loading}
-						disabled={userDelete.loading}
-						action={{
-							onClickEdit: onClickEdit,
-							onClickDelete: onClickDelete
-						}}
-						sortSearch={{
-							sortBy: userList.sort_by,
-							sortByOptions: userList.columns,
-							sortDirection: userList.sort_direction,
-							searchTemp: userList.search_temp,
-							onChangeSortBy: onChangeSortBy,
-							onChangeSortDirection: onChangeSortDirection,
-							onChangeSearch: onChangeSearch,
-							onChangeSearchTemp: onChangeSearchTemp
-						}}
-						pagination={{
-							page: userList.pagination.page,
-							pageSize: userList.pagination.page_size,
-							total: userList.pagination.total,
-							onChangePage: onChangePage,
-							onChangePageSize: onChangePageSize
-						}}
-						columnCell={(key, value, row) => {
-							return key === 'avatar' ? (
-								<div className="avatar">
-									<div className="mask mask-squircle w-12 h-12">
-										<Image className="h-10 w-10 rounded-full" src={_.toString(value)} alt={_.toString(row.user_name)} />
-									</div>
-								</div>
-							) : key === 'role' ? (
-								_.capitalize(_.toString(value))
-							) : key === 'status' ? (
-								<Badge color={Boolean(value) ? 'success' : 'error'}>{Boolean(value) ? 'Active' : 'Deactive'}</Badge>
-							) : (
-								_.toString(value)
-							);
-						}}
-					/>
+				<Card>
+					<Card.Body>
+						<Card.Title>List users</Card.Title>
+						<Card.Content>
+							<Table<User>
+								hiddenColumns={['id']}
+								columns={userList.columns}
+								data={userList.data}
+								loading={userList.loading}
+								disabled={userDelete.loading}
+								action={{
+									onClickEdit: onClickEdit,
+									onClickDelete: onClickDelete
+								}}
+								sortSearch={{
+									sortBy: userList.sort_by,
+									sortByOptions: userList.columns,
+									sortDirection: userList.sort_direction,
+									searchTemp: userList.search_temp,
+									onChangeSortBy: onChangeSortBy,
+									onChangeSortDirection: onChangeSortDirection,
+									onChangeSearch: onChangeSearch,
+									onChangeSearchTemp: onChangeSearchTemp
+								}}
+								pagination={{
+									page: userList.pagination.page,
+									pageSize: userList.pagination.page_size,
+									total: userList.pagination.total,
+									onChangePage: onChangePage,
+									onChangePageSize: onChangePageSize
+								}}
+								columnCell={(key, value, row) => {
+									return key === 'avatar' ? (
+										<div className="avatar">
+											<div className="mask mask-squircle w-12 h-12">
+												<Image className="h-10 w-10 rounded-full" src={_.toString(value)} alt={_.toString(row.user_name)} />
+											</div>
+										</div>
+									) : key === 'role' ? (
+										_.capitalize(_.toString(value))
+									) : key === 'status' ? (
+										<Badge color={Boolean(value) ? 'success' : 'error'}>{Boolean(value) ? 'Active' : 'Deactive'}</Badge>
+									) : (
+										_.toString(value)
+									);
+								}}
+							/>
+						</Card.Content>
+					</Card.Body>
 				</Card>
 			</div>
 		</div>

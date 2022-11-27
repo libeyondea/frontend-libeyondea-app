@@ -58,63 +58,70 @@ const SignInPage = () => {
 	};
 
 	return (
-		<Card className="sm:py-4 sm:px-8" subTitle="Sign in to your account">
-			<Form<SignInFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-				{(props) => (
-					<div className="grid grid-cols-1 gap-4">
-						<div className="col-span-1">
-							<Form.Input
-								label="User name"
-								error={Boolean(props.errors.user_name && props.touched.user_name)}
-								helperText={props.errors.user_name}
-								autoComplete="username"
-								{...props.getFieldProps('user_name')}
-							/>
-						</div>
-						<div className="col-span-1">
-							<Form.Input
-								type="password"
-								label="Password"
-								error={Boolean(props.errors.password && props.touched.password)}
-								helperText={props.errors.password}
-								autoComplete="current-password"
-								{...props.getFieldProps('password')}
-							/>
-						</div>
-						<div className="col-span-1">
-							<div className="flex items-center justify-between">
-								<Form.Checkbox
-									checked={props.values.remember_me}
-									error={Boolean(props.errors.remember_me && props.touched.remember_me)}
-									helperText={props.errors.remember_me}
-									{...props.getFieldProps('remember_me')}
-								>
-									Remember me
-								</Form.Checkbox>
-								<div className="text-sm">
-									<Link to="/" className="link link-primary link-hover">
-										Forgot password?
-									</Link>
+		<Card className="sm:py-4 sm:px-8">
+			<Card.Body>
+				<Card.Title as="h2" className="justify-center">
+					Sign in to your account
+				</Card.Title>
+				<Card.Content>
+					<Form<SignInFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+						{(props) => (
+							<div className="grid grid-cols-1 gap-4">
+								<div className="col-span-1">
+									<Form.Input
+										label="User name"
+										error={Boolean(props.errors.user_name && props.touched.user_name)}
+										helperText={props.errors.user_name}
+										autoComplete="username"
+										{...props.getFieldProps('user_name')}
+									/>
+								</div>
+								<div className="col-span-1">
+									<Form.Input
+										type="password"
+										label="Password"
+										error={Boolean(props.errors.password && props.touched.password)}
+										helperText={props.errors.password}
+										autoComplete="current-password"
+										{...props.getFieldProps('password')}
+									/>
+								</div>
+								<div className="col-span-1">
+									<div className="flex items-center justify-between">
+										<Form.Checkbox
+											checked={props.values.remember_me}
+											error={Boolean(props.errors.remember_me && props.touched.remember_me)}
+											helperText={props.errors.remember_me}
+											{...props.getFieldProps('remember_me')}
+										>
+											Remember me
+										</Form.Checkbox>
+										<div className="text-sm">
+											<Link to="/" className="link link-primary link-hover">
+												Forgot password?
+											</Link>
+										</div>
+									</div>
+								</div>
+								<div className="col-span-1">
+									<Button type="submit" fullWidth loading={props.isSubmitting}>
+										{props.isSubmitting ? 'Signing in' : 'Sign in'}
+									</Button>
 								</div>
 							</div>
-						</div>
-						<div className="col-span-1">
-							<Button type="submit" fullWidth loading={props.isSubmitting}>
-								{props.isSubmitting ? 'Signing in' : 'Sign in'}
-							</Button>
-						</div>
+						)}
+					</Form>
+					<div className="divider my-6">Or continue with</div>
+					<div className="flex items-center justify-center">
+						<span className="leading-none text-sm">
+							Do you have an account?
+							<Link className="ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_UP}`}>
+								Sign up
+							</Link>
+						</span>
 					</div>
-				)}
-			</Form>
-			<div className="divider my-6">Or continue with</div>
-			<div className="flex items-center justify-center">
-				<span className="leading-none text-sm">
-					Do you have an account?
-					<Link className="ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_UP}`}>
-						Sign up
-					</Link>
-				</span>
-			</div>
+				</Card.Content>
+			</Card.Body>
 		</Card>
 	);
 };

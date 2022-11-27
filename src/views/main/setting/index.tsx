@@ -78,31 +78,41 @@ const SettingPage = () => {
 	return (
 		<div className="grid grid-cols-1 gap-4">
 			<div className="col-span-1">
-				<Card title="Settings">
-					{settingShow.loading ? (
-						<SpinLoading />
-					) : (
-						<Form<UpdateSettingFormik> initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
-							{(props) => (
-								<div className="grid grid-cols-2 gap-4">
-									<div className="col-span-2 md:col-span-1">
-										<Form.Select
-											label="Theme"
-											options={[...settingConstant.SETTING_THEME_ALL]}
-											error={Boolean(props.errors.theme && props.touched.theme)}
-											helperText={props.errors.theme}
-											{...props.getFieldProps('theme')}
-										/>
-									</div>
-									<div className="col-span-2 flex flex-row-reverse">
-										<Button type="submit" loading={settingUpdate.loading}>
-											{settingUpdate.loading ? 'Updating' : 'Update'}
-										</Button>
-									</div>
-								</div>
+				<Card>
+					<Card.Body>
+						<Card.Title>Settings</Card.Title>
+						<Card.Content>
+							{settingShow.loading ? (
+								<SpinLoading />
+							) : (
+								<Form<UpdateSettingFormik>
+									initialValues={initialValues}
+									validationSchema={validationSchema}
+									onSubmit={onSubmit}
+									enableReinitialize
+								>
+									{(props) => (
+										<div className="grid grid-cols-2 gap-4">
+											<div className="col-span-2 md:col-span-1">
+												<Form.Select
+													label="Theme"
+													options={[...settingConstant.SETTING_THEME_ALL]}
+													error={Boolean(props.errors.theme && props.touched.theme)}
+													helperText={props.errors.theme}
+													{...props.getFieldProps('theme')}
+												/>
+											</div>
+											<div className="col-span-2 flex flex-row-reverse">
+												<Button type="submit" loading={settingUpdate.loading}>
+													{settingUpdate.loading ? 'Updating' : 'Update'}
+												</Button>
+											</div>
+										</div>
+									)}
+								</Form>
 							)}
-						</Form>
-					)}
+						</Card.Content>
+					</Card.Body>
 				</Card>
 			</div>
 		</div>
