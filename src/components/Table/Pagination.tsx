@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import Button from '../Button';
 import Form from 'src/components/Form';
 import { AngleDoubleLeftIcon, AngleDoubleRightIcon, AngleLeftIcon, AngleRightIcon } from 'src/components/Icon';
 
@@ -28,11 +29,12 @@ const Pagination = ({ page, pageSize, total, disabled = false, onChangePage, onC
 			<div className="flex-none flex items-center mr-4">
 				<span>
 					<Form.Select
+						size="sm"
+						focusOutline={false}
 						name="page_size"
 						value={pageSize}
 						onChange={(event) => _onChangePageSize(event)}
 						options={[10, 20, 50, 100]}
-						sizeType="sm"
 						disabled={disabled}
 					/>
 				</span>
@@ -44,33 +46,18 @@ const Pagination = ({ page, pageSize, total, disabled = false, onChangePage, onC
 			</div>
 			<div className="flex-none flex items-center">
 				<nav className="btn-group">
-					<button type="button" className="btn btn-sm btn-primary btn-outline" onClick={() => _onChangePage(1)} disabled={page <= 1 || disabled}>
+					<Button color="primary" size="sm" variant="outline" onClick={() => _onChangePage(1)} disabled={page <= 1 || disabled}>
 						<AngleDoubleLeftIcon className="h-4 w-4" />
-					</button>
-					<button
-						type="button"
-						className="btn btn-sm btn-primary btn-outline"
-						onClick={() => _onChangePage(page - 1)}
-						disabled={page <= 1 || disabled}
-					>
+					</Button>
+					<Button color="primary" size="sm" variant="outline" onClick={() => _onChangePage(page - 1)} disabled={page <= 1 || disabled}>
 						<AngleLeftIcon className="h-4 w-4" />
-					</button>
-					<button
-						type="button"
-						className="btn btn-sm btn-primary btn-outline"
-						onClick={() => _onChangePage(page + 1)}
-						disabled={page >= totalPages || disabled}
-					>
+					</Button>
+					<Button color="primary" size="sm" variant="outline" onClick={() => _onChangePage(page + 1)} disabled={page >= totalPages || disabled}>
 						<AngleRightIcon className="h-4 w-4" />
-					</button>
-					<button
-						type="button"
-						className="btn btn-sm btn-primary btn-outline"
-						onClick={() => _onChangePage(totalPages)}
-						disabled={page >= totalPages || disabled}
-					>
+					</Button>
+					<Button color="primary" size="sm" variant="outline" onClick={() => _onChangePage(totalPages)} disabled={page >= totalPages || disabled}>
 						<AngleDoubleRightIcon className="h-4 w-4" />
-					</button>
+					</Button>
 				</nav>
 			</div>
 		</div>

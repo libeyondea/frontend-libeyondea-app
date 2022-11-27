@@ -1,6 +1,6 @@
 type Props = {
 	className?: string;
-	size?: number | string;
+	size?: string | number;
 } & React.ComponentPropsWithoutRef<'svg'>;
 
 const SyncIcon = ({ className, size = '1em', ...props }: Props) => {

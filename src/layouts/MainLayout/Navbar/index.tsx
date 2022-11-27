@@ -1,6 +1,6 @@
+import Avatar from 'src/components/Avatar';
+import Dropdown from 'src/components/Dropdown';
 import { BarsIcon } from 'src/components/Icon';
-import Image from 'src/components/Image';
-import Link from 'src/components/Link';
 import * as cookiesConstant from 'src/constants/cookies';
 import * as routeConstant from 'src/constants/route';
 import authService from 'src/services/authService';
@@ -36,26 +36,20 @@ const Navbar = () => {
 				</label>
 			</div>
 			<div className="flex-none">
-				<div className="dropdown dropdown-end">
-					<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-						<div className="w-9 rounded-full">
-							<Image src={authCurrent.data.user?.avatar} alt={authCurrent.data.user?.user_name} />
-						</div>
-					</label>
-					<ul tabIndex={0} className="menu menu-compact dropdown-content mt-4 p-2 shadow bg-base-100 rounded-box w-52">
-						<li>
-							<Link to={`/${routeConstant.ROUTE_NAME_PROFILE}`}>Profile</Link>
-						</li>
-						<li>
-							<Link to={`/${routeConstant.ROUTE_NAME_SETTING}`}>Settings</Link>
-						</li>
-						<li>
+				<Dropdown align="end">
+					<Dropdown.Toggle color="ghost" shape="circle">
+						<Avatar src={authCurrent.data.user?.avatar} shape="circle" size="2.25rem" />
+					</Dropdown.Toggle>
+					<Dropdown.Menu>
+						<Dropdown.Item to={`/${routeConstant.ROUTE_NAME_PROFILE}`}>Profile</Dropdown.Item>
+						<Dropdown.Item to={`/${routeConstant.ROUTE_NAME_SETTING}`}>Settings</Dropdown.Item>
+						<Dropdown.Item>
 							<button type="button" onClick={onClickSignOut}>
 								Sign out
 							</button>
-						</li>
-					</ul>
-				</div>
+						</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
 			</div>
 		</nav>
 	);

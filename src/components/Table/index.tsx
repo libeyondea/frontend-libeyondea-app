@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import { Fragment } from 'react';
 
+import Button from '../Button';
 import { EditIcon, TrashIcon } from '../Icon';
 import Pagination from './Pagination';
 import SortSearch from './SortSearch';
@@ -129,22 +130,25 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 										{action && (
 											<td key={index}>
 												<div className="flex items-center">
-													<button
-														type="button"
-														className="text-info hover:text-info-content mr-2"
+													<Button
+														className="mr-2"
+														color="info"
+														size="sm"
+														variant="outline"
 														onClick={() => action.onClickEdit(data.id)}
 														disabled={disabled}
 													>
 														<EditIcon className="h-5 w-5" />
-													</button>
-													<button
-														type="button"
-														className="text-error hover:text-error-content"
+													</Button>
+													<Button
+														color="error"
+														size="sm"
+														variant="outline"
 														onClick={() => action.onClickDelete(data.id)}
 														disabled={disabled}
 													>
 														<TrashIcon className="h-5 w-5" />
-													</button>
+													</Button>
 												</div>
 											</td>
 										)}

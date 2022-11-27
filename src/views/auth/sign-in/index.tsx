@@ -99,7 +99,7 @@ const SignInPage = () => {
 							</div>
 						</div>
 						<div className="col-span-1">
-							<Button className="w-full" type="submit" loading={props.isSubmitting} disabled={props.isSubmitting}>
+							<Button type="submit" fullWidth loading={props.isSubmitting}>
 								{props.isSubmitting ? 'Signing in' : 'Sign in'}
 							</Button>
 						</div>
@@ -110,7 +110,7 @@ const SignInPage = () => {
 			<div className="flex items-center justify-center">
 				<span className="leading-none text-sm">
 					Do you have an account?
-					<Link className="link link-primary link-hover ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_UP}`}>
+					<Link className="ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_UP}`}>
 						Sign up
 					</Link>
 				</span>

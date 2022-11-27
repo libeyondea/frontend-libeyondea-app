@@ -95,7 +95,7 @@ const SettingPage = () => {
 										/>
 									</div>
 									<div className="col-span-2 flex flex-row-reverse">
-										<Button type="submit" loading={settingUpdate.loading} disabled={settingUpdate.loading}>
+										<Button type="submit" loading={settingUpdate.loading}>
 											{settingUpdate.loading ? 'Updating' : 'Update'}
 										</Button>
 									</div>

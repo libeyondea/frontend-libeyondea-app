@@ -1,5 +1,3 @@
-import classNames from 'classnames';
-
 type Props = {
 	className?: string;
 	src?: string;
@@ -7,7 +5,7 @@ type Props = {
 } & React.ComponentPropsWithoutRef<'img'>;
 
 const Image = ({ className, src, alt, ...props }: Props) => {
-	return <img {...props} className={classNames('', className)} src={src} alt={alt} />;
+	return <img {...props} className={className} src={src} alt={alt} />;
 };
 
 export default Image;

@@ -20,7 +20,7 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 	const id = useId();
 	const [previewImage, setPreviewImage] = useState(imageUrl);
 
-	const _onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const _onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const files = event.target.files;
 		if (files) {
 			setPreviewImage(URL.createObjectURL(files[0]));
@@ -29,11 +29,11 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 		}
 	};
 
-	const _onBlurFile = () => {
+	const _onBlurImage = () => {
 		onBlurImage(name, true);
 	};
 
-	const _onRemoveFile = () => {
+	const _onRemoveImage = () => {
 		onChangeImage(name, null);
 		setPreviewImage('');
 	};
@@ -53,22 +53,22 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 						</div>
 					</div>
 				)}
-				<Button className="relative" colorType="secondary">
+				<Button className="relative" color="secondary">
 					<input
 						{...props}
+						className="absolute w-full inset-0 opacity-0"
+						type="file"
 						id={id}
 						name={name}
 						value=""
-						onChange={_onChangeFile}
-						onBlur={_onBlurFile}
+						onChange={_onChangeImage}
+						onBlur={_onBlurImage}
 						accept=".jpg, .jpeg, .png, .gif"
-						className="absolute w-full inset-0 opacity-0"
-						type="file"
 					/>
 					Change
 				</Button>
 				{previewImage && canDelete && (
-					<Button className="mt-4 sm:mt-0 ml-0 sm:ml-4" colorType="danger" onClick={_onRemoveFile}>
+					<Button className="mt-4 sm:mt-0 ml-0 sm:ml-4" color="error" onClick={_onRemoveImage}>
 						Remove
 					</Button>
 				)}

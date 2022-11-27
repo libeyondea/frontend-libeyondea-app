@@ -145,7 +145,7 @@ const UserPage = () => {
 							) : key === 'role' ? (
 								_.capitalize(_.toString(value))
 							) : key === 'status' ? (
-								<Badge colorType={Boolean(value) ? 'success' : 'danger'}>{Boolean(value) ? 'Active' : 'Deactive'}</Badge>
+								<Badge color={Boolean(value) ? 'success' : 'error'}>{Boolean(value) ? 'Active' : 'Deactive'}</Badge>
 							) : (
 								_.toString(value)
 							);

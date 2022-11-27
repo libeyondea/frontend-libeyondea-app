@@ -1,6 +1,7 @@
 import { useEffectOnce } from 'react-use';
 
-import Stat from 'src/components/Stat';
+import { SpinLoading } from 'src/components/Loading';
+import Stats from 'src/components/Stats';
 import dashboardService from 'src/services/dashboardService';
 import { useDispatch, useSelector } from 'src/store';
 import { dashboardShowDataRequestAction, dashboardShowLoadingRequestAction } from 'src/store/dashboard/actions';
@@ -27,7 +28,12 @@ const DashboardPage = () => {
 	return (
 		<div className="grid grid-cols-12 gap-4">
 			<div className="col-span-12 sm:col-span-6 md:col-span-3">
-				<Stat title="Total User" value={dashboardShow.data.user?.total} loading={dashboardShow.loading} />
+				<Stats className="bg-base-200 shadow">
+					<Stats.Stat>
+						<Stats.Stat.Item variant="title">Total User</Stats.Stat.Item>
+						{dashboardShow.loading ? <SpinLoading /> : <Stats.Stat.Item variant="value">{dashboardShow.data.user?.total}</Stats.Stat.Item>}
+					</Stats.Stat>
+				</Stats>
 			</div>
 		</div>
 	);

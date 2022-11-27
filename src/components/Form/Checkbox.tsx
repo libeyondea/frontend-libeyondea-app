@@ -3,31 +3,45 @@ import { useId } from 'react';
 
 type Props = {
 	className?: string;
+	color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error';
+	size?: 'lg' | 'md' | 'sm' | 'xs';
 	name: string;
 	error?: boolean;
 	helperText?: string;
-	sizeType?: 'lg' | 'md' | 'sm' | 'xs';
 	children: React.ReactNode;
-} & React.ComponentPropsWithoutRef<'input'>;
+} & Omit<React.ComponentPropsWithoutRef<'input'>, 'color' | 'size'>;
 
-const CheckboxForm = ({ className, name, error = false, helperText, sizeType = 'md', children, ...props }: Props) => {
+const CheckboxForm = ({ className, color = 'primary', size = 'md', name, error = false, helperText, children, ...props }: Props) => {
 	const id = useId();
 
+	const containerClasses = classNames('form-control', className);
+
+	const inputClasses = classNames(
+		'checkbox',
+		{
+			'checkbox-primary': color === 'primary',
+			'checkbox-secondary': color === 'secondary',
+			'checkbox-accent': color === 'accent',
+			'checkbox-info': color === 'info',
+			'checkbox-success': color === 'success',
+			'checkbox-warning': color === 'warning',
+			'checkbox-error': color === 'error'
+		},
+		{
+			'checkbox-lg': size === 'lg',
+			'checkbox-md': size === 'md',
+			'checkbox-sm': size === 'sm',
+			'checkbox-xs': size === 'xs'
+		},
+		{
+			'checkbox-error': error
+		}
+	);
+
 	return (
-		<div className={classNames('form-control', className)}>
+		<div className={containerClasses}>
 			<label className="label justify-start p-0">
-				<input
-					{...props}
-					id={id}
-					name={name}
-					className={classNames('checkbox checkbox-primary', {
-						'checkbox-lg': sizeType === 'lg',
-						'checkbox-md': sizeType === 'md',
-						'checkbox-sm': sizeType === 'sm',
-						'checkbox-xs': sizeType === 'xs'
-					})}
-					type="checkbox"
-				/>
+				<input {...props} className={inputClasses} type="checkbox" id={id} name={name} />
 				<span className="label-text ml-2">{children}</span>
 			</label>
 			{error && (

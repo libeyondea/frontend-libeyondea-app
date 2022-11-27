@@ -187,7 +187,7 @@ const ProfilePage = () => {
 										/>
 									</div>
 									<div className="col-span-12 flex flex-row-reverse">
-										<Button type="submit" loading={profileUpdate.loading} disabled={profileUpdate.loading}>
+										<Button type="submit" loading={profileUpdate.loading}>
 											{profileUpdate.loading ? 'Updating' : 'Update'}
 										</Button>
 									</div>
