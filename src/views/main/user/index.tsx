@@ -121,7 +121,7 @@ const UserPage = () => {
 									onClickEdit: onClickEdit,
 									onClickDelete: onClickDelete
 								}}
-								sortSearch={{
+								toolBar={{
 									sortBy: userList.sort_by,
 									sortByOptions: userList.columns,
 									sortDirection: userList.sort_direction,

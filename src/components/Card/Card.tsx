@@ -8,19 +8,12 @@ import CardContent from './CardContent';
 import CardImage from './CardImage';
 import CardTitle from './CardTitle';
 
-export type CardProps = {
+type Props = {
 	className?: string;
-	imageFull?: boolean;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const Card = forwardRef(({ className, imageFull = false, ...props }: CardProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-	const classes = classNames(
-		'card bg-base-100 shadow-md w-full',
-		{
-			'image-full': imageFull
-		},
-		className
-	);
+const Card = forwardRef(({ className, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+	const classes = classNames('card bg-base-100 shadow-md w-full', className);
 
 	return <div {...props} className={classes} ref={ref} />;
 });

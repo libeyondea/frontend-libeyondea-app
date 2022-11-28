@@ -11,7 +11,7 @@ type Props = {
 } & NavLinkProps;
 
 const NavLink = forwardRef(({ className, classNameActive, classNameDeactive, to, children, ...props }: Props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
-	<ReactNavLink {...props} className={({ isActive }) => classNames(className, isActive ? classNameActive : classNameDeactive)} to={to} ref={ref} end>
+	<ReactNavLink {...props} className={({ isActive }) => classNames(className, isActive ? classNameActive : classNameDeactive)} to={to} end ref={ref}>
 		{children}
 	</ReactNavLink>
 ));

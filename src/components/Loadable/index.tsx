@@ -1,8 +1,8 @@
 import { ComponentType, LazyExoticComponent, Suspense } from 'react';
 
-type LoaderProps = {};
+type Props = {};
 
-const Loadable = (Component: LazyExoticComponent<() => JSX.Element> | ComponentType<any>) => (props: LoaderProps) =>
+const Loadable = (Component: LazyExoticComponent<() => JSX.Element> | ComponentType<any>) => (props: Props) =>
 	(
 		<Suspense fallback={null}>
 			<Component {...props} />

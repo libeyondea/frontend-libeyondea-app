@@ -4,13 +4,13 @@ import React, { forwardRef } from 'react';
 
 import Stat from './Stat';
 
-export type StatsProps = {
+type Props = {
 	className?: string;
 	vertical?: boolean;
 	children?: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const Stats = forwardRef(({ className, vertical = false, children, ...props }: StatsProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+const Stats = forwardRef(({ className, vertical = false, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
 	const classes = classNames('stats bg-base-100 w-full shadow-md', vertical ? 'stats-vertical' : 'stats-horizontal', className);
 
 	return (

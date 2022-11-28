@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
-export type BadgeProps = {
+type Props = {
 	color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost';
 	size?: 'lg' | 'md' | 'sm' | 'xs';
 	variant?: 'contain' | 'outline';
@@ -9,10 +9,7 @@ export type BadgeProps = {
 } & Omit<React.ComponentPropsWithoutRef<'div'>, 'color'>;
 
 const Badge = forwardRef(
-	(
-		{ className, color = 'primary', size = 'md', variant = 'contain', responsive, children, ...props }: BadgeProps,
-		ref: React.ForwardedRef<HTMLDivElement>
-	) => {
+	({ className, color = 'primary', size = 'md', variant = 'contain', responsive, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
 		const classes = classNames(
 			'badge',
 			{

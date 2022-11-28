@@ -149,7 +149,7 @@ const SignUpPage = () => {
 									</Form.Checkbox>
 								</div>
 								<div className="col-span-1">
-									<Button type="submit" fullWidth loading={props.isSubmitting}>
+									<Button className="w-full" type="submit" loading={props.isSubmitting}>
 										{props.isSubmitting ? 'Signing up' : 'Sign up'}
 									</Button>
 								</div>

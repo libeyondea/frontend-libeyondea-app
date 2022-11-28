@@ -4,14 +4,12 @@ import React, { forwardRef } from 'react';
 
 import StatItem from './StatItem';
 
-export type StatProps = {
+type Props = {
 	className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const Stat = forwardRef(({ className, ...props }: StatProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-	const classes = classNames('stat', className);
-
-	return <div {...props} className={classes} ref={ref} />;
+const Stat = forwardRef(({ className, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+	return <div {...props} className={classNames('stat', className)} ref={ref} />;
 });
 
 export default _.assign(Stat, {

@@ -5,13 +5,12 @@ import React, { forwardRef } from 'react';
 import Image from '../Image';
 import AvatarGroup from './AvatarGroup';
 
-export type AvatarProps = {
+type Props = {
 	className?: string;
 	src?: string;
 	alt?: string;
 	placeholder?: string;
 	size?: string | number;
-	shape?: 'circle' | 'square';
 	online?: boolean;
 	offline?: boolean;
 	children?: React.ReactNode;
@@ -19,7 +18,7 @@ export type AvatarProps = {
 
 const Avatar = forwardRef(
 	(
-		{ className, src, alt, placeholder, size = '3rem', shape = 'circle', online = false, offline = false, children, ...props }: AvatarProps,
+		{ className, src, alt, placeholder, size = '3rem', online = false, offline = false, children, ...props }: Props,
 		ref: React.ForwardedRef<HTMLDivElement>
 	) => {
 		const containerClasses = classNames(
@@ -32,34 +31,27 @@ const Avatar = forwardRef(
 			className
 		);
 
-		const imageClasses = classNames({
-			'rounded-full': shape === 'circle',
-			'rounded-btn': shape === 'square'
-		});
-
-		const placeholderClasses = classNames({
-			'rounded-full': shape === 'circle',
-			'rounded-btn': shape === 'square'
-		});
-
-		const styles = {
-			width: size,
-			height: size
-		};
-
 		return (
 			<div {...props} className={containerClasses} ref={ref}>
 				{src ? (
-					<div className={imageClasses} style={styles}>
+					<div
+						className="rounded-full"
+						style={{
+							width: size,
+							height: size
+						}}
+					>
 						<Image src={src} alt={alt} />
 					</div>
-				) : placeholder ? (
-					<div className={placeholderClasses} style={styles}>
-						{placeholder}
-					</div>
 				) : (
-					<div className={imageClasses} style={styles}>
-						{children}
+					<div
+						className="rounded-full"
+						style={{
+							width: size,
+							height: size
+						}}
+					>
+						{placeholder || children}
 					</div>
 				)}
 			</div>

@@ -1,23 +1,22 @@
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
-import { AvatarProps } from './Avatar';
-
-export type AvatarGroupProps = React.HTMLAttributes<HTMLDivElement> & {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
 	className?: string;
 	space?: string | number;
-	children: React.ReactElement<AvatarProps> | React.ReactElement<AvatarProps>[];
+	children: React.ReactNode;
 };
 
-const AvatarGroup = forwardRef(({ className, space = '-1.5rem', children, ...props }: AvatarGroupProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-	const classes = classNames('avatar-group', className);
-
-	const styles = {
-		marginLeft: space
-	};
-
+const AvatarGroup = forwardRef(({ className, space = '-1.5rem', children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
 	return (
-		<div {...props} className={classes} style={styles} ref={ref}>
+		<div
+			{...props}
+			className={classNames('avatar-group', className)}
+			style={{
+				marginLeft: space
+			}}
+			ref={ref}
+		>
 			{children}
 		</div>
 	);

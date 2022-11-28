@@ -104,7 +104,7 @@ const SignInPage = () => {
 									</div>
 								</div>
 								<div className="col-span-1">
-									<Button type="submit" fullWidth loading={props.isSubmitting}>
+									<Button className="w-full" type="submit" loading={props.isSubmitting}>
 										{props.isSubmitting ? 'Signing in' : 'Sign in'}
 									</Button>
 								</div>

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { useId, useState } from 'react';
 
+import Avatar from '../Avatar';
 import Button from 'src/components/Button';
-import Image from 'src/components/Image';
 
 type Props = {
 	className?: string;
@@ -47,10 +47,8 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 			)}
 			<div className="flex flex-col sm:flex-row">
 				{previewImage && (
-					<div className="mb-4 sm:mb-0 mr-0 sm:mr-4 avatar">
-						<div className="w-24 rounded-full">
-							<Image src={previewImage} alt="Image" />
-						</div>
+					<div className="mb-4 sm:mb-0 mr-0 sm:mr-4">
+						<Avatar src={previewImage} alt="Image" size="6rem" />
 					</div>
 				)}
 				<Button className="relative" color="secondary">

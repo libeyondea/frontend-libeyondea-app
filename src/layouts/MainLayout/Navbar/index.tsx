@@ -1,4 +1,5 @@
 import Avatar from 'src/components/Avatar';
+import Button from 'src/components/Button';
 import Dropdown from 'src/components/Dropdown';
 import { BarsIcon } from 'src/components/Icon';
 import * as cookiesConstant from 'src/constants/cookies';
@@ -37,8 +38,10 @@ const Navbar = () => {
 			</div>
 			<div className="flex-none">
 				<Dropdown align="end">
-					<Dropdown.Toggle color="ghost" shape="circle">
-						<Avatar src={authCurrent.data.user?.avatar} shape="circle" size="2.25rem" />
+					<Dropdown.Toggle>
+						<Button className="px-2" color="ghost">
+							<Avatar src={authCurrent.data.user?.avatar} size="2.25rem" />
+						</Button>
 					</Dropdown.Toggle>
 					<Dropdown.Menu>
 						<Dropdown.Item to={`/${routeConstant.ROUTE_NAME_PROFILE}`}>Profile</Dropdown.Item>

@@ -3,15 +3,13 @@ import { forwardRef } from 'react';
 
 import { SyncIcon } from '../Icon';
 
-export type PropsButton = {
+type Props = {
 	className?: string;
 	type?: 'button' | 'submit' | 'reset';
 	color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost';
 	size?: 'lg' | 'md' | 'sm' | 'xs';
 	variant?: 'contain' | 'outline' | 'link';
-	shape?: 'circle' | 'square';
 	responsive?: boolean;
-	fullWidth?: boolean;
 	loading?: boolean;
 	disabled?: boolean;
 	startIcon?: React.ReactNode;
@@ -27,16 +25,14 @@ const Button = forwardRef(
 			color = 'primary',
 			size = 'md',
 			variant = 'contain',
-			shape,
 			responsive = false,
-			fullWidth = false,
 			loading = false,
 			disabled = false,
 			startIcon,
 			endIcon,
 			children,
 			...props
-		}: PropsButton,
+		}: Props,
 		ref: React.ForwardedRef<HTMLButtonElement>
 	) => {
 		const classes = classNames(
@@ -61,17 +57,12 @@ const Button = forwardRef(
 				'btn-xs': size === 'xs'
 			},
 			{
-				'btn-circle': shape === 'circle',
-				'btn-square': shape === 'square'
-			},
-			{
 				'btn-contain': variant === 'contain',
 				'btn-outline': variant === 'outline',
 				'btn-link': variant === 'link'
 			},
 			{
 				'btn-xs md:btn-sm lg:btn-md xl:btn-lg': responsive,
-				'btn-block': fullWidth,
 				'btn-disabled': disabled || loading
 			},
 			className

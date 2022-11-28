@@ -16,7 +16,7 @@ type Props = {
 	onChangeSearchTemp: (searchTemp: string) => void;
 };
 
-const SortSearch = ({
+const ToolBar = ({
 	hiddenColumns,
 	sortBy,
 	sortByOptions,
@@ -77,4 +77,4 @@ const SortSearch = ({
 	);
 };
 
-export default SortSearch;
+export default ToolBar;
