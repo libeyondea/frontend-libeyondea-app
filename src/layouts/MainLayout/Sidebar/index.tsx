@@ -15,12 +15,12 @@ const Sidebar = () => {
 	const authCurrent = useSelector(selectAuthCurrent);
 
 	return (
-		<aside className="bg-base-200 w-64">
-			<div className="z-20 bg-base-200 bg-opacity-90 backdrop-blur sticky top-0 px-4 py-2 shadow-sm">
-				<Link to="/" className="btn btn-ghost px-4">
-					<div className="flex items-center text-primary transition-all duration-200 text-lg md:text-2xl">
-						<Image className="rounded-full h-8 w-8" src={Logo} alt={config.APP_NAME} />
-						<span className="capitalize tracking-tighter font-bold ml-2">{config.APP_NAME}</span>
+		<aside className="w-64 bg-base-200">
+			<div className="sticky top-0 z-20 bg-base-200 bg-opacity-90 px-4 py-2 shadow-sm backdrop-blur">
+				<Link to="/" className="btn-ghost btn px-4">
+					<div className="flex items-center text-lg text-primary transition-all duration-200 md:text-2xl">
+						<Image className="h-8 w-8 rounded-full" src={Logo} alt={config.APP_NAME} />
+						<span className="ml-2 font-bold capitalize tracking-tighter">{config.APP_NAME}</span>
 					</div>
 				</Link>
 			</div>
@@ -29,7 +29,7 @@ const Sidebar = () => {
 				<ul className="menu p-0 px-4">
 					<li>
 						<NavLink to={`/${routeConstant.ROUTE_NAME_DASHBOARD}`} classNameActive="active">
-							<TachometerIcon className="w-6 h-6" />
+							<TachometerIcon className="h-6 w-6" />
 							Dashboard
 						</NavLink>
 					</li>
@@ -42,13 +42,13 @@ const Sidebar = () => {
 					</li>
 					<li>
 						<NavLink to={`/${routeConstant.ROUTE_NAME_USER}`} classNameActive="active">
-							<ListIcon className="w-6 h-6" />
+							<ListIcon className="h-6 w-6" />
 							List
 						</NavLink>
 					</li>
 					<li>
 						<NavLink to={`/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`} classNameActive="active">
-							<PlusCircleIcon className="w-6 h-6" />
+							<PlusCircleIcon className="h-6 w-6" />
 							New
 						</NavLink>
 					</li>
@@ -60,7 +60,7 @@ const Sidebar = () => {
 				</li>
 				<li>
 					<NavLink to={`/${routeConstant.ROUTE_NAME_SETTING}`} classNameActive="active">
-						<CogIcon className="w-6 h-6" />
+						<CogIcon className="h-6 w-6" />
 						Settings
 					</NavLink>
 				</li>

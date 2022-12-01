@@ -38,8 +38,8 @@ class ErrorBoundary extends React.Component<Props, State> {
 				<div className="center-screen">
 					<div className="center-screen-content">
 						<Card>
-							<h6 className="font-bold text-error text-center">An error occurred. Please try again later.</h6>
-							<div className="flex justify-center mt-4">
+							<h6 className="text-center font-bold text-error">An error occurred. Please try again later.</h6>
+							<div className="mt-4 flex justify-center">
 								<Button color="primary" onClick={() => this.onClickReset()}>
 									Try again
 								</Button>

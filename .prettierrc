@@ -8,5 +8,7 @@
 	"semi": true,
 	"importOrder": ["^src|\\.\\/(.*)$"],
 	"importOrderSeparation": true,
-	"importOrderSortSpecifiers": true
+	"importOrderSortSpecifiers": true,
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"pluginSearchDirs": false
 }

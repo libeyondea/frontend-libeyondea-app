@@ -42,15 +42,15 @@ const ToolBar = ({
 	};
 
 	return (
-		<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-			<div className="flex flex-col sm:flex-row sm:items-center mb-4 md:mb-0">
+		<div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
+			<div className="mb-4 flex flex-col sm:flex-row sm:items-center md:mb-0">
 				<Form.Select
 					name="sort_by"
 					label="Sort by"
 					value={sortBy}
 					options={_.filter(sortByOptions, (column) => !_.includes(hiddenColumns, column))}
 					onChange={_onChangeSortBy}
-					className="min-w-full sm:w-36 sm:min-w-0 mr-0 sm:mr-4 mb-4 sm:mb-0"
+					className="mr-0 mb-4 min-w-full sm:mr-4 sm:mb-0 sm:w-36 sm:min-w-0"
 					disabled={disabled}
 				/>
 				<Form.Select

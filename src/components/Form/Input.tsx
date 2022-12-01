@@ -59,13 +59,13 @@ const InputForm = ({
 	return (
 		<div className={containerClasses}>
 			{label && (
-				<label className="label p-0 mb-2">
+				<label className="label mb-2 p-0">
 					<span className="label-text">{label}</span>
 				</label>
 			)}
 			<input {...props} className={inputClasses} type={type} id={id} name={name} placeholder={label} />
 			{error && (
-				<label className="label p-0 mt-2">
+				<label className="label mt-2 p-0">
 					<span className="label-text-alt text-error">{helperText}</span>
 				</label>
 			)}

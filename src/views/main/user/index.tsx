@@ -141,7 +141,7 @@ const UserPage = () => {
 								columnCell={(key, value, row) => {
 									return key === 'avatar' ? (
 										<div className="avatar">
-											<div className="mask mask-squircle w-12 h-12">
+											<div className="mask mask-squircle h-12 w-12">
 												<Image className="h-10 w-10 rounded-full" src={_.toString(value)} alt={_.toString(row.user_name)} />
 											</div>
 										</div>

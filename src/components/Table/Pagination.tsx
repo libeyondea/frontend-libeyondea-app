@@ -25,8 +25,8 @@ const Pagination = ({ page, pageSize, total, disabled = false, onChangePage, onC
 	};
 
 	return (
-		<div className="overflow-x-auto mt-4 flex items-center justify-start md:justify-end">
-			<div className="flex-none flex items-center mr-4">
+		<div className="mt-4 flex items-center justify-start overflow-x-auto md:justify-end">
+			<div className="mr-4 flex flex-none items-center">
 				<span>
 					<Form.Select
 						size="sm"
@@ -44,7 +44,7 @@ const Pagination = ({ page, pageSize, total, disabled = false, onChangePage, onC
 					<span className="font-semibold">{total}</span>
 				</span>
 			</div>
-			<div className="flex-none flex items-center">
+			<div className="flex flex-none items-center">
 				<nav className="btn-group">
 					<Button color="primary" size="sm" variant="outline" onClick={() => _onChangePage(1)} disabled={page <= 1 || disabled}>
 						<AngleDoubleLeftIcon className="h-4 w-4" />

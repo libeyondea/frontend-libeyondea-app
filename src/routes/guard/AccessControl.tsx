@@ -49,7 +49,7 @@ const AccessControl = ({ children }: Props) => {
 	if (!appInitialized) {
 		return (
 			<div className="flex h-screen">
-				<Image className="m-auto animate-spin rounded-full h-32 w-32" src={Logo} alt={config.APP_NAME} />
+				<Image className="m-auto h-32 w-32 animate-spin rounded-full" src={Logo} alt={config.APP_NAME} />
 			</div>
 		);
 	}

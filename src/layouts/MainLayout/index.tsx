@@ -14,11 +14,11 @@ const MainLayout = () => {
 	useTheme(authCurrent.data.user?.setting.theme);
 
 	return (
-		<div className="drawer drawer-mobile">
+		<div className="drawer-mobile drawer">
 			<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 			<div className="drawer-content">
 				<Navbar />
-				<main className="px-0 sm:px-4 py-4">
+				<main className="px-0 py-4 sm:px-4">
 					<div className="xl:container">
 						<Breadcrumb />
 						<Outlet />

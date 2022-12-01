@@ -30,10 +30,10 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className="navbar bg-base-100 w-full shadow-md sticky top-0 z-30 h-16 bg-opacity-90 backdrop-blur text-base-content">
+		<nav className="navbar sticky top-0 z-30 h-16 w-full bg-base-100 bg-opacity-90 text-base-content shadow-md backdrop-blur">
 			<div className="flex-1">
-				<label htmlFor="my-drawer" className="btn btn-square btn-ghost lg:hidden">
-					<BarsIcon className="inline-block w-5 h-5 stroke-current" />
+				<label htmlFor="my-drawer" className="btn-ghost btn-square btn lg:hidden">
+					<BarsIcon className="inline-block h-5 w-5 stroke-current" />
 				</label>
 			</div>
 			<div className="flex-none">

@@ -70,7 +70,7 @@ const Button = forwardRef(
 
 		return (
 			<button {...props} type={type} className={classes} disabled={disabled || loading} ref={ref}>
-				{loading ? <SyncIcon className="animate-spin h-4 w-4 mr-2" /> : startIcon && startIcon}
+				{loading ? <SyncIcon className="mr-2 h-4 w-4 animate-spin" /> : startIcon && startIcon}
 				{children}
 				{endIcon && endIcon}
 			</button>

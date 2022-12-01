@@ -41,20 +41,20 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 	return (
 		<div className={classNames('form-control w-full', className)}>
 			{label && (
-				<label className="label p-0 mb-2">
+				<label className="label mb-2 p-0">
 					<span className="label-text">{label}</span>
 				</label>
 			)}
 			<div className="flex flex-col sm:flex-row">
 				{previewImage && (
-					<div className="mb-4 sm:mb-0 mr-0 sm:mr-4">
+					<div className="mb-4 mr-0 sm:mb-0 sm:mr-4">
 						<Avatar src={previewImage} alt="Image" size="6rem" />
 					</div>
 				)}
 				<Button className="relative" color="secondary">
 					<input
 						{...props}
-						className="absolute w-full inset-0 opacity-0"
+						className="absolute inset-0 w-full opacity-0"
 						type="file"
 						id={id}
 						name={name}
@@ -66,13 +66,13 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 					Change
 				</Button>
 				{previewImage && canDelete && (
-					<Button className="mt-4 sm:mt-0 ml-0 sm:ml-4" color="error" onClick={_onRemoveImage}>
+					<Button className="mt-4 ml-0 sm:mt-0 sm:ml-4" color="error" onClick={_onRemoveImage}>
 						Remove
 					</Button>
 				)}
 			</div>
 			{error && (
-				<label className="label p-0 mt-2">
+				<label className="label mt-2 p-0">
 					<span className="label-text-alt text-error">{helperText}</span>
 				</label>
 			)}

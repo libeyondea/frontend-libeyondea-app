@@ -7,7 +7,7 @@ const Breadcrumb = () => {
 	const breadcrumbs = useBreadcrumbs();
 
 	return (
-		<div className="breadcrumbs text-sm  pt-0 py-4">
+		<div className="breadcrumbs py-4  pt-0 text-sm">
 			<ul>
 				{breadcrumbs.map((breadcrumb, index) => (
 					<li key={index}>
@@ -18,7 +18,7 @@ const Breadcrumb = () => {
 								'Home'
 							)
 						) : (
-							<Link className="link link-primary link-hover" to={breadcrumb.match.pathname}>
+							<Link className="link-hover link-primary link" to={breadcrumb.match.pathname}>
 								{_.size(breadcrumb.key) > 1 ? breadcrumb.breadcrumb : 'Home'}
 							</Link>
 						)}

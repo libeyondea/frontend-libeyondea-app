@@ -97,7 +97,7 @@ const SignInPage = () => {
 											Remember me
 										</Form.Checkbox>
 										<div className="text-sm">
-											<Link to="/" className="link link-primary link-hover">
+											<Link to="/" className="link-hover link-primary link">
 												Forgot password?
 											</Link>
 										</div>
@@ -113,7 +113,7 @@ const SignInPage = () => {
 					</Form>
 					<div className="divider my-6">Or continue with</div>
 					<div className="flex items-center justify-center">
-						<span className="leading-none text-sm">
+						<span className="text-sm leading-none">
 							Do you have an account?
 							<Link className="ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_UP}`}>
 								Sign up
