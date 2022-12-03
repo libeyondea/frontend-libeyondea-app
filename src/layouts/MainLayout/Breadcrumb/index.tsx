@@ -7,7 +7,7 @@ const Breadcrumb = () => {
 	const breadcrumbs = useBreadcrumbs();
 
 	return (
-		<div className="breadcrumbs py-4  pt-0 text-sm">
+		<div className="breadcrumbs py-4 pt-0 text-sm">
 			<ul>
 				{breadcrumbs.map((breadcrumb, index) => (
 					<li key={index}>

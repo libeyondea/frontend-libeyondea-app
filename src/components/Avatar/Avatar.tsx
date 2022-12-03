@@ -21,18 +21,20 @@ const Avatar = forwardRef(
 		{ className, src, alt, placeholder, size = '3rem', online = false, offline = false, children, ...props }: Props,
 		ref: React.ForwardedRef<HTMLDivElement>
 	) => {
-		const containerClasses = classNames(
-			'avatar',
-			{
-				placeholder: !src,
-				online: online,
-				offline: offline
-			},
-			className
-		);
-
 		return (
-			<div {...props} className={containerClasses} ref={ref}>
+			<div
+				{...props}
+				className={classNames(
+					'avatar',
+					{
+						placeholder: !src,
+						online: online,
+						offline: offline
+					},
+					className
+				)}
+				ref={ref}
+			>
 				{src ? (
 					<div
 						className="rounded-full"
