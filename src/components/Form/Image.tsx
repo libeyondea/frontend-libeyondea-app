@@ -16,9 +16,9 @@ type Props = {
 	canDelete?: boolean;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUrl = '', error = false, helperText, canDelete = false, ...props }: Props) => {
+const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUrl, error = false, helperText, canDelete = false, ...props }: Props) => {
 	const id = useId();
-	const [previewImage, setPreviewImage] = useState(imageUrl);
+	const [previewImage, setPreviewImage] = useState(imageUrl || '');
 
 	const _onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const files = event.target.files;
@@ -39,43 +39,39 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 	};
 
 	return (
-		<div className={classNames('form-control w-full', className)}>
+		<div className={classNames('w-full', className)}>
 			{label && (
-				<label className="label mb-2 p-0">
-					<span className="label-text">{label}</span>
+				<label htmlFor={id} className="mb-1 inline-block font-medium text-gray-600">
+					{label}
 				</label>
 			)}
-			<div className="flex flex-col sm:flex-row">
+			<div className="flex flex-col sm:flex-row sm:items-start">
 				{previewImage && (
 					<div className="mb-4 mr-0 sm:mb-0 sm:mr-4">
-						<Avatar src={previewImage} alt="Image" size="6rem" />
+						<Avatar className="h-20 w-20" src={previewImage} alt="Image" />
 					</div>
 				)}
 				<Button className="relative" color="secondary">
 					<input
 						{...props}
 						className="absolute inset-0 w-full opacity-0"
-						type="file"
 						id={id}
 						name={name}
 						value=""
+						type="file"
+						accept=".jpg, .jpeg, .png, .gif"
 						onChange={_onChangeImage}
 						onBlur={_onBlurImage}
-						accept=".jpg, .jpeg, .png, .gif"
 					/>
 					Change
 				</Button>
 				{previewImage && canDelete && (
-					<Button className="mt-4 ml-0 sm:mt-0 sm:ml-4" color="error" onClick={_onRemoveImage}>
+					<Button className="mt-4 ml-0 sm:mt-0 sm:ml-4" color="danger" onClick={_onRemoveImage}>
 						Remove
 					</Button>
 				)}
 			</div>
-			{error && (
-				<label className="label mt-2 p-0">
-					<span className="label-text-alt text-error">{helperText}</span>
-				</label>
-			)}
+			{error && <div className="mt-1 text-sm text-red-500">{helperText}</div>}
 		</div>
 	);
 };

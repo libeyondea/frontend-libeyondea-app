@@ -74,14 +74,14 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 						<thead>
 							<tr>
 								<th>
-									<div className="h-6 rounded-md bg-base-300" />
+									<div className="bg-base-300 h-6 rounded-md" />
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-									<div className="h-6 rounded-md bg-base-300" />
+									<div className="bg-base-300 h-6 rounded-md" />
 								</td>
 							</tr>
 						</tbody>
@@ -133,20 +133,13 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 													<Button
 														className="mr-2"
 														color="info"
-														size="sm"
-														variant="outline"
+														variant="outlined"
 														onClick={() => action.onClickEdit(data.id)}
 														disabled={disabled}
 													>
 														<EditIcon className="h-5 w-5" />
 													</Button>
-													<Button
-														color="error"
-														size="sm"
-														variant="outline"
-														onClick={() => action.onClickDelete(data.id)}
-														disabled={disabled}
-													>
+													<Button color="danger" variant="outlined" onClick={() => action.onClickDelete(data.id)} disabled={disabled}>
 														<TrashIcon className="h-5 w-5" />
 													</Button>
 												</div>
