@@ -1,45 +1,22 @@
-export interface SignIn {
-	user_name: string;
-	password: string;
-}
+import firebase from 'firebase/compat/app';
 
-export interface SignInFormik extends SignIn {
-	remember_me: boolean;
-}
+import { UserProfile } from 'src/types/user-profile';
 
-export interface SignUp {
-	first_name: string;
-	last_name: string;
-	user_name: string;
-	email: string;
-	password: string;
-}
+export type FirebaseContextType = {
+	isLoggedIn: boolean;
+	isInitialized?: boolean;
+	user?: UserProfile | null | undefined;
+	logout: () => Promise<void>;
+	login: () => void;
+	firebaseRegister: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
+	firebaseEmailPasswordSignIn: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
+	firebaseGoogleSignIn: () => Promise<firebase.auth.UserCredential>;
+	resetPassword: (email: string) => Promise<void>;
+	updateProfile: VoidFunction;
+};
 
-export interface SignUpFormik extends SignUp {
-	password_confirmation: string;
-	terms: boolean;
-}
-
-export interface Me {
-	id: number;
-	first_name: string;
-	last_name: string;
-	user_name: string;
-	avatar: string;
-	email: string;
-	role: string;
-	status: boolean;
-	created_at: string | null;
-	updated_at: string | null;
-	setting: {
-		id: number;
-		theme: string;
-		created_at: string | null;
-		updated_at: string | null;
-	};
-}
-
-export interface MeToken {
-	user: Me;
-	token: string;
+export interface InitialLoginContextProps {
+	isLoggedIn: boolean;
+	isInitialized?: boolean;
+	user?: UserProfile | null | undefined;
 }

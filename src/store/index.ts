@@ -1,38 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch as useAppDispatch, useSelector as useAppSelector } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import { createEpicMiddleware } from 'redux-observable';
 
-import rootEpic from './rootEpic';
-import rootReducer from './rootReducer';
-import config from 'src/config';
-
-const epicMiddleware = createEpicMiddleware();
-
-const middlewares = [
-	createLogger({
-		predicate: () => config.LOGGER.REDUX
-	}),
-	epicMiddleware
-];
-
-const preloadedState = {};
+import rootReducer from './reducer';
 
 const store = configureStore({
-	reducer: rootReducer,
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
-	devTools: process.env.NODE_ENV !== 'production',
-	preloadedState
+	reducer: rootReducer
 });
 
-epicMiddleware.run(rootEpic);
+export type RootState = ReturnType<typeof rootReducer>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type RootState = ReturnType<typeof store.getState>;
+const { dispatch } = store;
 
-export const useDispatch = () => useAppDispatch<AppDispatch>();
+const useDispatch = () => useAppDispatch<AppDispatch>();
+const useSelector: TypedUseSelectorHook<RootState> = useAppSelector;
 
-export const useSelector: TypedUseSelectorHook<RootState> = useAppSelector;
-
-export default store;
+export { store, dispatch, useSelector, useDispatch };

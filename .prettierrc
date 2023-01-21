@@ -8,7 +8,5 @@
 	"semi": true,
 	"importOrder": ["^src|\\.\\/(.*)$"],
 	"importOrderSeparation": true,
-	"importOrderSortSpecifiers": true,
-	"pluginSearchDirs": false,
-	"plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"]
+	"importOrderSortSpecifiers": true
 }

@@ -1,43 +1,28 @@
-export interface User {
-	id: number;
-	first_name: string;
-	last_name: string;
-	user_name: string;
+import { Profile, UserProfile } from 'src/types/user-profile';
+
+export interface FollowerCardProps {
 	avatar: string;
-	email: string;
-	role: string;
-	status: boolean;
-	created_at: string | null;
-	updated_at: string | null;
+	follow: number;
+	location: string;
+	name: string;
 }
 
-export interface ParamUser {
-	page: number;
-	page_size: number;
-	sort_by: string;
-	sort_direction: string;
-	search: string;
+export interface FriendRequestCardProps extends Profile {
+	mutual: number;
 }
 
-export interface CreateUpdateUser {
-	first_name: string;
-	last_name: string;
-	user_name: string;
-	email: string;
-	password: string;
-	role: string;
-	status: boolean;
+export interface FriendsCardProps {
 	avatar: string;
+	location: string;
+	name: string;
 }
-export interface CreateUpdateUserFormik {
-	first_name: string;
-	last_name: string;
-	user_name: string;
-	email: string;
-	password: string;
-	password_confirmation: string;
-	role: string;
-	status: boolean;
+
+export interface UserProfileCardProps extends UserProfile {
+	profile: string;
+}
+
+export interface UserSimpleCardProps {
 	avatar: string;
-	image: File | null;
+	name: string;
+	status: string;
 }

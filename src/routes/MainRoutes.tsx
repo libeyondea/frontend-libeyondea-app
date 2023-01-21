@@ -1,65 +1,34 @@
 import { lazy } from 'react';
 
-import DefaultPath from './DefaultPath';
-import AuthGuard from './guard/AuthGuard';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import Loadable from 'src/components/Loadable';
-import * as routeConstant from 'src/constants/route';
-import * as userConstant from 'src/constants/user';
-import { RouteObjectWithRole } from 'src/types/router';
+import MainLayout from 'src/layout/MainLayout';
+import Loadable from 'src/ui-component/Loadable';
+import AuthGuard from 'src/utils/route-guard/AuthGuard';
 
-const MainLayout = Loadable(lazy(() => import('src/layouts/MainLayout')));
-const ProfilePage = Loadable(lazy(() => import('src/views/main/profile')));
-const DashboardPage = Loadable(lazy(() => import('src/views/main/dashboard')));
-const UserPage = Loadable(lazy(() => import('src/views/main/user')));
-const NewUserPage = Loadable(lazy(() => import('src/views/main/user/new')));
-const EditUserPage = Loadable(lazy(() => import('src/views/main/user/edit')));
-const SettingPage = Loadable(lazy(() => import('src/views/main/setting')));
+const SamplePage = Loadable(lazy(() => import('src/views/sample-page')));
 
-const MainRoutes: RouteObjectWithRole = {
+const MainRoutes = {
 	path: '/',
 	element: (
-		<ErrorBoundary>
-			<AuthGuard>
-				<MainLayout />
-			</AuthGuard>
-		</ErrorBoundary>
+		<AuthGuard>
+			<MainLayout />
+		</AuthGuard>
 	),
 	children: [
 		{
 			path: '/',
-			element: <DefaultPath />,
-			roles: [...userConstant.USER_ROLE_ALL]
+			element: <SamplePage />
 		},
 		{
-			path: `/${routeConstant.ROUTE_NAME_DASHBOARD}`,
-			element: <DashboardPage />,
-			roles: [userConstant.USER_ROLE_OWNER]
+			path: '/sample-page',
+			element: <SamplePage />
 		},
 		{
-			path: `/${routeConstant.ROUTE_NAME_USER}`,
-			element: <UserPage />,
-			roles: [userConstant.USER_ROLE_OWNER]
+			path: '/pages/under-construction',
+			element: <SamplePage />
 		},
 		{
-			path: `/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_NEW}`,
-			element: <NewUserPage />,
-			roles: [userConstant.USER_ROLE_OWNER]
-		},
-		{
-			path: `/${routeConstant.ROUTE_NAME_USER}/${routeConstant.ROUTE_NAME_USER_EDIT}`,
-			element: <EditUserPage />,
-			roles: [userConstant.USER_ROLE_OWNER]
-		},
-		{
-			path: `/${routeConstant.ROUTE_NAME_SETTING}`,
-			element: <SettingPage />,
-			roles: [...userConstant.USER_ROLE_ALL]
-		},
-		{
-			path: `/${routeConstant.ROUTE_NAME_PROFILE}`,
-			element: <ProfilePage />,
-			roles: [...userConstant.USER_ROLE_ALL]
+			path: '/pages/coming-soon2',
+			element: <SamplePage />
 		}
 	]
 };
