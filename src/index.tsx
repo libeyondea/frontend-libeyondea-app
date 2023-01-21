@@ -1,9 +1,6 @@
-// project imports
-// style + assets
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-// third party
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
@@ -12,8 +9,6 @@ import { ConfigProvider } from './contexts/ConfigContext';
 // import * as serviceWorker from 'serviceWorker';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
-
-// ==============================|| REACT DOM RENDER  ||============================== //
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
