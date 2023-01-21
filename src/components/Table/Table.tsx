@@ -70,7 +70,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 			)}
 			<div className="overflow-x-auto">
 				{loading ? (
-					<table className={classNames('table-compact table w-full animate-pulse', className)}>
+					<table className={classNames('relative w-full animate-pulse', className)}>
 						<thead>
 							<tr>
 								<th>

@@ -7,23 +7,15 @@ type Props = {
 	className?: string;
 	src?: string;
 	alt?: string;
-	variant?: 'circular' | 'rounded';
 	children?: React.ReactNode;
 };
 
-const Avatar = forwardRef(({ className, src, alt, variant = 'circular', children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+const Avatar = forwardRef(({ className, src, alt, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
 	return (
 		<div
-			className={classNames(
-				'relative inline-flex aspect-square h-12 w-12 overflow-hidden object-cover object-center',
-				{
-					'rounded-full': variant === 'circular',
-					'rounded-lg': variant === 'rounded'
-				},
-				className
-			)}
-			ref={ref}
 			{...props}
+			className={classNames('relative inline-flex aspect-square h-12 w-12 overflow-hidden rounded-full object-cover object-center', className)}
+			ref={ref}
 		>
 			<Image className="h-full w-full object-cover" src={src} alt={alt} />
 		</div>

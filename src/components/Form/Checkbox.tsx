@@ -3,15 +3,13 @@ import { useId } from 'react';
 
 type Props = {
 	className?: string;
-	color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error';
-	size?: 'lg' | 'md' | 'sm' | 'xs';
 	name: string;
 	error?: boolean;
 	helperText?: string;
 	children: React.ReactNode;
-} & Omit<React.ComponentPropsWithoutRef<'input'>, 'color' | 'size'>;
+} & React.ComponentPropsWithoutRef<'input'>;
 
-const CheckboxForm = ({ className, color = 'primary', size = 'md', name, error = false, helperText, children, ...props }: Props) => {
+const CheckboxForm = ({ className, name, error = false, helperText, children, ...props }: Props) => {
 	const id = useId();
 
 	return (
@@ -19,12 +17,12 @@ const CheckboxForm = ({ className, color = 'primary', size = 'md', name, error =
 			<div className="flex items-center">
 				<input
 					{...props}
-					className="rounded border-gray-300 text-purple-500 checked:bg-purple-500 focus:ring-purple-600"
+					className="rounded border-gray-300 text-blue-500 checked:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
 					id={id}
 					name={name}
 					type="checkbox"
 				/>
-				<label htmlFor={name} className="ml-2 block text-sm text-gray-900">
+				<label htmlFor={id} className="ml-2 block text-sm text-gray-900">
 					{children}
 				</label>
 			</div>
