@@ -12,7 +12,7 @@ const initialState: SnackbarProps = {
 	},
 	variant: 'default',
 	alert: {
-		color: 'primary',
+		color: 'success', // primary
 		variant: 'filled'
 	},
 	transition: 'Fade',

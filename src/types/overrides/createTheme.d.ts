@@ -1,6 +1,5 @@
-import * as createTheme from '@mui/material/styles';
-
-import { customShadows } from 'src/themes/shadows';
+// import * as createTheme from '@mui/material/styles';
+import customShadows from 'src/themes/shadows';
 
 declare module '@mui/material/styles' {
 	interface ThemeOptions {
@@ -21,3 +20,5 @@ declare module '@mui/material/styles' {
 		grey500: string;
 	}
 }
+
+export default function createTheme(options?: ThemeOptions, ...args: object[]): Theme;

@@ -1,8 +1,7 @@
-import { alpha, Theme } from '@mui/material/styles';
+import { Theme, alpha } from '@mui/material/styles';
 
 const createCustomShadow = (theme: Theme, color: string) => {
 	const transparent = alpha(color, 0.24);
-
 	return {
 		z1: `0 1px 2px 0 ${transparent}`,
 		z8: `0 8px 16px 0 ${transparent}`,
