@@ -3,52 +3,30 @@ import { useId } from 'react';
 
 type Props = {
 	className?: string;
-	color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error';
-	size?: 'lg' | 'md' | 'sm' | 'xs';
 	name: string;
 	error?: boolean;
 	helperText?: string;
 	children: React.ReactNode;
-} & Omit<React.ComponentPropsWithoutRef<'input'>, 'color' | 'size'>;
+} & React.ComponentPropsWithoutRef<'input'>;
 
-const CheckboxForm = ({ className, color = 'primary', size = 'md', name, error = false, helperText, children, ...props }: Props) => {
+const CheckboxForm = ({ className, name, error = false, helperText, children, ...props }: Props) => {
 	const id = useId();
 
-	const containerClasses = classNames('form-control', className);
-
-	const inputClasses = classNames(
-		'checkbox',
-		{
-			'checkbox-primary': color === 'primary',
-			'checkbox-secondary': color === 'secondary',
-			'checkbox-accent': color === 'accent',
-			'checkbox-info': color === 'info',
-			'checkbox-success': color === 'success',
-			'checkbox-warning': color === 'warning',
-			'checkbox-error': color === 'error'
-		},
-		{
-			'checkbox-lg': size === 'lg',
-			'checkbox-md': size === 'md',
-			'checkbox-sm': size === 'sm',
-			'checkbox-xs': size === 'xs'
-		},
-		{
-			'checkbox-error': error
-		}
-	);
-
 	return (
-		<div className={containerClasses}>
-			<label className="label justify-start p-0">
-				<input {...props} className={inputClasses} type="checkbox" id={id} name={name} />
-				<span className="label-text ml-2">{children}</span>
-			</label>
-			{error && (
-				<label className="label">
-					<span className="label-text-alt text-error">{helperText}</span>
+		<div className={classNames('flex items-center', className)}>
+			<div className="flex items-center">
+				<input
+					{...props}
+					className="rounded border-gray-300 text-blue-500 checked:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+					id={id}
+					name={name}
+					type="checkbox"
+				/>
+				<label htmlFor={id} className="ml-2 block text-sm text-gray-900">
+					{children}
 				</label>
-			)}
+			</div>
+			{error && <div className="mt-1 text-sm text-red-700">{error}</div>}
 		</div>
 	);
 };

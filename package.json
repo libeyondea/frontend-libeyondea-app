@@ -3,6 +3,11 @@
 	"version": "3.1.0",
 	"private": true,
 	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.2.1",
+		"@fortawesome/free-regular-svg-icons": "^6.2.1",
+		"@fortawesome/free-solid-svg-icons": "^6.2.1",
+		"@fortawesome/react-fontawesome": "^0.2.0",
+		"@headlessui/react": "^1.7.4",
 		"@reduxjs/toolkit": "^1.9.0",
 		"@types/js-cookie": "^3.0.2",
 		"@types/node": "^18.11.9",
@@ -60,6 +65,7 @@
 		]
 	},
 	"devDependencies": {
+		"@tailwindcss/forms": "^0.5.3",
 		"@trivago/prettier-plugin-sort-imports": "^4.0.0",
 		"autoprefixer": "^10.4.13",
 		"node-sass": "^8.0.0",

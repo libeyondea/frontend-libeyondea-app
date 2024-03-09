@@ -30,52 +30,31 @@ const SelectForm = ({
 }: Props) => {
 	const id = useId();
 
-	const containerClasses = classNames('form-control w-full', className);
-
-	const selectClasses = classNames(
-		'select',
-		{
-			'select-primary': color === 'primary',
-			'select-secondary': color === 'secondary',
-			'select-accent': color === 'accent',
-			'select-info': color === 'info',
-			'select-success': color === 'success',
-			'select-warning': color === 'warning',
-			'select-error': color === 'error',
-			'select-ghost': color === 'ghost'
-		},
-		{
-			'select-lg': size === 'lg',
-			'select-md': size === 'md',
-			'select-sm': size === 'sm',
-			'select-xs': size === 'xs'
-		},
-		{
-			'select-bordered': bordered,
-			'focus:outline-none': !focusOutline,
-			'select-error': error
-		}
-	);
-
 	return (
-		<div className={containerClasses}>
+		<div className={classNames('w-full', className)}>
 			{label && (
-				<label className="label mb-2 p-0">
-					<span className="label-text">{label}</span>
+				<label htmlFor={id} className="mb-1 inline-block font-medium text-gray-600">
+					{label}
 				</label>
 			)}
-			<select {...props} className={selectClasses} id={id} name={name}>
+			<select
+				{...props}
+				className={classNames(
+					'w-full rounded-lg border border-blue-400 px-3 py-2.5 text-sm placeholder-slate-400 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50 disabled:border-0 disabled:bg-blue-100 disabled:opacity-50',
+					{
+						'border-red-400 focus:border-red-400 focus:ring-red-300': error
+					}
+				)}
+				id={id}
+				name={name}
+			>
 				{options.map((option, index) => (
 					<option value={option} key={index}>
 						{_.startCase(_.camelCase(_.toString(option)))}
 					</option>
 				))}
 			</select>
-			{error && (
-				<label className="label mt-2 p-0">
-					<span className="label-text-alt text-error">{helperText}</span>
-				</label>
-			)}
+			{error && <div className="mt-1 text-sm text-red-500">{helperText}</div>}
 		</div>
 	);
 };
