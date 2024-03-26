@@ -11,8 +11,8 @@ const Routes = () => {
 	const authCurrent = useSelector(selectAuthCurrent);
 
 	const mainRoutesChildrenWithRole = useMemo(
-		() => _.filter(MainRoutes.children, (c) => _.includes(c.roles, authCurrent.data.user?.role)),
-		[authCurrent.data.user?.role]
+		() => _.filter(MainRoutes.children, (c) => _.includes(c.roles, authCurrent.data.user?.role?.name)),
+		[authCurrent.data.user?.role?.name]
 	);
 
 	return useRoutes([

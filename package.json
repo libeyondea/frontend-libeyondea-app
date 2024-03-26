@@ -16,7 +16,7 @@
 		"@types/react-router-dom": "^5.3.3",
 		"@types/redux-logger": "^3.0.9",
 		"axios": "^1.2.0",
-		"classnames": "^2.3.2",
+		"classnames": "^2.5.1",
 		"daisyui": "^2.42.1",
 		"formik": "^2.2.9",
 		"js-cookie": "^3.0.1",

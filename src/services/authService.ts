@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Me, MeToken, SignIn, SignUp } from 'src/types/auth';
+import { Me, SignIn, SignUp } from 'src/types/auth';
 import { DataResponse } from 'src/types/response';
 import http from 'src/utils/http';
 
@@ -11,8 +11,8 @@ const authService = {
 			token: token
 		});
 	},
-	signIn: (data: SignIn): Promise<AxiosResponse<DataResponse<MeToken>>> => {
-		return http.post<DataResponse<MeToken>>({
+	signIn: (data: SignIn): Promise<AxiosResponse<DataResponse<Me>>> => {
+		return http.post<DataResponse<Me>>({
 			url: '/signin',
 			data: data
 		});
