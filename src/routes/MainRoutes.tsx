@@ -29,8 +29,7 @@ const MainRoutes: RouteObjectWithRole = {
 		{
 			path: '/',
 			element: <DefaultPath />,
-			roles: [...userConstant.USER_ROLE_ALL],
-			index: true
+			roles: [...userConstant.USER_ROLE_ALL]
 		},
 		{
 			path: `/${routeConstant.ROUTE_NAME_DASHBOARD}`,
