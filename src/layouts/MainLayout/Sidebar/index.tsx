@@ -54,7 +54,7 @@ const Sidebar = () => {
 					<div className="mt-14 flex flex-col overflow-y-auto p-4">
 						<nav className="flex-1 bg-gray-800">
 							<ul className="space-y-2">
-								{_.includes([userConstant.USER_ROLE_OWNER], authCurrent.data.user?.role) && (
+								{_.includes([userConstant.USER_ROLE_OWNER], authCurrent.data.user?.role.name) && (
 									<li>
 										<NavLink
 											to={`/${routeConstant.ROUTE_NAME_DASHBOARD}`}
@@ -67,7 +67,7 @@ const Sidebar = () => {
 										</NavLink>
 									</li>
 								)}
-								{_.includes([userConstant.USER_ROLE_OWNER], authCurrent.data.user?.role) && (
+								{_.includes([userConstant.USER_ROLE_OWNER], authCurrent.data.user?.role.name) && (
 									<Disclosure
 										as="li"
 										defaultOpen={[
