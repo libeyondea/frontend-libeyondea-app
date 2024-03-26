@@ -41,14 +41,14 @@ const SignInPage = () => {
 				cookies.set(cookiesConstant.COOKIES_AUTH_TOKEN, response.data.data.token, {
 					expires: values.remember_me ? config.AUTH.EXPIRED_TIME_REMEMBER_ME : config.AUTH.EXPIRED_TIME
 				});
-				dispatch(authCurrentDataUserRequestAction(response.data.data.user));
+				dispatch(authCurrentDataUserRequestAction(response.data.data));
 				dispatch(authCurrentDataTokenRequestAction(response.data.data.token));
-				toastify.success('Signed in successfully..');
+				toastify.success('Signed in successfully.');
 			})
 			.catch(
 				errorHandler((error) => {
 					if (error.type === 'validation-error') {
-						formikHelpers.setErrors(error.error.response?.data?.errors);
+						// formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
 			)
@@ -58,7 +58,7 @@ const SignInPage = () => {
 	};
 
 	return (
-		<Card className="sm:py-4 sm:px-8">
+		<Card className="sm:px-8 sm:py-4">
 			<Card.Body>
 				<Card.Title as="h2" className="justify-center">
 					Sign in to your account

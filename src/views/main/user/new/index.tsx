@@ -1,4 +1,4 @@
-import { FormikHelpers } from 'formik';
+// import { FormikHelpers } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 import UserForm from '../components/UserForm';
@@ -17,7 +17,7 @@ const NewUserPage = () => {
 	const dispatch = useDispatch();
 	const userCreate = useSelector(selectUserCreate);
 
-	const onSubmit = (values: CreateUpdateUserFormik, formikHelpers: FormikHelpers<CreateUpdateUserFormik>) => {
+	const onSubmit = (values: CreateUpdateUserFormik /* , formikHelpers: FormikHelpers<CreateUpdateUserFormik> */) => {
 		new Promise((resolve, reject) => {
 			dispatch(userCreateLoadingRequestAction(true));
 			if (!values.image) {
@@ -56,7 +56,7 @@ const NewUserPage = () => {
 			.catch(
 				errorHandler((error) => {
 					if (error.type === 'validation-error') {
-						formikHelpers.setErrors(error.error.response?.data?.errors);
+						// formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
 			)

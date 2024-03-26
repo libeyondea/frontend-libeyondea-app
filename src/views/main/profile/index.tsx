@@ -1,4 +1,4 @@
-import { FormikHelpers } from 'formik';
+// import { FormikHelpers } from 'formik';
 import _ from 'lodash';
 import { useEffectOnce } from 'react-use';
 import * as Yup from 'yup';
@@ -51,7 +51,7 @@ const ProfilePage = () => {
 		})
 	});
 
-	const onSubmit = (values: UpdateProfileFormik, formikHelpers: FormikHelpers<UpdateProfileFormik>) => {
+	const onSubmit = (values: UpdateProfileFormik /*, formikHelpers: FormikHelpers<UpdateProfileFormik> */) => {
 		new Promise((resolve, reject) => {
 			dispatch(profileUpdateLoadingRequestAction(true));
 			if (!values.image) {
@@ -90,7 +90,7 @@ const ProfilePage = () => {
 			.catch(
 				errorHandler((error) => {
 					if (error.type === 'validation-error') {
-						formikHelpers.setErrors(error.error.response?.data?.errors);
+						// formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
 			)

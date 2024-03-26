@@ -1,4 +1,4 @@
-import { FormikHelpers } from 'formik';
+// import { FormikHelpers } from 'formik';
 import { useCallback, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const EditUserPage = () => {
 	const userShow = useSelector(selectUserShow);
 	const userUpdate = useSelector(selectUserUpdate);
 
-	const onSubmit = (values: CreateUpdateUserFormik, formikHelpers: FormikHelpers<CreateUpdateUserFormik>) => {
+	const onSubmit = (values: CreateUpdateUserFormik /* , formikHelpers: FormikHelpers<CreateUpdateUserFormik> */) => {
 		new Promise((resolve, reject) => {
 			dispatch(userUpdateLoadingRequestAction(true));
 			if (!values.image) {
@@ -60,7 +60,7 @@ const EditUserPage = () => {
 			.catch(
 				errorHandler((error) => {
 					if (error.type === 'validation-error') {
-						formikHelpers.setErrors(error.error.response?.data?.errors);
+						// formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
 			)

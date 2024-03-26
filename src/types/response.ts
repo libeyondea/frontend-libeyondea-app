@@ -10,6 +10,7 @@ export type DataWithListResponse<T> = {
 } & DataResponse<T>;
 
 export type ErrorResponse = {
+	success?: boolean;
+	code?: number;
 	message?: string;
-	errors?: any;
 };

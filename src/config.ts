@@ -5,8 +5,8 @@ const config = {
 	},
 	DEFAULT_THEME: 'light',
 	URL: {
-		BASE_URL: process.env.REACT_APP_BASE_URL,
-		BASE_API_URL: process.env.REACT_APP_BASE_API_URL
+		BASE_URL: import.meta.env.VITE_BASE_URL,
+		BASE_API_URL: import.meta.env.VITE_BASE_API_URL
 	},
 	REQUEST: {
 		TIMEOUT: 30000

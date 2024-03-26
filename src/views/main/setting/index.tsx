@@ -1,4 +1,4 @@
-import { FormikHelpers } from 'formik';
+// import { FormikHelpers } from 'formik';
 import _ from 'lodash';
 import { useEffectOnce } from 'react-use';
 import * as Yup from 'yup';
@@ -36,7 +36,7 @@ const SettingPage = () => {
 			.oneOf([...settingConstant.SETTING_THEME_ALL], 'The theme invalid.')
 	});
 
-	const onSubmit = (values: UpdateSettingFormik, formikHelpers: FormikHelpers<UpdateSettingFormik>) => {
+	const onSubmit = (values: UpdateSettingFormik /* , formikHelpers: FormikHelpers<UpdateSettingFormik> */) => {
 		dispatch(settingUpdateLoadingRequestAction(true));
 		const payload = {
 			theme: values.theme
@@ -53,7 +53,7 @@ const SettingPage = () => {
 			.catch(
 				errorHandler((error) => {
 					if (error.type === 'validation-error') {
-						formikHelpers.setErrors(error.error.response?.data?.errors);
+						// formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
 			)

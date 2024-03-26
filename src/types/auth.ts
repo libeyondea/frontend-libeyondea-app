@@ -22,12 +22,20 @@ export interface SignUpFormik extends SignUp {
 
 export interface Me {
 	id: number;
+	avatar: string;
 	first_name: string;
 	last_name: string;
 	user_name: string;
-	avatar: string;
 	email: string;
-	role: string;
+	role: {
+		id: string;
+		name: string;
+		code: string;
+		created_at: string | null;
+		updated_at: string | null;
+	};
+	token: string;
+	last_sign_in: string;
 	status: boolean;
 	created_at: string | null;
 	updated_at: string | null;
