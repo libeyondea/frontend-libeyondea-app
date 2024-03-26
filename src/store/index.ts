@@ -21,11 +21,11 @@ const preloadedState = {};
 const store = configureStore({
 	reducer: rootReducer,
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
-	devTools: process.env.NODE_ENV !== 'production',
+	devTools: import.meta.env.NODE_ENV !== 'production',
 	preloadedState
 });
 
-epicMiddleware.run(rootEpic);
+epicMiddleware.run(rootEpic as any); // Fix new
 
 export type AppDispatch = typeof store.dispatch;
 

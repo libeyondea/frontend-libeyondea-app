@@ -62,7 +62,7 @@ const SignUpPage = () => {
 			.catch(
 				errorHandler((error) => {
 					if (error.type === 'validation-error') {
-						formikHelpers.setErrors(error.error.response?.data.errors);
+						// formikHelpers.setErrors(error.error.response?.data.errors);
 					}
 				})
 			)
@@ -72,7 +72,7 @@ const SignUpPage = () => {
 	};
 
 	return (
-		<Card className="sm:py-4 sm:px-8">
+		<Card className="sm:px-8 sm:py-4">
 			<Card.Body>
 				<Card.Title as="h2" className="justify-center">
 					Sign up your account

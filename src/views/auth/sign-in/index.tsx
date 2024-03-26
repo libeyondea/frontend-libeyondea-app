@@ -43,12 +43,12 @@ const SignInPage = () => {
 				});
 				dispatch(authCurrentDataUserRequestAction(response.data.data));
 				dispatch(authCurrentDataTokenRequestAction(response.data.data.token));
-				toastify.success('Signed in successfully..');
+				toastify.success('Signed in successfully.');
 			})
 			.catch(
 				errorHandler((error) => {
 					if (error.type === 'validation-error') {
-						formikHelpers.setErrors(error.error.response?.data?.errors);
+						// formikHelpers.setErrors(error.error.response?.data?.errors);
 					}
 				})
 			)

@@ -10,7 +10,7 @@ type Props = {
 	children?: React.ReactNode;
 };
 
-const Avatar = forwardRef(({ className, src, alt, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+const Avatar = forwardRef(({ className, src, alt, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
 	return (
 		<div
 			{...props}
