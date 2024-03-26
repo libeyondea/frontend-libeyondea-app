@@ -17,7 +17,7 @@ const NewUserPage = () => {
 	const dispatch = useDispatch();
 	const userCreate = useSelector(selectUserCreate);
 
-	const onSubmit = (values: CreateUpdateUserFormik, formikHelpers: FormikHelpers<CreateUpdateUserFormik>) => {
+	const onSubmit = (values: CreateUpdateUserFormik /* , formikHelpers: FormikHelpers<CreateUpdateUserFormik> */) => {
 		new Promise((resolve, reject) => {
 			dispatch(userCreateLoadingRequestAction(true));
 			if (!values.image) {

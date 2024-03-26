@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Logo from 'src/assets/images/logo.png';
-import { ChevronLeftIcon, CogIcon, ListIcon, PlusCircleIcon, TachometerIcon, TimesIcon, UserIcon } from 'src/components/Icon';
+import { ChevronLeftIcon, CogIcon, ListIcon, PlusCircleIcon, TachometerIcon, UserIcon } from 'src/components/Icon';
 import Image from 'src/components/Image';
 import Link from 'src/components/Link';
 import NavLink from 'src/components/NavLink';
@@ -37,7 +37,7 @@ const Sidebar = () => {
 				)}
 			>
 				<div className="flex w-64 flex-col bg-gray-800">
-					<div className="fixed z-50 flex w-64 flex-shrink-0 flex-col bg-gray-800 py-2 px-8">
+					<div className="fixed z-50 flex w-64 flex-shrink-0 flex-col bg-gray-800 px-8 py-2">
 						<div className="w-full">
 							<Link to="/" className="flex items-center text-left focus:outline-none">
 								<Image className="h-10 w-10 rounded-full" src={Logo} alt={config.APP_NAME} />

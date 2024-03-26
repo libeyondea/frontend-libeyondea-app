@@ -51,7 +51,7 @@ const ProfilePage = () => {
 		})
 	});
 
-	const onSubmit = (values: UpdateProfileFormik, formikHelpers: FormikHelpers<UpdateProfileFormik>) => {
+	const onSubmit = (values: UpdateProfileFormik /*, formikHelpers: FormikHelpers<UpdateProfileFormik> */) => {
 		new Promise((resolve, reject) => {
 			dispatch(profileUpdateLoadingRequestAction(true));
 			if (!values.image) {

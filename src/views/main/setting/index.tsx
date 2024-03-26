@@ -36,7 +36,7 @@ const SettingPage = () => {
 			.oneOf([...settingConstant.SETTING_THEME_ALL], 'The theme invalid.')
 	});
 
-	const onSubmit = (values: UpdateSettingFormik, formikHelpers: FormikHelpers<UpdateSettingFormik>) => {
+	const onSubmit = (values: UpdateSettingFormik /* , formikHelpers: FormikHelpers<UpdateSettingFormik> */) => {
 		dispatch(settingUpdateLoadingRequestAction(true));
 		const payload = {
 			theme: values.theme

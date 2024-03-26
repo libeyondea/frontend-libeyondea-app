@@ -21,7 +21,7 @@ const EditUserPage = () => {
 	const userShow = useSelector(selectUserShow);
 	const userUpdate = useSelector(selectUserUpdate);
 
-	const onSubmit = (values: CreateUpdateUserFormik, formikHelpers: FormikHelpers<CreateUpdateUserFormik>) => {
+	const onSubmit = (values: CreateUpdateUserFormik /* , formikHelpers: FormikHelpers<CreateUpdateUserFormik> */) => {
 		new Promise((resolve, reject) => {
 			dispatch(userUpdateLoadingRequestAction(true));
 			if (!values.image) {
