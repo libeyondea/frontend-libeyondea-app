@@ -43,7 +43,7 @@ const SignInPage = () => {
 				});
 				dispatch(authCurrentDataUserRequestAction(response.data.data.user));
 				dispatch(authCurrentDataTokenRequestAction(response.data.data.token));
-				toastify.success('Signed in successfully.');
+				toastify.success('Signed in successfully..');
 			})
 			.catch(
 				errorHandler((error) => {
