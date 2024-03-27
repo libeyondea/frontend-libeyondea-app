@@ -22,7 +22,7 @@ const Form = <Values extends FormikValues = FormikValues>({ className, initialVa
 		validationSchema: validationSchema,
 		onSubmit: onSubmit
 	});
-	console.log(formik);
+
 	return (
 		<form className={className} onSubmit={formik.handleSubmit}>
 			{children(formik)}

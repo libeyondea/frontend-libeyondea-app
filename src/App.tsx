@@ -1,5 +1,4 @@
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -12,9 +11,7 @@ const App = () => {
 	return (
 		<Provider store={store}>
 			<AccessControl>
-				<BrowserRouter>
-					<Routes />
-				</BrowserRouter>
+				<Routes />
 			</AccessControl>
 			<ToastContainer />
 		</Provider>
