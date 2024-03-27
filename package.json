@@ -1,7 +1,7 @@
 {
-	"name": "frontend-libeyondea-app-beta",
+	"name": "frontend-libeyondea-app",
 	"private": true,
-	"version": "0.0.0",
+	"version": "4.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -53,7 +53,6 @@
 		"eslint": "^8.57.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.6",
-		"node-sass": "^8.0.0",
 		"postcss": "^8.4.38",
 		"prettier": "^3.2.5",
 		"prettier-plugin-tailwindcss": "^0.5.12",
