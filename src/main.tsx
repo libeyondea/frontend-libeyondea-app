@@ -8,5 +8,3 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 		<App />
 	</React.StrictMode>
 );
-
-console.log(import.meta.env.VITE_BASE_API_URL);
