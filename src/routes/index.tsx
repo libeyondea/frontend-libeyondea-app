@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 
 import AuthRoutes from './AuthRoutes';
 import MainRoutes from './MainRoutes';
@@ -15,7 +15,7 @@ const Routes = () => {
 		[authCurrent.data.user?.role?.name]
 	);
 
-	const router = createBrowserRouter([
+	return useRoutes([
 		{
 			path: MainRoutes.path,
 			element: MainRoutes.element,
@@ -27,8 +27,6 @@ const Routes = () => {
 			element: <Navigate to="/" />
 		}
 	]);
-
-	return <RouterProvider router={router} />;
 };
 
 export default Routes;
