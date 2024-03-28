@@ -11,7 +11,7 @@ type Props = {
 	children: React.ReactNode;
 } & LinkProps;
 
-const Link = ({ className, to, color = 'primary', hover = true, children, ...props }: Props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
+const Link = forwardRef(({ className, to, color = 'primary', hover = true, children, ...props }: Props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
 	<ReactLink
 		{...props}
 		className={classNames(
@@ -27,6 +27,6 @@ const Link = ({ className, to, color = 'primary', hover = true, children, ...pro
 	>
 		{children}
 	</ReactLink>
-);
+));
 
-export default forwardRef(Link);
+export default Link;

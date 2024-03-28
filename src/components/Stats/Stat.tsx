@@ -8,10 +8,13 @@ type Props = {
 	className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const Stat = forwardRef(({ className, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
-	return <div {...props} className={classNames('stat', className)} ref={ref} />;
-});
+const Stat = _.assign(
+	forwardRef(({ className, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+		return <div {...props} className={classNames('stat', className)} ref={ref} />;
+	}),
+	{
+		Item: StatItem
+	}
+);
 
-export default _.assign(Stat, {
-	Item: StatItem
-});
+export default Stat;

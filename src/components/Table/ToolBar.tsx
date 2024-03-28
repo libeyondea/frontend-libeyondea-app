@@ -50,7 +50,7 @@ const ToolBar = ({
 					value={sortBy}
 					options={_.filter(sortByOptions, (column) => !_.includes(hiddenColumns, column))}
 					onChange={_onChangeSortBy}
-					className="mr-0 mb-4 min-w-full sm:mr-4 sm:mb-0 sm:w-36 sm:min-w-0"
+					className="mb-4 mr-0 min-w-full sm:mb-0 sm:mr-4 sm:w-36 sm:min-w-0"
 					disabled={disabled}
 				/>
 				<Form.Select

@@ -15,37 +15,40 @@ type Props = {
 	children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const Dropdown = forwardRef(
-	({ className, drop = 'bottom', align = 'start', open = false, hover = false, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
-		const classes = classNames(
-			'dropdown',
-			{
-				'dropdown-top': drop === 'top',
-				'dropdown-bottom': drop === 'bottom',
-				'dropdown-left': drop === 'left',
-				'dropdown-right': drop === 'right'
-			},
-			{
-				'dropdown-start': align === 'start',
-				'dropdown-end': align === 'end'
-			},
-			{
-				'dropdown-hover': hover,
-				'dropdown-open': open
-			},
-			className
-		);
+const Dropdown = _.assign(
+	forwardRef(
+		({ className, drop = 'bottom', align = 'start', open = false, hover = false, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+			const classes = classNames(
+				'dropdown',
+				{
+					'dropdown-top': drop === 'top',
+					'dropdown-bottom': drop === 'bottom',
+					'dropdown-left': drop === 'left',
+					'dropdown-right': drop === 'right'
+				},
+				{
+					'dropdown-start': align === 'start',
+					'dropdown-end': align === 'end'
+				},
+				{
+					'dropdown-hover': hover,
+					'dropdown-open': open
+				},
+				className
+			);
 
-		return (
-			<div {...props} className={classes} ref={ref}>
-				{children}
-			</div>
-		);
+			return (
+				<div {...props} className={classes} ref={ref}>
+					{children}
+				</div>
+			);
+		}
+	),
+	{
+		Toggle: DropdownToggle,
+		Menu: DropdownMenu,
+		Item: DropdownItem
 	}
 );
 
-export default _.assign(Dropdown, {
-	Toggle: DropdownToggle,
-	Menu: DropdownMenu,
-	Item: DropdownItem
-});
+export default Dropdown;

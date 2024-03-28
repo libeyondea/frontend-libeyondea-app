@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { Action, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch as useAppDispatch, useSelector as useAppSelector } from 'react-redux';
 import { createLogger } from 'redux-logger';
-import { createEpicMiddleware } from 'redux-observable';
+import { EpicMiddleware, createEpicMiddleware } from 'redux-observable';
 
 import rootEpic from './rootEpic';
 import rootReducer from './rootReducer';
 import config from 'src/config';
 
-const epicMiddleware = createEpicMiddleware();
+const epicMiddleware: EpicMiddleware<Action, Action, void, any> = createEpicMiddleware();
 
 const middlewares = [
 	createLogger({
@@ -25,7 +25,7 @@ const store = configureStore({
 	preloadedState
 });
 
-epicMiddleware.run(rootEpic as any);
+epicMiddleware.run(rootEpic);
 
 export type AppDispatch = typeof store.dispatch;
 
