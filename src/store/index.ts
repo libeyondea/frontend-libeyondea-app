@@ -25,7 +25,7 @@ const store = configureStore({
 	preloadedState
 });
 
-epicMiddleware.run(rootEpic as any); // Fix new
+epicMiddleware.run(rootEpic);
 
 export type AppDispatch = typeof store.dispatch;
 
