@@ -4,8 +4,10 @@ export type DataResponse<T> = {
 
 export type DataWithListResponse<T> = {
 	columns: string[];
-	pagination: {
-		total: number;
+	meta: {
+		pagination: {
+			total: number;
+		};
 	};
 } & DataResponse<T>;
 

@@ -13,15 +13,3 @@ export const appInitializedSuccessAction = createAction(actionTypes.APP_INITIALI
 		initialized
 	}
 }));
-
-export const appSidebarRequestAction = createAction(actionTypes.APP_SIDEBAR_REQUEST, (sidebar: boolean) => ({
-	payload: {
-		sidebar
-	}
-}));
-
-export const appSidebarSuccessAction = createAction(actionTypes.APP_SIDEBAR_SUCCESS, (sidebar: boolean) => ({
-	payload: {
-		sidebar
-	}
-}));

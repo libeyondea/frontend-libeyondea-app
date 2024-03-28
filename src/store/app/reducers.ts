@@ -1,27 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { appInitializedSuccessAction, appSidebarSuccessAction } from './actions';
+import { appInitializedSuccessAction } from './actions';
 
 type AppState = {
 	initialized: boolean;
-	sidebar: boolean;
 };
 
 const initialState: AppState = {
-	initialized: false,
-	sidebar: true
+	initialized: false
 };
 
 const appReducer = createReducer(initialState, (builder) => {
-	builder
-		.addCase(appInitializedSuccessAction, (state, action) => ({
-			...state,
-			initialized: action.payload.initialized
-		}))
-		.addCase(appSidebarSuccessAction, (state, action) => ({
-			...state,
-			sidebar: action.payload.sidebar
-		}));
+	builder.addCase(appInitializedSuccessAction, (state, action) => ({
+		...state,
+		initialized: action.payload.initialized
+	}));
 });
 
 export default appReducer;

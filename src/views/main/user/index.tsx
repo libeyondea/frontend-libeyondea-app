@@ -92,7 +92,7 @@ const UserPage = () => {
 			.then((response) => {
 				dispatch(userListDataRequestAction(response.data.data));
 				dispatch(userListColumnRequestAction(response.data.columns));
-				dispatch(userListPaginationTotalRequestAction(response.data.pagination.total));
+				dispatch(userListPaginationTotalRequestAction(response.data.meta.pagination.total));
 			})
 			.catch(errorHandler())
 			.finally(() => {

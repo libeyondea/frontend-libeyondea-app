@@ -52,6 +52,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 	columnCell,
 	...props
 }: Props<T>) => {
+	console.log(data);
 	return (
 		<Fragment>
 			{toolBar && (
@@ -70,7 +71,7 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 			)}
 			<div className="overflow-x-auto">
 				{loading ? (
-					<table className={classNames('relative w-full animate-pulse', className)}>
+					<table className={classNames('table-compact table w-full animate-pulse', className)}>
 						<thead>
 							<tr>
 								<th>
@@ -120,10 +121,10 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 													{column === 'updated_at'
 														? time.ago(data[column])
 														: column === 'created_at'
-														? time.format(data[column])
-														: columnCell
-														? columnCell(column, data[column], data)
-														: _.toString(data[column])}
+															? time.format(data[column])
+															: columnCell
+																? columnCell(column, data[column], data)
+																: _.toString(data[column])}
 												</td>
 											)
 										)}
@@ -133,13 +134,20 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 													<Button
 														className="mr-2"
 														color="info"
-														variant="outlined"
+														size="sm"
+														variant="outline"
 														onClick={() => action.onClickEdit(data.id)}
 														disabled={disabled}
 													>
 														<EditIcon className="h-5 w-5" />
 													</Button>
-													<Button color="danger" variant="outlined" onClick={() => action.onClickDelete(data.id)} disabled={disabled}>
+													<Button
+														color="error"
+														size="sm"
+														variant="outline"
+														onClick={() => action.onClickDelete(data.id)}
+														disabled={disabled}
+													>
 														<TrashIcon className="h-5 w-5" />
 													</Button>
 												</div>
