@@ -10,16 +10,19 @@ type Props = {
 	children?: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const Stats = forwardRef(({ className, vertical = false, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
-	const classes = classNames('stats bg-base-100 w-full shadow-md', vertical ? 'stats-vertical' : 'stats-horizontal', className);
+const Stats = _.assign(
+	forwardRef(({ className, vertical = false, children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+		const classes = classNames('stats bg-base-100 w-full shadow-md', vertical ? 'stats-vertical' : 'stats-horizontal', className);
 
-	return (
-		<div {...props} className={classes} ref={ref}>
-			{children}
-		</div>
-	);
-});
+		return (
+			<div {...props} className={classes} ref={ref}>
+				{children}
+			</div>
+		);
+	}),
+	{
+		Stat: Stat
+	}
+);
 
-export default _.assign(Stats, {
-	Stat: Stat
-});
+export default Stats;

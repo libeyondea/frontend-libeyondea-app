@@ -142,7 +142,7 @@ const SignUpPage = () => {
 										{...props.getFieldProps('terms')}
 									>
 										By signing up, you agree to our{' '}
-										<Link className="link-hover link-primary link font-medium" to="/">
+										<Link className="link-hover link link-primary font-medium" to="/">
 											Terms
 										</Link>
 										.
@@ -160,7 +160,7 @@ const SignUpPage = () => {
 					<div className="flex items-center justify-center">
 						<span className="text-sm leading-none">
 							Do you have an account?
-							<Link className="link-hover link-primary link ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_IN}`}>
+							<Link className="link-hover link link-primary ml-1" to={`/${routeConstant.ROUTE_NAME_SIGN_IN}`}>
 								Sign in
 							</Link>
 						</span>

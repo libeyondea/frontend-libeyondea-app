@@ -18,7 +18,7 @@ const Breadcrumb = () => {
 								'Home'
 							)
 						) : (
-							<Link className="link-hover link-primary link" to={breadcrumb.match.pathname}>
+							<Link className="link-hover link link-primary" to={breadcrumb.match.pathname}>
 								{_.size(breadcrumb.key) > 1 ? breadcrumb.breadcrumb : 'Home'}
 							</Link>
 						)}

@@ -15,10 +15,10 @@ const Sidebar = () => {
 	const authCurrent = useSelector(selectAuthCurrent);
 
 	return (
-		<aside className="bg-base-200 min-h-screen w-64">
-			<div className="bg-base-200 sticky top-0 z-20 bg-opacity-90 px-4 py-2 shadow-sm backdrop-blur">
-				<Link to="/" className="btn-ghost btn px-4">
-					<div className="text-primary flex items-center text-lg transition-all duration-200 md:text-2xl">
+		<aside className="min-h-screen w-64 bg-base-200">
+			<div className="sticky top-0 z-20 bg-base-200 bg-opacity-90 px-4 py-2 shadow-sm backdrop-blur">
+				<Link to="/" className="btn btn-ghost px-4">
+					<div className="flex items-center text-lg text-primary transition-all duration-200 md:text-2xl">
 						<Image className="h-8 w-8 rounded-full" src={Logo} alt={config.APP_NAME} />
 						<span className="ml-2 font-bold capitalize tracking-tighter">{config.APP_NAME}</span>
 					</div>

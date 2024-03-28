@@ -97,7 +97,7 @@ const SignInPage = () => {
 											Remember me
 										</Form.Checkbox>
 										<div className="text-sm">
-											<Link to="/" className="link-hover link-primary link">
+											<Link to="/" className="link-hover link link-primary">
 												Forgot password?
 											</Link>
 										</div>

@@ -66,7 +66,7 @@ const ImageForm = ({ className, onChangeImage, onBlurImage, name, label, imageUr
 					Change
 				</Button>
 				{previewImage && canDelete && (
-					<Button className="mt-4 ml-0 sm:mt-0 sm:ml-4" color="error" onClick={_onRemoveImage}>
+					<Button className="ml-0 mt-4 sm:ml-4 sm:mt-0" color="error" onClick={_onRemoveImage}>
 						Remove
 					</Button>
 				)}

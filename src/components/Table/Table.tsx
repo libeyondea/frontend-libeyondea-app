@@ -75,14 +75,14 @@ const Table = <T extends Record<string, any> = Record<string, any>>({
 						<thead>
 							<tr>
 								<th>
-									<div className="bg-base-300 h-6 rounded-md" />
+									<div className="h-6 rounded-md bg-base-300" />
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-									<div className="bg-base-300 h-6 rounded-md" />
+									<div className="h-6 rounded-md bg-base-300" />
 								</td>
 							</tr>
 						</tbody>

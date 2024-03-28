@@ -16,51 +16,54 @@ type Props = {
 	children?: React.ReactNode;
 };
 
-const Avatar = forwardRef(
-	(
-		{ className, src, alt, placeholder, size = '3rem', online = false, offline = false, children, ...props }: Props,
-		ref: React.ForwardedRef<HTMLDivElement>
-	) => {
-		return (
-			<div
-				{...props}
-				className={classNames(
-					'avatar',
-					{
-						placeholder: !src,
-						online: online,
-						offline: offline
-					},
-					className
-				)}
-				ref={ref}
-			>
-				{src ? (
-					<div
-						className="rounded-full"
-						style={{
-							width: size,
-							height: size
-						}}
-					>
-						<Image src={src} alt={alt} />
-					</div>
-				) : (
-					<div
-						className="rounded-full"
-						style={{
-							width: size,
-							height: size
-						}}
-					>
-						{placeholder || children}
-					</div>
-				)}
-			</div>
-		);
+const Avatar = _.assign(
+	forwardRef(
+		(
+			{ className, src, alt, placeholder, size = '3rem', online = false, offline = false, children, ...props }: Props,
+			ref: React.ForwardedRef<HTMLDivElement>
+		) => {
+			return (
+				<div
+					{...props}
+					className={classNames(
+						'avatar',
+						{
+							placeholder: !src,
+							online: online,
+							offline: offline
+						},
+						className
+					)}
+					ref={ref}
+				>
+					{src ? (
+						<div
+							className="rounded-full"
+							style={{
+								width: size,
+								height: size
+							}}
+						>
+							<Image src={src} alt={alt} />
+						</div>
+					) : (
+						<div
+							className="rounded-full"
+							style={{
+								width: size,
+								height: size
+							}}
+						>
+							{placeholder || children}
+						</div>
+					)}
+				</div>
+			);
+		}
+	),
+	{
+		Group: AvatarGroup
 	}
 );
 
-export default _.assign(Avatar, {
-	Group: AvatarGroup
-});
+export default Avatar;

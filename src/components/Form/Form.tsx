@@ -15,25 +15,28 @@ type Props<Values> = {
 	children: (props: FormikProps<Values>) => React.ReactNode;
 } & FormikConfig<Values>;
 
-const Form = <Values extends FormikValues = FormikValues>({ className, initialValues, validationSchema, onSubmit, children, ...props }: Props<Values>) => {
-	const formik: FormikProps<Values> = useFormik<Values>({
-		...props,
-		initialValues: initialValues,
-		validationSchema: validationSchema,
-		onSubmit: onSubmit
-	});
+const Form = _.assign(
+	<Values extends FormikValues = FormikValues>({ className, initialValues, validationSchema, onSubmit, children, ...props }: Props<Values>) => {
+		const formik: FormikProps<Values> = useFormik<Values>({
+			...props,
+			initialValues: initialValues,
+			validationSchema: validationSchema,
+			onSubmit: onSubmit
+		});
 
-	return (
-		<form className={className} onSubmit={formik.handleSubmit}>
-			{children(formik)}
-		</form>
-	);
-};
+		return (
+			<form className={className} onSubmit={formik.handleSubmit}>
+				{children(formik)}
+			</form>
+		);
+	},
+	{
+		Input: InputForm,
+		Select: SelectForm,
+		Checkbox: CheckboxForm,
+		Image: ImageForm,
+		Toggle: ToggleForm
+	}
+);
 
-export default _.assign(Form, {
-	Input: InputForm,
-	Select: SelectForm,
-	Checkbox: CheckboxForm,
-	Image: ImageForm,
-	Toggle: ToggleForm
-});
+export default Form;
