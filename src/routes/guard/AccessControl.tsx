@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import Logo from 'src/assets/images/logo.png';

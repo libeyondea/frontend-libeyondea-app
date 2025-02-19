@@ -56,54 +56,61 @@ const errorHandler = (
 			if (error.response && _.includes([AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE], error.code)) {
 				toastify.error(error.response.data.message || error.message);
 				if (error.response?.status === 400) {
-					callback &&
+					if (callback) {
 						callback({
 							error: error,
 							type: 'validation-error'
 						});
+					}
 				} else if (error.response?.status === 401) {
 					cookies.remove(cookiesConstant.COOKIES_AUTH_TOKEN);
 					store.dispatch(authCurrentDataUserRequestAction(null));
 					store.dispatch(authCurrentDataTokenRequestAction(null));
-					callback &&
+					if (callback) {
 						callback({
 							error: error,
 							type: 'unauthorized-error'
 						});
+					}
 				} else if (error.response?.status === 403) {
-					callback &&
+					if (callback) {
 						callback({
 							error: error,
 							type: 'forbidden-error'
 						});
+					}
 				} else if (error.response?.status === 404) {
-					callback &&
+					if (callback) {
 						callback({
 							error: error,
 							type: 'notfound-error'
 						});
+					}
 				} else {
-					callback &&
+					if (callback) {
 						callback({
 							error: error,
 							type: 'server-error'
 						});
+					}
 				}
 			} else {
 				toastify.error(error.message);
-				callback &&
+				if (callback) {
 					callback({
 						error: error,
 						type: 'axios-error'
 					});
+				}
 			}
 		} else {
 			toastify.error(error.message);
-			callback &&
+			if (callback) {
 				callback({
 					error: error,
 					type: 'stock-error'
 				});
+			}
 		}
 	};
 };

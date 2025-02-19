@@ -1,4 +1,4 @@
-import { ComponentType, LazyExoticComponent, Suspense } from 'react';
+import { ComponentType, JSX, LazyExoticComponent, Suspense } from 'react';
 
 type Props = object;
 
