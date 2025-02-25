@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import _ from 'lodash';
 import React, { forwardRef } from 'react';
 
 import Image from '../Image';
@@ -10,60 +9,37 @@ type Props = {
 	src?: string;
 	alt?: string;
 	placeholder?: string;
-	size?: string | number;
+	size?: number;
 	online?: boolean;
 	offline?: boolean;
 	children?: React.ReactNode;
 };
 
-const Avatar = _.assign(
-	forwardRef(
-		(
-			{ className, src, alt, placeholder, size = '3rem', online = false, offline = false, children, ...props }: Props,
-			ref: React.ForwardedRef<HTMLDivElement>
-		) => {
-			return (
-				<div
-					{...props}
-					className={classNames(
-						'avatar',
-						{
-							placeholder: !src,
-							online: online,
-							offline: offline
-						},
-						className
-					)}
-					ref={ref}
-				>
-					{src ? (
-						<div
-							className="rounded-full"
-							style={{
-								width: size,
-								height: size
-							}}
-						>
-							<Image src={src} alt={alt} />
-						</div>
-					) : (
-						<div
-							className="rounded-full"
-							style={{
-								width: size,
-								height: size
-							}}
-						>
-							{placeholder || children}
-						</div>
-					)}
+const Avatar = Object.assign(
+	forwardRef<HTMLDivElement, Props>(({ className, src, alt, placeholder, size = 3, online = false, offline = false, children, ...props }, ref) => {
+		const avatarSize = `${size}rem`;
+
+		return (
+			<div
+				{...props}
+				className={classNames(
+					'avatar',
+					{
+						'avatar-placeholder': !src,
+						'avatar-online': online,
+						'avatar-offline': offline
+					},
+					className
+				)}
+				ref={ref}
+			>
+				<div className="rounded-full" style={{ width: avatarSize, height: avatarSize }}>
+					{src ? <Image src={src} alt={alt} /> : placeholder || children}
 				</div>
-			);
-		}
-	),
-	{
-		Group: AvatarGroup
-	}
+			</div>
+		);
+	}),
+	{ Group: AvatarGroup }
 );
 
 export default Avatar;

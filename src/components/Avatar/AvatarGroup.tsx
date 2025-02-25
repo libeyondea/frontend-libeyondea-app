@@ -7,7 +7,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 	children: React.ReactNode;
 };
 
-const AvatarGroup = forwardRef(({ className, space = '-1.5rem', children, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+const AvatarGroup = forwardRef<HTMLDivElement, Props>(({ className, space = '-1.5rem', children, ...props }, ref) => {
 	return (
 		<div
 			{...props}

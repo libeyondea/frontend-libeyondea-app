@@ -13,23 +13,13 @@
 
 @layer components {
 	.center-screen {
-		@apply bg-base-200;
-		@apply h-full;
-		@apply w-full;
-		@apply fixed;
-		@apply overflow-x-hidden;
-		@apply overflow-y-auto;
+		@apply bg-base-200 h-full w-full fixed overflow-x-hidden overflow-y-auto;
 
 		.center-screen-content {
-			@apply min-h-full;
-			@apply flex;
-			@apply flex-col;
-			@apply py-8;
-			@apply sm:p-16;
+			@apply min-h-full flex flex-col py-8 sm:p-16;
 
 			&>* {
-				@apply m-auto;
-				@apply max-w-md;
+				@apply m-auto max-w-md;
 			}
 		}
 	}
