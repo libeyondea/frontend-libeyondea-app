@@ -6,26 +6,25 @@ import { SyncIcon } from '../Icon';
 type Props = {
 	className?: string;
 	type?: 'button' | 'submit' | 'reset';
-	color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost';
+	color?: 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
 	size?: 'lg' | 'md' | 'sm' | 'xs';
-	variant?: 'contain' | 'outline' | 'link';
+	variant?: 'outline' | 'dash' | 'soft' | 'ghost' | 'link';
 	responsive?: boolean;
 	loading?: boolean;
 	disabled?: boolean;
 	startIcon?: React.ReactNode;
 	endIcon?: React.ReactNode;
-	children: React.ReactNode;
-} & Omit<React.ComponentPropsWithoutRef<'button'>, 'color'>;
+} & React.ComponentPropsWithRef<'button'>;
 
-const Button = forwardRef(
+const Button = forwardRef<HTMLButtonElement, Props>(
 	(
 		{
 			className,
 			type = 'button',
 			color = 'primary',
 			size = 'md',
-			variant = 'contain',
-			responsive = false,
+			variant,
+			responsive = true,
 			loading = false,
 			disabled = false,
 			startIcon,
@@ -33,46 +32,26 @@ const Button = forwardRef(
 			children,
 			...props
 		}: Props,
-		ref: React.ForwardedRef<HTMLButtonElement>
+		ref
 	) => {
 		const classes = classNames(
 			'btn',
+			`btn-${color}`,
+			`btn-${size}`,
+			variant && `btn-${variant}`,
 			{
-				'gap-2': (startIcon && !loading) || endIcon
-			},
-			{
-				'btn-primary': color === 'primary',
-				'btn-secondary': color === 'secondary',
-				'btn-accent': color === 'accent',
-				'btn-info': color === 'info',
-				'btn-success': color === 'success',
-				'btn-warning': color === 'warning',
-				'btn-error': color === 'error',
-				'btn-ghost': color === 'ghost'
-			},
-			{
-				'btn-lg': size === 'lg',
-				'btn-md': size === 'md',
-				'btn-sm': size === 'sm',
-				'btn-xs': size === 'xs'
-			},
-			{
-				'btn-contain': variant === 'contain',
-				'btn-outline': variant === 'outline',
-				'btn-link': variant === 'link'
-			},
-			{
-				'btn-xs md:btn-sm lg:btn-md xl:btn-lg': responsive,
-				'btn-disabled': disabled || loading
+				'gap-2': (startIcon && !loading) || endIcon,
+				'btn-disabled': disabled || loading,
+				'btn-xs md:btn-sm lg:btn-md xl:btn-lg': responsive
 			},
 			className
 		);
 
 		return (
 			<button {...props} className={classes} type={type} disabled={disabled || loading} ref={ref}>
-				{loading ? <SyncIcon className="mr-2 h-4 w-4 animate-spin" /> : startIcon && startIcon}
+				{loading ? <SyncIcon className="mr-2 h-4 w-4 animate-spin" /> : startIcon}
 				{children}
-				{endIcon && endIcon}
+				{endIcon}
 			</button>
 		);
 	}

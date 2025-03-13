@@ -3,17 +3,18 @@ import React, { forwardRef } from 'react';
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
 	className?: string;
-	space?: string | number;
-	children: React.ReactNode;
-};
+	space?: number;
+} & React.ComponentPropsWithRef<'div'>;
 
-const AvatarGroup = forwardRef<HTMLDivElement, Props>(({ className, space = '-1.5rem', children, ...props }, ref) => {
+const AvatarGroup = forwardRef<HTMLDivElement, Props>(({ className, space = -1.5, children, ...props }, ref) => {
+	const avatarGroupSpace = `${space}rem`;
+
 	return (
 		<div
 			{...props}
 			className={classNames('avatar-group', className)}
 			style={{
-				marginLeft: space
+				marginLeft: avatarGroupSpace
 			}}
 			ref={ref}
 		>

@@ -11,28 +11,23 @@ type Props = {
 	placeholder?: string;
 	size?: number;
 	online?: boolean;
-	offline?: boolean;
-	children?: React.ReactNode;
-};
+} & React.ComponentPropsWithRef<'div'>;
 
 const Avatar = Object.assign(
-	forwardRef<HTMLDivElement, Props>(({ className, src, alt, placeholder, size = 3, online = false, offline = false, children, ...props }, ref) => {
+	forwardRef<HTMLDivElement, Props>(({ className, src, alt, placeholder, size = 3, online = false, children, ...props }, ref) => {
+		const classes = classNames(
+			'avatar',
+			online ? 'avatar-online' : 'avatar-offline',
+			{
+				'avatar-placeholder': !src
+			},
+			className
+		);
+
 		const avatarSize = `${size}rem`;
 
 		return (
-			<div
-				{...props}
-				className={classNames(
-					'avatar',
-					{
-						'avatar-placeholder': !src,
-						'avatar-online': online,
-						'avatar-offline': offline
-					},
-					className
-				)}
-				ref={ref}
-			>
+			<div {...props} className={classes} ref={ref}>
 				<div className="rounded-full" style={{ width: avatarSize, height: avatarSize }}>
 					{src ? <Image src={src} alt={alt} /> : placeholder || children}
 				</div>

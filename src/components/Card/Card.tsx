@@ -10,10 +10,10 @@ import CardTitle from './CardTitle';
 
 type Props = {
 	className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+} & React.ComponentPropsWithRef<'div'>;
 
 const Card = _.assign(
-	forwardRef(({ className, ...props }: Props, ref: React.ForwardedRef<HTMLDivElement>) => {
+	forwardRef<HTMLDivElement, Props>(({ className, ...props }, ref) => {
 		const classes = classNames('card bg-base-100 shadow-md w-full', className);
 
 		return <div {...props} className={classes} ref={ref} />;
